@@ -12,6 +12,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level01", "Level01", "{F14B0461-91B7-4EAD-9A6F-BEB8AC04D9FC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "App", "App\App.vcxproj", "{448A89EC-EAAD-4E08-89ED-EF4CDF6C7E25}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EA197215-13BB-4729-9573-DB483A0EE1A3} = {EA197215-13BB-4729-9573-DB483A0EE1A3}
+		{F0716EC2-0BC5-43EA-9046-B203E0985A67} = {F0716EC2-0BC5-43EA-9046-B203E0985A67}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
