@@ -37,6 +37,9 @@
     <ClInclude Include="EngineRandom.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="PreCompile.h">
+      <Filter>PreCompile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineDebug.cpp">
@@ -75,6 +78,9 @@
     <ClCompile Include="EngineRandom.cpp">
       <Filter>Math</Filter>
     </ClCompile>
+    <ClCompile Include="PreCompile.cpp">
+      <Filter>PreCompile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">
@@ -94,6 +100,9 @@
     </Filter>
     <Filter Include="Object">
       <UniqueIdentifier>{40dd519c-dfec-4e66-90e0-bf938d9a56ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PreCompile">
+      <UniqueIdentifier>{d29d4f0b-26de-431a-aca9-c1c8248089be}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
