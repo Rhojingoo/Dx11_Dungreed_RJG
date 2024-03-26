@@ -25,7 +25,7 @@ void UEngineInput::EngineKey::KeyCheck(float _DeltaTime)
 			Up = false;
 			Free = false;
 		}
-		else if(true == Down)
+		else if (true == Down)
 		{
 			UpTime = 0.0f;
 			// 이전까지 이 키는 눌리고 있었다.
@@ -47,7 +47,7 @@ void UEngineInput::EngineKey::KeyCheck(float _DeltaTime)
 			Up = true;
 			Free = false;
 		}
-		else if(true == Up)
+		else if (true == Up)
 		{
 			PressTime = 0.0f;
 			// 이전까지 이 키는 안눌리고 있었고 앞으로도 안눌릴거다.
@@ -232,13 +232,13 @@ void UEngineInput::KeyCheckTick(float _DeltaTime)
 	}
 }
 
-class InputInitCreator
+class UInputInitCreator
 {
 public:
-	InputInitCreator()
+	UInputInitCreator()
 	{
 		UEngineInput::InputInit();
 	}
 };
 
-InputInitCreator CreateValue = InputInitCreator();
+UInputInitCreator CreateValue = UInputInitCreator();

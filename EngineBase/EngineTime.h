@@ -3,18 +3,18 @@
 #include <Windows.h>
 
 // 설명 :
-class EngineTime
+class UEngineTime
 {
 public:
 	// constrcuter destructer
-	EngineTime();
-	~EngineTime();
+	UEngineTime();
+	~UEngineTime();
 
 	// delete Function
-	EngineTime(const EngineTime& _Other) = delete;
-	EngineTime(EngineTime&& _Other) noexcept = delete;
-	EngineTime& operator=(const EngineTime& _Other) = delete;
-	EngineTime& operator=(EngineTime&& _Other) noexcept = delete;
+	UEngineTime(const UEngineTime& _Other) = delete;
+	UEngineTime(UEngineTime&& _Other) noexcept = delete;
+	UEngineTime& operator=(const UEngineTime& _Other) = delete;
+	UEngineTime& operator=(UEngineTime&& _Other) noexcept = delete;
 
 	// 시간측정을 시작하겠다.
 	void TimeCheckStart();
@@ -50,7 +50,7 @@ private:
 	// 윈도우는 이런 함수를 제공합니다.
 	// 지금까지 얼마나 샜어?
 	// ex) 얼마나샜어 150
-	
+
 	// 넌 초당 얼마를 샐수 있어?
 	// ex) 100
 

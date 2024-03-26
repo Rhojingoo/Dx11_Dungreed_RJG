@@ -2,11 +2,11 @@
 #include <Windows.h>
 #include "EngineDebug.h"
 
-UEngineString::UEngineString() 
+UEngineString::UEngineString()
 {
 }
 
-UEngineString::~UEngineString() 
+UEngineString::~UEngineString()
 {
 }
 

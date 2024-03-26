@@ -3,7 +3,7 @@
 #include "EngineString.h"
 #include "EngineDebug.h"
 
-UEngineDirectory::UEngineDirectory() 
+UEngineDirectory::UEngineDirectory()
 {
 }
 
@@ -13,14 +13,14 @@ UEngineDirectory::UEngineDirectory(const UEnginePath& _Path)
 
 }
 
-UEngineDirectory::~UEngineDirectory() 
+UEngineDirectory::~UEngineDirectory()
 {
 }
 
 void UEngineDirectory::AllFileRecursive(
-	const std::string_view _Path, 
-	std::list<UEngineFile>& _Result, 
-	std::vector<std::string> _Ext /*= std::vector<std::string>()*/, 
+	const std::string_view _Path,
+	std::list<UEngineFile>& _Result,
+	std::vector<std::string> _Ext /*= std::vector<std::string>()*/,
 	bool _Recursive /*= false*/)
 {
 	std::filesystem::directory_iterator DirIter = std::filesystem::directory_iterator(_Path);
@@ -38,7 +38,7 @@ void UEngineDirectory::AllFileRecursive(
 				AllFileRecursive(Path.string(), _Result, _Ext, _Recursive);
 			}
 			continue;
-		} 
+		}
 
 		if (0 == _Ext.size())
 		{
@@ -64,14 +64,14 @@ void UEngineDirectory::AllFileRecursive(
 	}
 }
 
-UEngineFile UEngineDirectory::NewFile(std::string_view FileName)
+UEngineFile UEngineDirectory::GetPathFromFile(std::string_view FileName)
 {
 	std::string NewFilePath = GetFullPath() + "\\" + FileName.data();
 	return std::filesystem::path(NewFilePath);
 }
 
 std::list<UEngineFile> UEngineDirectory::AllFile(
-	std::vector<std::string> _Ext /*= std::vector<std::string>()*/, 
+	std::vector<std::string> _Ext /*= std::vector<std::string>()*/,
 	bool _Rescursive /*= false*/
 )
 {
