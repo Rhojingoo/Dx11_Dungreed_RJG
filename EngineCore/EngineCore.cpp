@@ -1,8 +1,8 @@
 #include "PreCompile.h"
 #include "EngineCore.h"
-#include "EngineOption.h"
 #include <EngineBase/EngineFile.h>
 #include <EngineBase/EngineDirectory.h>
+#include <EnginePlatform/EngineSound.h>
 
 UEngineCore::UEngineCore()
 {
@@ -10,11 +10,18 @@ UEngineCore::UEngineCore()
 
 UEngineCore::~UEngineCore()
 {
+	UEngineDirectory Dir;
+	Dir.MoveToSearchChild("Config");
+	UEngineFile File = Dir.GetPathFromFile("EngineOption.EData");
+	UEngineSerializer Ser;
+	EngineOption.Serialize(Ser);
+	File.Open(EIOOpenMode::Write, EIODataType::Text);
+	File.Save(Ser);
 }
 
 UEngineCore* GEngine = nullptr;
 
-void UEngineCore::EngineStart(HINSTANCE _Inst)
+void UEngineCore::EngineOptionInit()
 {
 	UEngineDirectory Dir;
 	Dir.MoveToSearchChild("Config");
@@ -50,4 +57,28 @@ void UEngineCore::EngineStart(HINSTANCE _Inst)
 		//std::bind(&UEngineCore::Update, &Core),
 		//std::bind(&UEngineCore::End, &Core)
 	);
+}
+
+void UEngineCore::EngineStart(HINSTANCE _Inst)
+{
+	EngineOptionInit();
+
+	EngineWindow.Open(EngineOption.WindowTitle);
+	EngineWindow.SetWindowScale(EngineOption.WindowScale);
+
+	{
+		UserCorePtr->Initialize();
+		MainTimer.TimeCheckStart();
+	}
+
+	UEngineWindow::WindowMessageLoop(
+		std::bind(&UEngineCore::EngineUpdate, this),
+		nullptr
+	);	
+}
+
+void UEngineCore::EngineUpdate()
+{
+	float DeltaTime = MainTimer.TimeCheck();
+	UEngineInput::KeyCheckTick(DeltaTime);
 }
