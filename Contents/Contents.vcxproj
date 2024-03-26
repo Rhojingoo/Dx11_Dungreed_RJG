@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{ac09fc49-b9ad-4ea1-8303-74fb8f36d261}</ProjectGuid>
-    <RootNamespace>EngineCore</RootNamespace>
+    <ProjectGuid>{39984bc2-87c6-4a5f-b06a-682dd4740bc0}</ProjectGuid>
+    <RootNamespace>Contents</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -155,21 +155,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="EngineCore.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="EngineOption.h">
+    <ClInclude Include="GameCore.h">
       <SubType>
       </SubType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EngineCore.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="EngineOption.cpp">
+    <ClCompile Include="GameCore.cpp">
       <SubType>
       </SubType>
     </ClCompile>
