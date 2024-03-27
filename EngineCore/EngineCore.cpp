@@ -10,6 +10,7 @@ UEngineCore::UEngineCore()
 
 UEngineCore::~UEngineCore()
 {
+	// 엔진이 종료할때 기존 엔진 옵션을 세이브 하고 한다.
 	UEngineDirectory Dir;
 	Dir.MoveToSearchChild("Config");
 	UEngineFile File = Dir.GetPathFromFile("EngineOption.EData");
@@ -20,44 +21,6 @@ UEngineCore::~UEngineCore()
 }
 
 UEngineCore* GEngine = nullptr;
-
-void UEngineCore::EngineOptionInit()
-{
-	UEngineDirectory Dir;
-	Dir.MoveToSearchChild("Config");
-
-	FEngineOption Option;
-	if (false == Dir.IsFile("EngineOption.EData"))
-	{
-		UEngineFile File = Dir.GetPathFromFile("EngineOption.EData");
-		UEngineSerializer Ser;
-		Option.Serialize(Ser);
-
-		File.Open(EIOOpenMode::Write, EIODataType::Text);
-		File.Save(Ser);
-	}
-
-	{
-		UEngineFile File = Dir.GetPathFromFile("EngineOption.EData");
-		UEngineSerializer Ser;
-		File = Dir.GetPathFromFile("EngineOption.EData");
-		File.Open(EIOOpenMode::Read, EIODataType::Text);
-		File.Load(Ser);
-		Option.DeSerialize(Ser);
-	}
-
-	EngineWindow.Open(Option.WindowTitle);
-	EngineWindow.SetWindowScale(Option.WindowScale);
-
-	UserCorePtr->Initialize();
-
-	UEngineWindow::WindowMessageLoop(
-		nullptr,
-		nullptr
-		//std::bind(&UEngineCore::Update, &Core),
-		//std::bind(&UEngineCore::End, &Core)
-	);
-}
 
 void UEngineCore::EngineStart(HINSTANCE _Inst)
 {
@@ -74,7 +37,33 @@ void UEngineCore::EngineStart(HINSTANCE _Inst)
 	UEngineWindow::WindowMessageLoop(
 		std::bind(&UEngineCore::EngineUpdate, this),
 		nullptr
-	);	
+	);
+}
+
+void UEngineCore::EngineOptionInit()
+{
+	UEngineDirectory Dir;
+	Dir.MoveToSearchChild("Config");
+
+	if (false == Dir.IsFile("EngineOption.EData"))
+	{
+		UEngineFile File = Dir.GetPathFromFile("EngineOption.EData");
+		UEngineSerializer Ser;
+		EngineOption.Serialize(Ser);
+
+		File.Open(EIOOpenMode::Write, EIODataType::Text);
+		File.Save(Ser);
+	}
+
+	{
+		UEngineFile File = Dir.GetPathFromFile("EngineOption.EData");
+		UEngineSerializer Ser;
+		File = Dir.GetPathFromFile("EngineOption.EData");
+		File.Open(EIOOpenMode::Read, EIODataType::Text);
+		File.Load(Ser);
+		EngineOption.DeSerialize(Ser);
+	}
+
 }
 
 void UEngineCore::EngineUpdate()

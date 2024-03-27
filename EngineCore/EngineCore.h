@@ -1,5 +1,7 @@
 #pragma once
+
 #include <EnginePlatform/EngineWindow.h>
+
 #include "EngineOption.h"
 
 #pragma comment (lib, "EngineBase.lib")
