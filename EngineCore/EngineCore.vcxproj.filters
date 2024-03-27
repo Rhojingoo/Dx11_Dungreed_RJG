@@ -19,6 +19,8 @@
       <Filter>PreCompile</Filter>
     </ClInclude>
     <ClInclude Include="EngineGraphicDevice.h" />
+    <ClInclude Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineRenderTarget.h" />
+    <ClInclude Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineTexture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp">
@@ -31,5 +33,7 @@
       <Filter>PreCompile</Filter>
     </ClCompile>
     <ClCompile Include="EngineGraphicDevice.cpp" />
+    <ClCompile Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineTexture.cpp" />
+    <ClCompile Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineRenderTarget.cpp" />
   </ItemGroup>
 </Project>

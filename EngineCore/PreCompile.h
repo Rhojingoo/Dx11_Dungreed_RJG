@@ -2,7 +2,6 @@
 
 #include <EnginePlatform/PreCompile.h>
 
-
 // 프리컴파일 헤더의 진짜 목적
 // 
 // DX
@@ -12,9 +11,14 @@
 // FMOD
 #include <EnginePlatform/ThirdParty/FMOD/inc/fmod.hpp>
 
-
 #include <EnginePlatform/EngineSound.h>
 #include <EnginePlatform/EngineWindow.h>
 #include <EnginePlatform/EngineWindow.h>
 #include <EnginePlatform/EngineResources.h>
 #include <EnginePlatform/EngineInput.h>
+
+
+#pragma comment(lib, "d3d11")
+#pragma comment(lib, "d3dcompiler")
+#pragma comment(lib, "dxguid")
+#pragma comment(lib, "DXGI")

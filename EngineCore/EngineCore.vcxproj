@@ -163,6 +163,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineRenderTarget.h" />
+    <ClInclude Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineTexture.h" />
     <ClInclude Include="EngineCore.h">
       <SubType>
       </SubType>
@@ -175,6 +177,8 @@
     <ClInclude Include="PreCompile.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineRenderTarget.cpp" />
+    <ClCompile Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineTexture.cpp" />
     <ClCompile Include="EngineCore.cpp">
       <SubType>
       </SubType>
