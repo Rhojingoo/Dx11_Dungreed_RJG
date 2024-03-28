@@ -21,6 +21,7 @@ public:
 	static std::wstring AnsiToUniCode(std::string_view View);
 
 	static std::vector<std::string> StringCutting(std::string& _Value, std::string_view _Start, std::string_view _End);
+
 protected:
 
 private:

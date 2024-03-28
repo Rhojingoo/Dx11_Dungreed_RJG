@@ -7,6 +7,33 @@
     <Filter Include="PreCompile">
       <UniqueIdentifier>{69b9e5a1-4ffb-427c-b3c0-d44a27e5f9e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{bdb1ea22-dd0b-4cd4-b8f8-0daea10492a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Texture">
+      <UniqueIdentifier>{30d9cf94-a451-469e-9315-472ae6495366}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{db96590d-2901-41eb-b558-9f609b838977}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Rendering">
+      <UniqueIdentifier>{4b3075e2-c506-4bbb-b56a-edce257bae27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Rendering\Component">
+      <UniqueIdentifier>{2e32c226-d634-4c1d-aff2-e496be89f8e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component">
+      <UniqueIdentifier>{b5908208-ae7f-4116-a0b6-4296c605c8f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor">
+      <UniqueIdentifier>{02a76b8f-88e5-4940-b2d2-8e310c26775a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor\Gamemode">
+      <UniqueIdentifier>{5da27f80-a8bd-4b2c-8e6f-1bb662594db9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device">
+      <UniqueIdentifier>{3f15dd31-19e0-49d1-b2e8-045edd2a1a01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineCore.h">
@@ -18,9 +45,42 @@
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
-    <ClInclude Include="EngineGraphicDevice.h" />
-    <ClInclude Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineRenderTarget.h" />
-    <ClInclude Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineTexture.h" />
+    <ClInclude Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineRenderTarget.h">
+      <Filter>Resources\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineTexture.h">
+      <Filter>Resources\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TickObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Object\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Object\Rendering\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneComponent.h">
+      <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorComponent.h">
+      <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Object\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMode.h">
+      <Filter>Object\Actor\Gamemode</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineGraphicDevice.h">
+      <Filter>Device</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp">
@@ -32,8 +92,41 @@
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
-    <ClCompile Include="EngineGraphicDevice.cpp" />
-    <ClCompile Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineTexture.cpp" />
-    <ClCompile Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineRenderTarget.cpp" />
+    <ClCompile Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineRenderTarget.cpp">
+      <Filter>Resources\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineTexture.cpp">
+      <Filter>Resources\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TickObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Object\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Object\Rendering\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneComponent.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ActorComponent.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Object\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMode.cpp">
+      <Filter>Object\Actor\Gamemode</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineGraphicDevice.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "GameCore.h"
+#include "PlayGameMode.h"
 
 UGameCore::UGameCore()
 {
@@ -11,15 +12,18 @@ UGameCore::~UGameCore()
 
 void UGameCore::Initialize()
 {
-	UEngineDirectory Dir;
-	Dir.MoveToSearchChild("ContentsResources");
-	Dir.Move("Sound");
+	GEngine->CreateLevel<APlayGameMode>("PlayLevel");
+	GEngine->ChangeLevel("PlayLevel");
 
-	std::list<UEngineFile> Files = Dir.AllFile({ ".wav" });
-	for (UEngineFile& File : Files)
-	{
-		UEngineSound::Load(File.GetFullPath());
-	}
+	//UEngineDirectory Dir;
+	//Dir.MoveToSearchChild("ContentsResources");
+	//Dir.Move("Sound");
 
-	UEngineSound::SoundPlay("anipang_ingame_wav.wav");
+	//std::list<UEngineFile> Files = Dir.AllFile({ ".wav" });
+	//for (UEngineFile& File : Files)
+	//{
+	//	UEngineSound::Load(File.GetFullPath());
+	//}
+
+	//UEngineSound::SoundPlay("anipang_ingame_wav.wav");
 }
