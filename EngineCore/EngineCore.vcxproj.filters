@@ -81,6 +81,12 @@
     <ClInclude Include="EngineGraphicDevice.h">
       <Filter>Device</Filter>
     </ClInclude>
+    <ClInclude Include="DefaultSceneComponent.h" />
+    <ClInclude Include="EngineVertexBuffer.h" />
+    <ClInclude Include="EngineVertex.h" />
+    <ClInclude Include="EngineMesh.h" />
+    <ClInclude Include="EngineIndexBuffer.h" />
+    <ClInclude Include="EngineBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp">
@@ -128,5 +134,11 @@
     <ClCompile Include="EngineGraphicDevice.cpp">
       <Filter>Device</Filter>
     </ClCompile>
+    <ClCompile Include="DefaultSceneComponent.cpp" />
+    <ClCompile Include="EngineVertexBuffer.cpp" />
+    <ClCompile Include="EngineMesh.cpp" />
+    <ClCompile Include="EngineIndexBuffer.cpp" />
+    <ClCompile Include="EngineGraphicDevice_Resources.cpp" />
+    <ClCompile Include="EngineBuffer.cpp" />
   </ItemGroup>
 </Project>

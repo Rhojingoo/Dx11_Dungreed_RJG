@@ -1,6 +1,8 @@
 #include "PreCompile.h"
 #include "Actor.h"
 #include "SceneComponent.h"
+#include "DefaultSceneComponent.h"
+
 
 AActor::AActor()
 {
@@ -44,4 +46,14 @@ void AActor::PushComponent(std::shared_ptr<UActorComponent> _Component, std::str
 		// std::shared_ptr을 그냥 포인터로 변경하는 함수
 		RootComponent = SceneComponent.get();
 	}
+}
+
+void AActor::RootCheck()
+{
+
+		if (nullptr == RootComponent)
+		{
+			RootComponent = CreateDefaultSubObject<UDefaultSceneComponent>("UDefaultSceneComponent");
+		}
+	
 }
