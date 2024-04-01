@@ -1,16 +1,18 @@
 #pragma once
 #include <EnginePlatform/EngineResources.h>
-
+// Ό³Έν :
 class UEngineBuffer
 {
-public : 
+public:
+	// constrcuter destructer
 	UEngineBuffer();
 	~UEngineBuffer();
 
-	UEngineBuffer(const UEngineBuffer& _Other)				 = delete;
-	UEngineBuffer(UEngineBuffer& _Other) noexcept				 = delete;
-	UEngineBuffer& operator =(const UEngineBuffer& _Other)	 = delete;
-	UEngineBuffer& operator =(UEngineBuffer& _Other) noexcept	 = delete;
+	// delete Function
+	UEngineBuffer(const UEngineBuffer& _Other) = delete;
+	UEngineBuffer(UEngineBuffer&& _Other) noexcept = delete;
+	UEngineBuffer& operator=(const UEngineBuffer& _Other) = delete;
+	UEngineBuffer& operator=(UEngineBuffer&& _Other) noexcept = delete;
 
 protected:
 	D3D11_BUFFER_DESC BufferInfo = {};

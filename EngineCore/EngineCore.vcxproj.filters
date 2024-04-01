@@ -45,12 +45,6 @@
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineRenderTarget.h">
-      <Filter>Resources\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineTexture.h">
-      <Filter>Resources\Texture</Filter>
-    </ClInclude>
     <ClInclude Include="WorldObject.h">
       <Filter>Object</Filter>
     </ClInclude>
@@ -87,6 +81,15 @@
     <ClInclude Include="EngineMesh.h" />
     <ClInclude Include="EngineIndexBuffer.h" />
     <ClInclude Include="EngineBuffer.h" />
+    <ClInclude Include="EngineShader.h" />
+    <ClInclude Include="EngineVertexShader.h" />
+    <ClInclude Include="EngineRasterizer.h" />
+    <ClInclude Include="EnginePixelShader.h" />
+    <ClInclude Include="EngineMaterial.h" />
+    <ClInclude Include="EngineRenderTarget.h" />
+    <ClInclude Include="EngineTexture.h">
+      <Filter>Resources\Texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp">
@@ -97,12 +100,6 @@
     </ClCompile>
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineRenderTarget.cpp">
-      <Filter>Resources\Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineTexture.cpp">
-      <Filter>Resources\Texture</Filter>
     </ClCompile>
     <ClCompile Include="WorldObject.cpp">
       <Filter>Object</Filter>
@@ -140,5 +137,14 @@
     <ClCompile Include="EngineIndexBuffer.cpp" />
     <ClCompile Include="EngineGraphicDevice_Resources.cpp" />
     <ClCompile Include="EngineBuffer.cpp" />
+    <ClCompile Include="EngineShader.cpp" />
+    <ClCompile Include="EngineVertexShader.cpp" />
+    <ClCompile Include="EnginePixelShader.cpp" />
+    <ClCompile Include="EngineRasterizer.cpp" />
+    <ClCompile Include="EngineMaterial.cpp" />
+    <ClCompile Include="EngineRenderTarget.cpp" />
+    <ClCompile Include="EngineTexture.cpp">
+      <Filter>Resources\Texture</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

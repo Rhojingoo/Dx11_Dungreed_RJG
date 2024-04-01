@@ -12,3 +12,4 @@ UEngineBuffer::~UEngineBuffer()
 		Buffer->Release();
 	}
 }
+

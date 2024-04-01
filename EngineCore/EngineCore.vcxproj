@@ -171,8 +171,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineRenderTarget.h" />
-    <ClInclude Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineTexture.h" />
     <ClInclude Include="Camera.h">
       <SubType>
       </SubType>
@@ -194,6 +192,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineMaterial.h" />
     <ClInclude Include="EngineMesh.h">
       <SubType>
       </SubType>
@@ -202,6 +201,11 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EnginePixelShader.h" />
+    <ClInclude Include="EngineRasterizer.h" />
+    <ClInclude Include="EngineRenderTarget.h" />
+    <ClInclude Include="EngineShader.h" />
+    <ClInclude Include="EngineTexture.h" />
     <ClInclude Include="EngineVertex.h">
       <SubType>
       </SubType>
@@ -210,6 +214,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineVertexShader.h" />
     <ClInclude Include="GameMode.h">
       <SubType>
       </SubType>
@@ -245,8 +250,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineRenderTarget.cpp" />
-    <ClCompile Include="C:\Users\assortrock0\Desktop\GM-main\DX\DirectX\EngineCore\EngineTexture.cpp" />
     <ClCompile Include="Camera.cpp">
       <SubType>
       </SubType>
@@ -269,6 +272,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EngineMaterial.cpp" />
     <ClCompile Include="EngineMesh.cpp">
       <SubType>
       </SubType>
@@ -277,10 +281,16 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EnginePixelShader.cpp" />
+    <ClCompile Include="EngineRasterizer.cpp" />
+    <ClCompile Include="EngineRenderTarget.cpp" />
+    <ClCompile Include="EngineShader.cpp" />
+    <ClCompile Include="EngineTexture.cpp" />
     <ClCompile Include="EngineVertexBuffer.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EngineVertexShader.cpp" />
     <ClCompile Include="GameMode.cpp">
       <SubType>
       </SubType>
