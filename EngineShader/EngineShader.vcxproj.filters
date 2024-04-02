@@ -5,4 +5,14 @@
       <UniqueIdentifier>{9d1406bf-8818-40dd-b990-4590b35b9c10}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="EngineVertex.hlsli">
+      <Filter>2D</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="ImageShader.fx">
+      <Filter>2D</Filter>
+    </FxCompile>
+  </ItemGroup>
 </Project>

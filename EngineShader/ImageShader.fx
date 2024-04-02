@@ -34,7 +34,10 @@ struct ImageVSOutPut
         // 언어를 배울때는 왜 안돼 어리석은 초보적인 생각은 그만두고 배워야한다.
         // 그냥 구조체처럼 초기화 하는게 안되는데.
         ImageVSOutPut Out = (ImageVSOutPut) 0;
-        Out.POSITION = _Input.POSITION;
+    
+        // hlsl 스위즐링(swizzling) 문법.
+        Out.POSITION.xyz = _Input.POSITION.xyz * 2.0f;
+        Out.POSITION.w = 1.0f;
         return Out;
     }
 //}
