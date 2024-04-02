@@ -25,13 +25,15 @@ void UEngineGraphicDevice::EngineResourcesRelease()
 	UEngineVertexShader::ResourcesRelease();
 	UEnginePixelShader::ResourcesRelease();
 	UEngineRasterizer::ResourcesRelease();
-
 	UEngineMaterial::ResourcesRelease();
 }
 
 // 인풋어셈블러 1과 인풋어셈블러 2의 리소스들을 만들어내는 이니셜라이즈
 void MeshInit()
 {
+	FEngineVertex::Info.AddInputLayOut("POSITION", DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT);
+	FEngineVertex::Info.AddInputLayOut("COLOR", DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT);
+
 	{
 		std::vector<FEngineVertex> VertexData;
 		VertexData.resize(4);
@@ -58,7 +60,7 @@ void MeshInit()
 
 		UEngineMesh::Create("Rect");
 
-
+		
 
 		// IndexBuffer
 	}
@@ -75,7 +77,7 @@ void ShaderInit()
 	UEngineDirectory Dir;
 	Dir.MoveToSearchChild("EngineShader");
 
-	std::vector<UEngineFile> Files = Dir.GetAllFile({ ".fx", "hlsl" });
+	std::vector<UEngineFile> Files = Dir.GetAllFile({".fx", "hlsl"});
 
 	for (size_t i = 0; i < Files.size(); i++)
 	{
@@ -111,23 +113,26 @@ void ShaderInit()
 				UEnginePixelShader::Load(FullPath.c_str(), EntryName);
 			}
 		}
-
-
 	}
+
+	// UEngineVertexShader::Load("D:ENgineShader\MeshVertexShader", "AAAA_VS");
+
+	//UEngineVertexShader::Load("AAA.png", EntryName);
+	//UEngineVertexShader::Load("BBB.png", EntryName);
 }
 
 void SettingInit()
 {
-	//D3D11_FILL_MODE FillMode;
-	//D3D11_CULL_MODE CullMode;
-	//BOOL FrontCounterClockwise;
-	//INT DepthBias;
-	//FLOAT DepthBiasClamp;
-	//FLOAT SlopeScaledDepthBias;
-	//BOOL DepthClipEnable;
-	//BOOL ScissorEnable;
-	//BOOL MultisampleEnable;
-	//BOOL AntialiasedLineEnable;
+		//D3D11_FILL_MODE FillMode;
+		//D3D11_CULL_MODE CullMode;
+		//BOOL FrontCounterClockwise;
+		//INT DepthBias;
+		//FLOAT DepthBiasClamp;
+		//FLOAT SlopeScaledDepthBias;
+		//BOOL DepthClipEnable;
+		//BOOL ScissorEnable;
+		//BOOL MultisampleEnable;
+		//BOOL AntialiasedLineEnable;
 
 
 	D3D11_RASTERIZER_DESC Desc = {};
@@ -140,7 +145,7 @@ void SettingInit()
 	// 앞면이건 뒷면이건 다 그려라.
 	// 우리 외적으로 앞
 	// 앞면 그리지마
-
+	
 	// Desc.CullMode = D3D11_CULL_MODE::D3D11_CULL_FRONT;
 	// 뒷면 그리지마
 	Desc.CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;

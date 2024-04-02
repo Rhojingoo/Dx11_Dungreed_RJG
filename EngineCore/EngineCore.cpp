@@ -9,11 +9,11 @@
 
 #include "EngineVertexBuffer.h"
 
-UEngineCore::UEngineCore()
+UEngineCore::UEngineCore() 
 {
 }
 
-UEngineCore::~UEngineCore()
+UEngineCore::~UEngineCore() 
 {
 	// 엔진이 종료할때 기존 엔진 옵션을 세이브 하고 한다.
 	UEngineDirectory Dir;

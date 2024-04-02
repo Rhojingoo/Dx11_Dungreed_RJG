@@ -1,11 +1,11 @@
 #include "PreCompile.h"
 #include "TickObject.h"
 
-UTickObject::UTickObject()
+UTickObject::UTickObject() 
 {
 }
 
-UTickObject::~UTickObject()
+UTickObject::~UTickObject() 
 {
 }
 

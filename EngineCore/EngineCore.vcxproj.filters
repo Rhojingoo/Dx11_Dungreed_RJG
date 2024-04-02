@@ -40,11 +40,11 @@
     <Filter Include="Resources\Mesh">
       <UniqueIdentifier>{fa45051b-8f87-4209-a24e-04a41bf5fb22}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\RenderingSetting">
-      <UniqueIdentifier>{71896ca5-2869-417c-88da-a21c03f1d6e5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\Shader">
       <UniqueIdentifier>{2704eb83-9263-4782-bbe4-7b351e07f018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\RenderingSetting">
+      <UniqueIdentifier>{71896ca5-2869-417c-88da-a21c03f1d6e5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +126,12 @@
     <ClInclude Include="EngineVertex.h">
       <Filter>Resources\Mesh</Filter>
     </ClInclude>
+    <ClInclude Include="EngineInputLayOut.h">
+      <Filter>Resources\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXHelper.h">
+      <Filter>Device</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp">
@@ -205,6 +211,15 @@
     </ClCompile>
     <ClCompile Include="EngineRenderTarget.cpp">
       <Filter>Resources\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineInputLayOut.cpp">
+      <Filter>Resources\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineVertex.cpp">
+      <Filter>Resources\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXHelper.cpp">
+      <Filter>Device</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

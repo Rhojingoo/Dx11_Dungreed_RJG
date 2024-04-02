@@ -179,6 +179,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="DirectXHelper.h" />
     <ClInclude Include="EngineBuffer.h">
       <SubType>
       </SubType>
@@ -192,6 +193,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineInputLayOut.h" />
     <ClInclude Include="EngineMaterial.h" />
     <ClInclude Include="EngineMesh.h">
       <SubType>
@@ -258,6 +260,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="DirectXHelper.cpp" />
     <ClCompile Include="EngineBuffer.cpp">
       <SubType>
       </SubType>
@@ -272,6 +275,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EngineInputLayOut.cpp" />
     <ClCompile Include="EngineMaterial.cpp" />
     <ClCompile Include="EngineMesh.cpp">
       <SubType>
@@ -286,6 +290,7 @@
     <ClCompile Include="EngineRenderTarget.cpp" />
     <ClCompile Include="EngineShader.cpp" />
     <ClCompile Include="EngineTexture.cpp" />
+    <ClCompile Include="EngineVertex.cpp" />
     <ClCompile Include="EngineVertexBuffer.cpp">
       <SubType>
       </SubType>

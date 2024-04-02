@@ -70,7 +70,7 @@ public:
 	void ScreenUpdate();
 
 	void SetWindowSmallIcon();
-
+	
 	FVector GetMousePosition();
 	void CursorOff();
 

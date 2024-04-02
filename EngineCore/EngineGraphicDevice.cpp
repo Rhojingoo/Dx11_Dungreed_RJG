@@ -5,11 +5,11 @@
 
 // 다이렉트 라이브러리를 사용하기 위해서
 
-UEngineGraphicDevice::UEngineGraphicDevice()
+UEngineGraphicDevice::UEngineGraphicDevice() 
 {
 }
 
-UEngineGraphicDevice::~UEngineGraphicDevice()
+UEngineGraphicDevice::~UEngineGraphicDevice() 
 {
 	if (nullptr != SwapChain)
 	{
@@ -38,7 +38,7 @@ IDXGIAdapter* UEngineGraphicDevice::GetHighPerFormanceAdapter()
 	// 인터페이스입니다
 	// Adapter를 만들어 내려면  Factory 필요하다.
 	// CreateDXGIFactory()
-
+	
 	// 문법 이해 안되면 물어보세요
 	HRESULT HR = CreateDXGIFactory(__uuidof(IDXGIFactory), reinterpret_cast<void**>(&Factory));
 
@@ -163,7 +163,7 @@ void UEngineGraphicDevice::Initialize(const UEngineWindow& _Window, const float4
 		MsgBoxAssert("그래픽카드가 메모리제어 권한 디바이스를 생성하는데 실패했습니다.");
 		return;
 	}
-
+	
 	// 나 포인터 썼다 무조건 null검사
 	// 생각자체를 하지마 그냥 하는거니까.
 	//if (nullptr != Adapter)
@@ -212,7 +212,6 @@ void UEngineGraphicDevice::Initialize(const UEngineWindow& _Window, const float4
 	CreateSwapChain(_ClearColor);
 
 	EngineResourcesInit();
-
 }
 
 void UEngineGraphicDevice::CreateSwapChain(const float4& _ClearColor)
@@ -264,7 +263,10 @@ void UEngineGraphicDevice::CreateSwapChain(const float4& _ClearColor)
 	// 버퍼가 있으면
 	// 교체하는 순서인데 010101010101
 	// 알고 있어봐야 의미 없죠.
-	ScInfo.SwapEffect = DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_FLIP_DISCARD;
+	// DXGI_SWAP_EFFECT_FLIP_DISCARD 2개를 교대로 보여줘라.
+	// 이거때문에 화면이 깜빡임
+	// ScInfo.SwapEffect = DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_FLIP_DISCARD;
+	ScInfo.SwapEffect = DXGI_SWAP_EFFECT::DXGI_SWAP_EFFECT_DISCARD;
 	// 전혀 기억 안난다.
 	ScInfo.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
@@ -300,7 +302,7 @@ void UEngineGraphicDevice::CreateSwapChain(const float4& _ClearColor)
 	pF->Release();
 
 	// 끄집어 내서 쓸것이다.
-
+	
 	// 내가 설정한 화면크기만한 directx용 image가 들어있다.
 	// ID3d11Texture2D
 	// 쉽게말하자면 IDXGISwapChain 내부에 맵을 들고 있는데
@@ -331,7 +333,7 @@ void UEngineGraphicDevice::CreateSwapChain(const float4& _ClearColor)
 	// 
 
 
-
+	
 }
 
 void UEngineGraphicDevice::RenderStart()

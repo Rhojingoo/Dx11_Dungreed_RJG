@@ -15,6 +15,7 @@
 #include "EngineVertex.hlsli"
 
 // 리턴할 구조체도 만들어야 한다.
+// 일치시킬 필요는 없는데 일치시키는게 좋다.
 struct ImageVSOutPut
 {
     float4 POSITION : SV_POSITION;
