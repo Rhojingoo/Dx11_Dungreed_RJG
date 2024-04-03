@@ -46,6 +46,9 @@
     <Filter Include="Resources\RenderingSetting">
       <UniqueIdentifier>{71896ca5-2869-417c-88da-a21c03f1d6e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\ShaderResources">
+      <UniqueIdentifier>{b74af5fb-99fa-40fe-b2be-890a795b7137}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineCore.h">
@@ -131,6 +134,12 @@
     </ClInclude>
     <ClInclude Include="DirectXHelper.h">
       <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineConstantBuffer.h">
+      <Filter>Resources\ShaderResources</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineShaderResources.h">
+      <Filter>Resources\ShaderResources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +229,12 @@
     </ClCompile>
     <ClCompile Include="DirectXHelper.cpp">
       <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineConstantBuffer.cpp">
+      <Filter>Resources\ShaderResources</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineShaderResources.cpp">
+      <Filter>Resources\ShaderResources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
