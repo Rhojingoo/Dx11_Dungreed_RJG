@@ -49,6 +49,21 @@
     <Filter Include="Resources\ShaderResources">
       <UniqueIdentifier>{b74af5fb-99fa-40fe-b2be-890a795b7137}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{fa129c94-e9fe-43cd-a77f-80d497f172fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\DirectXTex">
+      <UniqueIdentifier>{0f1694c9-b765-41d5-ad80-8cd09e00a943}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\DirectXTex\Debug">
+      <UniqueIdentifier>{ed275b61-d5ed-44b3-95d2-3c55548db3ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\DirectXTex\Inc">
+      <UniqueIdentifier>{f15be883-d1a2-4aad-9d5b-80b65b9639f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\DirectXTex\Release">
+      <UniqueIdentifier>{6149e789-9ca4-441f-8b5d-2e1bdd797513}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineCore.h">
@@ -141,6 +156,10 @@
     <ClInclude Include="EngineShaderResources.h">
       <Filter>Resources\ShaderResources</Filter>
     </ClInclude>
+    <ClInclude Include="ThirdParty\DirectxTex\inc\DirectXTex.h">
+      <Filter>ThirdParty\DirectXTex\Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineSampler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp">
@@ -236,5 +255,14 @@
     <ClCompile Include="EngineShaderResources.cpp">
       <Filter>Resources\ShaderResources</Filter>
     </ClCompile>
+    <ClCompile Include="EngineSampler.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="ThirdParty\DirectxTex\Debug\DirectXTex.lib">
+      <Filter>ThirdParty\DirectXTex\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\DirectxTex\Release\DirectXTex.lib">
+      <Filter>ThirdParty\DirectXTex\Release</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>
