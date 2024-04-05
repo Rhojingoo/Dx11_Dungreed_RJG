@@ -38,7 +38,7 @@ public:
 		// 이 사이에서만 컴포넌트를 생성할수 있어야 한다.
 		IsActorConstructer = true;
 		std::shared_ptr<AActor> NewActor = std::make_shared<ActorType>();
-		NewActor->RootCheck();
+		Test(NewActor);
 		IsActorConstructer = false;
 
 		// 이
@@ -59,6 +59,11 @@ public:
 protected:
 	void Tick(float _DeltaTime) override;
 	void Render(float _DeltaTime);
+
+	void LevelEnd(ULevel* _NextLevel) override;
+	void LevelStart(ULevel* _PrevLevel) override;
+
+	void Test(std::shared_ptr<AActor> _A);
 
 private:
 	std::shared_ptr<UCamera> MainCamera = nullptr;

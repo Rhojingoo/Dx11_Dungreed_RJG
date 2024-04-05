@@ -189,6 +189,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineEnums.h" />
     <ClInclude Include="EngineGraphicDevice.h" />
     <ClInclude Include="EngineIndexBuffer.h">
       <SubType>
@@ -210,6 +211,7 @@
     <ClInclude Include="EngineSampler.h" />
     <ClInclude Include="EngineShader.h" />
     <ClInclude Include="EngineShaderResources.h" />
+    <ClInclude Include="EngineSprite.h" />
     <ClInclude Include="EngineTexture.h" />
     <ClInclude Include="EngineVertex.h">
       <SubType>
@@ -237,6 +239,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="ThirdParty\DirectxTex\inc\DirectXTex.h" />
     <ClInclude Include="TickObject.h">
       <SubType>
@@ -296,6 +299,7 @@
     <ClCompile Include="EngineSampler.cpp" />
     <ClCompile Include="EngineShader.cpp" />
     <ClCompile Include="EngineShaderResources.cpp" />
+    <ClCompile Include="EngineSprite.cpp" />
     <ClCompile Include="EngineTexture.cpp" />
     <ClCompile Include="EngineVertex.cpp" />
     <ClCompile Include="EngineVertexBuffer.cpp">
@@ -325,6 +329,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="TickObject.cpp">
       <SubType>
       </SubType>

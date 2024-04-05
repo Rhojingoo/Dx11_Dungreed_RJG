@@ -7,14 +7,20 @@
     <ClInclude Include="GameCore.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="TitleMode.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Level\Object</Filter>
     </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>Level\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Title_GameMode.h">
+      <Filter>Level\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Town_GameMode.h">
+      <Filter>Level\Town</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss_GameMode.h">
+      <Filter>Level\BossRoom</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -24,14 +30,20 @@
     <ClCompile Include="GameCore.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="TitleMode.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Level\Object</Filter>
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>Level\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Title_GameMode.cpp">
+      <Filter>Level\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Town_GameMode.cpp">
+      <Filter>Level\Town</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss_GameMode.cpp">
+      <Filter>Level\BossRoom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +58,15 @@
     </Filter>
     <Filter Include="Level\Object">
       <UniqueIdentifier>{6267f4e0-8c63-42b9-952b-2a66a73d5dfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Title">
+      <UniqueIdentifier>{11dac7f2-1b43-4029-b4e0-9db5112e5ebe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Town">
+      <UniqueIdentifier>{6574f642-44b7-42bb-bc02-75924ce35f59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\BossRoom">
+      <UniqueIdentifier>{48ea03d0-d6d7-45b4-affb-a3c04b73f687}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

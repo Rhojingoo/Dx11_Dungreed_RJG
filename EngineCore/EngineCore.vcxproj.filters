@@ -160,6 +160,11 @@
       <Filter>ThirdParty\DirectXTex\Inc</Filter>
     </ClInclude>
     <ClInclude Include="EngineSampler.h" />
+    <ClInclude Include="SpriteRenderer.h" />
+    <ClInclude Include="EngineSprite.h" />
+    <ClInclude Include="EngineEnums.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp">
@@ -256,6 +261,8 @@
       <Filter>Resources\ShaderResources</Filter>
     </ClCompile>
     <ClCompile Include="EngineSampler.cpp" />
+    <ClCompile Include="SpriteRenderer.cpp" />
+    <ClCompile Include="EngineSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="ThirdParty\DirectxTex\Debug\DirectXTex.lib">
