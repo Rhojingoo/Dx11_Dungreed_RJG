@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "GameCore.h"
-#include "PlayGameMode.h"
+#include "TitleMode.h"
 
 UGameCore::UGameCore()
 {
@@ -58,8 +58,8 @@ void UGameCore::Initialize()
 		// UEngineSound::SoundPlay("anipang_ingame_wav.wav");
 	}
 
-	GEngine->CreateLevel<APlayGameMode>("PlayLevel");
-	GEngine->ChangeLevel("PlayLevel");
+	GEngine->CreateLevel<ATitleMode>("TitleLevel");
+	GEngine->ChangeLevel("TitleLevel");
 
 
 

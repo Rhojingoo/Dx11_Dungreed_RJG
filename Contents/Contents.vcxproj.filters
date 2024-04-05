@@ -7,10 +7,13 @@
     <ClInclude Include="GameCore.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="PlayGameMode.h">
+    <ClInclude Include="TitleMode.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Level\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
       <Filter>Level\Object</Filter>
     </ClInclude>
   </ItemGroup>
@@ -21,10 +24,13 @@
     <ClCompile Include="GameCore.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="PlayGameMode.cpp">
+    <ClCompile Include="TitleMode.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
+      <Filter>Level\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
       <Filter>Level\Object</Filter>
     </ClCompile>
   </ItemGroup>

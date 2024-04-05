@@ -3,12 +3,12 @@
 #include "SceneComponent.h"
 #include "DefaultSceneComponent.h"
 
-AActor::AActor() 
+AActor::AActor()
 {
 	// 
 }
 
-AActor::~AActor() 
+AActor::~AActor()
 {
 }
 

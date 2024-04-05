@@ -163,6 +163,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BackGround.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameCore.h">
       <SubType>
       </SubType>
@@ -171,13 +175,17 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="PlayGameMode.h">
+    <ClInclude Include="TitleMode.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="PreCompile.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BackGround.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameCore.cpp">
       <SubType>
       </SubType>
@@ -186,7 +194,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="PlayGameMode.cpp">
+    <ClCompile Include="TitleMode.cpp">
       <SubType>
       </SubType>
     </ClCompile>
