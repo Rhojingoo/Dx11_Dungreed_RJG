@@ -1,8 +1,8 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EngineCore/SpriteRenderer.h>
 
 // Ό³Έν :
-class URenderer;
 class APlayer : public AActor
 {
 	GENERATED_BODY(AActor)
@@ -22,8 +22,11 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+
+	void RendererOff();
+	void RendererOn();
+
 private:
-	URenderer* Renderer;
-	float4 Color;
+	USpriteRenderer* Renderer = nullptr;
 };
 

@@ -4,16 +4,7 @@
 
 APlayer::APlayer()
 {
-	//Renderer = CreateDefaultSubObject<URenderer>("Renderer");
-	//Renderer->SetMesh("Rect");
-	// 메테리얼을 해주는순간
-	// 메테리얼은 안에 버텍스쉐이더와 픽셀쉐이더를 둘다 들고 있죠.
-	// 색깔  머티리얼그자체에 세팅해준다.
-	// 
-	//Renderer->SetMaterial("2DImage");
-
-	// Renderer->세팅픽셀쉐이더상수버퍼();
-	// Renderer->세팅버텍스쉐이더상수버퍼();
+	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 }
 
 APlayer::~APlayer()
@@ -23,13 +14,14 @@ APlayer::~APlayer()
 void APlayer::BeginPlay()
 {
 	Super::BeginPlay();
+	SetActorScale3D(FVector(320.0f, 320.0f, 100.0f));
+	
+	Renderer->CreateAnimation("Player_Idle", "Player_Idle",0.1f);
+	Renderer->CreateAnimation("Player_Jump", "Player_Jump", 0.1f);
+	Renderer->CreateAnimation("Player_Run", "Player_Run", 0.1f);
+	Renderer->CreateAnimation("Player_Die", "Player_Die", 0.1f);
+	Renderer->ChangeAnimation("Player_Idle");
 
-	//SetActorScale3D(FVector(300.0f, 300.0f, 100.0f));
-
-	// 안해주면 터져야한다.
-	//Renderer->Resources->SettingConstantBuffer("OutPutColor", Color);
-	// 내부에서 샘플러도 같이 찾을
-	//Renderer->Resources->SettingTexture("Image", "CharIdle0.png", "POINT");
 
 }
 
@@ -40,14 +32,35 @@ void APlayer::Tick(float _DeltaTime)
 
 	float Speed = 100.0f;
 
+	if (true == UEngineInput::IsPress('1'))
+	{
+		Renderer->ChangeAnimation("Idle");
+	}
+
+	if (true == UEngineInput::IsPress('2'))
+	{
+		Renderer->ChangeAnimation("Jump");
+	}
+
+	if (true == UEngineInput::IsPress('3'))
+	{
+		Renderer->ChangeAnimation("Run");
+	}
+
+	if (true == UEngineInput::IsPress('4'))
+	{
+		Renderer->ChangeAnimation("Die");
+	}
+
+
 	if (true == UEngineInput::IsPress('A'))
 	{
-		AddActorLocation(FVector::Left * _DeltaTime * Speed);
+		AddActorLocation(FVector::Left * _DeltaTime * Speed);		
 	}
 
 	if (true == UEngineInput::IsPress('D'))
 	{
-		AddActorLocation(FVector::Right * _DeltaTime * Speed);
+		AddActorLocation(FVector::Right * _DeltaTime * Speed);		
 	}
 
 	if (true == UEngineInput::IsPress('W'))
@@ -60,39 +73,53 @@ void APlayer::Tick(float _DeltaTime)
 		AddActorLocation(FVector::Down * _DeltaTime * Speed);
 	}
 
-	if (true == UEngineInput::IsPress(VK_NUMPAD1))
-	{
-		Color.X += _DeltaTime;
-	}
+	//if (true == UEngineInput::IsPress(VK_NUMPAD1))
+	//{
+	//	Color.X += _DeltaTime;
+	//}
 
-	if (true == UEngineInput::IsPress(VK_NUMPAD2))
-	{
-		Color.X -= _DeltaTime;
-	}
+	//if (true == UEngineInput::IsPress(VK_NUMPAD2))
+	//{
+	//	Color.X -= _DeltaTime;
+	//}
 
-	if (true == UEngineInput::IsPress(VK_NUMPAD4))
-	{
-		Color.Y += _DeltaTime;
-	}
+	//if (true == UEngineInput::IsPress(VK_NUMPAD4))
+	//{
+	//	Color.Y += _DeltaTime;
+	//}
 
-	if (true == UEngineInput::IsPress(VK_NUMPAD5))
-	{
-		Color.Y -= _DeltaTime;
-	}
+	//if (true == UEngineInput::IsPress(VK_NUMPAD5))
+	//{
+	//	Color.Y -= _DeltaTime;
+	//}
 
-	if (true == UEngineInput::IsPress(VK_NUMPAD7))
-	{
-		Color.Z += _DeltaTime;
-	}
+	//if (true == UEngineInput::IsPress(VK_NUMPAD7))
+	//{
+	//	Color.Z += _DeltaTime;
+	//}
 
-	if (true == UEngineInput::IsPress(VK_NUMPAD8))
-	{
-		Color.Z -= _DeltaTime;
-	}
+	//if (true == UEngineInput::IsPress(VK_NUMPAD8))
+	//{
+	//	Color.Z -= _DeltaTime;
+	//}
 
 
 
 	// Renderer->SetConstanctBuffer("Ftransform", GetTransform());
 
 
+}
+
+void APlayer::RendererOff()
+{
+	Renderer->SetSprite("CuttingTest.png", 11);
+	//Renderer->SetActive(false);
+	DelayCallBack(0.2f, std::bind(&APlayer::RendererOn, this));
+}
+
+void APlayer::RendererOn()
+{
+	Renderer->SetSprite("CuttingTest.png", 11);
+	//Renderer->SetActive(true);
+	DelayCallBack(0.2f, std::bind(&APlayer::RendererOff, this));
 }

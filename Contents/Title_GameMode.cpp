@@ -1,28 +1,32 @@
 #include "PreCompile.h"
-#include "TitleMode.h"
+#include "Title_GameMode.h"
 #include "Player.h"
-#include "BackGround.h"
+#include "Title_BackGround.h"
 #include <EngineCore/Camera.h>
 
-ATitleMode::ATitleMode()
+ATitle_GameMode::ATitle_GameMode()
 {
 }
 
-ATitleMode::~ATitleMode()
+ATitle_GameMode::~ATitle_GameMode()
 {
 }
 
-void ATitleMode::BeginPlay()
+void ATitle_GameMode::BeginPlay()
 {
 	Super::BeginPlay();
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation(FVector(0.0f, 0.0f, -100.0f));
-	GetWorld()->SpawnActor<ABackGround>("Title_Logo");
+	GetWorld()->SpawnActor<ATitle_BackGround>("Title_Bg");
 	//GetWorld()->SpawnActor<APlayer>("Player");
 }
 
-void ATitleMode::Tick(float _DeltaTime)
+void ATitle_GameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	if (true == UEngineInput::IsDown('P'))
+	{
+		GEngine->ChangeLevel("TownLevel");
+	}
 }

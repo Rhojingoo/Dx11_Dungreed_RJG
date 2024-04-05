@@ -167,6 +167,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Boss.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Boss_BackGround.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Boss_GameMode.h">
       <SubType>
       </SubType>
@@ -179,11 +187,19 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Title_BackGround.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Title_GameMode.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="PreCompile.h" />
+    <ClInclude Include="Town_BackGround.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Town_GameMode.h">
       <SubType>
       </SubType>
@@ -191,6 +207,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BackGround.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Boss_BackGround.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -206,6 +230,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Title_BackGround.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Title_GameMode.cpp">
       <SubType>
       </SubType>
@@ -215,6 +243,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Town_BackGround.cpp">
+      <SubType>
+      </SubType>
     </ClCompile>
     <ClCompile Include="Town_GameMode.cpp">
       <SubType>
