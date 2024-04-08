@@ -34,6 +34,9 @@
     <ClInclude Include="Boss_BackGround.h">
       <Filter>Level\BossRoom\Boss_Object</Filter>
     </ClInclude>
+    <ClInclude Include="Title_Logo.h">
+      <Filter>Level\Title\Title_Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -68,6 +71,9 @@
     </ClCompile>
     <ClCompile Include="Boss_BackGround.cpp">
       <Filter>Level\BossRoom\Boss_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Title_Logo.cpp">
+      <Filter>Level\Title\Title_Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

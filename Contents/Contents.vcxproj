@@ -196,6 +196,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="PreCompile.h" />
+    <ClInclude Include="Title_Logo.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Town_BackGround.h">
       <SubType>
       </SubType>
@@ -243,6 +247,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Title_Logo.cpp">
+      <SubType>
+      </SubType>
     </ClCompile>
     <ClCompile Include="Town_BackGround.cpp">
       <SubType>
