@@ -14,7 +14,7 @@ void ATown_BackGround::BeginPlay()
 {
 	Super::BeginPlay();
 	SetActorScale3D(FVector(1000.0f, 300.0f, 100.0f));
-	Renderer->SetSprite("TownModel2.bmp");
+	Renderer->SetSprite("TownModel2.png");
 	//Renderer->SetSprite("TownBG_Night.bmp");
 	//Renderer->SetSprite("TownLayer_Night.bmp");
 }

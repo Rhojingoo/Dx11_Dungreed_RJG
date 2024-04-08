@@ -171,6 +171,7 @@
     <ClInclude Include="SpriteRenderer.h">
       <Filter>Object\Component</Filter>
     </ClInclude>
+    <ClInclude Include="EngineBlend.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp">
@@ -275,6 +276,7 @@
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>Object\Component</Filter>
     </ClCompile>
+    <ClCompile Include="EngineBlend.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="ThirdParty\DirectxTex\Debug\DirectXTex.lib">
@@ -283,5 +285,13 @@
     <CopyFileToFolders Include="ThirdParty\DirectxTex\Release\DirectXTex.lib">
       <Filter>ThirdParty\DirectXTex\Release</Filter>
     </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ThirdParty\DirectxTex\Debug\DirectXTex.pdb">
+      <Filter>ThirdParty\DirectXTex\Debug</Filter>
+    </None>
+    <None Include="ThirdParty\DirectxTex\Release\DirectXTex.pdb">
+      <Filter>ThirdParty\DirectXTex\Release</Filter>
+    </None>
   </ItemGroup>
 </Project>

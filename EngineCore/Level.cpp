@@ -20,11 +20,6 @@ ULevel::~ULevel()
 {
 }
 
-void ULevel::Test(std::shared_ptr<AActor> _A)
-{
-	_A->RootCheck();
-}
-
 void ULevel::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
@@ -123,4 +118,9 @@ void ULevel::LevelStart(ULevel* _PrevLevel)
 			Actor->LevelStart(_PrevLevel);
 		}
 	}
+}
+
+void ULevel::Test(std::shared_ptr<AActor> _A)
+{
+	_A->RootCheck();
 }
