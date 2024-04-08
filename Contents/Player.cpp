@@ -20,6 +20,13 @@ void APlayer::BeginPlay()
 	Renderer->CreateAnimation("Player_Jump", "Player_Jump", 0.1f);
 	Renderer->CreateAnimation("Player_Run", "Player_Run", 0.1f);
 	Renderer->CreateAnimation("Player_Die", "Player_Die", 0.1f);
+
+	Renderer->CreateAnimation("Boss_Attack", "Boss_Idle", 0.1f);
+	Renderer->CreateAnimation("Boss_Die", "Boss_Die", 0.1f);
+	Renderer->CreateAnimation("Boss_Enter", "Boss_Enter", 0.1f);
+	Renderer->CreateAnimation("Boss_Exit", "Boss_Exit", 0.1f);
+	Renderer->CreateAnimation("Boss_Idle", "Boss_Idle", 0.1f);
+
 	Renderer->ChangeAnimation("Player_Idle");
 
 
