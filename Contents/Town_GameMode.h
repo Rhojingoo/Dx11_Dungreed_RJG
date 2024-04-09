@@ -1,6 +1,8 @@
 #pragma once
 #include <EngineCore/GameMode.h>
 
+class APlayer;
+class UCamera;
 class ATown_GameMode : public AGameMode
 {
 	GENERATED_BODY(AGameMode)
@@ -19,5 +21,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
+	std::shared_ptr<UCamera> Camera = nullptr;
+	std::shared_ptr<APlayer> Actors = nullptr;
 };
 

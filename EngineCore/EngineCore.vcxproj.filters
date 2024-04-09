@@ -172,6 +172,7 @@
       <Filter>Object\Component</Filter>
     </ClInclude>
     <ClInclude Include="EngineBlend.h" />
+    <ClInclude Include="StateManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp">
@@ -277,6 +278,7 @@
       <Filter>Object\Component</Filter>
     </ClCompile>
     <ClCompile Include="EngineBlend.cpp" />
+    <ClCompile Include="StateManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="ThirdParty\DirectxTex\Debug\DirectXTex.lib">

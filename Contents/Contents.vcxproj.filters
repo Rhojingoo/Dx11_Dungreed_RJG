@@ -37,6 +37,16 @@
     <ClInclude Include="Title_Logo.h">
       <Filter>Level\Title\Title_Object</Filter>
     </ClInclude>
+    <ClInclude Include="Title_Bird.h">
+      <Filter>Level\Title\Title_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Titlre_Cloud.h">
+      <Filter>Level\Title\Title_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Town_BGPIXEL.h">
+      <Filter>Level\Town\Town_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -75,6 +85,16 @@
     <ClCompile Include="Title_Logo.cpp">
       <Filter>Level\Title\Title_Object</Filter>
     </ClCompile>
+    <ClCompile Include="Title_Bird.cpp">
+      <Filter>Level\Title\Title_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Titlre_Cloud.cpp">
+      <Filter>Level\Title\Title_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Town_BGPIXEL.cpp">
+      <Filter>Level\Town\Town_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentsHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">

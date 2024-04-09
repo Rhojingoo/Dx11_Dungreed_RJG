@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include <EngineCore/Renderer.h>
+#include "ContentsHelper.h"
 
 APlayer::APlayer()
 {
@@ -27,9 +28,13 @@ void APlayer::BeginPlay()
 	Renderer->CreateAnimation("Boss_Exit", "Boss_Exit", 0.1f);
 	Renderer->CreateAnimation("Boss_Idle", "Boss_Idle", 0.1f);
 
+
+	//Renderer->SetSprite("CuttingTest.png", 11);
+	Renderer->SetAutoSize(3.f, true);
+	
+	Renderer->SetOrder(7);
+	
 	Renderer->ChangeAnimation("Player_Idle");
-
-
 }
 
 void APlayer::Tick(float _DeltaTime)
@@ -114,6 +119,26 @@ void APlayer::Tick(float _DeltaTime)
 
 	// Renderer->SetConstanctBuffer("Ftransform", GetTransform());
 
+
+	std::shared_ptr<UEngineTexture> Tex = UContentsHelper::MapTex;
+
+#ifdef _DEBUG
+	if (nullptr == Tex)
+	{
+		MsgBoxAssert("이미지 충돌체크중 이미지가 존재하지 않습니다.");
+	}
+#endif
+
+	float4 Pos = GetActorLocation();
+	//Pos /= UContentsHelper::TileSize;
+	Pos.Y = -Pos.Y;
+
+	Color8Bit Color = Tex->GetColor(Pos, Color8Bit::Black);
+
+	if (Color != Color8Bit::Black)
+	{
+		AddActorLocation(float4::Down * _DeltaTime * 100.0f);
+	}
 
 }
 

@@ -179,6 +179,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ContentsHelper.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameCore.h">
       <SubType>
       </SubType>
@@ -191,6 +195,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Title_Bird.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Title_GameMode.h">
       <SubType>
       </SubType>
@@ -200,7 +208,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Titlre_Cloud.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Town_BackGround.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Town_BGPIXEL.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -226,6 +242,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="ContentsHelper.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameCore.cpp">
       <SubType>
       </SubType>
@@ -235,6 +255,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Title_BackGround.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Title_Bird.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -252,7 +276,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Titlre_Cloud.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Town_BackGround.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Town_BGPIXEL.cpp">
       <SubType>
       </SubType>
     </ClCompile>

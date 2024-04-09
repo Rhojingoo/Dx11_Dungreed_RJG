@@ -44,7 +44,8 @@ void UGameCore::Initialize()
 		// 이미 이 이름을 가진 스프라이트가 존재한다.
 		// 그러면 기존의 스프라이트 데이터는 날려버리고
 		// 자른 스프라이트 데이터 변경한다.
-		//UEngineSprite::CreateCutting("CuttingTest.png", 4, 3);
+		UEngineSprite::CreateCutting("Title_Bird.png", 8, 1);
+		UEngineSprite::CreateCutting("CuttingTest.png", 4, 3);
 	}
 	//UEngineDirectory Dir;
 	//Dir.MoveToSearchChild("ContentsResources");
@@ -78,7 +79,7 @@ void UGameCore::Initialize()
 	GEngine->CreateLevel<ATitle_GameMode>("TitleLevel");
 	GEngine->CreateLevel<ATown_GameMode>("TownLevel");
 	GEngine->CreateLevel<ABoss_GameMode>("BossLevel");
-	GEngine->ChangeLevel("TitleLevel");
+	GEngine->ChangeLevel("TownLevel");
 
 
 

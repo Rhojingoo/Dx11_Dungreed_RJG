@@ -1,26 +1,27 @@
 #include "PreCompile.h"
 #include <EngineCore/Renderer.h>
-#include "Town_BackGround.h"
+#include "Town_BGPIXEL.h"
 
-ATown_BackGround::ATown_BackGround()
+ATown_BGPIXEL::ATown_BGPIXEL()
 {
 }
 
-ATown_BackGround::~ATown_BackGround()
+ATown_BGPIXEL::~ATown_BGPIXEL()
 {
 }
 
-void ATown_BackGround::BeginPlay()
+void ATown_BGPIXEL::BeginPlay()
 {
 	Super::BeginPlay();
 	SetActorScale3D(FVector(1000.0f, 300.0f, 100.0f));
-	Renderer->SetSprite("TownModel.png");
+	Renderer->SetSprite("TownModelPX.png");
 	//Renderer->SetSprite("TownBG_Night.bmp");
 	//Renderer->SetSprite("TownLayer_Night.bmp");
-	Renderer->SetOrder(0);
+	Renderer->SetOrder(1);
 }
 
-void ATown_BackGround::Tick(float _DeltaTime)
+void ATown_BGPIXEL::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 }
+

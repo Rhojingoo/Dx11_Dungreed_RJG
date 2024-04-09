@@ -15,6 +15,7 @@ void ATitle_BackGround::BeginPlay()
 	Super::BeginPlay();
 	SetActorScale3D(FVector(1280.0f, 860.0f, 100.0f));
 	Renderer->SetSprite("TitleSky.png");
+	Renderer->SetOrder(0);
 }
 
 void ATitle_BackGround::Tick(float _DeltaTime)
