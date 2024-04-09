@@ -1,5 +1,6 @@
 #pragma once
 #include "Renderer.h"
+#include "EngineEnums.h"
 #include "EngineSprite.h"
 
 struct FCuttingData
@@ -18,11 +19,17 @@ public:
 	std::shared_ptr<UEngineSprite> Sprite;
 	std::vector<float> Inter;
 	std::vector<int> Frame;
+
+	std::map<int, std::function<void()>> FrameCallback;
+
 	int CurFrame = 0;
 	float CurTime = 0.0f;
 	bool Loop = true;
+	bool IsEnd = false;
 
 	void Update(float _DeltaTime);
+
+	void FrameCallBackCheck();
 
 	FSpriteInfo GetCurSpriteInfo()
 	{
@@ -66,6 +73,12 @@ public:
 	void SetAutoSize(float _ScaleRatio, bool _AutoSize);
 	void SetSpriteInfo(const FSpriteInfo& _Info);
 
+	void SetFrameCallback(std::string_view _AnimationName, int _Index, std::function<void()> _Function);
+
+	void SetDir(EEngineDir _Dir);
+
+	bool IsCurAnimationEnd();
+	
 protected:
 	void Tick(float _DeltaTime) override;
 
@@ -73,6 +86,8 @@ private:
 	bool AutoSize = false;
 	float ScaleRatio = 1.0f;
 	FSpriteInfo CurInfo;
+
+	EEngineDir Dir = EEngineDir::MAX;
 
 	FCuttingData CuttingDataValue;
 	float4 PlusColor = float4::Zero;
