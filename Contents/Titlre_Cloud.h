@@ -2,19 +2,19 @@
 #include <EngineCore/Actor.h>
 #include <EngineCore/SpriteRenderer.h>
 
-class Titlre_Cloud : public AActor
+class ATitlre_Cloud : public AActor
 {
 	GENERATED_BODY(AActor)
 
 public:
-	Titlre_Cloud();
-	~Titlre_Cloud();
+	ATitlre_Cloud();
+	~ATitlre_Cloud();
 
 	// delete Function
-	Titlre_Cloud(const Titlre_Cloud& _Other) = delete;
-	Titlre_Cloud(Titlre_Cloud&& _Other) noexcept = delete;
-	Titlre_Cloud& operator=(const Titlre_Cloud& _Other) = delete;
-	Titlre_Cloud& operator=(Titlre_Cloud&& _Other) noexcept = delete;
+	ATitlre_Cloud(const ATitlre_Cloud& _Other) = delete;
+	ATitlre_Cloud(ATitlre_Cloud&& _Other) noexcept = delete;
+	ATitlre_Cloud& operator=(const ATitlre_Cloud& _Other) = delete;
+	ATitlre_Cloud& operator=(ATitlre_Cloud&& _Other) noexcept = delete;
 
 protected:
 	void BeginPlay() override;

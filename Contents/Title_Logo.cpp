@@ -19,7 +19,7 @@ void ATitle_Logo::BeginPlay()
 	SetActorLocation(FVector(0.0f, 150.0f, .0f));
 	Renderer->SetSprite("MainLogo.png");
 	Renderer->SetAutoSize(4.5f, true);
-	Renderer->SetOrder(1);
+	Renderer->SetOrder(5);
 }
 
 void ATitle_Logo::Tick(float _DeltaTime)

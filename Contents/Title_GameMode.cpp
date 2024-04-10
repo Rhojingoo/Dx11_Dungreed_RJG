@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Title_BackGround.h"
 #include "Title_Logo.h"
+#include "Titlre_Cloud.h"
 #include <EngineCore/Camera.h>
 
 ATitle_GameMode::ATitle_GameMode()
@@ -20,6 +21,7 @@ void ATitle_GameMode::BeginPlay()
 	Camera->SetActorLocation(FVector(0.0f, 0.0f, -100.0f));
 	GetWorld()->SpawnActor<ATitle_BackGround>("Title_Bg");
 	GetWorld()->SpawnActor<ATitle_Logo>("Title_logo");
+	GetWorld()->SpawnActor<ATitlre_Cloud>("Title_Cloud1");
 	
 	//GetWorld()->SpawnActor<APlayer>("Player");
 }

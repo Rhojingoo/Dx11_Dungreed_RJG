@@ -79,7 +79,7 @@ void UGameCore::Initialize()
 	GEngine->CreateLevel<ATitle_GameMode>("TitleLevel");
 	GEngine->CreateLevel<ATown_GameMode>("TownLevel");
 	GEngine->CreateLevel<ABoss_GameMode>("BossLevel");
-	GEngine->ChangeLevel("TownLevel");
+	GEngine->ChangeLevel("TitleLevel");
 
 
 

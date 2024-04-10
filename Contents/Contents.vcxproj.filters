@@ -47,6 +47,9 @@
       <Filter>Level\Town\Town_Object</Filter>
     </ClInclude>
     <ClInclude Include="ContentsHelper.h" />
+    <ClInclude Include="Contents_SpriteRender.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -95,6 +98,9 @@
       <Filter>Level\Town\Town_Object</Filter>
     </ClCompile>
     <ClCompile Include="ContentsHelper.cpp" />
+    <ClCompile Include="Contents_SpriteRender.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -135,6 +141,9 @@
     </Filter>
     <Filter Include="Level\Title\Title_Object">
       <UniqueIdentifier>{92299745-88e1-4e4e-8781-6e0931344fa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{99cfab3f-75ee-463f-ac98-f0a7f9e53411}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
