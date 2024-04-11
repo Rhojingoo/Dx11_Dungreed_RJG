@@ -35,6 +35,7 @@ private:
 	FVector PlayerPos = {};
 	FVector CursorPos = {};
 	bool JumpOn = false;
+	bool JumpCheck = false;
 	float JumpSpeed = 750.f;
 
 
@@ -60,7 +61,8 @@ private:
 	void CalGravityVector(float _DeltaTime);
 	void MoveLastMoveVector(float _DeltaTime);
 	void MoveUpdate(float _DeltaTime);
-	void GroundUp();
+	void GroundUp(float _DeltaTime);
+	void AddMoveVector(const FVector& _DirDelta);
 
 
 
@@ -71,7 +73,7 @@ private:
 	FVector GravityAcc = FVector::Down * 2000.0f;
 	FVector GravityVector = FVector::Zero;
 
-	FVector JumpPower = FVector::Up * 1000;
+	FVector JumpPower = FVector::Up * 750;
 	FVector JumpVector = FVector::Zero;
 	// 내가 나갈 모든 방향의 합
 	FVector LastMoveVector = FVector::Zero;
