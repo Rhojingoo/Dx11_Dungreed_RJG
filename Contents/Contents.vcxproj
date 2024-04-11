@@ -195,6 +195,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Target.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Title_BackGround.h">
       <SubType>
       </SubType>
@@ -259,6 +267,15 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Player.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp" />
+    <ClCompile Include="RigidBody.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Target.cpp">
       <SubType>
       </SubType>
     </ClCompile>

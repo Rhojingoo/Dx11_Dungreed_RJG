@@ -6,7 +6,7 @@
 
 Contents_SpriteRender::Contents_SpriteRender()
 {
-	Resources->SettingConstantBuffer("FCuttingData", CuttingDataValue);
+	//Resources->SettingConstantBuffer("FCuttingData", CuttingDataValue);
 }
 
 Contents_SpriteRender::~Contents_SpriteRender()

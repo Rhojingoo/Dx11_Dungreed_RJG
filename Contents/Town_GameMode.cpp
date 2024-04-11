@@ -5,6 +5,7 @@
 #include "Town_BGPIXEL.h"
 #include <EngineCore/Camera.h>
 #include "ContentsHelper.h"
+#include "Target.h"
 
 
 
@@ -31,6 +32,10 @@ void ATown_GameMode::BeginPlay()
 	Actors = Actor;
 	Actor->SetActorLocation({ 640.0f, -360.0f, 200.0f });
 	FVector assad = Actor->GetActorLocation();
+
+	std::shared_ptr<ATarget> Cursor = GetWorld()->SpawnActor<ATarget>("Player2");
+	Cursor->SetActorLocation({ 640.0f, -360.0f, 200.0f });
+	
 
 	{
 		std::shared_ptr<ATown_BackGround> BackGr = GetWorld()->SpawnActor<ATown_BackGround>("TOWNBack");

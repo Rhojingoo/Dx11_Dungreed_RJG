@@ -50,6 +50,12 @@
     <ClInclude Include="Contents_SpriteRender.h">
       <Filter>Shader</Filter>
     </ClInclude>
+    <ClInclude Include="Target.h">
+      <Filter>Level\Public_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>Level\Public_Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -100,6 +106,15 @@
     <ClCompile Include="ContentsHelper.cpp" />
     <ClCompile Include="Contents_SpriteRender.cpp">
       <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Target.cpp">
+      <Filter>Level\Public_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Level\Public_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>Level\Public_Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

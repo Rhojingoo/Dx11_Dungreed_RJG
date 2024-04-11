@@ -64,6 +64,15 @@
     <Filter Include="ThirdParty\DirectXTex\Release">
       <UniqueIdentifier>{6149e789-9ca4-441f-8b5d-2e1bdd797513}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Editor">
+      <UniqueIdentifier>{7920bdb2-8259-476d-bb2c-4e2887791c6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor\Imgui">
+      <UniqueIdentifier>{f124eb5f-d507-4cab-947e-1bf745bbe871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor\Contents">
+      <UniqueIdentifier>{893d96cd-0039-4a0b-90d7-b149f7cf086a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineCore.h">
@@ -173,6 +182,39 @@
     </ClInclude>
     <ClInclude Include="EngineBlend.h" />
     <ClInclude Include="StateManager.h" />
+    <ClInclude Include="imconfig.h">
+      <Filter>Editor\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui.h">
+      <Filter>Editor\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_dx11.h">
+      <Filter>Editor\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_win32.h">
+      <Filter>Editor\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_internal.h">
+      <Filter>Editor\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_rectpack.h">
+      <Filter>Editor\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_textedit.h">
+      <Filter>Editor\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_truetype.h">
+      <Filter>Editor\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineDebugMsgWindow.h">
+      <Filter>Editor\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineEditorGUI.h">
+      <Filter>Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineEditorWindow.h">
+      <Filter>Editor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp">
@@ -279,6 +321,36 @@
     </ClCompile>
     <ClCompile Include="EngineBlend.cpp" />
     <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="imgui.cpp">
+      <Filter>Editor\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_demo.cpp">
+      <Filter>Editor\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <Filter>Editor\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_dx11.cpp">
+      <Filter>Editor\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_win32.cpp">
+      <Filter>Editor\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_tables.cpp">
+      <Filter>Editor\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <Filter>Editor\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineDebugMsgWindow.cpp">
+      <Filter>Editor\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineEditorGUI.cpp">
+      <Filter>Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineEditorWindow.cpp">
+      <Filter>Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="ThirdParty\DirectxTex\Debug\DirectXTex.lib">
