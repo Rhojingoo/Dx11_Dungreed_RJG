@@ -56,6 +56,9 @@
     <ClInclude Include="RigidBody.h">
       <Filter>Level\Public_Object</Filter>
     </ClInclude>
+    <ClInclude Include="Player_Hand.h">
+      <Filter>Level\Public_Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -114,6 +117,9 @@
       <Filter>Level\Public_Object</Filter>
     </ClCompile>
     <ClCompile Include="RigidBody.cpp">
+      <Filter>Level\Public_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Hand.cpp">
       <Filter>Level\Public_Object</Filter>
     </ClCompile>
   </ItemGroup>

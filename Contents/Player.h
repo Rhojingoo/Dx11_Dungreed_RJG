@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include <EngineCore/StateManager.h>
+#include "Player_Hand.h"
 #include "Target.h"
 
 // 설명 :
@@ -32,6 +33,10 @@ private:
 	USpriteRenderer* Renderer = nullptr;
 	float4 Color;
 	std::shared_ptr<ATarget> Cursor = nullptr;
+	std::shared_ptr<APlayer_Hand> Right_Hand = nullptr;
+	std::shared_ptr<APlayer_Hand> Left_Hand = nullptr;
+	
+
 	FVector PlayerPos = {};
 	FVector CursorPos = {};
 	bool JumpOn = false;
@@ -51,9 +56,16 @@ private:
 	void RunStart();
 	void Run(float _DeltaTime);
 
+	void DashStart();
+	void Dash(float _DeltaTime);
+
+	void SecondDashStart();
+	void SecondDash(float _DeltaTime);
+
 	void DebugFunction();
 
 	void Direction();
+	void Dash_Direction(float _DeltaTime);
 
 	void CalLastMoveVector(float _DeltaTime);
 	void CalMoveVector(float _DeltaTime);
@@ -75,9 +87,14 @@ private:
 
 	FVector JumpPower = FVector::Up * 750;
 	FVector JumpVector = FVector::Zero;
+	FVector DashVector = FVector::Zero;
+	FVector SecondDashVector = FVector::Zero;
+
 	// 내가 나갈 모든 방향의 합
 	FVector LastMoveVector = FVector::Zero;
-
-
+	FVector DashDir = FVector::Zero;
+	float DashTime = 0.f;
+	int DashCount = 0;
+	const int DashMax = 2;
 };
 

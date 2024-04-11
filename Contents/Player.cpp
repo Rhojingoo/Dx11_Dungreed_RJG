@@ -19,6 +19,12 @@ void APlayer::BeginPlay()
 	Cursor = GetWorld()->SpawnActor<ATarget>("Target");
 	Cursor->SetActorLocation({ 640.0f, -360.0f, 200.0f });
 
+	Right_Hand = GetWorld()->SpawnActor<APlayer_Hand>("R_Hand");
+	Right_Hand->SetActorLocation({ 640.0f, -360.0f, 200.0f });
+	Left_Hand = GetWorld()->SpawnActor<APlayer_Hand>("L_Hand");
+	Left_Hand->SetActorLocation({ 640.0f, -360.0f, 200.0f });
+	
+
 
 	SetActorScale3D(FVector(320.0f, 320.0f, 100.0f));
 	
@@ -33,7 +39,7 @@ void APlayer::BeginPlay()
 	Renderer->CreateAnimation("Boss_Exit", "Boss_Exit", 0.1f);
 	Renderer->CreateAnimation("Boss_Idle", "Boss_Idle", 0.1f);
 
-
+	
 	//Renderer->SetSprite("CuttingTest.png", 11);
 	Renderer->SetAutoSize(3.f, true);
 	
@@ -45,8 +51,13 @@ void APlayer::BeginPlay()
 
 void APlayer::Tick(float _DeltaTime)
 {
-	// 위에 뭔가를 쳐야할때도 있다.
 	Super::Tick(_DeltaTime);
 	State.Update(_DeltaTime);
 	DebugFunction();
+
+	PlayerPos = GetActorLocation();
+	Right_Hand->SetActorLocation({ PlayerPos.X+20,PlayerPos.Y -25, PlayerPos.Z -1});
+	Left_Hand->SetActorLocation({ PlayerPos.X - 20,PlayerPos.Y - 25, PlayerPos.Z - 1 });
+	int a = 0;
+	//Left_Hand->SetActorLocation();
 }

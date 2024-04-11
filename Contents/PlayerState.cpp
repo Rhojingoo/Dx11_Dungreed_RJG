@@ -16,6 +16,9 @@ void APlayer::StateInit()
 	State.CreateState("Player_Idle");
 	State.CreateState("Player_Jump");
 	State.CreateState("Player_Run");
+	State.CreateState("Player_Dash");
+	State.CreateState("Player_SecondDash");
+
 
 	InputOn();
 
@@ -39,7 +42,15 @@ void APlayer::StateInit()
 
 	State.SetStartFunction("Player_Jump", std::bind(&APlayer::JumpStart, this));
 
+	State.SetUpdateFunction("Player_Dash", std::bind(&APlayer::Dash, this, std::placeholders::_1));
 
+	State.SetStartFunction("Player_Dash", std::bind(&APlayer::DashStart, this));
+
+	State.SetUpdateFunction("Player_SecondDash", std::bind(&APlayer::SecondDash, this, std::placeholders::_1));
+
+	State.SetStartFunction("Player_SecondDash", std::bind(&APlayer::SecondDashStart, this));
+
+	
 	// √º¿Œ¡ˆ
 	State.ChangeState("Player_Idle");
 }
@@ -63,7 +74,11 @@ void APlayer::Idle(float _DeltaTime)
 		State.ChangeState("Player_Jump");
 		return;
 	}
-
+	if (true == IsDown(VK_RBUTTON))
+	{
+		State.ChangeState("Player_Dash");
+		return;
+	}
 	MoveUpdate(_DeltaTime);
 }
 
@@ -87,7 +102,13 @@ void APlayer::Jump(float _DeltaTime)
 	{
 		AddMoveVector(FVector::Right * _DeltaTime * Speed);
 	}
-
+	if (true == IsPress(VK_SPACE))
+	{
+		if (JumpVector.Y <= 1200.f)
+		{
+			JumpVector += (FVector::Up * _DeltaTime * 1500);
+		}
+	}	
 
 	MoveUpdate(_DeltaTime);
 	if (JumpOn == false)
@@ -138,6 +159,13 @@ void APlayer::Run(float _DeltaTime)
 		return;
 	}
 
+	if (true == IsPress(VK_RBUTTON))
+	{
+		State.ChangeState("Player_Dash");
+		return;
+	}
+
+
 	MoveUpdate(_DeltaTime);
 	
 	//if (true == IsPress('W'))
@@ -183,6 +211,85 @@ void APlayer::Run(float _DeltaTime)
 
 }
 
+void APlayer::DashStart()
+{
+	PlayerPos = GetActorLocation();
+	CursorPos = Cursor->GetPos();
+
+	DashDir = CursorPos - PlayerPos;
+	DashDir.Z = 0.f;
+	DashDir.Normalize3D();
+	float Speed = 1250.f;
+	DashVector = DashDir * Speed;
+	JumpOn = true;
+	DashTime = 0.f;
+	DashCount += 1;
+}
+
+void APlayer::Dash(float _DeltaTime)
+{
+	//Dash_Direction(_DeltaTime);
+	MoveUpdate(_DeltaTime);
+
+	if (DashCount < DashMax)
+	{
+		if (true == IsDown(VK_RBUTTON))
+		{
+			State.ChangeState("Player_SecondDash");
+			JumpOn = false;
+			DashTime = 0.f;
+			return;
+		}
+	}
+
+	DashTime += _DeltaTime;
+	if (DashTime >= 0.3f )
+	{
+		State.ChangeState("Player_Idle");
+		//JumpVector = FVector::Zero;
+		//MoveVector = FVector::Zero;
+		//LastMoveVector = FVector::Zero;
+		DashVector = FVector::Zero;
+		JumpOn = false;
+		DashTime = 0.f;
+		DashCount = 0;
+	}
+}
+
+void APlayer::SecondDashStart()
+{
+	PlayerPos = GetActorLocation();
+	CursorPos = Cursor->GetPos();
+
+	DashDir = CursorPos - PlayerPos;
+	DashDir.Z = 0.f;
+	DashDir.Normalize3D();
+	float Speed = 1250.f; 
+	SecondDashVector = DashDir * Speed;
+	JumpOn = true;
+	DashTime = 0.f;
+	DashCount += 1;
+}
+
+void APlayer::SecondDash(float _DeltaTime)
+{
+	MoveUpdate(_DeltaTime);
+
+	DashTime += _DeltaTime;
+	if (DashTime >= 0.3f)
+	{
+		State.ChangeState("Player_Idle");
+		JumpVector = FVector::Zero;
+		MoveVector = FVector::Zero;
+		LastMoveVector = FVector::Zero;
+		DashVector = FVector::Zero;
+		SecondDashVector = FVector::Zero;
+		JumpOn = false;
+		DashTime = 0.f;
+		DashCount = 0;
+	}
+}
+
 void APlayer::DebugFunction()
 {
 	{
@@ -213,11 +320,26 @@ void APlayer::Direction()
 	}
 }
 
+void APlayer::Dash_Direction(float _DeltaTime)
+{
+	PlayerPos = GetActorLocation();
+	CursorPos = Cursor->GetPos();
+
+	DashDir = CursorPos - PlayerPos;
+	DashDir.Z = 0.f;
+	DashDir.Normalize3D();
+	float Speed = 150.f;
+	AddMoveVector(DashDir * _DeltaTime * Speed);
+
+}
+
 void APlayer::CalLastMoveVector(float _DeltaTime)
 {
 	LastMoveVector = FVector::Zero;
 	LastMoveVector = LastMoveVector + MoveVector;
 	LastMoveVector = LastMoveVector + JumpVector;
+	LastMoveVector = LastMoveVector + DashVector;
+	LastMoveVector = LastMoveVector + SecondDashVector;
 	LastMoveVector = LastMoveVector + GravityVector;
 }
 
