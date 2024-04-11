@@ -3,6 +3,7 @@
 #include <EngineCore/StateManager.h>
 #include "Player_Hand.h"
 #include "Target.h"
+#include "LegendSowrd.h"
 
 // 설명 :
 class USpriteRenderer;
@@ -35,7 +36,7 @@ private:
 	std::shared_ptr<ATarget> Cursor = nullptr;
 	std::shared_ptr<APlayer_Hand> Right_Hand = nullptr;
 	std::shared_ptr<APlayer_Hand> Left_Hand = nullptr;
-	
+	std::shared_ptr<ALegendSowrd> Sowrd = nullptr;
 
 	FVector PlayerPos = {};
 	FVector CursorPos = {};
@@ -58,6 +59,7 @@ private:
 
 	void DashStart();
 	void Dash(float _DeltaTime);
+	void DashEnd();
 
 	void SecondDashStart();
 	void SecondDash(float _DeltaTime);
@@ -93,8 +95,11 @@ private:
 	// 내가 나갈 모든 방향의 합
 	FVector LastMoveVector = FVector::Zero;
 	FVector DashDir = FVector::Zero;
+	float DashDeceleration = 20.0f;
 	float DashTime = 0.f;
 	int DashCount = 0;
 	const int DashMax = 2;
+
+	void colorsetting();
 };
 

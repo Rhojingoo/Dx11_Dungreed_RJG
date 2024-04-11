@@ -79,7 +79,21 @@ void APlayer::Idle(float _DeltaTime)
 		State.ChangeState("Player_Dash");
 		return;
 	}
+	if (true == IsDown(VK_LBUTTON))
+	{
+		Right_Hand->InverseArmAxis(Axis::X);
+		return;
+	}
+
+	
+
 	MoveUpdate(_DeltaTime);
+
+	if (JumpOn == false) 
+	{
+		DashVector = FVector::Zero;
+		SecondDashVector = FVector::Zero;
+	}
 }
 
 void APlayer::JumpStart()
@@ -167,47 +181,6 @@ void APlayer::Run(float _DeltaTime)
 
 
 	MoveUpdate(_DeltaTime);
-	
-	//if (true == IsPress('W'))
-	//{
-	//	AddActorLocation(FVector::Up * _DeltaTime * Speed);
-	//}
-
-	//if (true == IsPress('S'))
-	//{
-	//	AddActorLocation(FVector::Down * _DeltaTime * Speed);
-	//}
-
-	//if (true == IsPress(VK_NUMPAD1))
-	//{
-	//	// AddActorRotation(float4{0.0f, 0.0f, 1.0f} * 360.0f * _DeltaTime);
-	//	// Color.X += _DeltaTime;
-	//}
-
-	//if (true == IsPress(VK_NUMPAD2))
-	//{
-	//	Color.X -= _DeltaTime;
-	//}
-
-	//if (true == IsPress(VK_NUMPAD4))
-	//{
-	//	Color.Y += _DeltaTime;
-	//}
-
-	//if (true == IsPress(VK_NUMPAD5))
-	//{
-	//	Color.Y -= _DeltaTime;
-	//}
-
-	//if (true == IsPress(VK_NUMPAD7))
-	//{
-	//	Color.Z += _DeltaTime;
-	//}
-
-	//if (true == IsPress(VK_NUMPAD8))
-	//{
-	//	Color.Z -= _DeltaTime;
-	//}
 
 }
 
@@ -215,11 +188,11 @@ void APlayer::DashStart()
 {
 	PlayerPos = GetActorLocation();
 	CursorPos = Cursor->GetPos();
-
 	DashDir = CursorPos - PlayerPos;
 	DashDir.Z = 0.f;
-	DashDir.Normalize3D();
-	float Speed = 1250.f;
+	DashDir.Normalize2D();
+	DashDir *= 24.f;
+	float Speed = 50.f;
 	DashVector = DashDir * Speed;
 	JumpOn = true;
 	DashTime = 0.f;
@@ -228,15 +201,15 @@ void APlayer::DashStart()
 
 void APlayer::Dash(float _DeltaTime)
 {
-	//Dash_Direction(_DeltaTime);
 	MoveUpdate(_DeltaTime);
 
 	if (DashCount < DashMax)
 	{
 		if (true == IsDown(VK_RBUTTON))
 		{
+			GravityVector = FVector::Zero;
+			DashVector = FVector::Zero;
 			State.ChangeState("Player_SecondDash");
-			JumpOn = false;
 			DashTime = 0.f;
 			return;
 		}
@@ -246,25 +219,24 @@ void APlayer::Dash(float _DeltaTime)
 	if (DashTime >= 0.3f )
 	{
 		State.ChangeState("Player_Idle");
-		//JumpVector = FVector::Zero;
-		//MoveVector = FVector::Zero;
-		//LastMoveVector = FVector::Zero;
-		DashVector = FVector::Zero;
-		JumpOn = false;
 		DashTime = 0.f;
 		DashCount = 0;
+		return;
 	}
 }
 
 void APlayer::SecondDashStart()
 {
+	DashVector = FVector::Zero;
+	GravityVector = FVector::Zero;
+	LastMoveVector = FVector::Zero;
 	PlayerPos = GetActorLocation();
 	CursorPos = Cursor->GetPos();
-
 	DashDir = CursorPos - PlayerPos;
 	DashDir.Z = 0.f;
-	DashDir.Normalize3D();
-	float Speed = 1250.f; 
+	DashDir.Normalize2D();
+	DashDir *= 24.f;
+	float Speed = 50.f;
 	SecondDashVector = DashDir * Speed;
 	JumpOn = true;
 	DashTime = 0.f;
@@ -274,19 +246,16 @@ void APlayer::SecondDashStart()
 void APlayer::SecondDash(float _DeltaTime)
 {
 	MoveUpdate(_DeltaTime);
-
+	SecondDashVector;
+	LastMoveVector;
 	DashTime += _DeltaTime;
 	if (DashTime >= 0.3f)
 	{
-		State.ChangeState("Player_Idle");
-		JumpVector = FVector::Zero;
-		MoveVector = FVector::Zero;
-		LastMoveVector = FVector::Zero;
-		DashVector = FVector::Zero;
 		SecondDashVector = FVector::Zero;
-		JumpOn = false;
+		State.ChangeState("Player_Idle");
 		DashTime = 0.f;
 		DashCount = 0;
+		return;
 	}
 }
 
@@ -327,7 +296,8 @@ void APlayer::Dash_Direction(float _DeltaTime)
 
 	DashDir = CursorPos - PlayerPos;
 	DashDir.Z = 0.f;
-	DashDir.Normalize3D();
+	DashDir.Normalize2D();
+	DashDir *= 24.f;
 	float Speed = 150.f;
 	AddMoveVector(DashDir * _DeltaTime * Speed);
 
@@ -390,8 +360,7 @@ void APlayer::CalGravityVector(float _DeltaTime)
 	if (Color == Color8Bit::Black)
 	{
 		GravityVector = FVector::Zero;	
-		JumpOn = false;
-	
+		JumpOn = false;	
 	}
 }
 
@@ -450,4 +419,49 @@ void APlayer::GroundUp(float _DeltaTime)
 void APlayer::AddMoveVector(const FVector& _DirDelta)
 {
 	MoveVector += _DirDelta * MoveAcc;
+}
+
+void APlayer::colorsetting()
+{
+	//if (true == IsPress('W'))
+	//{
+	//	AddActorLocation(FVector::Up * _DeltaTime * Speed);
+	//}
+
+	//if (true == IsPress('S'))
+	//{
+	//	AddActorLocation(FVector::Down * _DeltaTime * Speed);
+	//}
+
+	//if (true == IsPress(VK_NUMPAD1))
+	//{
+	//	// AddActorRotation(float4{0.0f, 0.0f, 1.0f} * 360.0f * _DeltaTime);
+	//	// Color.X += _DeltaTime;
+	//}
+
+	//if (true == IsPress(VK_NUMPAD2))
+	//{
+	//	Color.X -= _DeltaTime;
+	//}
+
+	//if (true == IsPress(VK_NUMPAD4))
+	//{
+	//	Color.Y += _DeltaTime;
+	//}
+
+	//if (true == IsPress(VK_NUMPAD5))
+	//{
+	//	Color.Y -= _DeltaTime;
+	//}
+
+	//if (true == IsPress(VK_NUMPAD7))
+	//{
+	//	Color.Z += _DeltaTime;
+	//}
+
+	//if (true == IsPress(VK_NUMPAD8))
+	//{
+	//	Color.Z -= _DeltaTime;
+	//}
+
 }

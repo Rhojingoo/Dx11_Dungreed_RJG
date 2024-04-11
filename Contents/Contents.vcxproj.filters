@@ -7,9 +7,6 @@
     <ClInclude Include="GameCore.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Level\Public_Object</Filter>
-    </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>Level\Public_Object</Filter>
     </ClInclude>
@@ -50,14 +47,17 @@
     <ClInclude Include="Contents_SpriteRender.h">
       <Filter>Shader</Filter>
     </ClInclude>
-    <ClInclude Include="Target.h">
-      <Filter>Level\Public_Object</Filter>
+    <ClInclude Include="LegendSowrd.h">
+      <Filter>Level\Public_Object\Player</Filter>
     </ClInclude>
-    <ClInclude Include="RigidBody.h">
-      <Filter>Level\Public_Object</Filter>
+    <ClInclude Include="Player.h">
+      <Filter>Level\Public_Object\Player</Filter>
     </ClInclude>
     <ClInclude Include="Player_Hand.h">
-      <Filter>Level\Public_Object</Filter>
+      <Filter>Level\Public_Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Target.h">
+      <Filter>Level\Public_Object\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -66,9 +66,6 @@
     </ClCompile>
     <ClCompile Include="GameCore.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Level\Public_Object</Filter>
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>Level\Public_Object</Filter>
@@ -110,17 +107,20 @@
     <ClCompile Include="Contents_SpriteRender.cpp">
       <Filter>Shader</Filter>
     </ClCompile>
-    <ClCompile Include="Target.cpp">
-      <Filter>Level\Public_Object</Filter>
+    <ClCompile Include="LegendSowrd.cpp">
+      <Filter>Level\Public_Object\Player</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerState.cpp">
-      <Filter>Level\Public_Object</Filter>
-    </ClCompile>
-    <ClCompile Include="RigidBody.cpp">
-      <Filter>Level\Public_Object</Filter>
+    <ClCompile Include="Player.cpp">
+      <Filter>Level\Public_Object\Player</Filter>
     </ClCompile>
     <ClCompile Include="Player_Hand.cpp">
-      <Filter>Level\Public_Object</Filter>
+      <Filter>Level\Public_Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Level\Public_Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Target.cpp">
+      <Filter>Level\Public_Object\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +165,9 @@
     </Filter>
     <Filter Include="Shader">
       <UniqueIdentifier>{99cfab3f-75ee-463f-ac98-f0a7f9e53411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Public_Object\Player">
+      <UniqueIdentifier>{f4360ab8-18e2-4679-bc2d-42efdacfd90e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -191,15 +191,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="LegendSowrd.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="Player_Hand.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="RigidBody.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -270,16 +270,16 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="LegendSowrd.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="Player_Hand.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="RigidBody.cpp">
       <SubType>
       </SubType>
     </ClCompile>
