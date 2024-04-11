@@ -63,7 +63,7 @@ void APlayer::Die(float _Update)
 
 void APlayer::Idle(float _DeltaTime)
 {
-	if (true == IsPress('A') || true == IsPress('D') || true == IsPress('W') || true == IsPress('S'))
+	if (true == IsPress('A') || true == IsPress('D') )
 	{
 		State.ChangeState("Player_Run");
 		return;

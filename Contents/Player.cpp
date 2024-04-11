@@ -80,7 +80,9 @@ void APlayer::Tick(float _DeltaTime)
 
 	FVector SwordRotation = FVector(0.0f, 0.0f, FinalAngleRad* (UEngineMath::PI / 180.f));
 	//Sowrd->AddActorRotation(SwordRotation);
-	Sowrd->SetActorRotation(SwordRotation);
+	//Sowrd->GetActorTransform().AddRotationDeg(SwordRotation);
+	Sowrd->GetActorTransform().SetRotationDeg(SwordRotation);
+	//Sowrd->SetActorRotation(SwordRotation);
 
 	//Left_Hand->SetActorLocation({ PlayerPos.X - 20,PlayerPos.Y - 25, PlayerPos.Z - 1 });
 	int a = 0;
