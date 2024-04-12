@@ -81,7 +81,7 @@ void APlayer::Idle(float _DeltaTime)
 	}
 	if (true == IsDown(VK_LBUTTON))
 	{
-		Right_Hand->InverseArmAxis(Axis::X);
+		//Right_Hand->InverseArmAxis(Axis::X);
 		return;
 	}
 
@@ -353,7 +353,7 @@ void APlayer::CalGravityVector(float _DeltaTime)
 
 	Direction();
 	
-	PlayerPos.Y = PlayerPos.Y - 44;	
+	//PlayerPos.Y = PlayerPos.Y /*- 44*/;	
 	PlayerPos.Y = -PlayerPos.Y;
 
 	Color8Bit Color = Tex->GetColor(PlayerPos, Color8Bit::Black);
