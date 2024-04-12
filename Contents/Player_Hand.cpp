@@ -32,14 +32,16 @@ APlayer_Hand::APlayer_Hand()
 	Sword_Renderer->SetScale(FVector(6.0f, 20.0f, 100.0f));
 	Sword_Renderer->AddPosition({ 1.0f, 10.0f, -1.0f });
 
-
 	SetRoot(Root);
+
 }
 
 
 APlayer_Hand::~APlayer_Hand()
 {
 }
+
+
 
 void APlayer_Hand::BeginPlay()
 {
@@ -53,7 +55,7 @@ void APlayer_Hand::BeginPlay()
 
 	//Renderer->SetAutoSize(3.f, true);
 	Renderer->SetOrder(8);
-
+	InputOn();
 }
 
 void APlayer_Hand::Tick(float _DeltaTime)
@@ -63,58 +65,85 @@ void APlayer_Hand::Tick(float _DeltaTime)
 	PlayerPos = GetActorLocation();
 	CursorPos = Cursor->GetPos();
 
+	Hand_Dir();
 
-
-	float Dir1 = CursorPos.X - PlayerPos.X;
-
-	if (Dir1 >= 0.f)
+	Dir = CursorPos - PlayerPos;
+	Dir.Z = 0; // Z 축 값은 회전 계산에 사용되지 않으므로 0으로 설정
+	Dir.Normalize2DReturn();
+	 
+	switch (Hand_RL)
 	{
-		LeftSetting = false;
-		Left = false;
-		Right = true;
-		if (RightSetting != true)
-		{
-			Hand_Renderer->Transform.LocalPosition = -Hand_Renderer->GetLocalPosition();
-		}
-		RightSetting = true;
+	case Hand_LeftRight::Right:
+		Right();
+	 break;
+	case Hand_LeftRight::Left:
+		Left();
+	case Hand_LeftRight::End:
+	 break;
+	default:
+	 break;
+	}
+	SetActorRotation(SwordRotation);
+}
+
+
+
+void APlayer_Hand::Right()
+{
+	if (UpSetting == true) 
+	{
+		float CursorAngleRad = std::atan2(Dir.Y, Dir.X);
+		const float Degrees = 10.0f;
+		const float AdditionalAngleRad = Degrees * UEngineMath::DToR;
+		float FinalAngleRad = CursorAngleRad + AdditionalAngleRad;
+		SwordRotation = FVector(0.0f, 0.0f, FinalAngleRad * UEngineMath::RToD);
 	}
 	else
 	{
-		RightSetting = false;
-		Left = true;
-		Right = false;
-		if (LeftSetting != true)
-		{
-			Hand_Renderer->Transform.LocalPosition = -Hand_Renderer->GetLocalPosition();
-		}
-		LeftSetting = true;
-	}
-
-	FVector Dir = CursorPos - PlayerPos;
-	Dir.Z = 0; // Z 축 값은 회전 계산에 사용되지 않으므로 0으로 설정
-	Dir.Normalize2DReturn();
-	FVector SwordRotation;
-	if (Left ==true)
-	{
-		Right = false;
-		//Hand_Renderer->SetPosition({ -Hand_Renderer->GetWorldPosition()});
-		Renderer->SetDir(EEngineDir::Left);
-		Hand_Renderer-> SetDir(EEngineDir::Left);
-		//Sword_Renderer->SetDir(EEngineDir::Left);
 		float CursorAngleRad = std::atan2(-Dir.Y, -Dir.X);
 		const float Degrees = -10.0f;
 		const float AdditionalAngleRad = Degrees * UEngineMath::DToR;
 		float FinalAngleRad = CursorAngleRad + AdditionalAngleRad;
 		SwordRotation = FVector(0.0f, 0.0f, FinalAngleRad * UEngineMath::RToD);
 	}
-	if (Right ==true )
+
+	if (true == IsDown(VK_LBUTTON))
 	{
-		Left = false;
-		//Hand_Renderer->SetPosition({ -Hand_Renderer->GetWorldPosition() });
-		// Hand_Renderer-> 로컬로 변경 해봐라
-		Renderer->SetDir(EEngineDir::Right);
-		Hand_Renderer-> SetDir(EEngineDir::Right);
-	//	Sword_Renderer->SetDir(EEngineDir::Right);
+		UpSetting = !UpSetting;
+		if (UpSetting == true)
+		{
+			Renderer->SetDir(EEngineDir::Right);
+			Hand_Renderer->SetDir(EEngineDir::Right);
+			FVector SetLocal = Hand_Renderer->GetLocalPosition();
+			FVector SetWorld = Renderer->GetLocalPosition();
+			Hand_Renderer->Transform.LocalPosition = { SetWorld.X + 20.0f, 0.f,0.f };
+		}
+		else
+		{
+			Renderer->SetDir(EEngineDir::Left);
+			Hand_Renderer->SetDir(EEngineDir::Left);
+			FVector SetLocal = Hand_Renderer->GetLocalPosition();
+			FVector SetWorld = Renderer->GetLocalPosition();
+			Hand_Renderer->Transform.LocalPosition = { SetWorld.X-20.f, SetWorld.Y - 15.f,0.f };
+		}
+		return;
+	}
+}
+
+
+void APlayer_Hand::Left()
+{
+
+	if (UpSetting == true)
+	{
+		float CursorAngleRad = std::atan2(-Dir.Y, -Dir.X);
+		const float Degrees = -10.0f;
+		const float AdditionalAngleRad = Degrees * UEngineMath::DToR;
+		float FinalAngleRad = CursorAngleRad + AdditionalAngleRad;
+		SwordRotation = FVector(0.0f, 0.0f, FinalAngleRad * UEngineMath::RToD);
+	}
+	else
+	{
 		float CursorAngleRad = std::atan2(Dir.Y, Dir.X);
 		const float Degrees = 10.0f;
 		const float AdditionalAngleRad = Degrees * UEngineMath::DToR;
@@ -122,54 +151,78 @@ void APlayer_Hand::Tick(float _DeltaTime)
 		SwordRotation = FVector(0.0f, 0.0f, FinalAngleRad * UEngineMath::RToD);
 	}
 
-	// 커서 방향으로의 2D 벡터 계산
-
-;
-	// atan2를 사용하여 커서 방향에 대한 각도 계산 (라디안)
-
-	SetActorRotation(SwordRotation);
-}
-
-void APlayer_Hand::InverseArmAxis(Axis axis)
-{
-	FVector ownerRot = GetActorTransform().GetRotation();
-	
-	switch (axis)
+	if (true == IsDown(VK_LBUTTON))
 	{
-	case Axis::X:
-	{
-		ownerRot.X = ownerRot.X + UEngineMath::PI;
-		if (ownerRot.X >= 2 * UEngineMath::PI && ownerRot.X < 0.f)
+		UpSetting = !UpSetting;
+		if (UpSetting == true)
 		{
-			ownerRot.X = 0.f;
-		}
-
-		Revurse_X = !Revurse_X;
-		float pos = GetActorLocation().Z;
-		if (Revurse_X) pos *= -1.f;
-		else pos *= -1.f;
-		SetActorLocation({ GetActorLocation().X,GetActorLocation().Y, pos });
-		//GetActorTransform().SetRotationDeg()
-		if (Revurse_X)
-		{
-			Offset_Angle = 45.f;
+			Renderer->SetDir(EEngineDir::Left);
+			Hand_Renderer->SetDir(EEngineDir::Left);
+			FVector SetLocal = Hand_Renderer->GetLocalPosition();
+			FVector SetWorld = Renderer->GetLocalPosition();
+			Hand_Renderer->Transform.LocalPosition = { SetWorld.X - 20.0f, 0.f,0.f };
 		}
 		else
 		{
-			Offset_Angle = 20.f;
+			Renderer->SetDir(EEngineDir::Right);
+			Hand_Renderer->SetDir(EEngineDir::Right);
+			FVector SetLocal = Hand_Renderer->GetLocalPosition();
+			FVector SetWorld = Renderer->GetLocalPosition();
+			Hand_Renderer->Transform.LocalPosition = { SetWorld.X + 20.f, SetWorld.Y - 15.f,0.f };
 		}
-		break;
-	}
-	case Axis::Y:
-		ownerRot.Y = ownerRot.Y + UEngineMath::PI;
-		break;
-	case Axis::Z:
-		ownerRot.Z = ownerRot.Z + UEngineMath::PI;
-		break;
-	case Axis::End:
-	default:
 		return;
 	}
-	GetActorTransform().SetRotationDeg(ownerRot);
 }
 
+
+
+
+void APlayer_Hand::Hand_Dir()
+{
+	float Dir1 = CursorPos.X - PlayerPos.X;
+
+	if (Dir1 >= 0.f)
+	{
+		LeftSetting = false;
+		if (RightSetting != true && UpSetting == true)
+		{
+			Hand_Renderer->Transform.LocalPosition = -Hand_Renderer->GetLocalPosition();
+			Renderer->SetDir(EEngineDir::Right);
+			Hand_Renderer->SetDir(EEngineDir::Right);
+			Hand_RL = Hand_LeftRight::Right;
+			RightSetting = true;
+			return;
+		}
+		else if (RightSetting != true && UpSetting != true)
+		{
+			Hand_Renderer->Transform.LocalPosition = -Hand_Renderer->GetLocalPosition();
+			Renderer->SetDir(EEngineDir::Left);
+			Hand_Renderer->SetDir(EEngineDir::Left);
+			Hand_RL = Hand_LeftRight::Right;
+			RightSetting = true;
+			return;
+		}
+	}
+	else
+	{
+		RightSetting = false;
+		if (LeftSetting != true && UpSetting == true)
+		{
+			Hand_Renderer->Transform.LocalPosition = -Hand_Renderer->GetLocalPosition();
+			Renderer->SetDir(EEngineDir::Left);
+			Hand_Renderer->SetDir(EEngineDir::Left);
+			Hand_RL = Hand_LeftRight::Left;
+			LeftSetting = true;
+			return;
+		}
+		else if (LeftSetting != true && UpSetting != true)
+		{
+			Hand_Renderer->Transform.LocalPosition = -Hand_Renderer->GetLocalPosition();
+			Renderer->SetDir(EEngineDir::Right);
+			Hand_Renderer->SetDir(EEngineDir::Right);
+			Hand_RL = Hand_LeftRight::Left;
+			LeftSetting = true;
+			return;
+		}
+	}
+}

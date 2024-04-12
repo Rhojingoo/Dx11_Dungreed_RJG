@@ -79,11 +79,6 @@ void APlayer::Idle(float _DeltaTime)
 		State.ChangeState("Player_Dash");
 		return;
 	}
-	if (true == IsDown(VK_LBUTTON))
-	{
-		//Right_Hand->InverseArmAxis(Axis::X);
-		return;
-	}
 
 	
 
