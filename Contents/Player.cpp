@@ -83,7 +83,6 @@ void APlayer::Tick(float _DeltaTime)
 	//Sowrd->GetActorTransform().AddRotationDeg(SwordRotation);
 	Sowrd->GetActorTransform().SetRotationDeg(SwordRotation);
 	//Sowrd->SetActorRotation(SwordRotation);
-
 	//Left_Hand->SetActorLocation({ PlayerPos.X - 20,PlayerPos.Y - 25, PlayerPos.Z - 1 });
 	int a = 0;
 	//Left_Hand->SetActorLocation();

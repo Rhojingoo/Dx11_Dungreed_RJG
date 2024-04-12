@@ -219,6 +219,7 @@ void APlayer::Dash(float _DeltaTime)
 	if (DashTime >= 0.3f )
 	{
 		State.ChangeState("Player_Idle");
+		GravityVector = FVector::Zero;
 		DashTime = 0.f;
 		DashCount = 0;
 		return;
@@ -252,6 +253,7 @@ void APlayer::SecondDash(float _DeltaTime)
 	if (DashTime >= 0.3f)
 	{
 		SecondDashVector = FVector::Zero;
+		GravityVector = FVector::Zero;
 		State.ChangeState("Player_Idle");
 		DashTime = 0.f;
 		DashCount = 0;
@@ -265,7 +267,6 @@ void APlayer::DebugFunction()
 		std::string Msg = std::format("PlayerPos : {}\n", GetActorLocation().ToString());
 		UEngineDebugMsgWindow::PushMsg(Msg);
 	}
-
 	{
 		std::string Msg = std::format("MousePos : {}\n", GEngine->EngineWindow.GetScreenMousePos().ToString());
 		UEngineDebugMsgWindow::PushMsg(Msg);
