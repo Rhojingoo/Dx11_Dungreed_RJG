@@ -18,6 +18,7 @@ void ATown_BackGround::BeginPlay()
 	//Renderer->SetSprite("TownBG_Night.bmp");
 	//Renderer->SetSprite("TownLayer_Night.bmp");
 	Renderer->SetOrder(0);
+	//SetRoot(Renderer);
 }
 
 void ATown_BackGround::Tick(float _DeltaTime)

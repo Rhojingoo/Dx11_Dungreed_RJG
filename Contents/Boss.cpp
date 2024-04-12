@@ -6,6 +6,7 @@
 Boss::Boss()
 {
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	SetRoot(Renderer);
 }
 
 Boss::~Boss()

@@ -15,6 +15,7 @@ void ABoss_BackGround::BeginPlay()
 	Super::BeginPlay();
 	SetActorScale3D(FVector(1000.0f, 300.0f, 100.0f));
 	Renderer->SetSprite("NIflheimRoom.png");
+	//SetRoot(Renderer);
 	//Renderer->SetSprite("IceFrontBG.bmp");
 	//Renderer->SetSprite("IceBackBG.bmp");
 	//Renderer->SetSprite("Ice_NIflheim_foothold.bmp");

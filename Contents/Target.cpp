@@ -9,6 +9,7 @@
 ATarget::ATarget()
 {
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	SetRoot(Renderer);
 }
 
 ATarget::~ATarget()

@@ -5,6 +5,7 @@
 ATitle_Bird::ATitle_Bird()
 {
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	SetRoot(Renderer);
 }
 
 ATitle_Bird::~ATitle_Bird()

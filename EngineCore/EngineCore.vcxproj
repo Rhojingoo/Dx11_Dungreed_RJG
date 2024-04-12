@@ -175,6 +175,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="DefaultSceneComponent.h">
       <SubType>
       </SubType>
@@ -276,6 +277,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="DefaultSceneComponent.cpp">
       <SubType>
       </SubType>

@@ -8,7 +8,7 @@
 APlayer_Hand::APlayer_Hand()
 {
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-
+	SetRoot(Renderer);
 }
 
 

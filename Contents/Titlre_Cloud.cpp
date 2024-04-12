@@ -5,6 +5,7 @@
 ATitlre_Cloud::ATitlre_Cloud()
 {
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	SetRoot(Renderer);
 }
 
 ATitlre_Cloud::~ATitlre_Cloud()

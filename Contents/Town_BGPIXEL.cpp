@@ -18,6 +18,7 @@ void ATown_BGPIXEL::BeginPlay()
 	//Renderer->SetSprite("TownBG_Night.bmp");
 	//Renderer->SetSprite("TownLayer_Night.bmp");
 	Renderer->SetOrder(1);
+	//SetRoot(Renderer);
 }
 
 void ATown_BGPIXEL::Tick(float _DeltaTime)

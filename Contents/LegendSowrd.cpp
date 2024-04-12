@@ -7,6 +7,7 @@
 ALegendSowrd::ALegendSowrd()
 {
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	SetRoot(Renderer);
 }
 
 ALegendSowrd::~ALegendSowrd()
