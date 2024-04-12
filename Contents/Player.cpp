@@ -3,11 +3,25 @@
 #include <EngineCore/Renderer.h>
 #include "ContentsHelper.h"
 #include <cmath>
+#include <EngineCore/DefaultSceneComponent.h>
 
 APlayer::APlayer()
 {
+	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
+
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	SetRoot(Renderer);
+	Renderer->SetupAttachment(Root);
+	//Renderer->SetScale(FVector(300.0f, 300.0f, 300.0f));
+	//Renderer->SetOrder(15);
+	//SetRoot(Renderer);
+
+	ChildRenderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	ChildRenderer->SetupAttachment(Root);
+	ChildRenderer->SetSprite("DemonSword.png");
+	ChildRenderer->SetScale(FVector(48.0f, 180.0f, 100.0f));
+	ChildRenderer->AddPosition({ 30.0f, 50.0f, 0.0f });
+
+	SetRoot(Root);
 }
 
 APlayer::~APlayer()
@@ -26,11 +40,11 @@ void APlayer::BeginPlay()
 	//Left_Hand = GetWorld()->SpawnActor<APlayer_Hand>("L_Hand");
 	//Left_Hand->SetActorLocation({ 640.0f, -360.0f, 200.0f });	
 
-	Sowrd = GetWorld()->SpawnActor<ALegendSowrd>("Sowrd");
-	Sowrd->SetActorLocation({ 640.0f, -360.0f, 200.0f });
+	//Sowrd = GetWorld()->SpawnActor<ALegendSowrd>("Sowrd");
+	//Sowrd->SetActorLocation({ 640.0f, -360.0f, 200.0f });
 
 
-	SetActorScale3D(FVector(320.0f, 320.0f, 100.0f));
+	//SetActorScale3D(FVector(32.0f, 32.0f, 100.0f));
 	
 	Renderer->CreateAnimation("Player_Idle", "Player_Idle",0.1f);
 	Renderer->CreateAnimation("Player_Jump", "Player_Jump", 0.1f);
@@ -47,7 +61,7 @@ void APlayer::BeginPlay()
 	//Renderer->SetSprite("CuttingTest.png", 11);
 	Renderer->SetAutoSize(3.f, true);
 	
-	Renderer->SetOrder(7);
+	
 	
 	Renderer->ChangeAnimation("Player_Idle");
 	StateInit();
@@ -61,7 +75,7 @@ void APlayer::Tick(float _DeltaTime)
 
 	PlayerPos = GetActorLocation();
 	Right_Hand->SetActorLocation({ PlayerPos.X+20,PlayerPos.Y -25, PlayerPos.Z -1});
-	Sowrd ->SetActorLocation({ PlayerPos.X + 30,PlayerPos.Y + 55, PlayerPos.Z - 1 });
+	//Sowrd ->SetActorLocation({ PlayerPos.X + 30,PlayerPos.Y + 55, PlayerPos.Z - 1 });
 
 	FVector PlayerPos = GetActorLocation();
 	FVector CursorPos = Cursor->GetPos();
@@ -80,9 +94,11 @@ void APlayer::Tick(float _DeltaTime)
 	float FinalAngleRad = CursorAngleRad + AdditionalAngleRad;
 
 	FVector SwordRotation = FVector(0.0f, 0.0f, FinalAngleRad* (UEngineMath::PI / 180.f));
+	ChildRenderer->SetRotationDeg(SwordRotation);
+
 	//Sowrd->AddActorRotation(SwordRotation);
 	//Sowrd->GetActorTransform().AddRotationDeg(SwordRotation);
-	Sowrd->GetActorTransform().SetRotationDeg(SwordRotation);
+	//Sowrd->GetActorTransform().SetRotationDeg(SwordRotation);
 	//Sowrd->SetActorRotation(SwordRotation);
 	//Left_Hand->SetActorLocation({ PlayerPos.X - 20,PlayerPos.Y - 25, PlayerPos.Z - 1 });
 	int a = 0;
