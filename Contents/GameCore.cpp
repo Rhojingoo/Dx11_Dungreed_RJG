@@ -48,7 +48,7 @@ void UGameCore::Initialize()
 		UEngineSprite::CreateCutting("Demon_Sword.png", 9, 1);
 		UEngineSprite::CreateCutting("Fire_Sword.png", 13, 1);
 		UEngineSprite::CreateCutting("Dash_Smoke.png", 5, 1);
-		UEngineSprite::CreateCutting("Run_Smoke.png", 5, 1);
+		UEngineSprite::CreateCutting("Run_Smoke.png", 6, 1);
 		UEngineSprite::CreateCutting("CuttingTest.png", 4, 3);
 	}
 	//UEngineDirectory Dir;

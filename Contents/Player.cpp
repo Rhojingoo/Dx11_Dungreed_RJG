@@ -4,6 +4,9 @@
 #include "ContentsHelper.h"
 #include <cmath>
 #include <EngineCore/DefaultSceneComponent.h>
+#include "Player_Hand.h"
+#include "Target.h"
+#include "Player_Smoke_Effect.h"
 
 APlayer::APlayer()
 {
@@ -40,6 +43,10 @@ void APlayer::BeginPlay()
 	Right_Hand = GetWorld()->SpawnActor<APlayer_Hand>("R_Hand");
 	Right_Hand->SetActorLocation({ 640.0f, -360.0f, 200.0f });
 	Right_Hand->SetTarget(Cursor);
+
+	Smoke_Effect = GetWorld()->SpawnActor<APlayer_Smoke_Effect>("Smoke");
+	Smoke_Effect->SetActorLocation({0.0f, 0.0f, 200.0f });
+
 	//Left_Hand = GetWorld()->SpawnActor<APlayer_Hand>("L_Hand");
 	//Left_Hand->SetActorLocation({ 640.0f, -360.0f, 200.0f });	
 

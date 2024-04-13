@@ -3,6 +3,9 @@
 #include <EngineCore/SpriteRenderer.h>
 #include "ContentsHelper.h"
 #include <EngineCore/EngineDebugMsgWindow.h>
+#include "Player_Hand.h"
+#include "Target.h"
+#include "Player_Smoke_Effect.h"
 
 //void Function(URenderer* Renderer)
 //{
@@ -79,9 +82,7 @@ void APlayer::Idle(float _DeltaTime)
 		State.ChangeState("Player_Dash");
 		return;
 	}
-
 	
-
 	MoveUpdate(_DeltaTime);
 
 	if (JumpOn == false) 
@@ -147,11 +148,23 @@ void APlayer::Run(float _DeltaTime)
 	if (UEngineInput::IsPress('A'))
 	{
 		AddMoveVector(FVector::Left * _DeltaTime* Speed);
+		if (Smoke_Effect->CanPlayEffect() == true)
+		{
+			Smoke_Effect->SetActorLocation({ GetActorLocation().X + 15, GetActorLocation().Y , GetActorLocation().Z + 1 });
+			Smoke_Effect->Run_Smoke_On();
+			Smoke_Effect->Left_Dir();
+		}
 	}
 
 	if (UEngineInput::IsPress('D'))
 	{
 		AddMoveVector(FVector::Right * _DeltaTime* Speed);
+		if (Smoke_Effect->CanPlayEffect() == true)
+		{
+			Smoke_Effect->SetActorLocation({ GetActorLocation().X - 15, GetActorLocation().Y , GetActorLocation().Z + 1 });
+			Smoke_Effect->Run_Smoke_On();
+			Smoke_Effect->Right_Dir();
+		}
 	}
 
 	if (true == IsUp('A') || true == IsUp('D'))
@@ -173,10 +186,7 @@ void APlayer::Run(float _DeltaTime)
 		State.ChangeState("Player_Dash");
 		return;
 	}
-
-
 	MoveUpdate(_DeltaTime);
-
 }
 
 void APlayer::DashStart()
@@ -193,6 +203,7 @@ void APlayer::DashStart()
 	JumpOn = true;
 	DashTime = 0.f;
 	DashCount += 1;
+	Dash_Effect_Call();
 }
 
 void APlayer::Dash(float _DeltaTime)
@@ -211,6 +222,13 @@ void APlayer::Dash(float _DeltaTime)
 		}
 	}
 
+	if (true == IsPress('A') || true == IsPress('D'))
+	{		
+		int a = 0;
+		return;
+	}
+
+
 	DashTime += _DeltaTime;
 	if (DashTime >= 0.3f )
 	{
@@ -219,6 +237,22 @@ void APlayer::Dash(float _DeltaTime)
 		DashTime = 0.f;
 		DashCount = 0;
 		return;
+	}
+}
+
+void APlayer::Dash_Effect_Call()
+{
+	if (CursorPos.X - PlayerPos.X > 0.f)
+	{
+		Smoke_Effect->SetActorLocation({ GetActorLocation().X - 15, GetActorLocation().Y , GetActorLocation().Z + 1 });
+		Smoke_Effect->Run_Smoke_On();
+		Smoke_Effect->Right_Dir();
+	}
+	else
+	{
+		Smoke_Effect->SetActorLocation({ GetActorLocation().X + 15, GetActorLocation().Y , GetActorLocation().Z + 1 });
+		Smoke_Effect->Run_Smoke_On();
+		Smoke_Effect->Left_Dir();
 	}
 }
 
@@ -239,13 +273,18 @@ void APlayer::SecondDashStart()
 	JumpOn = true;
 	DashTime = 0.f;
 	DashCount += 1;
+	Dash_Effect_Call();
 }
 
 void APlayer::SecondDash(float _DeltaTime)
 {
 	MoveUpdate(_DeltaTime);
-	SecondDashVector;
-	LastMoveVector;
+
+	if (true == IsPress('A') || true == IsPress('D'))
+	{
+		return;
+	}
+
 	DashTime += _DeltaTime;
 	if (DashTime >= 0.3f)
 	{
@@ -298,7 +337,6 @@ void APlayer::Dash_Direction(float _DeltaTime)
 	DashDir *= 24.f;
 	float Speed = 150.f;
 	AddMoveVector(DashDir * _DeltaTime * Speed);
-
 }
 
 void APlayer::CalLastMoveVector(float _DeltaTime)
@@ -325,7 +363,6 @@ void APlayer::CalMoveVector(float _DeltaTime)
 			MoveVector = float4::Zero;
 		}
 	}
-
 	if (MoveMaxSpeed <= MoveVector.Size2D())
 	{
 		MoveVector = MoveVector.Normalize2DReturn() * MoveMaxSpeed;
@@ -363,8 +400,8 @@ void APlayer::CalGravityVector(float _DeltaTime)
 }
 
 void APlayer::MoveLastMoveVector(float _DeltaTime)
-{	// 카메라는 x축으로만 움직여야 하니까.
-	
+{	
+	// 카메라는 x축으로만 움직여야 하니까.	
 	AddActorLocation(LastMoveVector * _DeltaTime);
 }
 

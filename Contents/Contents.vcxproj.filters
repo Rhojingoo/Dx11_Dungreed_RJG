@@ -59,6 +59,9 @@
     <ClInclude Include="Player_Attack_Effect.h">
       <Filter>Level\Public_Object\Player\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Player_Smoke_Effect.h">
+      <Filter>Level\Public_Object\Player\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -120,6 +123,9 @@
       <Filter>Level\Public_Object\Player</Filter>
     </ClCompile>
     <ClCompile Include="Player_Attack_Effect.cpp">
+      <Filter>Level\Public_Object\Player\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Smoke_Effect.cpp">
       <Filter>Level\Public_Object\Player\Effect</Filter>
     </ClCompile>
   </ItemGroup>

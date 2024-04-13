@@ -1,12 +1,11 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include <EngineCore/StateManager.h>
-#include "Player_Hand.h"
-#include "Target.h"
-
-
 
 // Ό³Έν :
+class ATarget;
+class APlayer_Hand;
+class APlayer_Smoke_Effect;
 class USpriteRenderer;
 class APlayer : public AActor
 {
@@ -38,6 +37,8 @@ private:
 	std::shared_ptr<ATarget> Cursor = nullptr;
 	std::shared_ptr<APlayer_Hand> Right_Hand = nullptr;
 	std::shared_ptr<APlayer_Hand> Left_Hand = nullptr;
+	std::shared_ptr<APlayer_Smoke_Effect> Smoke_Effect = nullptr;
+	
 
 	FVector PlayerPos = {};
 	FVector CursorPos = {};
@@ -60,7 +61,7 @@ private:
 
 	void DashStart();
 	void Dash(float _DeltaTime);
-	void DashEnd();
+	void Dash_Effect_Call();
 
 	void SecondDashStart();
 	void SecondDash(float _DeltaTime);
