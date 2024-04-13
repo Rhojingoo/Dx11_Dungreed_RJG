@@ -163,6 +163,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Boss_BGPIXEL.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="BackGround.h">
       <SubType>
       </SubType>
@@ -189,6 +193,42 @@
     </ClInclude>
     <ClInclude Include="Dungreed_Enum.h" />
     <ClInclude Include="GameCore.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Monster01_BackGround.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Monster01_BGPIXEL.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Monster01_GameMode.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Monster02_BackGround.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Monster02_BGPIXEL.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Monster02_GameMode.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Monster03_BackGround.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Monster03_BGPIXEL.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Monster03_GameMode.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -247,6 +287,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Boss_BGPIXEL.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <SubType>
       </SubType>
@@ -272,6 +316,42 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameCore.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Monster01_BackGround.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Monster01_BGPIXEL.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Monster01_GameMode.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Monster02_BackGround.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Monster02_BGPIXEL.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Monster02_GameMode.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Monster03_BackGround.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Monster03_BGPIXEL.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Monster03_GameMode.cpp">
       <SubType>
       </SubType>
     </ClCompile>

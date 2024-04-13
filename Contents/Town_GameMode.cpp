@@ -17,22 +17,30 @@ ATown_GameMode::~ATown_GameMode()
 {
 }
 
+void ATown_GameMode::LevelStart(ULevel* _PrevLevel)
+{
+	Camera = GetWorld()->GetMainCamera();
+	Camera->SetActorLocation(FVector(640.0f, -360.0f, -200.0f));
+
+	UContentsHelper::MapTex = UEngineTexture::FindRes("TownModelPX.png");
+	UContentsHelper::MapTexScale = UContentsHelper::MapTex->GetScale();
+	Player->SetColTown();
+}
+
+void ATown_GameMode::LevelEnd(ULevel* _NextLevel)
+{
+}
+
 void ATown_GameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UContentsHelper::MapTex = UEngineTexture::FindRes("TownModelPX.png");//원래
-	//UContentsHelper::MapTex = UEngineTexture::FindRes("Monster3_PX.png");
+	UContentsHelper::MapTex = UEngineTexture::FindRes("TownModelPX.png");//원래 통짜맵 사용할때
 	UContentsHelper::MapTexScale = UContentsHelper::MapTex->GetScale();
 
-	Camera = GetWorld()->GetMainCamera();
-	Camera->SetActorLocation(FVector(640.0f, -360.0f, -200.0f));
-
-	std::shared_ptr<APlayer> Actor = GetWorld()->SpawnActor<APlayer>("Player", EOBJ_Order::Player);
-	Actors = Actor;
-	Actor->SetActorLocation({ 640.0f, -360.0f, 200.0f });
-	FVector assad = Actor->GetActorLocation();
-
+	Player = GetWorld()->SpawnActor<APlayer>("Player", EOBJ_Order::Player);
+	Player->SetActorLocation({ 640.0f, -360.0f, 200.0f });
+	Player->SetColTown();
 
 	std::shared_ptr<ATarget> Cursor = GetWorld()->SpawnActor<ATarget>("Player2");
 	Cursor->SetActorLocation({ 640.0f, -360.0f, 200.0f });	
@@ -43,15 +51,13 @@ void ATown_GameMode::BeginPlay()
 	//float4 ImageScale = { TexScale.X * TileSize, TexScale.Y * TileSize, 0.0f };
 	//BackGr->SetActorScale3D(ImageScale);
 	//BackGr->SetActorLocation({ ImageScale.hX(), -ImageScale.hY(), 500.0f });
-	BackGr->SetActorScale3D(TexScale); //원래
-	BackGr->SetActorLocation({ TexScale.hX(), -TexScale.hY(), 500.0f });//원래
+	BackGr->SetActorScale3D(TexScale); //원래 통짜맵 사용할때
+	BackGr->SetActorLocation({ TexScale.hX(), -TexScale.hY(), 500.0f });//원래 통짜맵 사용할때
 	
 	std::shared_ptr<ATown_BGPIXEL> Back = GetWorld()->SpawnActor<ATown_BGPIXEL>("TOWNBackPX", EOBJ_Order::PixelGround);
-	float4 ImageScale = UContentsHelper::MapTexScale;//원래
+	float4 ImageScale = UContentsHelper::MapTexScale;//원래 통짜맵 사용할때
 	Back->SetActorScale3D(ImageScale);
-	Back->SetActorLocation({ ImageScale.hX(), -ImageScale.hY(), 500.0f }); 
-	
-	int a = 0;
+	Back->SetActorLocation({ ImageScale.hX(), -ImageScale.hY(), 500.0f }); 	
 }
 
 void ATown_GameMode::Tick(float _DeltaTime)
@@ -59,9 +65,7 @@ void ATown_GameMode::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 	if (true == UEngineInput::IsDown('P'))
 	{
-		GEngine->ChangeLevel("BossLevel");
+		GEngine->ChangeLevel("Mon01_Level");
 	}
-
-
-	Camera->SetActorLocation({ Actors->GetActorLocation().X, Actors->GetActorLocation().Y });
+	Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y });
 }

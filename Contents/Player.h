@@ -24,6 +24,7 @@ public:
 	APlayer& operator=(APlayer&& _Other) noexcept = delete;
 
 	UStateManager State;
+	void SetColTown() { Foot_Collision_Check_At_Town = true; }
 
 protected:
 	void BeginPlay() override;
@@ -82,7 +83,7 @@ private:
 	void GroundUp(float _DeltaTime);
 	void AddMoveVector(const FVector& _DirDelta);
 
-
+	
 
 	FVector MoveVector = FVector::Zero;
 	FVector MoveAcc = FVector::Right * 500.0f;
@@ -103,6 +104,8 @@ private:
 	float DashTime = 0.f;
 	int DashCount = 0;
 	const int DashMax = 2;
+	bool Foot_Collision_Check_At_Town = false;
+
 
 	void colorsetting();
 };

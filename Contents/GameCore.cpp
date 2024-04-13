@@ -2,7 +2,11 @@
 #include "GameCore.h"
 #include "Title_GameMode.h"
 #include "Town_GameMode.h"
+#include "Monster01_GameMode.h"
+#include "Monster02_GameMode.h"
+#include "Monster03_GameMode.h"
 #include "Boss_GameMode.h"
+
 #include <EngineCore/EngineSprite.h>
 
 UGameCore::UGameCore()
@@ -82,7 +86,11 @@ void UGameCore::Initialize()
 
 	GEngine->CreateLevel<ATitle_GameMode>("TitleLevel");
 	GEngine->CreateLevel<ATown_GameMode>("TownLevel");
+	GEngine->CreateLevel<AMonster01_GameMode>("Mon01_Level");
+	GEngine->CreateLevel<AMonster02_GameMode>("Mon02_Level");
+	GEngine->CreateLevel<AMonster03_GameMode>("Mon03_Level");
 	GEngine->CreateLevel<ABoss_GameMode>("BossLevel");
+
 	GEngine->ChangeLevel("TitleLevel");
 
 

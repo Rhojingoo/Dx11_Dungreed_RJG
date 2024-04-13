@@ -386,8 +386,16 @@ void APlayer::CalGravityVector(float _DeltaTime)
 #endif
 
 	Direction();
-	//PlayerPos /= UContentsHelper::TileSize;
-	//PlayerPos.Y = PlayerPos.Y /*- 44*/;	
+
+	if (Foot_Collision_Check_At_Town == true)
+	{
+		//PlayerPos.Y = PlayerPos.Y /*- 44*/;
+	}
+	else
+	{
+		PlayerPos.Y = PlayerPos.Y + 25;
+		PlayerPos /= UContentsHelper::TileSize;
+	}		
 	PlayerPos.Y = -PlayerPos.Y;
 
 	Color8Bit Color = Tex->GetColor(PlayerPos, Color8Bit::Black);
