@@ -191,7 +191,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="LegendSowrd.h">
+    <ClInclude Include="Player_Attack_Effect.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -270,7 +270,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="LegendSowrd.cpp">
+    <ClCompile Include="Player_Attack_Effect.cpp">
       <SubType>
       </SubType>
     </ClCompile>

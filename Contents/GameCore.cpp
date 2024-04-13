@@ -45,6 +45,10 @@ void UGameCore::Initialize()
 		// 그러면 기존의 스프라이트 데이터는 날려버리고
 		// 자른 스프라이트 데이터 변경한다.
 		UEngineSprite::CreateCutting("Title_Bird.png", 8, 1);
+		UEngineSprite::CreateCutting("Demon_Sword.png", 9, 1);
+		UEngineSprite::CreateCutting("Fire_Sword.png", 13, 1);
+		UEngineSprite::CreateCutting("Dash_Smoke.png", 5, 1);
+		UEngineSprite::CreateCutting("Run_Smoke.png", 5, 1);
 		UEngineSprite::CreateCutting("CuttingTest.png", 4, 3);
 	}
 	//UEngineDirectory Dir;

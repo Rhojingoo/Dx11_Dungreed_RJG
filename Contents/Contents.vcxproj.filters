@@ -47,9 +47,6 @@
     <ClInclude Include="Contents_SpriteRender.h">
       <Filter>Shader</Filter>
     </ClInclude>
-    <ClInclude Include="LegendSowrd.h">
-      <Filter>Level\Public_Object\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Level\Public_Object\Player</Filter>
     </ClInclude>
@@ -58,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="Target.h">
       <Filter>Level\Public_Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_Attack_Effect.h">
+      <Filter>Level\Public_Object\Player\Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -107,9 +107,6 @@
     <ClCompile Include="Contents_SpriteRender.cpp">
       <Filter>Shader</Filter>
     </ClCompile>
-    <ClCompile Include="LegendSowrd.cpp">
-      <Filter>Level\Public_Object\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Level\Public_Object\Player</Filter>
     </ClCompile>
@@ -121,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="Target.cpp">
       <Filter>Level\Public_Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Attack_Effect.cpp">
+      <Filter>Level\Public_Object\Player\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +168,9 @@
     </Filter>
     <Filter Include="Level\Public_Object\Player">
       <UniqueIdentifier>{f4360ab8-18e2-4679-bc2d-42efdacfd90e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Public_Object\Player\Effect">
+      <UniqueIdentifier>{1312e8e1-92f9-4ee6-ae07-4bd786cffd54}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

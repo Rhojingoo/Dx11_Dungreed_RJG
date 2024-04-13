@@ -181,6 +181,7 @@ void APlayer::Run(float _DeltaTime)
 
 void APlayer::DashStart()
 {
+	Renderer->ChangeAnimation("Player_Jump");
 	PlayerPos = GetActorLocation();
 	CursorPos = Cursor->GetPos();
 	DashDir = CursorPos - PlayerPos;
@@ -223,6 +224,7 @@ void APlayer::Dash(float _DeltaTime)
 
 void APlayer::SecondDashStart()
 {
+	Renderer->ChangeAnimation("Player_Jump");
 	DashVector = FVector::Zero;
 	GravityVector = FVector::Zero;
 	LastMoveVector = FVector::Zero;

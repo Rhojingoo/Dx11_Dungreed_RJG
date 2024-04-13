@@ -3,7 +3,6 @@
 #include <EngineCore/StateManager.h>
 #include "Player_Hand.h"
 #include "Target.h"
-#include "LegendSowrd.h"
 
 
 
@@ -39,7 +38,6 @@ private:
 	std::shared_ptr<ATarget> Cursor = nullptr;
 	std::shared_ptr<APlayer_Hand> Right_Hand = nullptr;
 	std::shared_ptr<APlayer_Hand> Left_Hand = nullptr;
-	std::shared_ptr<ALegendSowrd> Sowrd = nullptr;
 
 	FVector PlayerPos = {};
 	FVector CursorPos = {};

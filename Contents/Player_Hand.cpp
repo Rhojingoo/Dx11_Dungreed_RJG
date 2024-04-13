@@ -26,14 +26,34 @@ APlayer_Hand::APlayer_Hand()
 
 
 	Sword_Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer2");
-	Sword_Renderer->SetupAttachment(Hand_Renderer);
-	Sword_Renderer->SetPivot(EPivot::BOT);
-	Sword_Renderer->SetSprite("DemonSword.png");
+	Sword_Renderer->CreateAnimation("Demon_Sword", "Demon_Sword.png", 0.1f);
+	Sword_Renderer->CreateAnimation("Fire_Sword", "Fire_Sword.png", 0.1f); // 별개의 검 (손이랑 좌표 안맞음)
+	Sword_Renderer->ChangeAnimation("Demon_Sword");
 	Sword_Renderer->SetScale(FVector(6.0f, 20.0f, 100.0f));
 	Sword_Renderer->AddPosition({ 1.0f, 10.0f, -1.0f });
+	//Sword_Renderer->SetPivot(EPivot::BOT);//Sword.png
+	//Sword_Renderer->SetSprite("DemonSword.png");
+	//Sword_Renderer->SetScale(FVector(6.0f, 20.0f, 100.0f));
+	//Sword_Renderer->AddPosition({ 1.0f, 10.0f, -1.0f });
+	Sword_Renderer->SetupAttachment(Hand_Renderer);
 
+
+	
+
+
+	//공격이펙트
+	{
+		//AttatEffect_Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer3");
+		//AttatEffect_Renderer->SetupAttachment(Root);
+		//AttatEffect_Renderer->CreateAnimation("Sword_Swing_Normal", "Sword_Swing_Normal", 0.1f /*,false*/);
+		//AttatEffect_Renderer->CreateAnimation("Sword_Swing_Legend", "Sword_Swing_Legend", 0.1f ,false);
+		//AttatEffect_Renderer->SetScale(FVector(180.0f, 141.0f, 100.0f));
+		//AttatEffect_Renderer->AddPosition({ 100.0f, 0.0f, 0.0f });
+		////Renderer->SetAutoSize(3.f, true);
+		////Renderer->SetOrder(9);
+		//AttatEffect_Renderer->ChangeAnimation("Sword_Swing_Legend");
+	}
 	SetRoot(Root);
-
 }
 
 
@@ -47,13 +67,10 @@ void APlayer_Hand::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//SetActorScale3D(FVector(320.0f, 320.0f, 100.0f));
-	//Renderer->SetSprite("CuttingTest.png", 11);
+	Swing_EF = GetWorld()->SpawnActor<APlayer_Attack_Effect>("R_Hand");
 
 	Renderer->CreateAnimation("Player_Hand", "Player_Hand", 0.1f);
 	Renderer->ChangeAnimation("Player_Hand");
-
-	//Renderer->SetAutoSize(3.f, true);
 	Renderer->SetOrder(8);
 	InputOn();
 }
@@ -67,10 +84,13 @@ void APlayer_Hand::Tick(float _DeltaTime)
 
 	Hand_Dir();
 
-	Dir = CursorPos - PlayerPos;
-	Dir.Z = 0; // Z 축 값은 회전 계산에 사용되지 않으므로 0으로 설정
-	Dir.Normalize2DReturn();
+
 	 
+	Attack_Effect_Dir();
+	
+	
+	
+
 	switch (Hand_RL)
 	{
 	case Hand_LeftRight::Right:
@@ -93,6 +113,7 @@ void APlayer_Hand::Right()
 	if (UpSetting == true) 
 	{
 		float CursorAngleRad = std::atan2(Dir.Y, Dir.X);
+		//Attack_Degree = CursorAngleRad * UEngineMath::RToD;
 		const float Degrees = 10.0f;
 		const float AdditionalAngleRad = Degrees * UEngineMath::DToR;
 		float FinalAngleRad = CursorAngleRad + AdditionalAngleRad;
@@ -101,6 +122,7 @@ void APlayer_Hand::Right()
 	else
 	{
 		float CursorAngleRad = std::atan2(-Dir.Y, -Dir.X);
+		//Attack_Degree = CursorAngleRad * UEngineMath::RToD;
 		const float Degrees = -10.0f;
 		const float AdditionalAngleRad = Degrees * UEngineMath::DToR;
 		float FinalAngleRad = CursorAngleRad + AdditionalAngleRad;
@@ -112,19 +134,32 @@ void APlayer_Hand::Right()
 		UpSetting = !UpSetting;
 		if (UpSetting == true)
 		{
+			//AttatEffect_Renderer->ChangeAnimation("Sword_Swing_Legend");
 			Renderer->SetDir(EEngineDir::Right);
 			Hand_Renderer->SetDir(EEngineDir::Right);
-			FVector SetLocal = Hand_Renderer->GetLocalPosition();
-			FVector SetWorld = Renderer->GetLocalPosition();
-			Hand_Renderer->Transform.LocalPosition = { SetWorld.X + 20.0f, 0.f,0.f };
+			FVector HandRender_Local = Hand_Renderer->GetLocalPosition();
+			FVector MainRender_World = Renderer->GetLocalPosition();
+			Hand_Renderer->Transform.LocalPosition = { MainRender_World.X + 20.0f, 0.f,0.f };
+
+
+			Attack_EffectDir = Attack_EffectDir * UEngineMath::DToR;
+			Swing_EF->SetActorLocation({ GetActorLocation().X - (15.0f* Attack_EffectDir.X), GetActorLocation().Y - (15.0f * Attack_EffectDir.Y),190.f});
+			Swing_EF->SetActorRotation({0.f,0.f,Attack_Degree + 90.f });
+			Swing_EF->AttackOn();
 		}
 		else
 		{
+			//AttatEffect_Renderer->ChangeAnimation("Sword_Swing_Legend");
 			Renderer->SetDir(EEngineDir::Left);
 			Hand_Renderer->SetDir(EEngineDir::Left);
-			FVector SetLocal = Hand_Renderer->GetLocalPosition();
-			FVector SetWorld = Renderer->GetLocalPosition();
-			Hand_Renderer->Transform.LocalPosition = { SetWorld.X-20.f, SetWorld.Y - 15.f,0.f };
+			FVector HandRender_Local = Hand_Renderer->GetLocalPosition();
+			FVector MainRender_World = Renderer->GetLocalPosition();
+			Hand_Renderer->Transform.LocalPosition = { MainRender_World.X-20.f, MainRender_World.Y - 15.f,0.f };
+
+			Attack_EffectDir = Attack_EffectDir * UEngineMath::DToR;
+			Swing_EF->SetActorLocation( { GetActorLocation().X - 15.0f * Attack_EffectDir.X,  GetActorLocation().Y - (15.0f * Attack_EffectDir.Y),190.f });
+			Swing_EF->SetActorRotation({ 0.f,0.f,Attack_Degree + 90.f });
+			Swing_EF->AttackOn();
 		}
 		return;
 	}
@@ -158,17 +193,29 @@ void APlayer_Hand::Left()
 		{
 			Renderer->SetDir(EEngineDir::Left);
 			Hand_Renderer->SetDir(EEngineDir::Left);
-			FVector SetLocal = Hand_Renderer->GetLocalPosition();
-			FVector SetWorld = Renderer->GetLocalPosition();
-			Hand_Renderer->Transform.LocalPosition = { SetWorld.X - 20.0f, 0.f,0.f };
+			FVector HandRender_Local = Hand_Renderer->GetLocalPosition();
+			FVector MainRender_World = Renderer->GetLocalPosition();
+			Hand_Renderer->Transform.LocalPosition = { MainRender_World.X - 20.0f, 0.f,0.f };
+
+
+			Attack_EffectDir = Attack_EffectDir * UEngineMath::DToR;
+			Swing_EF->SetActorLocation({ GetActorLocation().X - (15.0f * Attack_EffectDir.X), GetActorLocation().Y - (15.0f * Attack_EffectDir.Y),190.f });
+			Swing_EF->SetActorRotation({ 0.f,0.f,Attack_Degree + 90.f });
+			Swing_EF->AttackOn();
 		}
 		else
 		{
 			Renderer->SetDir(EEngineDir::Right);
 			Hand_Renderer->SetDir(EEngineDir::Right);
-			FVector SetLocal = Hand_Renderer->GetLocalPosition();
-			FVector SetWorld = Renderer->GetLocalPosition();
-			Hand_Renderer->Transform.LocalPosition = { SetWorld.X + 20.f, SetWorld.Y - 15.f,0.f };
+			FVector HandRender_Local = Hand_Renderer->GetLocalPosition();
+			FVector MainRender_World = Renderer->GetLocalPosition();
+			Hand_Renderer->Transform.LocalPosition = { MainRender_World.X + 20.f, MainRender_World.Y - 15.f,0.f };
+
+
+			Attack_EffectDir = Attack_EffectDir * UEngineMath::DToR;
+			Swing_EF->SetActorLocation({ GetActorLocation().X - (15.0f * Attack_EffectDir.X), GetActorLocation().Y - (15.0f * Attack_EffectDir.Y),190.f });
+			Swing_EF->SetActorRotation({ 0.f,0.f,Attack_Degree + 90.f });
+			Swing_EF->AttackOn();
 		}
 		return;
 	}
@@ -224,5 +271,45 @@ void APlayer_Hand::Hand_Dir()
 			LeftSetting = true;
 			return;
 		}
+	}
+}
+
+void APlayer_Hand::Attack_Effect_Dir()
+{
+	//팔, 소드 회전시 사용되는 Dir
+	{
+		Dir = CursorPos - PlayerPos;
+		Dir.Z = 0; // Z 축 값은 회전 계산에 사용되지 않으므로 0으로 설정
+		Dir.Normalize2DReturn();
+	}
+	// 소드 이펙트 Dir설정
+	{
+		Attack_EffectDir = PlayerPos - CursorPos;
+		float Dir1 = CursorPos.X - PlayerPos.X;
+		if (Dir1 >= 0.f)
+		{
+			if (Attack_EffectDir.X < -290.f)
+			{
+				Attack_EffectDir.X = -290.f;
+			}
+			if (Attack_EffectDir.Y < -290.f)
+			{
+				Attack_EffectDir.Y = -290.f;
+			}
+		}
+		else
+		{
+			if (Attack_EffectDir.X > 290.f)
+			{
+				Attack_EffectDir.X = 290.f;
+			}
+			if (Attack_EffectDir.Y > 290.f)
+			{
+				Attack_EffectDir.Y = 290.f;
+			}
+		}
+		Attack_EffectDir.Z = 0; // Z 축 값은 회전 계산에 사용되지 않으므로 0으로 설정
+		Attack_EffectDir.Normalize2DReturn();
+		Attack_Degree = (std::atan2(Attack_EffectDir.Y, Attack_EffectDir.X)) * UEngineMath::RToD;
 	}
 }

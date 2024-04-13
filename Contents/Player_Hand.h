@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include "Target.h"
+#include "Player_Attack_Effect.h"
 
 enum class Hand_LeftRight
 {
@@ -34,6 +35,7 @@ public:
 	void Right();
 	void Left();
 	void Hand_Dir();
+	void Attack_Effect_Dir();
 
 protected:
 	void BeginPlay() override;
@@ -43,6 +45,13 @@ private:
 	USpriteRenderer* Renderer = nullptr;
 	USpriteRenderer* Hand_Renderer = nullptr;
 	USpriteRenderer* Sword_Renderer = nullptr;
+	USpriteRenderer* AttatEffect_Renderer = nullptr;
+
+
+	std::shared_ptr<APlayer_Attack_Effect> Swing_EF = nullptr;
+	float Attack_Degree = 0.f;
+	FVector Attack_EffectDir = {};
+
 	std::shared_ptr<ATarget> Cursor = nullptr;
 	Hand_LeftRight Hand_RL= Hand_LeftRight::Right;
 
