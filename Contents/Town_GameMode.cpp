@@ -21,7 +21,8 @@ void ATown_GameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UContentsHelper::MapTex = UEngineTexture::FindRes("TownModelPX.png");
+	UContentsHelper::MapTex = UEngineTexture::FindRes("TownModelPX.png");//원래
+	//UContentsHelper::MapTex = UEngineTexture::FindRes("Monster3_PX.png");
 	UContentsHelper::MapTexScale = UContentsHelper::MapTex->GetScale();
 
 	Camera = GetWorld()->GetMainCamera();
@@ -36,18 +37,20 @@ void ATown_GameMode::BeginPlay()
 	std::shared_ptr<ATarget> Cursor = GetWorld()->SpawnActor<ATarget>("Player2");
 	Cursor->SetActorLocation({ 640.0f, -360.0f, 200.0f });	
 
-	
 	std::shared_ptr<ATown_BackGround> BackGr = GetWorld()->SpawnActor<ATown_BackGround>("TOWNBack", EOBJ_Order::BackGround);
 	float TileSize = UContentsHelper::TileSize;
-	float4 TexScale = UContentsHelper::MapTexScale;
-	BackGr->SetActorScale3D(TexScale);
-	BackGr->SetActorLocation({ TexScale.hX(), -TexScale.hY(), 500.0f });
-
-
+	float4 TexScale = UContentsHelper::MapTexScale;	
+	//float4 ImageScale = { TexScale.X * TileSize, TexScale.Y * TileSize, 0.0f };
+	//BackGr->SetActorScale3D(ImageScale);
+	//BackGr->SetActorLocation({ ImageScale.hX(), -ImageScale.hY(), 500.0f });
+	BackGr->SetActorScale3D(TexScale); //원래
+	BackGr->SetActorLocation({ TexScale.hX(), -TexScale.hY(), 500.0f });//원래
+	
 	std::shared_ptr<ATown_BGPIXEL> Back = GetWorld()->SpawnActor<ATown_BGPIXEL>("TOWNBackPX", EOBJ_Order::PixelGround);
-	float4 ImageScale = UContentsHelper::MapTexScale;
+	float4 ImageScale = UContentsHelper::MapTexScale;//원래
 	Back->SetActorScale3D(ImageScale);
-	Back->SetActorLocation({ ImageScale.hX(), -ImageScale.hY(), 500.0f });
+	Back->SetActorLocation({ ImageScale.hX(), -ImageScale.hY(), 500.0f }); 
+	
 	int a = 0;
 }
 

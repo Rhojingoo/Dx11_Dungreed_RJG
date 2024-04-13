@@ -21,13 +21,6 @@ APlayer::APlayer()
 	Collision->SetupAttachment(Renderer);
 	//Collision->SetScale(FVector(1000.f, 0.5f, 1.0f));
 	//Collision->AddPosition({ 0.0f, 0.f, 0.0f });
-
-	//ChildRenderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	//ChildRenderer->SetupAttachment(Renderer);
-	//ChildRenderer->SetScale(FVector(0.5f, 0.5f, 1.0f));
-	//ChildRenderer->AddPosition({ 0.0f, 0.25f, 0.0f });
-	//ChildRenderer->SetPivot(EPivot::BOT);
-
 	SetRoot(Renderer);
 }
 
@@ -73,8 +66,5 @@ void APlayer::Tick(float _DeltaTime)
 	State.Update(_DeltaTime);
 	DebugFunction();
 	FVector PlayerPos = GetActorLocation();
-	Right_Hand->SetActorLocation({ PlayerPos });
-
-
-	
+	Right_Hand->SetActorLocation({ PlayerPos });	
 }

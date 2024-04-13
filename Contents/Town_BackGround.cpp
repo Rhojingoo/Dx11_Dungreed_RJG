@@ -13,8 +13,10 @@ ATown_BackGround::~ATown_BackGround()
 void ATown_BackGround::BeginPlay()
 {
 	Super::BeginPlay();
-	SetActorScale3D(FVector(1000.0f, 300.0f, 100.0f));
-	Renderer->SetSprite("TownModel.png");
+	SetActorScale3D(FVector(1000.0f, 300.0f, 100.0f));//Town
+	Renderer->SetSprite("TownModel.png");  //¿øº»
+	//Renderer->SetSprite("Monster3.png");
+	
 	//Renderer->SetSprite("TownBG_Night.bmp");
 	//Renderer->SetSprite("TownLayer_Night.bmp");
 	Renderer->SetOrder(ERenderOrder::ForeGround);

@@ -386,7 +386,7 @@ void APlayer::CalGravityVector(float _DeltaTime)
 #endif
 
 	Direction();
-	
+	//PlayerPos /= UContentsHelper::TileSize;
 	//PlayerPos.Y = PlayerPos.Y /*- 44*/;	
 	PlayerPos.Y = -PlayerPos.Y;
 
