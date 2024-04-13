@@ -10,7 +10,7 @@ enum class Hand_LeftRight
 	End
 };
 
-
+class UCollision;
 class USpriteRenderer;
 class APlayer_Hand : public AActor
 {
@@ -46,7 +46,7 @@ private:
 	USpriteRenderer* Hand_Renderer = nullptr;
 	USpriteRenderer* Sword_Renderer = nullptr;
 	USpriteRenderer* AttatEffect_Renderer = nullptr;
-
+	UCollision* Collision = nullptr;
 
 	std::shared_ptr<APlayer_Attack_Effect> Swing_EF = nullptr;
 	float Attack_Degree = 0.f;

@@ -23,8 +23,6 @@ APlayer_Hand::APlayer_Hand()
 	Hand_Renderer->SetScale(FVector(9.0f, 9.0f, 100.0f));
 	Hand_Renderer->AddPosition({ 20.0f, 0.0f, 0.0f });
 
-
-
 	Sword_Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer2");
 	Sword_Renderer->CreateAnimation("Demon_Sword", "Demon_Sword.png", 0.1f);
 	Sword_Renderer->CreateAnimation("Fire_Sword", "Fire_Sword.png", 0.1f); // 별개의 검 (손이랑 좌표 안맞음)
@@ -37,22 +35,10 @@ APlayer_Hand::APlayer_Hand()
 	//Sword_Renderer->AddPosition({ 1.0f, 10.0f, -1.0f });
 	Sword_Renderer->SetupAttachment(Hand_Renderer);
 
-
+	Collision = CreateDefaultSubObject<UCollision>("Collision");
+	Collision->SetupAttachment(Sword_Renderer);
 	
 
-
-	//공격이펙트
-	{
-		//AttatEffect_Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer3");
-		//AttatEffect_Renderer->SetupAttachment(Root);
-		//AttatEffect_Renderer->CreateAnimation("Sword_Swing_Normal", "Sword_Swing_Normal", 0.1f /*,false*/);
-		//AttatEffect_Renderer->CreateAnimation("Sword_Swing_Legend", "Sword_Swing_Legend", 0.1f ,false);
-		//AttatEffect_Renderer->SetScale(FVector(180.0f, 141.0f, 100.0f));
-		//AttatEffect_Renderer->AddPosition({ 100.0f, 0.0f, 0.0f });
-		////Renderer->SetAutoSize(3.f, true);
-		////Renderer->SetOrder(9);
-		//AttatEffect_Renderer->ChangeAnimation("Sword_Swing_Legend");
-	}
 	SetRoot(Root);
 }
 
@@ -71,7 +57,9 @@ void APlayer_Hand::BeginPlay()
 
 	Renderer->CreateAnimation("Player_Hand", "Player_Hand", 0.1f);
 	Renderer->ChangeAnimation("Player_Hand");
-	Renderer->SetOrder(8);
+	Renderer->SetOrder(ERenderOrder::Wapon);
+	Sword_Renderer->SetOrder(ERenderOrder::Wapon);
+	Hand_Renderer->SetOrder(ERenderOrder::Wapon);
 	InputOn();
 }
 
@@ -84,11 +72,8 @@ void APlayer_Hand::Tick(float _DeltaTime)
 
 	Hand_Dir();
 
-
 	 
-	Attack_Effect_Dir();
-	
-	
+	Attack_Effect_Dir();	
 	
 
 	switch (Hand_RL)

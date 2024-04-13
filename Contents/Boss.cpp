@@ -25,6 +25,7 @@ void Boss::BeginPlay()
 	//Renderer->CreateAnimation("Boss_Idle", "Boss_Idle", 0.1f);
 
 	//Renderer->ChangeAnimation("Boss_Idle");
+	Renderer->SetOrder(ERenderOrder::Boss);
 }
 
 void Boss::Tick(float _DeltaTime)

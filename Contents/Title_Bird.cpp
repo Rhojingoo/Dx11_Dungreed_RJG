@@ -17,6 +17,7 @@ void ATitle_Bird::BeginPlay()
 	Super::BeginPlay();
 	Renderer->CreateAnimation("run", "Title_Bird.png", 0.1f);
 	Renderer->ChangeAnimation("run");
+	Renderer->SetOrder(ERenderOrder::MidGround);
 }
 
 void ATitle_Bird::Tick(float _DeltaTime)

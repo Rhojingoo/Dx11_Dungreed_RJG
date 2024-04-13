@@ -17,7 +17,7 @@ void ATown_BackGround::BeginPlay()
 	Renderer->SetSprite("TownModel.png");
 	//Renderer->SetSprite("TownBG_Night.bmp");
 	//Renderer->SetSprite("TownLayer_Night.bmp");
-	Renderer->SetOrder(0);
+	Renderer->SetOrder(ERenderOrder::ForeGround);
 	//SetRoot(Renderer);
 }
 

@@ -24,7 +24,7 @@ void APlayer_Attack_Effect::BeginPlay()
 	Renderer->CreateAnimation("Sword_Swing_Normal", "Sword_Swing_Normal", 0.1f, false);
 	Renderer->CreateAnimation("Sword_Swing_Legend", "Sword_Swing_Legend", 0.1f, false);
 	Renderer->SetAutoSize(5.f, true);
-	Renderer->SetOrder(9);	
+	Renderer->SetOrder(ERenderOrder::Attack_Effect);
 	//Renderer->ChangeAnimation("Sword_Swing_Legend");
 }
 

@@ -24,7 +24,7 @@ void APlayer_Smoke_Effect::BeginPlay()
 	Renderer->CreateAnimation("Run_Smoke", "Run_Smoke.png", 0.1f, false);
 	Renderer->CreateAnimation("Dash_Smoke", "Dash_Smoke.png", 0.1f, false);
 	Renderer->SetAutoSize(1.f, true);
-	Renderer->SetOrder(9);
+	Renderer->SetOrder(ERenderOrder::Effect_Back);
 	Renderer->ChangeAnimation("Run_Smoke");
 }
 

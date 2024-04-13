@@ -15,18 +15,20 @@ APlayer::APlayer()
 
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Renderer->SetPivot(EPivot::BOT);
-	SetRoot(Renderer);
-	//Renderer->SetScale(FVector(300.0f, 300.0f, 300.0f));
 
+
+	Collision = CreateDefaultSubObject<UCollision>("Collision");
+	Collision->SetupAttachment(Renderer);
+	//Collision->SetScale(FVector(1000.f, 0.5f, 1.0f));
+	//Collision->AddPosition({ 0.0f, 0.f, 0.0f });
 
 	//ChildRenderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	//ChildRenderer->SetupAttachment(Root);
+	//ChildRenderer->SetupAttachment(Renderer);
+	//ChildRenderer->SetScale(FVector(0.5f, 0.5f, 1.0f));
+	//ChildRenderer->AddPosition({ 0.0f, 0.25f, 0.0f });
 	//ChildRenderer->SetPivot(EPivot::BOT);
-	//ChildRenderer->SetSprite("DemonSword.png");
-	//ChildRenderer->SetScale(FVector(48.0f, 180.0f, 100.0f));
-	//ChildRenderer->AddPosition({ 30.0f, 110.0f, 0.0f });
 
-	//SetRoot(Root);
+	SetRoot(Renderer);
 }
 
 APlayer::~APlayer()
@@ -45,17 +47,7 @@ void APlayer::BeginPlay()
 	Right_Hand->SetTarget(Cursor);
 
 	Smoke_Effect = GetWorld()->SpawnActor<APlayer_Smoke_Effect>("Smoke");
-	Smoke_Effect->SetActorLocation({0.0f, 0.0f, 200.0f });
-
-	//Left_Hand = GetWorld()->SpawnActor<APlayer_Hand>("L_Hand");
-	//Left_Hand->SetActorLocation({ 640.0f, -360.0f, 200.0f });	
-
-	//Sowrd = GetWorld()->SpawnActor<ALegendSowrd>("Sowrd");
-	//Sowrd->SetActorLocation({ 640.0f, -360.0f, 200.0f });
-
-
-	//SetActorScale3D(FVector(32.0f, 32.0f, 100.0f));
-	
+	Smoke_Effect->SetActorLocation({0.0f, 0.0f, 200.0f });	
 	Renderer->CreateAnimation("Player_Idle", "Player_Idle",0.1f);
 	Renderer->CreateAnimation("Player_Jump", "Player_Jump", 0.1f);
 	Renderer->CreateAnimation("Player_Run", "Player_Run", 0.1f);
@@ -67,12 +59,10 @@ void APlayer::BeginPlay()
 	Renderer->CreateAnimation("Boss_Exit", "Boss_Exit", 0.1f);
 	Renderer->CreateAnimation("Boss_Idle", "Boss_Idle", 0.1f);
 
-	
 	//Renderer->SetSprite("CuttingTest.png", 11);
 	Renderer->SetAutoSize(3.f, true);
-	Renderer->SetOrder(7);
-	
-	
+	Renderer->SetOrder(ERenderOrder::Player);	
+	//Collision->SetOrder(ERenderOrder::Collision);
 	Renderer->ChangeAnimation("Player_Idle");
 	StateInit();
 }
@@ -84,13 +74,7 @@ void APlayer::Tick(float _DeltaTime)
 	DebugFunction();
 	FVector PlayerPos = GetActorLocation();
 	Right_Hand->SetActorLocation({ PlayerPos });
-	//ChildRenderer->SetRotationDeg(SwordRotation);
 
-	//Sowrd->AddActorRotation(SwordRotation);
-	//Sowrd->GetActorTransform().AddRotationDeg(SwordRotation);
-	//Sowrd->GetActorTransform().SetRotationDeg(SwordRotation);
-	//Sowrd->SetActorRotation(SwordRotation);
-	//Left_Hand->SetActorLocation({ PlayerPos.X - 20,PlayerPos.Y - 25, PlayerPos.Z - 1 });
-	int a = 0;
-	//Left_Hand->SetActorLocation();
+
+	
 }

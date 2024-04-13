@@ -20,7 +20,7 @@ void ATitlre_Cloud::BeginPlay()
 	SetActorLocation(FVector(0.0f, 0.0f, .0f));
 	Renderer->SetSprite("Cloud1.png");
 	Renderer->SetAutoSize(0.8f, true);
-	Renderer->SetOrder(1);
+	Renderer->SetOrder(ERenderOrder::MidGround);
 }
 
 void ATitlre_Cloud::Tick(float _DeltaTime)

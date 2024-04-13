@@ -21,8 +21,7 @@ void ATarget::BeginPlay()
 	Super::BeginPlay();
 	SetActorScale3D(FVector(32.0f, 32.0f, 100.0f));
 	Renderer->SetSprite("Target.png");
-	Renderer->SetOrder(8);
-
+	Renderer->SetOrder(ERenderOrder::Cursor);
 }
 
 void ATarget::Tick(float _DeltaTime)

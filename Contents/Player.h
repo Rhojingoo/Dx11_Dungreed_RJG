@@ -6,6 +6,7 @@
 class ATarget;
 class APlayer_Hand;
 class APlayer_Smoke_Effect;
+class UCollision;
 class USpriteRenderer;
 class APlayer : public AActor
 {
@@ -33,10 +34,11 @@ protected:
 private:
 	USpriteRenderer* Renderer = nullptr;
 	USpriteRenderer* ChildRenderer = nullptr;
+	UCollision* Collision;
 	float4 Color;
 	std::shared_ptr<ATarget> Cursor = nullptr;
 	std::shared_ptr<APlayer_Hand> Right_Hand = nullptr;
-	std::shared_ptr<APlayer_Hand> Left_Hand = nullptr;
+	//std::shared_ptr<APlayer_Hand> Left_Hand = nullptr;
 	std::shared_ptr<APlayer_Smoke_Effect> Smoke_Effect = nullptr;
 	
 

@@ -17,7 +17,7 @@ void ATown_BGPIXEL::BeginPlay()
 	Renderer->SetSprite("TownModelPX.png");
 	//Renderer->SetSprite("TownBG_Night.bmp");
 	//Renderer->SetSprite("TownLayer_Night.bmp");
-	Renderer->SetOrder(1);
+	Renderer->SetOrder(ERenderOrder::PixelMap);
 	//SetRoot(Renderer);
 }
 

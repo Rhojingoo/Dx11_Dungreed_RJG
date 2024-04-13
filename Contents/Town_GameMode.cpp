@@ -27,7 +27,7 @@ void ATown_GameMode::BeginPlay()
 	Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation(FVector(640.0f, -360.0f, -200.0f));
 
-	std::shared_ptr<APlayer> Actor = GetWorld()->SpawnActor<APlayer>("Player");
+	std::shared_ptr<APlayer> Actor = GetWorld()->SpawnActor<APlayer>("Player", EOBJ_Order::Player);
 	Actors = Actor;
 	Actor->SetActorLocation({ 640.0f, -360.0f, 200.0f });
 	FVector assad = Actor->GetActorLocation();
@@ -37,14 +37,14 @@ void ATown_GameMode::BeginPlay()
 	Cursor->SetActorLocation({ 640.0f, -360.0f, 200.0f });	
 
 	
-	std::shared_ptr<ATown_BackGround> BackGr = GetWorld()->SpawnActor<ATown_BackGround>("TOWNBack");
+	std::shared_ptr<ATown_BackGround> BackGr = GetWorld()->SpawnActor<ATown_BackGround>("TOWNBack", EOBJ_Order::BackGround);
 	float TileSize = UContentsHelper::TileSize;
 	float4 TexScale = UContentsHelper::MapTexScale;
 	BackGr->SetActorScale3D(TexScale);
 	BackGr->SetActorLocation({ TexScale.hX(), -TexScale.hY(), 500.0f });
 
 
-	std::shared_ptr<ATown_BGPIXEL> Back = GetWorld()->SpawnActor<ATown_BGPIXEL>("TOWNBackPX");
+	std::shared_ptr<ATown_BGPIXEL> Back = GetWorld()->SpawnActor<ATown_BGPIXEL>("TOWNBackPX", EOBJ_Order::PixelGround);
 	float4 ImageScale = UContentsHelper::MapTexScale;
 	Back->SetActorScale3D(ImageScale);
 	Back->SetActorLocation({ ImageScale.hX(), -ImageScale.hY(), 500.0f });

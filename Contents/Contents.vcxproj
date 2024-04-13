@@ -187,6 +187,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Dungreed_Enum.h" />
     <ClInclude Include="GameCore.h">
       <SubType>
       </SubType>

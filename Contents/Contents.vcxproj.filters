@@ -7,9 +7,6 @@
     <ClInclude Include="GameCore.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="BackGround.h">
-      <Filter>Level\Public_Object</Filter>
-    </ClInclude>
     <ClInclude Include="Boss_GameMode.h">
       <Filter>Level\BossRoom\Boss_Level</Filter>
     </ClInclude>
@@ -18,9 +15,6 @@
     </ClInclude>
     <ClInclude Include="Title_GameMode.h">
       <Filter>Level\Title\Title_Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Boss.h">
-      <Filter>Level\Public_Object</Filter>
     </ClInclude>
     <ClInclude Include="Title_BackGround.h">
       <Filter>Level\Title\Title_Object</Filter>
@@ -43,24 +37,35 @@
     <ClInclude Include="Town_BGPIXEL.h">
       <Filter>Level\Town\Town_Object</Filter>
     </ClInclude>
-    <ClInclude Include="ContentsHelper.h" />
     <ClInclude Include="Contents_SpriteRender.h">
       <Filter>Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Level\Public_Object\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Player_Hand.h">
-      <Filter>Level\Public_Object\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Target.h">
-      <Filter>Level\Public_Object\Player</Filter>
     </ClInclude>
     <ClInclude Include="Player_Attack_Effect.h">
       <Filter>Level\Public_Object\Player\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Player_Smoke_Effect.h">
       <Filter>Level\Public_Object\Player\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsHelper.h">
+      <Filter>ContentsHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Dungreed_Enum.h">
+      <Filter>ContentsHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>Level\Public_Object\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Level\Public_Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Target.h">
+      <Filter>Level\Public_Object\Player\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Level\Public_Object\Player\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_Hand.h">
+      <Filter>Level\Public_Object\Player\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -70,9 +75,6 @@
     <ClCompile Include="GameCore.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="BackGround.cpp">
-      <Filter>Level\Public_Object</Filter>
-    </ClCompile>
     <ClCompile Include="Boss_GameMode.cpp">
       <Filter>Level\BossRoom\Boss_Level</Filter>
     </ClCompile>
@@ -81,9 +83,6 @@
     </ClCompile>
     <ClCompile Include="Title_GameMode.cpp">
       <Filter>Level\Title\Title_Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Boss.cpp">
-      <Filter>Level\Public_Object</Filter>
     </ClCompile>
     <ClCompile Include="Title_BackGround.cpp">
       <Filter>Level\Title\Title_Object</Filter>
@@ -106,27 +105,35 @@
     <ClCompile Include="Town_BGPIXEL.cpp">
       <Filter>Level\Town\Town_Object</Filter>
     </ClCompile>
-    <ClCompile Include="ContentsHelper.cpp" />
     <ClCompile Include="Contents_SpriteRender.cpp">
       <Filter>Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Level\Public_Object\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Player_Hand.cpp">
-      <Filter>Level\Public_Object\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerState.cpp">
-      <Filter>Level\Public_Object\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Target.cpp">
-      <Filter>Level\Public_Object\Player</Filter>
     </ClCompile>
     <ClCompile Include="Player_Attack_Effect.cpp">
       <Filter>Level\Public_Object\Player\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Player_Smoke_Effect.cpp">
       <Filter>Level\Public_Object\Player\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentsHelper.cpp">
+      <Filter>ContentsHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>Level\Public_Object\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Level\Public_Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Level\Public_Object\Player\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Hand.cpp">
+      <Filter>Level\Public_Object\Player\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Level\Public_Object\Player\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Target.cpp">
+      <Filter>Level\Public_Object\Player\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +184,18 @@
     </Filter>
     <Filter Include="Level\Public_Object\Player\Effect">
       <UniqueIdentifier>{1312e8e1-92f9-4ee6-ae07-4bd786cffd54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsHelper">
+      <UniqueIdentifier>{91ef3e95-be88-4dc6-a60d-7b943355922f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Public_Object\BackGround">
+      <UniqueIdentifier>{b6f0da8b-3e37-4e15-b3ad-cddfc08606b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Public_Object\Boss">
+      <UniqueIdentifier>{6c88e587-ae6d-43d0-a298-7178bf14518b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Public_Object\Player\Base">
+      <UniqueIdentifier>{ffe371bb-41ab-444e-a772-2ac0b43931b7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
