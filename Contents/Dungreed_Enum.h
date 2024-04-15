@@ -21,6 +21,7 @@ enum class ERenderOrder
 	Effect_Back,
 	Effect_Mid,
 	Effect_Front,
+	AfterImage,
 	Monster_Bullet,
 	Monster,
 	Boss_Bullet,

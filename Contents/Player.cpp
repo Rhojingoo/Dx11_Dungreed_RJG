@@ -7,6 +7,7 @@
 #include "Player_Hand.h"
 #include "Target.h"
 #include "Player_Smoke_Effect.h"
+#include "Player_AfterImage.h"
 
 APlayer::APlayer()
 {
@@ -40,6 +41,14 @@ void APlayer::BeginPlay()
 
 	Smoke_Effect = GetWorld()->SpawnActor<APlayer_Smoke_Effect>("Smoke");
 	Smoke_Effect->SetActorLocation({0.0f, 0.0f, 200.0f });	
+
+	for (int a = 0; a < 10; a++)
+	{
+		After_Image[a] = GetWorld()->SpawnActor<APlayer_AfterImage>("AfterImage");
+	}
+	
+
+
 	Renderer->CreateAnimation("Player_Idle", "Player_Idle",0.1f);
 	Renderer->CreateAnimation("Player_Jump", "Player_Jump", 0.1f);
 	Renderer->CreateAnimation("Player_Run", "Player_Run", 0.1f);
@@ -55,9 +64,7 @@ void APlayer::BeginPlay()
 	Renderer->SetAutoSize(3.f, true);
 	Renderer->SetOrder(ERenderOrder::Player);	
 
-
-	Collision->SetOrder(ERenderOrder::Collision);
-	
+	Collision->SetOrder(ERenderOrder::Collision);	
 	
 	Renderer->ChangeAnimation("Player_Idle");
 	StateInit();
@@ -70,4 +77,7 @@ void APlayer::Tick(float _DeltaTime)
 	DebugFunction();
 	FVector PlayerPos = GetActorLocation();
 	Right_Hand->SetActorLocation({ PlayerPos });	
+	PlayAfterImage(_DeltaTime, PlayerPos);	
 }
+
+

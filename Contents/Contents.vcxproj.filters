@@ -100,6 +100,9 @@
     <ClInclude Include="Test_GameMode.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="Player_AfterImage.h">
+      <Filter>Level\Public_Object\Player\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -200,6 +203,9 @@
     </ClCompile>
     <ClCompile Include="Test_GameMode.cpp">
       <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_AfterImage.cpp">
+      <Filter>Level\Public_Object\Player\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

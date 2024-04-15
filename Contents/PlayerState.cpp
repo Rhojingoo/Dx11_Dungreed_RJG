@@ -6,6 +6,7 @@
 #include "Player_Hand.h"
 #include "Target.h"
 #include "Player_Smoke_Effect.h"
+#include "Player_AfterImage.h"
 
 //void Function(URenderer* Renderer)
 //{
@@ -66,6 +67,7 @@ void APlayer::Die(float _Update)
 
 void APlayer::Idle(float _DeltaTime)
 {
+
 	if (true == IsPress('A') || true == IsPress('D') )
 	{
 		State.ChangeState("Player_Run");
@@ -204,10 +206,21 @@ void APlayer::DashStart()
 	DashTime = 0.f;
 	DashCount += 1;
 	Dash_Effect_Call();
+	AfterImageSwitch = true;
+
+	if (DashDir.X > 0.f)
+	{
+		AfterImageRight = true;
+	}
+	else
+	{
+		AfterImageRight = false;
+	}
 }
 
 void APlayer::Dash(float _DeltaTime)
 {
+
 	MoveUpdate(_DeltaTime);
 
 	if (DashCount < DashMax)
@@ -221,6 +234,7 @@ void APlayer::Dash(float _DeltaTime)
 			return;
 		}
 	}
+
 
 	if (true == IsPress('A') || true == IsPress('D'))
 	{		
@@ -236,6 +250,8 @@ void APlayer::Dash(float _DeltaTime)
 		GravityVector = FVector::Zero;
 		DashTime = 0.f;
 		DashCount = 0;
+		AfterImageSwitch = false;
+		AfterImage_Time = 0.f;
 		return;
 	}
 }
@@ -274,6 +290,17 @@ void APlayer::SecondDashStart()
 	DashTime = 0.f;
 	DashCount += 1;
 	Dash_Effect_Call();
+	AfterImageSwitch = true;
+	AfterImage_Time = 0.f;
+
+	if (DashDir.X > 0.f)
+	{
+		AfterImageRight = true;
+	}
+	else
+	{
+		AfterImageRight = false;
+	}
 }
 
 void APlayer::SecondDash(float _DeltaTime)
@@ -293,6 +320,8 @@ void APlayer::SecondDash(float _DeltaTime)
 		State.ChangeState("Player_Idle");
 		DashTime = 0.f;
 		DashCount = 0;
+		AfterImageSwitch =false;
+		AfterImage_Time = 0.f;
 		return;
 	}
 }
@@ -462,6 +491,43 @@ void APlayer::GroundUp(float _DeltaTime)
 void APlayer::AddMoveVector(const FVector& _DirDelta)
 {
 	MoveVector += _DirDelta * MoveAcc;
+}
+
+void APlayer::PlayAfterImage(float _DeltaTime, FVector _PlayerPos)
+{
+	if (AfterImageSwitch == true)
+	{
+	
+
+		static int Num = 0;
+		After_Image[Num]->SetActorLocation(_PlayerPos);
+		After_Image[Num]->ImageOn();
+		if (AfterImageRight == true)
+		{
+			After_Image[Num]->RightDir();
+		}
+		else
+		{
+			After_Image[Num]->LeftDir();
+		}
+
+		static float check = AfterImage_Time;
+		AfterImage_Time += _DeltaTime;
+		if ((AfterImage_Time - check) >= 0.02f)
+		{
+			check = AfterImage_Time;
+			if (Num < 9)
+			{
+				Num++;
+			}
+			else if (Num >= 9)
+			{
+				Num = 0;
+				check = 0.f;
+				AfterImage_Time = 0.f;
+			}
+		}
+	}
 }
 
 void APlayer::colorsetting()

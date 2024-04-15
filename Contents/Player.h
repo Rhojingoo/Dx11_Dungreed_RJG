@@ -5,6 +5,7 @@
 // 설명 :
 class ATarget;
 class APlayer_Hand;
+class APlayer_AfterImage;
 class APlayer_Smoke_Effect;
 class UCollision;
 class USpriteRenderer;
@@ -41,6 +42,9 @@ private:
 	std::shared_ptr<APlayer_Hand> Right_Hand = nullptr;
 	//std::shared_ptr<APlayer_Hand> Left_Hand = nullptr;
 	std::shared_ptr<APlayer_Smoke_Effect> Smoke_Effect = nullptr;
+	std::shared_ptr<APlayer_AfterImage> After_Image[10] = {};
+
+	
 	
 
 	FVector PlayerPos = {};
@@ -82,7 +86,7 @@ private:
 	void MoveUpdate(float _DeltaTime);
 	void GroundUp(float _DeltaTime);
 	void AddMoveVector(const FVector& _DirDelta);
-
+	void PlayAfterImage(float _DeltaTime, FVector _PlayerPos);
 	
 
 	FVector MoveVector = FVector::Zero;
@@ -106,6 +110,10 @@ private:
 	const int DashMax = 2;
 	bool Foot_Collision_Check_At_Town = false;
 
+	//이미지 잔상
+	bool AfterImageSwitch = false;
+	float AfterImage_Time = 0.f;
+	bool AfterImageRight = false;
 
 	void colorsetting();
 };
