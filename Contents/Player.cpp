@@ -16,7 +16,6 @@ APlayer::APlayer()
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Renderer->SetPivot(EPivot::BOT);
 
-
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
 	Collision->SetupAttachment(Renderer);
 	//Collision->SetScale(FVector(1000.f, 0.5f, 1.0f));
@@ -55,7 +54,11 @@ void APlayer::BeginPlay()
 	//Renderer->SetSprite("CuttingTest.png", 11);
 	Renderer->SetAutoSize(3.f, true);
 	Renderer->SetOrder(ERenderOrder::Player);	
-	//Collision->SetOrder(ERenderOrder::Collision);
+
+
+	Collision->SetOrder(ERenderOrder::Collision);
+	
+	
 	Renderer->ChangeAnimation("Player_Idle");
 	StateInit();
 }

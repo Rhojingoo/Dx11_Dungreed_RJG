@@ -2,18 +2,18 @@
 #include <EngineCore/Actor.h>
 #include <EngineCore/SpriteRenderer.h>
 
-class Boss : public AActor
+class ABoss : public AActor
 {
 	GENERATED_BODY(AActor)
 
 public:
-	Boss();
-	~Boss();
+	ABoss();
+	~ABoss();
 
-	Boss(const Boss& _Other)					= delete;
-	Boss(Boss& _Other) noexcept					= delete;
-	Boss& operator =(const 	Boss& _Other)		= delete;
-	Boss& operator =(Boss& _Other)noexcept		= delete;
+	ABoss(const ABoss& _Other)					= delete;
+	ABoss(ABoss& _Other) noexcept					= delete;
+	ABoss& operator =(const 	ABoss& _Other)		= delete;
+	ABoss& operator =(ABoss& _Other)noexcept		= delete;
 
 
 protected:

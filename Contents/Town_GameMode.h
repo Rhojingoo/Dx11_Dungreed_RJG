@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/GameMode.h>
 
+class ABoss;
 class APlayer;
 class UCamera;
 class ATown_GameMode : public AGameMode
@@ -26,5 +27,6 @@ protected:
 private:
 	std::shared_ptr<UCamera> Camera = nullptr;
 	std::shared_ptr<APlayer> Player = nullptr;
+	std::shared_ptr<ABoss> Boss = nullptr;
 };
 

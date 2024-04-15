@@ -15,6 +15,15 @@ public:
 	UCollision& operator=(const UCollision& _Other) = delete;
 	UCollision& operator=(UCollision&& _Other) noexcept = delete;
 
+	template<typename EnumType>
+	bool IsCollisionGroup(EnumType _Index)
+	{
+		SetCollisionGroudp(static_cast<int>(_Index));
+	}
+
+	//void SetCollisionGroup(int _Index);
+	
+
 protected:
 
 private:

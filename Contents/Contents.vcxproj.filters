@@ -97,6 +97,9 @@
     <ClInclude Include="Monster03_BackGround.h">
       <Filter>Level\Monster_Stage\Monster03_Stage\OBJ</Filter>
     </ClInclude>
+    <ClInclude Include="Test_GameMode.h">
+      <Filter>Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -194,6 +197,9 @@
     </ClCompile>
     <ClCompile Include="Monster03_BackGround.cpp">
       <Filter>Level\Monster_Stage\Monster03_Stage\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="Test_GameMode.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

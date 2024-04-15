@@ -32,6 +32,8 @@ void ATitle_GameMode::Tick(float _DeltaTime)
 
 	if (true == UEngineInput::IsDown('P'))
 	{
-		GEngine->ChangeLevel("TownLevel");
+		GEngine->ChangeLevel("TestLevel");
+		//TestLevel
+		//TownLevel
 	}
 }

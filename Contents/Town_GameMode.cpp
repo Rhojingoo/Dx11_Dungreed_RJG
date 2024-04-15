@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Town_GameMode.h"
 #include "Player.h"
+#include "Boss.h"
 #include "Town_BackGround.h"
 #include "Town_BGPIXEL.h"
 #include <EngineCore/Camera.h>
@@ -41,6 +42,10 @@ void ATown_GameMode::BeginPlay()
 	Player = GetWorld()->SpawnActor<APlayer>("Player", EOBJ_Order::Player);
 	Player->SetActorLocation({ 640.0f, -360.0f, 200.0f });
 	Player->SetColTown();
+
+	Boss = GetWorld()->SpawnActor<ABoss>("Boss", EOBJ_Order::Monster);
+	Boss->SetActorLocation({ 1040.0f, -360.0f, 200.0f });
+
 
 	std::shared_ptr<ATarget> Cursor = GetWorld()->SpawnActor<ATarget>("Player2");
 	Cursor->SetActorLocation({ 640.0f, -360.0f, 200.0f });	
