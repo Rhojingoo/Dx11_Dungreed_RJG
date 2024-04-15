@@ -60,7 +60,7 @@ void UCamera::Tick(float _DeltaTime)
 {
 	// tick은 그냥 진행된다.
 	// 그런데 입력은 카메라만 받아야 한다.
-	/*IsDown();*/
+	// IsDown()
 
 	int Key = GEngine->GetEngineOption().FreeCameraKey;
 

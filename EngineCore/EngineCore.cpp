@@ -6,6 +6,7 @@
 #include <EngineCore/EngineTexture.h>
 #include <EngineCore/EngineDebugMsgWindow.h>
 #include "EngineEditorGUI.h"
+#include "EngineDebug3D.h"
 
 #include "Level.h"
 #include "GameMode.h"
@@ -124,6 +125,7 @@ void UEngineCore::EngineFrameUpdate()
 	// 게임에 요소들을 그리고
 
 	CurLevel->Render(DeltaTime);
+	UDebugRenderClass::DebugRender();
 	UEngineEditorGUI::GUIRender(DeltaTime);
 	EngineDevice.RenderEnd();
 

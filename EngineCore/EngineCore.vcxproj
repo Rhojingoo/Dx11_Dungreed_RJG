@@ -191,6 +191,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineDebug3D.h" />
     <ClInclude Include="EngineDebugMsgWindow.h" />
     <ClInclude Include="EngineEditorGUI.h" />
     <ClInclude Include="EngineEditorWindow.h" />
@@ -293,6 +294,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EngineDebug3D.cpp" />
     <ClCompile Include="EngineDebugMsgWindow.cpp" />
     <ClCompile Include="EngineEditorGUI.cpp" />
     <ClCompile Include="EngineEditorWindow.cpp" />
