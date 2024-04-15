@@ -103,6 +103,12 @@
     <ClInclude Include="Player_AfterImage.h">
       <Filter>Level\Public_Object\Player\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Boss_IcePillar.h">
+      <Filter>Level\Public_Object\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="IceBullet.h">
+      <Filter>Level\Public_Object\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -206,6 +212,12 @@
     </ClCompile>
     <ClCompile Include="Player_AfterImage.cpp">
       <Filter>Level\Public_Object\Player\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss_IcePillar.cpp">
+      <Filter>Level\Public_Object\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="IceBullet.cpp">
+      <Filter>Level\Public_Object\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

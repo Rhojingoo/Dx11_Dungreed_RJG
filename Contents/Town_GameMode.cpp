@@ -44,8 +44,8 @@ void ATown_GameMode::BeginPlay()
 	Player->SetColTown();
 
 	Boss = GetWorld()->SpawnActor<ABoss>("Boss", EOBJ_Order::Monster);
-	Boss->SetActorLocation({ 1040.0f, -360.0f, 200.0f });
-
+	Boss->SetActorLocation({ 1040.0f, -850.0f, 200.0f });
+	Boss->SetPlayer(Player);
 
 	std::shared_ptr<ATarget> Cursor = GetWorld()->SpawnActor<ATarget>("Player2");
 	Cursor->SetActorLocation({ 640.0f, -360.0f, 200.0f });	
