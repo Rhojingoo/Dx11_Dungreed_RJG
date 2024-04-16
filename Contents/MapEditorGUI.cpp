@@ -5,6 +5,9 @@
 #include "TileMap.h"
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/Camera.h>
+#include <fstream> 
+#include <iostream>
+
 
 MapEditorGUI::MapEditorGUI() 
 {
@@ -92,28 +95,47 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 	}
 
 	UTileRenderer* TileRenderer = Ptr->TileMap->TileRenderer;
-
+	char spriteFilename[128] = "Map4X(64).png";
+	char dataToSave[1024] = "";
 	
-	ImGui::InputFloat("TileSizeX", &TileSizeX);
+	ImGui::InputFloat2("TileSize", TileSize);
+	ImGui::InputFloat2("TileCount", TileCount);
+	ImGui::InputText("Sprite Filename", spriteFilename, IM_ARRAYSIZE(spriteFilename));
 	// ImGui::InputFloat2()
 
+	if (true == ImGui::Button("Create"))
+	{
+		TileRenderer->CreateTileMap(spriteFilename, { TileSize[0], TileSize[1] }, TileCount[0], TileCount[1], 0);
+	}
+
+
+	ImGui::InputTextMultiline("Data to Save", dataToSave, IM_ARRAYSIZE(dataToSave));
+	
+	if (ImGui::Button("Save Data")) 
+	{
+		std::ofstream outFile("saved_data.txt");
+		if (outFile.is_open()) {
+			outFile << dataToSave; // 파일에 데이터 쓰기
+			outFile.close();
+			std::cout << "Data saved successfully.\n";
+		}
+		else {
+			std::cout << "Failed to open file for writing.\n";
+		}
+	}
 	// 타일 크기 지정
 	// 타일 개수 x
 	// 타일 개수 y를 
 	// 스프라이트 선택.
 	// 저장.
 
-	if (true == ImGui::Button("Create"))
-	{
-		TileRenderer->CreateTileMap("Map4X(64).png", { 64, 64 }, 50, 50, 0);
-	}
+
 
 
 	ImGui::Text(("WorldMouse : " + MousePosWorld.ToString()).c_str());
 	float4 Index = TileRenderer->ConvertTileIndex(MousePosWorld);
 	ImGui::Text(("TileIndexPos : " + Index.ToString()).c_str());
 	ImGui::Text(std::format("Index : {} {}", Index.iX(), Index.iY()).c_str());
-
 
 	std::shared_ptr<UEngineSprite> Sprite = UEngineSprite::FindRes("Map4X(64).png");
 
@@ -171,13 +193,9 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 	}
 
 	// Index 내가 찍어야할 스프라이트
-
-	// 
-
 	//ImGui::TextUnformatted("child_2");
 	//ImGui::GetWindowDrawList()->AddLine({ 0, 0 }, { 500, 500 }, 0xFFFFFFFF);
 	//ImGui::SetCursorPos({ 1500, 1500 });
 	//ImGui::TextUnformatted("hello");
 	ImGui::EndChild();
-
 }

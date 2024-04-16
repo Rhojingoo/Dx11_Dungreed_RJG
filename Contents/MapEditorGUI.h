@@ -25,6 +25,9 @@ protected:
 private:
 	float4 MousePosWorld;
 	int SelectSpriteIndex = 0;
-	float TileSizeX = 0.0f;
+	float TileSize[2] = {};
+	float TileCount[2] = {};
 };
+
+
 

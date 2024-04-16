@@ -22,6 +22,7 @@ void APlayer::StateInit()
 	State.CreateState("Player_Run");
 	State.CreateState("Player_Dash");
 	State.CreateState("Player_SecondDash");
+	State.CreateState("Player_Debug");
 
 
 	InputOn();
@@ -54,6 +55,49 @@ void APlayer::StateInit()
 
 	State.SetStartFunction("Player_SecondDash", std::bind(&APlayer::SecondDashStart, this));
 
+
+	State.SetUpdateFunction("Player_Debug", [=](float _Delta)
+		{
+
+			float Speed = 500.0f;
+			if (UEngineInput::IsPress('A'))
+			{
+				AddActorLocation(FVector::Left * _Delta * Speed);
+			}
+
+			if (UEngineInput::IsPress('D'))
+			{
+				AddActorLocation(FVector::Right * _Delta * Speed);
+			}
+
+			if (UEngineInput::IsPress('W'))
+			{
+				AddActorLocation(FVector::Up * _Delta * Speed);
+			}
+
+			if (UEngineInput::IsPress('S'))
+			{
+				AddActorLocation(FVector::Down * _Delta * Speed);
+			}
+
+			std::shared_ptr<UEngineTexture> Tex = UContentsHelper::MapTex;
+
+			float4 PlayerLocation = GetActorLocation();
+
+			PlayerLocation.Y = (Tex->GetScale().Y * 64.0f) - PlayerLocation.Y;
+			PlayerLocation /= UContentsHelper::TileSize;
+			Color8Bit Color = Tex->GetColor(PlayerLocation, Color8Bit::Black);
+
+			if (Color == Color8Bit::Black)
+			{
+				GravityVector = FVector::Zero;
+				JumpOn = false;
+			}
+
+		});
+
+
+	State.CreateState("");
 	
 	// 체인지
 	State.ChangeState("Player_Idle");
@@ -189,6 +233,14 @@ void APlayer::Run(float _DeltaTime)
 		return;
 	}
 	MoveUpdate(_DeltaTime);
+}
+
+void APlayer::DebugStart()
+{
+}
+
+void APlayer::DebugCeck(float _DeltaTime)
+{
 }
 
 void APlayer::DashStart()
@@ -416,23 +468,28 @@ void APlayer::CalGravityVector(float _DeltaTime)
 
 	Direction();
 
+	Color8Bit Color;
 	if (Foot_Collision_Check_At_Town == true)
 	{
-		//PlayerPos.Y = PlayerPos.Y /*- 44*/;
 		PlayerPos.Y = -PlayerPos.Y;
+		Color = Tex->GetColor(PlayerPos, Color8Bit::Black);
 	}
 	else
 	{
-		PlayerPos.Y = PlayerPos.Y - 25;
-		// PlayerPos.Y 타일을 위로 바꾸면 이걸 변경
-		//		PlayerPos.Y = PlayerPos.Y - 25;
-		PlayerPos /= UContentsHelper::TileSize;
+		std::shared_ptr<UEngineTexture> Tex = UContentsHelper::MapTex;
+
+		float4 PlayerLocation = GetActorLocation();
+
+		PlayerLocation.Y = (Tex->GetScale().Y * 64.0f) - PlayerLocation.Y-25;
+		PlayerLocation /= UContentsHelper::TileSize;
+		Color = Tex->GetColor(PlayerLocation, Color8Bit::Black);
+
+		if (Color == Color8Bit::Black)
+		{
+			GravityVector = FVector::Zero;
+			JumpOn = false;
+		}
 	}		
-	//PlayerPos.Y = -PlayerPos.Y;
-	// PlayerPos.Y 타일을 위로 바꾸면 이걸 변경 안하면 된다
-
-	Color8Bit Color = Tex->GetColor(PlayerPos, Color8Bit::Black);
-
 	if (Color == Color8Bit::Black)
 	{
 		GravityVector = FVector::Zero;	
@@ -501,8 +558,6 @@ void APlayer::PlayAfterImage(float _DeltaTime, FVector _PlayerPos)
 {
 	if (AfterImageSwitch == true)
 	{
-	
-
 		static int Num = 0;
 		After_Image[Num]->SetActorLocation(_PlayerPos);
 		After_Image[Num]->ImageOn();

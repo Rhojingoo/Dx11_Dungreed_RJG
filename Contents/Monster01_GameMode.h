@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/GameMode.h>
+#include "Test_GameMode.h"
 
 class APlayer;
 class UCamera;

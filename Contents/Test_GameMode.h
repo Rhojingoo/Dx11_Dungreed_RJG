@@ -28,7 +28,5 @@ protected:
 
 private:
 	std::shared_ptr<UCamera> Camera = nullptr;
-	std::shared_ptr<APlayer> Player = nullptr;
-
 };
 

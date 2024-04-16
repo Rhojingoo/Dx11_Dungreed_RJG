@@ -23,10 +23,7 @@ ATileMapLevel::~ATileMapLevel()
 void ATileMapLevel::BeginPlay()
 {
 	Super::BeginPlay();
-
 	TileMap = GetWorld()->SpawnActor<ATileMap>("TileMap", EOBJ_Order::BackGround);
-
-	// 
 }
 
 void ATileMapLevel::Tick(float _DeltaTime)

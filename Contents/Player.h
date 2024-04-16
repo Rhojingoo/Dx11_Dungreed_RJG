@@ -66,6 +66,9 @@ private:
 	void RunStart();
 	void Run(float _DeltaTime);
 
+	void DebugStart();
+	void DebugCeck(float _DeltaTime);
+
 	void DashStart();
 	void Dash(float _DeltaTime);
 	void Dash_Effect_Call();
