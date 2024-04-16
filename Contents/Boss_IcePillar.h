@@ -30,14 +30,17 @@ protected:
 private:
 	FVector BulletDir = {};
 	FVector Pos = {};
+	FVector RenderPos = {};
 	std::shared_ptr<APlayer> Player = nullptr;
 	FVector PlayerPos = {};
-	std::shared_ptr<AIceBullet> IceBullet = nullptr;
+	//std::shared_ptr<AIceBullet> IceBullet = nullptr;
+	std::shared_ptr<AIceBullet> IceBullet[12] = {};
+	bool SetBullet = false;
+	float FireTime = 0.f;
 
 	USpriteRenderer* Renderer = nullptr;
 	USpriteRenderer* Center_Renderer = nullptr;
 
-	//std::shared_ptr<AIceBullet> IcePillar[12] = {};
 	
 	bool Create_Check = false;
 };

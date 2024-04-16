@@ -36,8 +36,11 @@ void ABoss_IcePillar::BeginPlay()
 {
 	Super::BeginPlay();
 
-	IceBullet = GetWorld()->SpawnActor<AIceBullet>("IceBullet");
-	IceBullet->SetActorLocation({ 640.0f, -360.0f, 200.0f });
+	for (int Num = 0; Num < 12; Num++)
+	{
+		IceBullet[Num] = GetWorld()->SpawnActor<AIceBullet>("IceBullet");
+		IceBullet[Num]->SetActorLocation({640.0f, -360.0f, 200.0f});
+	}
 
 	Renderer->SetAutoSize(4.0f, true);
 	Renderer->CreateAnimation("IcePillar", "IcePillar", 0.1f, false);
@@ -50,20 +53,76 @@ void ABoss_IcePillar::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 	Pos = GetActorLocation();
+	RenderPos = Renderer->GetWorldPosition();
 	if (Player != nullptr)
 	{
 		PlayerPos = Player->GetActorLocation();
 	}	
 	if (UEngineInput::IsPress('1'))//VK_NUMPAD1
 	{
-		IceBullet->SetActorLocation(Pos);
-		BulletDir = Pos - PlayerPos;
-		BulletDir.Normalize2D();
-		BulletDir.Z = 0;
-		BulletDir.X = BulletDir.X * UEngineMath::DToR;
-		BulletDir.Y = BulletDir.Y * UEngineMath::DToR;
-		IceBullet->SetTarget(BulletDir);
-		IceBullet->TargetOn();
+		SetBullet = true;
+	}
+
+	if (SetBullet == true)
+	{
+		static int Num = 0;
+		static float check = 0.0f; // 초기화가 필요합니다.
+
+		FireTime += _DeltaTime;
+
+		if ((FireTime - check) >= 0.05f) // 총알 발사 조건
+		{
+			if (Num < 12)
+			{
+				IceBullet[Num]->SetActorLocation(RenderPos);
+				BulletDir = RenderPos - PlayerPos;
+				BulletDir.Normalize2D();
+				BulletDir.Z = 0;
+				BulletDir.X *= UEngineMath::DToR; // 각도 변환
+				BulletDir.Y *= UEngineMath::DToR; // 각도 변환
+				IceBullet[Num]->SetTarget(BulletDir);
+				IceBullet[Num]->TargetOn();
+
+				++Num;
+				check = FireTime; // 현재 발사 시간을 check에 저장
+			}
+			else
+			{
+				Num = 0;
+				SetBullet = false;
+			}
+		}
+
+
+
+/*		static int Num = 0;
+		static float check = FireTime;
+		FireTime += _DeltaTime;
+		
+		{
+			IceBullet[Num]->SetActorLocation(RenderPos);
+			BulletDir = RenderPos - PlayerPos;
+			BulletDir.Normalize2D();
+			BulletDir.Z = 0;
+			BulletDir.X = BulletDir.X * UEngineMath::DToR;
+			BulletDir.Y = BulletDir.Y * UEngineMath::DToR;
+			IceBullet[Num]->SetTarget(BulletDir);
+			IceBullet[Num]->TargetOn();
+		}
+		if ((FireTime - check) >= 0.5f)
+		{
+			if (Num < 11)
+			{
+				++Num;
+			}
+			else
+			{
+				Num = 0;
+				check = 0;
+				FireTime = 0;
+				SetBullet = false;
+			}
+		}	*/	
 	}
 
 	AddActorRotation(float4{ 0.0f, 0.0f, 1.0f } *180.0f * _DeltaTime);
