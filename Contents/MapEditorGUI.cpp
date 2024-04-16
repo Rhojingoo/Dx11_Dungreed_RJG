@@ -5,8 +5,12 @@
 #include "TileMap.h"
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/Camera.h>
-#include <fstream> 
+#include <fstream>
 #include <iostream>
+#include <string>
+#include <EngineCore/EngineCore.h>
+#include <EngineBase/EngineDirectory.h>
+#include <EngineCore/EngineOption.h>
 
 
 MapEditorGUI::MapEditorGUI() 
@@ -19,7 +23,7 @@ MapEditorGUI::~MapEditorGUI()
 
 void MapEditorGUI::Init()
 {
-
+	
 }
 
 void MapEditorGUI::Tick(ULevel* Level, float _Delta)
@@ -96,8 +100,12 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 
 	UTileRenderer* TileRenderer = Ptr->TileMap->TileRenderer;
 	char spriteFilename[128] = "Map4X(64).png";
-	char dataToSave[1024] = "";
-	
+
+	// 타일 크기 지정
+	// 타일 개수 x
+	// 타일 개수 y를 
+	// 스프라이트 선택.
+	// 저장.
 	ImGui::InputFloat2("TileSize", TileSize);
 	ImGui::InputFloat2("TileCount", TileCount);
 	ImGui::InputText("Sprite Filename", spriteFilename, IM_ARRAYSIZE(spriteFilename));
@@ -108,29 +116,20 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 		TileRenderer->CreateTileMap(spriteFilename, { TileSize[0], TileSize[1] }, TileCount[0], TileCount[1], 0);
 	}
 
-
-	ImGui::InputTextMultiline("Data to Save", dataToSave, IM_ARRAYSIZE(dataToSave));
+	//dataToSave = {0};
+	ImGui::InputTextMultiline("Data Name", dataToSave, IM_ARRAYSIZE(dataToSave));
 	
-	if (ImGui::Button("Save Data")) 
+	if (ImGui::Button("Save Data"))
 	{
-		std::ofstream outFile("saved_data.txt");
-		if (outFile.is_open()) {
-			outFile << dataToSave; // 파일에 데이터 쓰기
-			outFile.close();
-			std::cout << "Data saved successfully.\n";
-		}
-		else {
-			std::cout << "Failed to open file for writing.\n";
-		}
+		UEngineDirectory Dir;
+		Dir.MoveToSearchChild("ContentsResources");
+		Dir.Move("Image");
+		Dir.Move("TileMap_Save");
+		std::filesystem::path Path = Dir.GetFullPath();	
+		saveData(dataToSave, Path.string());
 	}
-	// 타일 크기 지정
-	// 타일 개수 x
-	// 타일 개수 y를 
-	// 스프라이트 선택.
-	// 저장.
-
-
-
+	//UEngineString::AnsiToUniCode(
+	//std::string Data = dataToSave;
 
 	ImGui::Text(("WorldMouse : " + MousePosWorld.ToString()).c_str());
 	float4 Index = TileRenderer->ConvertTileIndex(MousePosWorld);
@@ -198,4 +197,30 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 	//ImGui::SetCursorPos({ 1500, 1500 });
 	//ImGui::TextUnformatted("hello");
 	ImGui::EndChild();
+}
+
+void MapEditorGUI::saveData(const std::string_view _data, const std::string_view _filePath)
+{
+	UEngineDirectory Dir;
+	Dir.MoveToSearchChild("ContentsResources");
+	Dir.Move("Image");
+	Dir.Move("TileMap_Save");
+	FEngineOption EngineOption;
+	if (false==Dir.IsFile(_data))
+	{
+		UEngineFile File = Dir.GetPathFromFile(_data);
+		UEngineSerializer Ser;		
+		EngineOption.Serialize(Ser);
+		File.Open(EIOOpenMode::Write, EIODataType::Text);
+		File.Save(Ser);
+	}
+
+	{
+		//UEngineFile File = Dir.GetPathFromFile(_data);
+		//UEngineSerializer Ser;
+		//File = Dir.GetPathFromFile(_data);
+		//File.Open(EIOOpenMode::Read, EIODataType::Text);
+		//File.Load(Ser);
+		//EngineOption.DeSerialize(Ser);
+	}
 }

@@ -22,11 +22,14 @@ protected:
 
 	virtual void OnGui(ULevel* Level, float _Delta);
 
+	void saveData(const std::string_view _data, const std::string_view _filePath);
+
 private:
 	float4 MousePosWorld;
 	int SelectSpriteIndex = 0;
 	float TileSize[2] = {};
 	float TileCount[2] = {};
+	char dataToSave[128] = "";
 };
 
 
