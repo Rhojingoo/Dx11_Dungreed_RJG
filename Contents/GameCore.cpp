@@ -10,6 +10,10 @@
 
 #include <EngineCore/EngineSprite.h>
 
+#include <EngineCore/EngineEditorGUI.h>
+#include "ContentsGUI.h"
+#include "MapEditorGUI.h"
+
 UGameCore::UGameCore()
 {
 }
@@ -20,6 +24,11 @@ UGameCore::~UGameCore()
 
 void UGameCore::Initialize()
 {
+	{
+		UEngineEditorGUI::CreateEditorWindow<ContentsGUI>("Contents");
+		UEngineEditorGUI::CreateEditorWindow<MapEditorGUI>("MapEditor");
+	}
+
 	{
 		// 파일의 헤더
 		UEngineDirectory Dir;
@@ -55,6 +64,7 @@ void UGameCore::Initialize()
 		UEngineSprite::CreateCutting("Dash_Smoke.png", 5, 1);
 		UEngineSprite::CreateCutting("Run_Smoke.png", 6, 1);
 		UEngineSprite::CreateCutting("CuttingTest.png", 4, 3);
+		UEngineSprite::CreateCutting("Map4X(64).png", 12, 4);
 	}
 	//UEngineDirectory Dir;
 	//Dir.MoveToSearchChild("ContentsResources");
@@ -93,7 +103,7 @@ void UGameCore::Initialize()
 	GEngine->CreateLevel<ABoss_GameMode>("BossLevel");
 	GEngine->CreateLevel<ATest_GameMode>("TestLevel");
 
-	GEngine->ChangeLevel("TitleLevel");
+	GEngine->ChangeLevel("TestLevel");
 
 
 

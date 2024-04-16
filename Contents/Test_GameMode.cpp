@@ -5,6 +5,10 @@
 #include "Boss_BackGround.h"
 #include "Boss_BGPIXEL.h"
 #include <EngineCore/Camera.h>
+#include "Player.h"
+#include <EngineCore/TileRenderer.h>
+#include "TileMap.h"
+#include <EngineCore/TileRenderer.h>
 
 
 ATest_GameMode::ATest_GameMode()
@@ -27,8 +31,8 @@ void ATest_GameMode::BeginPlay()
 {
 	Super::BeginPlay();
 	Camera = GetWorld()->GetMainCamera();
-	Camera->SetActorLocation(FVector(640.0f, -360.0f, -200.0f));
-
+	// È­¸éÀÇ Áß¾ÓÀ¸·Î º¸³Â´Ù.
+	Camera->SetActorLocation(FVector(0.0f, 0.0f, -200.0f));
 
 }
 
@@ -39,5 +43,6 @@ void ATest_GameMode::Tick(float _DeltaTime)
 	{
 		GEngine->ChangeLevel("TownLevel");
 	}
+
 	//Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y });
 }

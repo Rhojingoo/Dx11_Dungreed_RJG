@@ -419,13 +419,17 @@ void APlayer::CalGravityVector(float _DeltaTime)
 	if (Foot_Collision_Check_At_Town == true)
 	{
 		//PlayerPos.Y = PlayerPos.Y /*- 44*/;
+		PlayerPos.Y = -PlayerPos.Y;
 	}
 	else
 	{
-		PlayerPos.Y = PlayerPos.Y + 25;
+		PlayerPos.Y = PlayerPos.Y - 25;
+		// PlayerPos.Y 타일을 위로 바꾸면 이걸 변경
+		//		PlayerPos.Y = PlayerPos.Y - 25;
 		PlayerPos /= UContentsHelper::TileSize;
 	}		
-	PlayerPos.Y = -PlayerPos.Y;
+	//PlayerPos.Y = -PlayerPos.Y;
+	// PlayerPos.Y 타일을 위로 바꾸면 이걸 변경 안하면 된다
 
 	Color8Bit Color = Tex->GetColor(PlayerPos, Color8Bit::Black);
 

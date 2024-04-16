@@ -187,6 +187,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ContentsGUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ContentsHelper.h">
       <SubType>
       </SubType>
@@ -201,6 +205,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="IceBullet.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MapEditorGUI.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -268,6 +276,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TileMapLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Title_BackGround.h">
       <SubType>
       </SubType>
@@ -327,6 +343,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="ContentsGUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ContentsHelper.cpp">
       <SubType>
       </SubType>
@@ -340,6 +360,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="IceBullet.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MapEditorGUI.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -405,6 +429,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Test_GameMode.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TileMapLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>

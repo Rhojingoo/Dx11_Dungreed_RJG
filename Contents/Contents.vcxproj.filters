@@ -109,6 +109,18 @@
     <ClInclude Include="IceBullet.h">
       <Filter>Level\Public_Object\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="ContentsGUI.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEditorGUI.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Level\Public_Object\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMapLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -219,6 +231,18 @@
     <ClCompile Include="IceBullet.cpp">
       <Filter>Level\Public_Object\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="ContentsGUI.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEditorGUI.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Level\Public_Object\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMapLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -310,6 +334,12 @@
     </Filter>
     <Filter Include="Level\Monster_Stage\Monster03_Stage\OBJ">
       <UniqueIdentifier>{63fbcfa9-1fde-4027-b6c1-80566d46d2e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{931a8cd5-cfaf-4afb-a7eb-1ff0c37685c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Public_Object\TileMap">
+      <UniqueIdentifier>{4733a461-8e6b-4f04-8607-5689fee036b4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

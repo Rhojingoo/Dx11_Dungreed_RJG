@@ -73,6 +73,9 @@
     <Filter Include="Editor\Contents">
       <UniqueIdentifier>{893d96cd-0039-4a0b-90d7-b149f7cf086a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Rendering\Contents">
+      <UniqueIdentifier>{3f7d87f9-cdd7-476b-9666-a289010a7d58}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineCore.h">
@@ -217,6 +220,12 @@
     </ClInclude>
     <ClInclude Include="Collision.h" />
     <ClInclude Include="EngineDebug3D.h" />
+    <ClInclude Include="TileRenderer.h">
+      <Filter>Object\Rendering\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineStruct.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp">
@@ -355,6 +364,12 @@
     </ClCompile>
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="EngineDebug3D.cpp" />
+    <ClCompile Include="TileRenderer.cpp">
+      <Filter>Object\Rendering\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineStruct.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="ThirdParty\DirectxTex\Debug\DirectXTex.lib">
