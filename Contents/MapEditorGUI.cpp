@@ -121,12 +121,36 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 	
 	if (ImGui::Button("Save Data"))
 	{
+		
+
+
 		UEngineDirectory Dir;
 		Dir.MoveToSearchChild("ContentsResources");
 		Dir.Move("Image");
 		Dir.Move("TileMap_Save");
 		std::filesystem::path Path = Dir.GetFullPath();	
-		saveData(dataToSave, Path.string());
+
+
+		{
+			UEngineDirectory Dir;
+			Dir.MoveToSearchChild("ContentsResources");
+			Dir.Move("Image");
+			Dir.Move("TileMap_Save");
+			FEngineOption EngineOption;
+			if (false == Dir.IsFile(dataToSave))
+			{
+				UEngineFile File = Dir.GetPathFromFile(dataToSave);
+				//UEngineSerializer Ser;		
+				//EngineOption.Serialize(Ser);
+
+				TileRenderer->GetTileMapData();
+				File.Open(EIOOpenMode::Write, EIODataType::Text);
+				File.Save(Ser);
+			}
+		}
+
+
+		//saveData(dataToSave, Path.string());
 	}
 	//UEngineString::AnsiToUniCode(
 	//std::string Data = dataToSave;
@@ -201,19 +225,19 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 
 void MapEditorGUI::saveData(const std::string_view _data, const std::string_view _filePath)
 {
-	UEngineDirectory Dir;
-	Dir.MoveToSearchChild("ContentsResources");
-	Dir.Move("Image");
-	Dir.Move("TileMap_Save");
-	FEngineOption EngineOption;
-	if (false==Dir.IsFile(_data))
-	{
-		UEngineFile File = Dir.GetPathFromFile(_data);
-		UEngineSerializer Ser;		
-		EngineOption.Serialize(Ser);
-		File.Open(EIOOpenMode::Write, EIODataType::Text);
-		File.Save(Ser);
-	}
+	//UEngineDirectory Dir;
+	//Dir.MoveToSearchChild("ContentsResources");
+	//Dir.Move("Image");
+	//Dir.Move("TileMap_Save");
+	//FEngineOption EngineOption;
+	//if (false==Dir.IsFile(_data))
+	//{
+	//	UEngineFile File = Dir.GetPathFromFile(_data);
+	//	//UEngineSerializer Ser;		
+	//	//EngineOption.Serialize(Ser);
+	//	File.Open(EIOOpenMode::Write, EIODataType::Text);
+	//	File.Save(Ser);
+	//}
 
 	{
 		//UEngineFile File = Dir.GetPathFromFile(_data);
