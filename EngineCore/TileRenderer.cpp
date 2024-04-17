@@ -21,6 +21,8 @@ void UTileRenderer::BeginPlay()
 	Resources->SettingConstantBuffer("FCuttingData", CuttingDataValue);
 }
 
+
+
 void UTileRenderer::CreateTileMap(std::string_view _TileSet, float4 _TileSize, int _X, int _Y, int _DefaultIndex)
 {
 	// 오로지 랜더링적 요소만 가진것.
@@ -35,7 +37,7 @@ void UTileRenderer::CreateTileMap(std::string_view _TileSet, float4 _TileSize, i
 		return;
 	}
 
-	FSpriteInfo Info = TileSprite->GetSpriteInfo(3);
+	FSpriteInfo Info = TileSprite->GetSpriteInfo(_DefaultIndex);
 
 	Resources->SettingTexture("Image", Info.Texture, "POINT");
 

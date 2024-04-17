@@ -147,13 +147,13 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 				std::string Text;
 				Text = std::format("TileSizeX :, {}, TileSizeY : ,{}\n", TileSize[0], TileSize[1]);
 
-				// std::vector<std::vector<int>> TileData = TileRenderer->GetTileMapData();
-				std::vector<std::vector<int>> TileData;
-				TileData.resize(10);
-				for (size_t i = 0; i < TileData.size(); i++)
+				 std::vector<std::vector<int>> TileData = TileRenderer->GetTileMapData();
+				//std::vector<std::vector<int>> TileData;
+				//TileData.resize(10);
+	/*			for (size_t i = 0; i < TileData.size(); i++)
 				{
 					TileData[i].resize(10);
-				}
+				}*/
 
 				Text += std::format("TileCount :, {}, TileCount : ,{}\n", TileCount[0], TileCount[1]);
 
@@ -223,6 +223,26 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 					Result[y][x] = (std::stoi(Values[StartCount++]));
 				}
 			}
+
+			//TileRenderer->SetTiels(Result);
+			TileRenderer->CreateTileMap(spriteFilename, { 64, 64 }, TileCount[0], TileCount[1], 0);
+			for (size_t y = 0; y < TileCount[1]; y++)
+			{
+				for (size_t x = 0; x < TileCount[0]; x++)
+				{
+					
+					TileRenderer->SetTile(x,y, Result[y][x]);
+				}
+			}
+
+
+
+			//void SetTile(float4 _WorldXY, int _Index);
+			//void SetTile(int _X, int _Y, int _Index);
+
+
+			
+			Result;
 
 			int a = 0;
 
