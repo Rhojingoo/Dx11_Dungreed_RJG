@@ -100,7 +100,7 @@ void APlayer::StateInit()
 	State.CreateState("");
 	
 	// Ã¼ÀÎÁö
-	State.ChangeState("Player_Idle");
+	State.ChangeState("Player_Debug");
 }
 
 
