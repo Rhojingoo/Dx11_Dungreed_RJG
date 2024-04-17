@@ -226,6 +226,7 @@
     <ClInclude Include="EngineStruct.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="RenderUnit.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp">
@@ -370,6 +371,7 @@
     <ClCompile Include="EngineStruct.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="RenderUnit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="ThirdParty\DirectxTex\Debug\DirectXTex.lib">

@@ -69,8 +69,7 @@ public:
 
 			FindSprite = CreateResName(Texture->GetPath(), Texture->GetName());
 		}
-		else 
-		{
+		else {
 			FSpriteInfo Info = FindSprite->GetSpriteInfo(0);
 			Texture = Info.Texture;
 		}

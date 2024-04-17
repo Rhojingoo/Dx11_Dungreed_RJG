@@ -253,6 +253,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="RenderUnit.h" />
     <ClInclude Include="SceneComponent.h">
       <SubType>
       </SubType>
@@ -365,6 +366,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="RenderUnit.cpp" />
     <ClCompile Include="SceneComponent.cpp">
       <SubType>
       </SubType>
