@@ -1,12 +1,13 @@
 #pragma once
-#include <EngineCore/GameMode.h>
+//#include <EngineCore/GameMode.h>
+#include "TileSet_Mode.h"
 
 class MapEditorGUI;
 class APlayer;
 class UCamera;
-class ABoss_GameMode :  public AGameMode
+class ABoss_GameMode : public ATileMapLevel /* public AGameMode*/
 {
-	GENERATED_BODY(AGameMode)
+	GENERATED_BODY(ATileMapLevel)
 
 public:
 	ABoss_GameMode();
@@ -30,6 +31,5 @@ protected:
 private:
 	std::shared_ptr<UCamera> Camera = nullptr;
 	std::shared_ptr<APlayer> Player = nullptr;
-	std::shared_ptr<MapEditorGUI> MapGui = nullptr;
 };
 

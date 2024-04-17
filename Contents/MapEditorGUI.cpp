@@ -56,9 +56,13 @@ void MapEditorGUI::Tick(ULevel* Level, float _Delta)
 	std::string LevelName = Level->GetName();
 	std::shared_ptr<AGameMode> Mode = Level->GetGameMode();
 	ATileMapLevel* Ptr = dynamic_cast<ATileMapLevel*>(Mode.get());
+	if (nullptr == Ptr)
+	{
+		return;
+	}
 	active = Ptr->GetActive();
 
-	if ( "Mon01_Level" == Level->GetName() || "Mon02_Level" == Level->GetName())
+	if ( "Mon01_Level" == Level->GetName() || "Mon02_Level" == Level->GetName()  || "Mon03_Level" == Level->GetName() || "BossLevel" == Level->GetName())
 	{
 		On();
 		if (active == false)

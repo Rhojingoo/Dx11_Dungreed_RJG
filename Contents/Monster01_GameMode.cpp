@@ -52,17 +52,17 @@ void AMonster01_GameMode::BeginPlay()
 	std::shared_ptr<ATarget> Cursor = GetWorld()->SpawnActor<ATarget>("Player2");
 	Cursor->SetActorLocation({ 640.0f, 360.0f, 200.0f });
 
-	//std::shared_ptr<AMonster01_BackGround> BackGr = GetWorld()->SpawnActor<AMonster01_BackGround>("Monster01_Bg", EOBJ_Order::BackGround);
+	std::shared_ptr<AMonster01_BackGround> BackGr = GetWorld()->SpawnActor<AMonster01_BackGround>("Monster01_Bg", EOBJ_Order::BackGround);
 	float TileSize = UContentsHelper::TileSize;
 	float4 TexScale = UContentsHelper::MapTexScale;
 	float4 ImageScale = { TexScale.X * TileSize, TexScale.Y * TileSize, 0.0f };
-	//BackGr->SetActorScale3D(ImageScale);
-	//BackGr->SetActorLocation({ ImageScale.hX(), ImageScale.hY(), 500.0f });
+	BackGr->SetActorScale3D(ImageScale);
+	BackGr->SetActorLocation({ ImageScale.hX(), ImageScale.hY(), 500.0f });
 
 
 	std::shared_ptr<AMonster01_BGPIXEL> Back = GetWorld()->SpawnActor<AMonster01_BGPIXEL>("Monster_01PX", EOBJ_Order::PixelGround);
 	Back->SetActorScale3D(ImageScale);
-	Back->SetActorLocation({ ImageScale.hX(), ImageScale.hY()/*- TexScale.Y */, 500.0f});
+	Back->SetActorLocation({ ImageScale.hX(), ImageScale.hY(), 500.0f});
 }
 
 void AMonster01_GameMode::Tick(float _DeltaTime)

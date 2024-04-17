@@ -9,7 +9,7 @@ public:
 	AMonster02_BackGround();
 	~AMonster02_BackGround();
 
-	AMonster02_BackGround(const AMonster02_BackGround& _Other)					= delete;
+	AMonster02_BackGround(const AMonster02_BackGround& _Other)						= delete;
 	AMonster02_BackGround(AMonster02_BackGround& _Other) noexcept					= delete;
 	AMonster02_BackGround& operator =(const 	AMonster02_BackGround& _Other)		= delete;
 	AMonster02_BackGround& operator =(AMonster02_BackGround& _Other)noexcept		= delete;
