@@ -30,6 +30,7 @@ private:
 	float TileSize[2] = {};
 	float TileCount[2] = {};
 	char dataToSave[128] = "";
+	char dataToLoad[128] = "";
 };
 
 

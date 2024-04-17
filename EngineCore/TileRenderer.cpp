@@ -35,7 +35,7 @@ void UTileRenderer::CreateTileMap(std::string_view _TileSet, float4 _TileSize, i
 		return;
 	}
 
-	FSpriteInfo Info = TileSprite->GetSpriteInfo(0);
+	FSpriteInfo Info = TileSprite->GetSpriteInfo(3);
 
 	Resources->SettingTexture("Image", Info.Texture, "POINT");
 

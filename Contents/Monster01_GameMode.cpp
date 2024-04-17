@@ -53,7 +53,7 @@ void AMonster01_GameMode::BeginPlay()
 
 	std::shared_ptr<AMonster01_BGPIXEL> Back = GetWorld()->SpawnActor<AMonster01_BGPIXEL>("Monster_01PX", EOBJ_Order::PixelGround);
 	Back->SetActorScale3D(ImageScale);
-	Back->SetActorLocation({ ImageScale.hX(), ImageScale.hY()- TexScale.Y , 500.0f});
+	Back->SetActorLocation({ ImageScale.hX(), ImageScale.hY()/*- TexScale.Y */, 500.0f});
 }
 
 void AMonster01_GameMode::Tick(float _DeltaTime)

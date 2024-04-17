@@ -61,6 +61,16 @@ void MapEditorGUI::Tick(ULevel* Level, float _Delta)
 		Off();
 	}
 
+
+	if ("Mon01_Level" == Level->GetName())
+	{
+		On();
+	}
+	else
+	{
+		Off();
+	}
+
 	std::shared_ptr<AGameMode> Mode = Level->GetGameMode();
 
 	ATileMapLevel* Ptr = dynamic_cast<ATileMapLevel*>(Mode.get());
@@ -109,7 +119,6 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 	ImGui::InputFloat2("TileSize", TileSize);
 	ImGui::InputFloat2("TileCount", TileCount);
 	ImGui::InputText("Sprite Filename", spriteFilename, IM_ARRAYSIZE(spriteFilename));
-	// ImGui::InputFloat2()
 
 	if (true == ImGui::Button("Create"))
 	{
@@ -117,43 +126,166 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 	}
 
 	//dataToSave = {0};
-	ImGui::InputTextMultiline("Data Name", dataToSave, IM_ARRAYSIZE(dataToSave));
+	ImGui::InputTextMultiline("Save Data Name", dataToSave, IM_ARRAYSIZE(dataToSave));
 	
 	if (ImGui::Button("Save Data"))
-	{
-		
-
-
-		UEngineDirectory Dir;
-		Dir.MoveToSearchChild("ContentsResources");
-		Dir.Move("Image");
-		Dir.Move("TileMap_Save");
-		std::filesystem::path Path = Dir.GetFullPath();	
-
-
+	{		
 		{
 			UEngineDirectory Dir;
 			Dir.MoveToSearchChild("ContentsResources");
 			Dir.Move("Image");
 			Dir.Move("TileMap_Save");
 			FEngineOption EngineOption;
-			if (false == Dir.IsFile(dataToSave))
-			{
-				UEngineFile File = Dir.GetPathFromFile(dataToSave);
-				//UEngineSerializer Ser;		
-				//EngineOption.Serialize(Ser);
+			std::fstream fs;
+			std::string str_buf;
 
-				TileRenderer->GetTileMapData();
+			{
+				UEngineFile File = Dir.GetPathFromFile(std::string(dataToSave) + ".csv");
 				File.Open(EIOOpenMode::Write, EIODataType::Text);
+
+				UEngineSerializer Ser;
+				std::string Text;
+				Text = std::format("TileSizeX :, {}, TileSizeY : ,{}\n", TileSize[0], TileSize[1]);
+
+				// std::vector<std::vector<int>> TileData = TileRenderer->GetTileMapData();
+				std::vector<std::vector<int>> TileData;
+				TileData.resize(10);
+				for (size_t i = 0; i < TileData.size(); i++)
+				{
+					TileData[i].resize(10);
+				}
+
+				Text += std::format("TileCount :, {}, TileCount : ,{}\n", TileCount[0], TileCount[1]);
+
+				for (size_t y = 0; y < TileData.size(); y++)
+				{
+					for (size_t x = 0; x < TileData[y].size(); x++)
+					{
+						Text += std::format("{}", TileData[y][x]);
+
+						if (x != TileData[y].size() - 1)
+						{
+							Text += ",";
+						}
+					}
+					Text += "\n";
+				}
+
+				Ser.WriteText(Text);
+
 				File.Save(Ser);
 			}
+
 		}
+	}	
+	
 
+	ImGui::InputTextMultiline("Load Data Name", dataToLoad, IM_ARRAYSIZE(dataToLoad));
+	if (ImGui::Button("Load Data")) 
+	{
+		UEngineDirectory Dir;
+		Dir.MoveToSearchChild("ContentsResources");
+		Dir.Move("Image");
+		Dir.Move("TileMap_Save");
+		if (true == Dir.IsFile(std::string(dataToLoad) + ".csv"))
+		{
+			UEngineFile File = Dir.GetPathFromFile(std::string(dataToLoad) + ".csv");
 
-		//saveData(dataToSave, Path.string());
-	}
-	//UEngineString::AnsiToUniCode(
-	//std::string Data = dataToSave;
+			File.Open(EIOOpenMode::Read, EIODataType::Text);
+			UEngineSerializer Ser;
+			File.Load(Ser);
+
+			std::string LSTR = Ser.ToString();
+			std::vector<std::vector<int>> Result;
+
+			std::vector<std::string> Values = UEngineString::StringCutting(LSTR, {",", "\n"});
+
+			TileSize[0] = std::stoi(Values[1]);
+			TileSize[1] = std::stoi(Values[3]);
+
+			TileCount[0] = std::stoi(Values[5]);
+			TileCount[1] = std::stoi(Values[7]);
+
+			//TileCount[0] = 10;
+			//TileCount[1] = 10;
+
+			Result.resize(TileCount[1]);
+			for (size_t y = 0; y < TileCount[1]; y++)
+			{
+				Result[y].resize(TileCount[0]);
+			}
+			int StartCount = 8;
+
+			for (size_t y = 0; y < TileCount[1]; y++)
+			{
+				for (size_t x = 0; x < TileCount[0]; x++)
+				{
+					Result[y][x] = (std::stoi(Values[StartCount++]));
+				}
+			}
+
+			int a = 0;
+
+		
+			//// 파일 경로 출력 및 파일 로딩				
+			//std::fstream fs(File.GetFullPath(), std::ios::in);
+			//if (fs.is_open())
+			//{
+			//	std::vector<std::vector<int>> Tiles;
+			//	std::string line;	
+			//	{
+			//		std::getline(fs, line, ',');
+			//		std::getline(fs, line, ',');
+			//		TileSize[0] = std::stoi(line);
+			//		std::getline(fs, line, ',');
+			//		std::getline(fs, line, ',');
+			//		TileSize[1] = std::stoi(line);
+			//	}
+			//	{
+			//		std::getline(fs, line, ',');
+			//		std::getline(fs, line, ',');
+			//		TileCount[0] = std::stoi(line);
+			//		std::getline(fs, line, ',');
+			//		std::getline(fs, line, ',');
+			//		TileCount[1] = std::stoi(line);		
+			//		std::getline(fs, line, '\n');
+			//	}
+			//	std::getline(fs, line);
+			//	while (std::getline(fs, line))
+			//	{
+			//		std::stringstream ss(line);
+			//		int Tile_Index;
+			//		int Count_X;
+
+			//		std::vector<int> Row_Tiles;
+			//		std::string number;
+			//
+			//		std::string s_num, s_row, s_col, s_tile_index;
+			//		std::getline(ss, s_num, ',');
+			//		std::getline(ss, s_row, ',');
+			//		//
+			//		std::getline(ss, s_col, ',');
+			//		Count_X = std::stoi(s_col);
+			//		std::getline(ss, s_tile_index);
+			//		Tile_Index = std::stoi(s_tile_index);
+			//		Row_Tiles.push_back(Tile_Index);
+
+			//		if (Count_X >= TileCount[0] - 1)
+			//		{
+			//			Tiles.push_back(Row_Tiles);
+			//			Row_Tiles.clear();
+			//		}					
+			//	}
+			//	Tiles;
+			//	TileRenderer->CreateTileMap(dataToLoad, { TileSize[0], TileSize[1] }, TileCount[0], TileCount[1], 0);
+			//	TileRenderer->GetTileMapData();
+			//	// TileRenderer->SetTile();
+
+			//	fs.close();
+			//}
+		}
+	}			
+
 
 	ImGui::Text(("WorldMouse : " + MousePosWorld.ToString()).c_str());
 	float4 Index = TileRenderer->ConvertTileIndex(MousePosWorld);

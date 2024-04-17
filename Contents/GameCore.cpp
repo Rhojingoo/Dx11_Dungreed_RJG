@@ -103,7 +103,7 @@ void UGameCore::Initialize()
 	GEngine->CreateLevel<ABoss_GameMode>("BossLevel");
 	GEngine->CreateLevel<ATest_GameMode>("TestLevel");
 
-	GEngine->ChangeLevel("TestLevel");
+	GEngine->ChangeLevel("Mon01_Level");
 
 
 

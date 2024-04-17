@@ -4,9 +4,9 @@
 
 class APlayer;
 class UCamera;
-class AMonster01_GameMode : public AGameMode
+class AMonster01_GameMode :  public ATileMapLevel //public AGameMode
 {
-	GENERATED_BODY(AGameMode)
+	GENERATED_BODY(ATileMapLevel)
 public:
 	AMonster01_GameMode();
 	~AMonster01_GameMode();
