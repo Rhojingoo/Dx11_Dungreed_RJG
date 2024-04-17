@@ -2,6 +2,7 @@
 #include <EngineCore/EngineEditorWindow.h>
 
 // Ό³Έν :
+class UTileRenderer;
 class MapEditorGUI : public UEngineEditorWindow
 {
 public:
@@ -31,6 +32,7 @@ private:
 	float TileCount[2] = {};
 	char dataToSave[128] = "";
 	char dataToLoad[128] = "";
+	bool Delete = false;
 };
 
 

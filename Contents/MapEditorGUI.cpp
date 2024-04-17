@@ -87,7 +87,14 @@ void MapEditorGUI::Tick(ULevel* Level, float _Delta)
 		float4 MousePos = GEngine->EngineWindow.GetScreenMousePos();
 		MousePosWorld = Level->GetMainCamera()->ScreenPosToWorldPos(MousePos);
 
+		if (Delete == true)
+		{
+			TileRenderer->DeleteON();			
+		}
+
 		TileRenderer->SetTile(MousePosWorld, SelectSpriteIndex);
+
+
 	}
 
 
@@ -109,8 +116,10 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 	}
 
 	UTileRenderer* TileRenderer = Ptr->TileMap->TileRenderer;
-	char spriteFilename[128] = "Map4X(64).png";
+	//char spriteFilename[128] = "Map4X(64).png";
+	char spriteFilename[128] = "Map4X(64)_Cut.png";
 
+	
 	// 타일 크기 지정
 	// 타일 개수 x
 	// 타일 개수 y를 
@@ -125,9 +134,14 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 		TileRenderer->CreateTileMap(spriteFilename, { TileSize[0], TileSize[1] }, TileCount[0], TileCount[1], 0);
 	}
 
+
+	if (true == ImGui::Button("DELETE"))
+	{
+		Delete = !Delete;
+	}
+
 	//dataToSave = {0};
 	ImGui::InputTextMultiline("Save Data Name", dataToSave, IM_ARRAYSIZE(dataToSave));
-	
 	if (ImGui::Button("Save Data"))
 	{		
 		{
@@ -147,13 +161,7 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 				std::string Text;
 				Text = std::format("TileSizeX :, {}, TileSizeY : ,{}\n", TileSize[0], TileSize[1]);
 
-				 std::vector<std::vector<int>> TileData = TileRenderer->GetTileMapData();
-				//std::vector<std::vector<int>> TileData;
-				//TileData.resize(10);
-	/*			for (size_t i = 0; i < TileData.size(); i++)
-				{
-					TileData[i].resize(10);
-				}*/
+				std::vector<std::vector<int>> TileData = TileRenderer->GetTileMapData();
 
 				Text += std::format("TileCount :, {}, TileCount : ,{}\n", TileCount[0], TileCount[1]);
 
@@ -170,7 +178,6 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 					}
 					Text += "\n";
 				}
-
 				Ser.WriteText(Text);
 
 				File.Save(Ser);
@@ -229,23 +236,10 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 			for (size_t y = 0; y < TileCount[1]; y++)
 			{
 				for (size_t x = 0; x < TileCount[0]; x++)
-				{
-					
+				{					
 					TileRenderer->SetTile(x,y, Result[y][x]);
 				}
-			}
-
-
-
-			//void SetTile(float4 _WorldXY, int _Index);
-			//void SetTile(int _X, int _Y, int _Index);
-
-
-			
-			Result;
-
-			int a = 0;
-
+			}		
 		
 			//// 파일 경로 출력 및 파일 로딩				
 			//std::fstream fs(File.GetFullPath(), std::ios::in);
@@ -312,7 +306,10 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 	ImGui::Text(("TileIndexPos : " + Index.ToString()).c_str());
 	ImGui::Text(std::format("Index : {} {}", Index.iX(), Index.iY()).c_str());
 
-	std::shared_ptr<UEngineSprite> Sprite = UEngineSprite::FindRes("Map4X(64).png");
+
+	
+	std::shared_ptr<UEngineSprite> Sprite = UEngineSprite::FindRes("Map4X(64)_Cut.png");
+	//std::shared_ptr<UEngineSprite> Sprite = UEngineSprite::FindRes("Map4X(64).png");
 
 
 	// 다이렉트 디바이스랑

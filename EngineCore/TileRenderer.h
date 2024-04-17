@@ -37,6 +37,7 @@ public:
 	{
 		return Tiles;
 	}
+	void DeleteON() { Delete = true; }
 
 protected:
 	void BeginPlay() override;
@@ -47,5 +48,6 @@ protected:
 	FCuttingData CuttingDataValue;
 	std::shared_ptr<UEngineSprite> TileSprite;
 	float4 TileSize = {64, 64};
+	bool Delete = false;
 };
 

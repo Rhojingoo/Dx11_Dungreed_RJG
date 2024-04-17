@@ -84,8 +84,15 @@ void UTileRenderer::SetTile(int _X, int _Y, int _Index)
 	{
 		return;
 	}
-
-	Tiles[_Y][_X] = _Index;
+	if (Delete == true)
+	{
+		Tiles[_Y][_X] = 0;
+		Delete = false;
+	}
+	else
+	{
+		Tiles[_Y][_X] = _Index;
+	}
 }
 
 void UTileRenderer::Render(float _DeltaTime)
