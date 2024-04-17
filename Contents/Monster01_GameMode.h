@@ -1,10 +1,9 @@
 #pragma once
-#include <EngineCore/GameMode.h>
-#include "Test_GameMode.h"
+#include "TileSet_Mode.h"
 
 class APlayer;
 class UCamera;
-class AMonster01_GameMode :  public ATileMapLevel //public AGameMode
+class AMonster01_GameMode :  public ATileMapLevel 
 {
 	GENERATED_BODY(ATileMapLevel)
 public:
@@ -15,7 +14,7 @@ public:
 	AMonster01_GameMode(AMonster01_GameMode& _Other) noexcept					= delete;
 	AMonster01_GameMode& operator =(const 	AMonster01_GameMode& _Other)		= delete;
 	AMonster01_GameMode& operator =(AMonster01_GameMode& _Other)noexcept		= delete;
-
+	
 protected:
 	void LevelStart(ULevel* _PrevLevel) override;
 	void LevelEnd(ULevel* _NextLevel) override;
@@ -25,5 +24,6 @@ protected:
 private:
 	std::shared_ptr<UCamera> Camera = nullptr;
 	std::shared_ptr<APlayer> Player = nullptr;
+	
 };
 

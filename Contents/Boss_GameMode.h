@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/GameMode.h>
 
+class MapEditorGUI;
 class APlayer;
 class UCamera;
 class ABoss_GameMode :  public AGameMode
@@ -16,6 +17,8 @@ public:
 	ABoss_GameMode& operator =(const 	ABoss_GameMode& _Other)		= delete;
 	ABoss_GameMode& operator =(ABoss_GameMode& _Other)noexcept		= delete;
 
+	void SetMapEdit();
+
 protected:
 	void LevelStart(ULevel* _PrevLevel) override;
 	void LevelEnd(ULevel* _NextLevel) override;
@@ -27,5 +30,6 @@ protected:
 private:
 	std::shared_ptr<UCamera> Camera = nullptr;
 	std::shared_ptr<APlayer> Player = nullptr;
+	std::shared_ptr<MapEditorGUI> MapGui = nullptr;
 };
 

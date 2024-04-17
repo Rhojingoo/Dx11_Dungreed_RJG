@@ -1,5 +1,5 @@
 #include "PreCompile.h"
-#include "Test_GameMode.h"
+#include "TileSet_Mode.h"
 #include "Player.h"
 #include "Target.h"
 #include "Boss_BackGround.h"
@@ -11,23 +11,23 @@
 #include <EngineCore/TileRenderer.h>
 
 
-ATest_GameMode::ATest_GameMode()
+ATileSet_Mode::ATileSet_Mode()
 {
 }
 
-ATest_GameMode::~ATest_GameMode()
+ATileSet_Mode::~ATileSet_Mode()
 {
 }
 
-void ATest_GameMode::LevelStart(ULevel* _PrevLevel)
+void ATileSet_Mode::LevelStart(ULevel* _PrevLevel)
 {
 }
 
-void ATest_GameMode::LevelEnd(ULevel* _NextLevel)
+void ATileSet_Mode::LevelEnd(ULevel* _NextLevel)
 {
 }
 
-void ATest_GameMode::BeginPlay()
+void ATileSet_Mode::BeginPlay()
 {
 	Super::BeginPlay();
 	Camera = GetWorld()->GetMainCamera();
@@ -36,7 +36,7 @@ void ATest_GameMode::BeginPlay()
 
 }
 
-void ATest_GameMode::Tick(float _DeltaTime)
+void ATileSet_Mode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 	if (true == UEngineInput::IsDown('P'))

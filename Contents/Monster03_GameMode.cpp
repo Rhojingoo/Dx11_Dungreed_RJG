@@ -29,6 +29,10 @@ void AMonster03_GameMode::LevelEnd(ULevel* _NextLevel)
 
 void AMonster03_GameMode::BeginPlay()
 {
+	Tile_MapName = "Monster_03_Tile";
+	FixelSize[0] = 64, FixelSize[1] = 64;
+	IndexCount[0] = 35, IndexCount[1] = 18;
+
 	Super::BeginPlay();
 
 	UContentsHelper::MapTex = UEngineTexture::FindRes("Monster_03PX.png");

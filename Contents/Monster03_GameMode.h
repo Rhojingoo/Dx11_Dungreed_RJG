@@ -1,17 +1,17 @@
 #pragma once
-#include <EngineCore/GameMode.h>
+#include "TileSet_Mode.h"
 
 
 class APlayer;
 class UCamera;
-class AMonster03_GameMode : public AGameMode
+class AMonster03_GameMode : public ATileMapLevel
 {
-	GENERATED_BODY(AGameMode)
+	GENERATED_BODY(ATileMapLevel)
 public:
 	AMonster03_GameMode();
 	~AMonster03_GameMode();
 
-	AMonster03_GameMode(const AMonster03_GameMode& _Other)					= delete;
+	AMonster03_GameMode(const AMonster03_GameMode& _Other)						= delete;
 	AMonster03_GameMode(AMonster03_GameMode& _Other) noexcept					= delete;
 	AMonster03_GameMode& operator =(const 	AMonster03_GameMode& _Other)		= delete;
 	AMonster03_GameMode& operator =(AMonster03_GameMode& _Other)noexcept		= delete;

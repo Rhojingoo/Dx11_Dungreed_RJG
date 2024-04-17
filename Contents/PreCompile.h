@@ -16,3 +16,4 @@
 
 #include "Dungreed_Enum.h"
 #include "ContentsHelper.h"
+#include <cstring>

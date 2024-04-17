@@ -29,6 +29,10 @@ void AMonster02_GameMode::LevelEnd(ULevel* _NextLevel)
 
 void AMonster02_GameMode::BeginPlay()
 {
+	Tile_MapName = "Monster_02_Tile";
+	FixelSize[0] = 64, FixelSize[1] = 64;
+	IndexCount[0] = 54, IndexCount[1] = 25;
+
 	Super::BeginPlay();
 
 	UContentsHelper::MapTex = UEngineTexture::FindRes("Monster_02PX.png");
@@ -52,7 +56,7 @@ void AMonster02_GameMode::BeginPlay()
 
 	std::shared_ptr<AMonster02_BGPIXEL> Back = GetWorld()->SpawnActor<AMonster02_BGPIXEL>("Monster02_PXBg", EOBJ_Order::PixelGround);
 	Back->SetActorScale3D(ImageScale);
-	Back->SetActorLocation({ ImageScale.hX(), ImageScale.hY() - TexScale.Y, 500.0f });
+	Back->SetActorLocation({ ImageScale.hX(), ImageScale.hY(), 500.0f });
 }
 
 void AMonster02_GameMode::Tick(float _DeltaTime)

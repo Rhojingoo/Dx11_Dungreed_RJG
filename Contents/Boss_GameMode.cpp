@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "Boss_GameMode.h"
+#include "MapEditorGUI.h"
 #include "Player.h"
 #include "Target.h"
 #include "Boss_BackGround.h"
@@ -11,6 +12,10 @@ ABoss_GameMode::ABoss_GameMode()
 }
 
 ABoss_GameMode::~ABoss_GameMode()
+{
+}
+
+void ABoss_GameMode::SetMapEdit()
 {
 }
 

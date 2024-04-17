@@ -4,19 +4,19 @@
 
 class APlayer;
 class UCamera;
-class ATest_GameMode : public ATileMapLevel
+class ATileSet_Mode : public ATileMapLevel
 {
 	GENERATED_BODY(ATileMapLevel)
 
 public:
-	ATest_GameMode();
-	~ATest_GameMode();
+	ATileSet_Mode();
+	~ATileSet_Mode();
 
 	// delete Function
-	ATest_GameMode(const ATest_GameMode& _Other) = delete;
-	ATest_GameMode(ATest_GameMode&& _Other) noexcept = delete;
-	ATest_GameMode& operator=(const ATest_GameMode& _Other) = delete;
-	ATest_GameMode& operator=(ATest_GameMode&& _Other) noexcept = delete;
+	ATileSet_Mode(const ATileSet_Mode& _Other) = delete;
+	ATileSet_Mode(ATileSet_Mode&& _Other) noexcept = delete;
+	ATileSet_Mode& operator=(const ATileSet_Mode& _Other) = delete;
+	ATileSet_Mode& operator=(ATileSet_Mode&& _Other) noexcept = delete;
 
 protected:
 	void LevelStart(ULevel* _PrevLevel) override;

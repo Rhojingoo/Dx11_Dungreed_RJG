@@ -6,7 +6,7 @@
 #include "Monster02_GameMode.h"
 #include "Monster03_GameMode.h"
 #include "Boss_GameMode.h"
-#include "Test_GameMode.h"
+#include "TileSet_Mode.h"
 
 #include <EngineCore/EngineSprite.h>
 
@@ -103,7 +103,6 @@ void UGameCore::Initialize()
 	GEngine->CreateLevel<AMonster02_GameMode>("Mon02_Level");
 	GEngine->CreateLevel<AMonster03_GameMode>("Mon03_Level");
 	GEngine->CreateLevel<ABoss_GameMode>("BossLevel");
-	GEngine->CreateLevel<ATest_GameMode>("TestLevel");
 
 	GEngine->ChangeLevel("Mon01_Level");
 

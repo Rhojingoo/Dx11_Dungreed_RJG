@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "TileMapLevel.h"
-#include "Test_GameMode.h"
+#include "TileSet_Mode.h"
 #include "Player.h"
 #include "Target.h"
 #include "Boss_BackGround.h"

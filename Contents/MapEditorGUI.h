@@ -16,6 +16,14 @@ public:
 	MapEditorGUI& operator=(const MapEditorGUI& _Other) = delete;
 	MapEditorGUI& operator=(MapEditorGUI&& _Other) noexcept = delete;
 
+	//void SetLoad(char* _Set) 
+	//{ 
+	//	dataToLoad;
+	//	std::string(dataToLoad) = _Set; 
+	//	dataToLoad;
+	//	int a = 0;
+	//}
+
 protected:
 	virtual void Init();
 
@@ -26,11 +34,13 @@ protected:
 
 private:
 	float4 MousePosWorld;
-	int SelectSpriteIndex = 0;
-	float TileSize[2] = {};
-	float TileCount[2] = {};
+	int SelectSpriteIndex = 12;
+	int TileSize[2] = {};
+	int TileCount[2] = {};
 	char dataToSave[128] = "";
 	char dataToLoad[128] = "";
+	bool active = true;
+	bool FirstSetting = false;
 };
 
 

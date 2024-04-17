@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "Monster01_GameMode.h"
+#include "MapEditorGUI.h"
 #include "Player.h"
 #include "Target.h"
 #include "Monster01_BackGround.h"
@@ -14,6 +15,8 @@ AMonster01_GameMode::~AMonster01_GameMode()
 {
 }
 
+
+
 void AMonster01_GameMode::LevelStart(ULevel* _PrevLevel)
 {
 	Camera = GetWorld()->GetMainCamera();
@@ -21,6 +24,8 @@ void AMonster01_GameMode::LevelStart(ULevel* _PrevLevel)
 
 	UContentsHelper::MapTex = UEngineTexture::FindRes("Monster_01PX.png");
 	UContentsHelper::MapTexScale = UContentsHelper::MapTex->GetScale();
+
+	
 }
 
 void AMonster01_GameMode::LevelEnd(ULevel* _NextLevel)
@@ -30,6 +35,10 @@ void AMonster01_GameMode::LevelEnd(ULevel* _NextLevel)
 
 void AMonster01_GameMode::BeginPlay()
 {
+	Tile_MapName = "Monster_01_Tile";
+	FixelSize[0] = 64, FixelSize[1] = 64;
+	IndexCount[0] = 25, IndexCount[1] = 24;
+
 	Super::BeginPlay();
 
 	UContentsHelper::MapTex = UEngineTexture::FindRes("Monster_01PX.png");

@@ -13,21 +13,23 @@
 #include <EngineCore/EngineOption.h>
 
 
-MapEditorGUI::MapEditorGUI() 
+MapEditorGUI::MapEditorGUI()
 {
+
 }
 
-MapEditorGUI::~MapEditorGUI() 
+MapEditorGUI::~MapEditorGUI()
 {
 }
 
 void MapEditorGUI::Init()
 {
-	
+
 }
 
 void MapEditorGUI::Tick(ULevel* Level, float _Delta)
 {
+
 	Level->GetMainCamera();
 	float Speed = 500.0f;
 
@@ -52,28 +54,39 @@ void MapEditorGUI::Tick(ULevel* Level, float _Delta)
 	}
 
 	std::string LevelName = Level->GetName();
+	std::shared_ptr<AGameMode> Mode = Level->GetGameMode();
+	ATileMapLevel* Ptr = dynamic_cast<ATileMapLevel*>(Mode.get());
+	active = Ptr->GetActive();
 
-	if ("TestLevel" == Level->GetName())
+	if ( "Mon01_Level" == Level->GetName() || "Mon02_Level" == Level->GetName())
 	{
 		On();
-	} else 
-	{
-		Off();
-	}
-
-
-	if ("Mon01_Level" == Level->GetName())
-	{
-		On();
+		if (active == false)
+		{
+			Off();
+		}
 	}
 	else
 	{
 		Off();
 	}
 
-	std::shared_ptr<AGameMode> Mode = Level->GetGameMode();
+	FirstSetting = Ptr->GetSetting();
 
-	ATileMapLevel* Ptr = dynamic_cast<ATileMapLevel*>(Mode.get());
+	if (FirstSetting == false)
+	{
+		strcpy_s(dataToLoad, sizeof(dataToLoad), Ptr->GetName().c_str());
+		for (int a = 0; a < 2; a++)
+		{
+			TileSize[a] = Ptr->FixelSize[a];
+			TileCount[a] = Ptr->IndexCount[a];
+		}
+		TileSize;
+		TileCount;
+		dataToLoad;
+		FirstSetting = true;
+		Ptr->TileSet_True();
+	}
 
 	if (nullptr == Ptr)
 	{
@@ -81,19 +94,20 @@ void MapEditorGUI::Tick(ULevel* Level, float _Delta)
 	}
 
 	UTileRenderer* TileRenderer = Ptr->TileMap->TileRenderer;
-
-	if (true == UEngineInput::IsPress(VK_LBUTTON))
+	if (active == true)
 	{
-		float4 MousePos = GEngine->EngineWindow.GetScreenMousePos();
-		MousePosWorld = Level->GetMainCamera()->ScreenPosToWorldPos(MousePos);
+		if (true == UEngineInput::IsPress(VK_LBUTTON))
+		{
+			float4 MousePos = GEngine->EngineWindow.GetScreenMousePos();
+			MousePosWorld = Level->GetMainCamera()->ScreenPosToWorldPos(MousePos);
 
-		TileRenderer->SetTile(MousePosWorld, SelectSpriteIndex);
+			TileRenderer->SetTile(MousePosWorld, SelectSpriteIndex);
+		}
 	}
 }
 
 void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 {
-
 	float4 MousePos = GEngine->EngineWindow.GetScreenMousePos();
 	MousePosWorld = Level->GetMainCamera()->ScreenPosToWorldPos(MousePos);
 
@@ -110,14 +124,14 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 	//char spriteFilename[128] = "Map4X(64).png";
 	char spriteFilename[128] = "Map4X(64)_Cut.png";
 
-	
+
 	// 타일 크기 지정
 	// 타일 개수 x
 	// 타일 개수 y를 
 	// 스프라이트 선택.
 	// 저장.
-	ImGui::InputFloat2("TileSize", TileSize);
-	ImGui::InputFloat2("TileCount", TileCount);
+	ImGui::InputInt2("TileSize", TileSize);
+	ImGui::InputInt2("TileCount", TileCount);
 	ImGui::InputText("Sprite Filename", spriteFilename, IM_ARRAYSIZE(spriteFilename));
 
 	if (true == ImGui::Button("Create"))
@@ -128,7 +142,7 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 	//dataToSave = {0};
 	ImGui::InputTextMultiline("Save Data Name", dataToSave, IM_ARRAYSIZE(dataToSave));
 	if (ImGui::Button("Save Data"))
-	{		
+	{
 		{
 			UEngineDirectory Dir;
 			Dir.MoveToSearchChild("ContentsResources");
@@ -169,11 +183,11 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 			}
 
 		}
-	}	
-	
+	}
+	dataToLoad;
 
 	ImGui::InputTextMultiline("Load Data Name", dataToLoad, IM_ARRAYSIZE(dataToLoad));
-	if (ImGui::Button("Load Data")) 
+	if (ImGui::Button("Load Data"))
 	{
 		UEngineDirectory Dir;
 		Dir.MoveToSearchChild("ContentsResources");
@@ -190,7 +204,7 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 			std::string LSTR = Ser.ToString();
 			std::vector<std::vector<int>> Result;
 
-			std::vector<std::string> Values = UEngineString::StringCutting(LSTR, {",", "\n"});
+			std::vector<std::string> Values = UEngineString::StringCutting(LSTR, { ",", "\n" });
 
 			TileSize[0] = std::stoi(Values[1]);
 			TileSize[1] = std::stoi(Values[3]);
@@ -217,12 +231,13 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 			for (size_t y = 0; y < TileCount[1]; y++)
 			{
 				for (size_t x = 0; x < TileCount[0]; x++)
-				{					
-					TileRenderer->SetTile(x,y, Result[y][x]);
+				{
+					TileRenderer->SetTile(x, y, Result[y][x]);
 				}
-			}					
+			}
 		}
-	}			
+		Ptr->SetActive(false);
+	}
 
 
 	ImGui::Text(("WorldMouse : " + MousePosWorld.ToString()).c_str());
@@ -231,9 +246,9 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 	ImGui::Text(std::format("Index : {} {}", Index.iX(), Index.iY()).c_str());
 
 
-	
+
 	std::shared_ptr<UEngineSprite> Sprite = UEngineSprite::FindRes("Map4X(64)_Cut.png");
-	
+
 	if (SelectSpriteIndex != -1)
 	{
 		FSpriteInfo Info = Sprite->GetSpriteInfo(SelectSpriteIndex);
@@ -246,7 +261,7 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 
 		ImGui::ImageButton("Select", Info.Texture->GetSRV(), { 100, 100 }, UV0, UV1);
 	}
-	else 
+	else
 	{
 		ImGui::ImageButton("Select", nullptr, { 100, 100 });
 	}
@@ -258,7 +273,7 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 	{
 		FSpriteInfo Info = Sprite->GetSpriteInfo(i);
 
-		ImVec2 UV0 = { Info.CuttingPosition.X, Info.CuttingPosition.Y};
+		ImVec2 UV0 = { Info.CuttingPosition.X, Info.CuttingPosition.Y };
 		ImVec2 UV1 = { Info.CuttingSize.X, Info.CuttingSize.Y };
 
 		UV1.x = UV1.x + UV0.x;
@@ -266,17 +281,18 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 
 		std::string Text = std::to_string(i);
 
-		if (true == ImGui::ImageButton(Text.c_str(), Info.Texture->GetSRV(), {64, 64}, UV0, UV1))
+		if (true == ImGui::ImageButton(Text.c_str(), Info.Texture->GetSRV(), { 64, 64 }, UV0, UV1))
 		{
 			SelectSpriteIndex = i;
 		}
-		
-		if ((i + 1) % 5 )
+
+		if ((i + 1) % 5)
 		{
 			ImGui::SameLine();
 		}
 	}
-		
+
 	ImGui::EndChild();
+
 }
 

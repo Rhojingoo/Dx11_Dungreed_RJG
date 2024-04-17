@@ -1,11 +1,11 @@
 #pragma once
-#include <EngineCore/GameMode.h>
+#include "TileSet_Mode.h"
 
 class APlayer;
 class UCamera;
-class AMonster02_GameMode : public AGameMode
+class AMonster02_GameMode : public ATileMapLevel
 {
-	GENERATED_BODY(AGameMode)
+	GENERATED_BODY(ATileMapLevel)
 public:
 	AMonster02_GameMode();
 	~AMonster02_GameMode();

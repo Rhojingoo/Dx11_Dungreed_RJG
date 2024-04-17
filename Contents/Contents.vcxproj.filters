@@ -8,43 +8,43 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Boss_GameMode.h">
-      <Filter>Level\Boss_Stage\Boss_Level</Filter>
+      <Filter>Level &amp; OBJ\Boss_Stage\Boss_Level</Filter>
     </ClInclude>
     <ClInclude Include="Town_GameMode.h">
-      <Filter>Level\Town_Stage\Town_Level</Filter>
+      <Filter>Level &amp; OBJ\Town_Stage\Town_Level</Filter>
     </ClInclude>
     <ClInclude Include="Title_GameMode.h">
-      <Filter>Level\Title_Screen\Title_Level</Filter>
+      <Filter>Level &amp; OBJ\Title_Screen\Title_Level</Filter>
     </ClInclude>
     <ClInclude Include="Title_BackGround.h">
-      <Filter>Level\Title_Screen\Title_Object</Filter>
+      <Filter>Level &amp; OBJ\Title_Screen\Title_Object</Filter>
     </ClInclude>
     <ClInclude Include="Town_BackGround.h">
-      <Filter>Level\Town_Stage\Town_Object</Filter>
+      <Filter>Level &amp; OBJ\Town_Stage\Town_Object</Filter>
     </ClInclude>
     <ClInclude Include="Boss_BackGround.h">
-      <Filter>Level\Boss_Stage\Boss_Object</Filter>
+      <Filter>Level &amp; OBJ\Boss_Stage\Boss_Object</Filter>
     </ClInclude>
     <ClInclude Include="Title_Logo.h">
-      <Filter>Level\Title_Screen\Title_Object</Filter>
+      <Filter>Level &amp; OBJ\Title_Screen\Title_Object</Filter>
     </ClInclude>
     <ClInclude Include="Title_Bird.h">
-      <Filter>Level\Title_Screen\Title_Object</Filter>
+      <Filter>Level &amp; OBJ\Title_Screen\Title_Object</Filter>
     </ClInclude>
     <ClInclude Include="Titlre_Cloud.h">
-      <Filter>Level\Title_Screen\Title_Object</Filter>
+      <Filter>Level &amp; OBJ\Title_Screen\Title_Object</Filter>
     </ClInclude>
     <ClInclude Include="Town_BGPIXEL.h">
-      <Filter>Level\Town_Stage\Town_Object</Filter>
+      <Filter>Level &amp; OBJ\Town_Stage\Town_Object</Filter>
     </ClInclude>
     <ClInclude Include="Contents_SpriteRender.h">
       <Filter>Shader</Filter>
     </ClInclude>
     <ClInclude Include="Player_Attack_Effect.h">
-      <Filter>Level\Public_Object\Player\Effect</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Player_Smoke_Effect.h">
-      <Filter>Level\Public_Object\Player\Effect</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Effect</Filter>
     </ClInclude>
     <ClInclude Include="ContentsHelper.h">
       <Filter>ContentsHelper</Filter>
@@ -53,61 +53,58 @@
       <Filter>ContentsHelper</Filter>
     </ClInclude>
     <ClInclude Include="BackGround.h">
-      <Filter>Level\Public_Object\BackGround</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\BackGround</Filter>
     </ClInclude>
     <ClInclude Include="Boss.h">
-      <Filter>Level\Public_Object\Boss</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Boss</Filter>
     </ClInclude>
     <ClInclude Include="Target.h">
-      <Filter>Level\Public_Object\Player\Base</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Base</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Level\Public_Object\Player\Base</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Base</Filter>
     </ClInclude>
     <ClInclude Include="Player_Hand.h">
-      <Filter>Level\Public_Object\Player\Base</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Base</Filter>
     </ClInclude>
     <ClInclude Include="Boss_BGPIXEL.h">
-      <Filter>Level\Boss_Stage\Boss_Object</Filter>
+      <Filter>Level &amp; OBJ\Boss_Stage\Boss_Object</Filter>
     </ClInclude>
     <ClInclude Include="Monster01_GameMode.h">
-      <Filter>Level\Monster_Stage\Monster01_Stage\Level</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster01_Stage\Level</Filter>
     </ClInclude>
     <ClInclude Include="Monster02_GameMode.h">
-      <Filter>Level\Monster_Stage\Monster02_Stage\Level</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster02_Stage\Level</Filter>
     </ClInclude>
     <ClInclude Include="Monster01_BGPIXEL.h">
-      <Filter>Level\Monster_Stage\Monster01_Stage\OBJ</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster01_Stage\OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Monster02_BGPIXEL.h">
-      <Filter>Level\Monster_Stage\Monster02_Stage\OBJ</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster02_Stage\OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Monster01_BackGround.h">
-      <Filter>Level\Monster_Stage\Monster01_Stage\OBJ</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster01_Stage\OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Monster02_BackGround.h">
-      <Filter>Level\Monster_Stage\Monster02_Stage\OBJ</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster02_Stage\OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Monster03_GameMode.h">
-      <Filter>Level\Monster_Stage\Monster03_Stage\Level</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster03_Stage\Level</Filter>
     </ClInclude>
     <ClInclude Include="Monster03_BGPIXEL.h">
-      <Filter>Level\Monster_Stage\Monster03_Stage\OBJ</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster03_Stage\OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Monster03_BackGround.h">
-      <Filter>Level\Monster_Stage\Monster03_Stage\OBJ</Filter>
-    </ClInclude>
-    <ClInclude Include="Test_GameMode.h">
-      <Filter>Level</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster03_Stage\OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Player_AfterImage.h">
-      <Filter>Level\Public_Object\Player\Effect</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Boss_IcePillar.h">
-      <Filter>Level\Public_Object\Boss</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Boss</Filter>
     </ClInclude>
     <ClInclude Include="IceBullet.h">
-      <Filter>Level\Public_Object\Boss</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Boss</Filter>
     </ClInclude>
     <ClInclude Include="ContentsGUI.h">
       <Filter>GUI</Filter>
@@ -116,10 +113,13 @@
       <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="TileMap.h">
-      <Filter>Level\Public_Object\TileMap</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\TileMap</Filter>
     </ClInclude>
     <ClInclude Include="TileMapLevel.h">
-      <Filter>Level</Filter>
+      <Filter>Level &amp; OBJ\Public\LEVEL</Filter>
+    </ClInclude>
+    <ClInclude Include="TileSet_Mode.h">
+      <Filter>Level &amp; OBJ\Public\LEVEL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -130,106 +130,103 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Boss_GameMode.cpp">
-      <Filter>Level\Boss_Stage\Boss_Level</Filter>
+      <Filter>Level &amp; OBJ\Boss_Stage\Boss_Level</Filter>
     </ClCompile>
     <ClCompile Include="Town_GameMode.cpp">
-      <Filter>Level\Town_Stage\Town_Level</Filter>
+      <Filter>Level &amp; OBJ\Town_Stage\Town_Level</Filter>
     </ClCompile>
     <ClCompile Include="Title_GameMode.cpp">
-      <Filter>Level\Title_Screen\Title_Level</Filter>
+      <Filter>Level &amp; OBJ\Title_Screen\Title_Level</Filter>
     </ClCompile>
     <ClCompile Include="Title_BackGround.cpp">
-      <Filter>Level\Title_Screen\Title_Object</Filter>
+      <Filter>Level &amp; OBJ\Title_Screen\Title_Object</Filter>
     </ClCompile>
     <ClCompile Include="Town_BackGround.cpp">
-      <Filter>Level\Town_Stage\Town_Object</Filter>
+      <Filter>Level &amp; OBJ\Town_Stage\Town_Object</Filter>
     </ClCompile>
     <ClCompile Include="Boss_BackGround.cpp">
-      <Filter>Level\Boss_Stage\Boss_Object</Filter>
+      <Filter>Level &amp; OBJ\Boss_Stage\Boss_Object</Filter>
     </ClCompile>
     <ClCompile Include="Title_Logo.cpp">
-      <Filter>Level\Title_Screen\Title_Object</Filter>
+      <Filter>Level &amp; OBJ\Title_Screen\Title_Object</Filter>
     </ClCompile>
     <ClCompile Include="Title_Bird.cpp">
-      <Filter>Level\Title_Screen\Title_Object</Filter>
+      <Filter>Level &amp; OBJ\Title_Screen\Title_Object</Filter>
     </ClCompile>
     <ClCompile Include="Titlre_Cloud.cpp">
-      <Filter>Level\Title_Screen\Title_Object</Filter>
+      <Filter>Level &amp; OBJ\Title_Screen\Title_Object</Filter>
     </ClCompile>
     <ClCompile Include="Town_BGPIXEL.cpp">
-      <Filter>Level\Town_Stage\Town_Object</Filter>
+      <Filter>Level &amp; OBJ\Town_Stage\Town_Object</Filter>
     </ClCompile>
     <ClCompile Include="Contents_SpriteRender.cpp">
       <Filter>Shader</Filter>
     </ClCompile>
     <ClCompile Include="Player_Attack_Effect.cpp">
-      <Filter>Level\Public_Object\Player\Effect</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Player_Smoke_Effect.cpp">
-      <Filter>Level\Public_Object\Player\Effect</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Effect</Filter>
     </ClCompile>
     <ClCompile Include="ContentsHelper.cpp">
       <Filter>ContentsHelper</Filter>
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
-      <Filter>Level\Public_Object\BackGround</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\BackGround</Filter>
     </ClCompile>
     <ClCompile Include="Boss.cpp">
-      <Filter>Level\Public_Object\Boss</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Boss</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Level\Public_Object\Player\Base</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Base</Filter>
     </ClCompile>
     <ClCompile Include="Player_Hand.cpp">
-      <Filter>Level\Public_Object\Player\Base</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Base</Filter>
     </ClCompile>
     <ClCompile Include="PlayerState.cpp">
-      <Filter>Level\Public_Object\Player\Base</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Base</Filter>
     </ClCompile>
     <ClCompile Include="Target.cpp">
-      <Filter>Level\Public_Object\Player\Base</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Base</Filter>
     </ClCompile>
     <ClCompile Include="Boss_BGPIXEL.cpp">
-      <Filter>Level\Boss_Stage\Boss_Object</Filter>
+      <Filter>Level &amp; OBJ\Boss_Stage\Boss_Object</Filter>
     </ClCompile>
     <ClCompile Include="Monster01_GameMode.cpp">
-      <Filter>Level\Monster_Stage\Monster01_Stage\Level</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster01_Stage\Level</Filter>
     </ClCompile>
     <ClCompile Include="Monster02_GameMode.cpp">
-      <Filter>Level\Monster_Stage\Monster02_Stage\Level</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster02_Stage\Level</Filter>
     </ClCompile>
     <ClCompile Include="Monster01_BGPIXEL.cpp">
-      <Filter>Level\Monster_Stage\Monster01_Stage\OBJ</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster01_Stage\OBJ</Filter>
     </ClCompile>
     <ClCompile Include="Monster02_BGPIXEL.cpp">
-      <Filter>Level\Monster_Stage\Monster02_Stage\OBJ</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster02_Stage\OBJ</Filter>
     </ClCompile>
     <ClCompile Include="Monster01_BackGround.cpp">
-      <Filter>Level\Monster_Stage\Monster01_Stage\OBJ</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster01_Stage\OBJ</Filter>
     </ClCompile>
     <ClCompile Include="Monster02_BackGround.cpp">
-      <Filter>Level\Monster_Stage\Monster02_Stage\OBJ</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster02_Stage\OBJ</Filter>
     </ClCompile>
     <ClCompile Include="Monster03_GameMode.cpp">
-      <Filter>Level\Monster_Stage\Monster03_Stage\Level</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster03_Stage\Level</Filter>
     </ClCompile>
     <ClCompile Include="Monster03_BGPIXEL.cpp">
-      <Filter>Level\Monster_Stage\Monster03_Stage\OBJ</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster03_Stage\OBJ</Filter>
     </ClCompile>
     <ClCompile Include="Monster03_BackGround.cpp">
-      <Filter>Level\Monster_Stage\Monster03_Stage\OBJ</Filter>
-    </ClCompile>
-    <ClCompile Include="Test_GameMode.cpp">
-      <Filter>Level</Filter>
+      <Filter>Level &amp; OBJ\Monster_Stage\Monster03_Stage\OBJ</Filter>
     </ClCompile>
     <ClCompile Include="Player_AfterImage.cpp">
-      <Filter>Level\Public_Object\Player\Effect</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Boss_IcePillar.cpp">
-      <Filter>Level\Public_Object\Boss</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Boss</Filter>
     </ClCompile>
     <ClCompile Include="IceBullet.cpp">
-      <Filter>Level\Public_Object\Boss</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Boss</Filter>
     </ClCompile>
     <ClCompile Include="ContentsGUI.cpp">
       <Filter>GUI</Filter>
@@ -238,107 +235,119 @@
       <Filter>GUI</Filter>
     </ClCompile>
     <ClCompile Include="TileMap.cpp">
-      <Filter>Level\Public_Object\TileMap</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TileSet_Mode.cpp">
+      <Filter>Level &amp; OBJ\Public\LEVEL</Filter>
     </ClCompile>
     <ClCompile Include="TileMapLevel.cpp">
-      <Filter>Level</Filter>
+      <Filter>Level &amp; OBJ\Public\LEVEL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
       <UniqueIdentifier>{fd605e94-9bdf-4d18-b7b0-0828847b38ce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level">
-      <UniqueIdentifier>{cc273b67-3995-4d04-a850-6a50a35d6542}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{bd6b4b12-182c-47a0-85ac-35582cac0e36}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Public_Object">
-      <UniqueIdentifier>{6267f4e0-8c63-42b9-952b-2a66a73d5dfa}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shader">
       <UniqueIdentifier>{99cfab3f-75ee-463f-ac98-f0a7f9e53411}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\Public_Object\Player">
-      <UniqueIdentifier>{f4360ab8-18e2-4679-bc2d-42efdacfd90e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Public_Object\Player\Effect">
-      <UniqueIdentifier>{1312e8e1-92f9-4ee6-ae07-4bd786cffd54}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ContentsHelper">
       <UniqueIdentifier>{91ef3e95-be88-4dc6-a60d-7b943355922f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Public_Object\BackGround">
-      <UniqueIdentifier>{b6f0da8b-3e37-4e15-b3ad-cddfc08606b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Public_Object\Boss">
-      <UniqueIdentifier>{6c88e587-ae6d-43d0-a298-7178bf14518b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Public_Object\Player\Base">
-      <UniqueIdentifier>{ffe371bb-41ab-444e-a772-2ac0b43931b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Boss_Stage">
-      <UniqueIdentifier>{48ea03d0-d6d7-45b4-affb-a3c04b73f687}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Boss_Stage\Boss_Object">
-      <UniqueIdentifier>{06debe8d-4a1b-476c-8a13-26bf8957ad2e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Boss_Stage\Boss_Level">
-      <UniqueIdentifier>{2ad3bbf2-84af-4632-ac66-b39297df0aba}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Town_Stage">
-      <UniqueIdentifier>{6574f642-44b7-42bb-bc02-75924ce35f59}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Town_Stage\Town_Level">
-      <UniqueIdentifier>{51bafdb3-8f30-480b-97b1-f99ef596930b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Town_Stage\Town_Object">
-      <UniqueIdentifier>{dcb72775-f936-463b-86cd-411b7ac6a220}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Title_Screen">
-      <UniqueIdentifier>{11dac7f2-1b43-4029-b4e0-9db5112e5ebe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Title_Screen\Title_Level">
-      <UniqueIdentifier>{0167decc-efd3-4dcf-8466-262b5c931a86}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Title_Screen\Title_Object">
-      <UniqueIdentifier>{92299745-88e1-4e4e-8781-6e0931344fa6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Monster_Stage">
-      <UniqueIdentifier>{df6620eb-6ee0-4d10-b180-69d9908e57d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Monster_Stage\Monster01_Stage">
-      <UniqueIdentifier>{4cdba82d-f938-4357-a04c-366f7de81314}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Monster_Stage\Monster02_Stage">
-      <UniqueIdentifier>{685d1c05-9203-4560-b5b5-c4c3cd1f3ef1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Monster_Stage\Monster01_Stage\Level">
-      <UniqueIdentifier>{70026487-4d2b-4c90-8127-e80765217f44}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Monster_Stage\Monster02_Stage\Level">
-      <UniqueIdentifier>{6c75856a-3299-4354-aacb-bf32f51f1bed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Monster_Stage\Monster02_Stage\OBJ">
-      <UniqueIdentifier>{030d3ea9-8a47-443d-874b-073490ad24ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Monster_Stage\Monster01_Stage\OBJ">
-      <UniqueIdentifier>{2fa5f1f9-5c2b-456b-9bab-2a4490fc8bbc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Monster_Stage\Monster03_Stage">
-      <UniqueIdentifier>{866335a4-944d-4ac1-9be9-9a797ad885f4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Monster_Stage\Monster03_Stage\Level">
-      <UniqueIdentifier>{495b018f-9894-49ff-8fa9-0a2ca9532806}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Monster_Stage\Monster03_Stage\OBJ">
-      <UniqueIdentifier>{63fbcfa9-1fde-4027-b6c1-80566d46d2e0}</UniqueIdentifier>
     </Filter>
     <Filter Include="GUI">
       <UniqueIdentifier>{931a8cd5-cfaf-4afb-a7eb-1ff0c37685c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\Public_Object\TileMap">
+    <Filter Include="Level &amp; OBJ">
+      <UniqueIdentifier>{cc273b67-3995-4d04-a850-6a50a35d6542}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Boss_Stage">
+      <UniqueIdentifier>{48ea03d0-d6d7-45b4-affb-a3c04b73f687}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Boss_Stage\Boss_Object">
+      <UniqueIdentifier>{06debe8d-4a1b-476c-8a13-26bf8957ad2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Boss_Stage\Boss_Level">
+      <UniqueIdentifier>{2ad3bbf2-84af-4632-ac66-b39297df0aba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Town_Stage">
+      <UniqueIdentifier>{6574f642-44b7-42bb-bc02-75924ce35f59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Town_Stage\Town_Level">
+      <UniqueIdentifier>{51bafdb3-8f30-480b-97b1-f99ef596930b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Town_Stage\Town_Object">
+      <UniqueIdentifier>{dcb72775-f936-463b-86cd-411b7ac6a220}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Title_Screen">
+      <UniqueIdentifier>{11dac7f2-1b43-4029-b4e0-9db5112e5ebe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Title_Screen\Title_Level">
+      <UniqueIdentifier>{0167decc-efd3-4dcf-8466-262b5c931a86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Title_Screen\Title_Object">
+      <UniqueIdentifier>{92299745-88e1-4e4e-8781-6e0931344fa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Monster_Stage">
+      <UniqueIdentifier>{df6620eb-6ee0-4d10-b180-69d9908e57d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Monster_Stage\Monster01_Stage">
+      <UniqueIdentifier>{4cdba82d-f938-4357-a04c-366f7de81314}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Monster_Stage\Monster01_Stage\Level">
+      <UniqueIdentifier>{70026487-4d2b-4c90-8127-e80765217f44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Monster_Stage\Monster01_Stage\OBJ">
+      <UniqueIdentifier>{2fa5f1f9-5c2b-456b-9bab-2a4490fc8bbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Monster_Stage\Monster02_Stage">
+      <UniqueIdentifier>{685d1c05-9203-4560-b5b5-c4c3cd1f3ef1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Monster_Stage\Monster02_Stage\Level">
+      <UniqueIdentifier>{6c75856a-3299-4354-aacb-bf32f51f1bed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Monster_Stage\Monster02_Stage\OBJ">
+      <UniqueIdentifier>{030d3ea9-8a47-443d-874b-073490ad24ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Monster_Stage\Monster03_Stage">
+      <UniqueIdentifier>{866335a4-944d-4ac1-9be9-9a797ad885f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Monster_Stage\Monster03_Stage\Level">
+      <UniqueIdentifier>{495b018f-9894-49ff-8fa9-0a2ca9532806}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Monster_Stage\Monster03_Stage\OBJ">
+      <UniqueIdentifier>{63fbcfa9-1fde-4027-b6c1-80566d46d2e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Public">
+      <UniqueIdentifier>{4be8823e-d347-417f-9548-bc8301b13f9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Public\LEVEL">
+      <UniqueIdentifier>{c41022d4-292e-44dd-be18-29dc5380bef0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Public\OBJ">
+      <UniqueIdentifier>{6c0f88d2-a2a2-41a3-a986-cbce80456566}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Public\OBJ\Public_Object">
+      <UniqueIdentifier>{6267f4e0-8c63-42b9-952b-2a66a73d5dfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Public\OBJ\Public_Object\Player">
+      <UniqueIdentifier>{f4360ab8-18e2-4679-bc2d-42efdacfd90e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Public\OBJ\Public_Object\Player\Effect">
+      <UniqueIdentifier>{1312e8e1-92f9-4ee6-ae07-4bd786cffd54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Public\OBJ\Public_Object\Player\Base">
+      <UniqueIdentifier>{ffe371bb-41ab-444e-a772-2ac0b43931b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Public\OBJ\Public_Object\BackGround">
+      <UniqueIdentifier>{b6f0da8b-3e37-4e15-b3ad-cddfc08606b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Public\OBJ\Public_Object\Boss">
+      <UniqueIdentifier>{6c88e587-ae6d-43d0-a298-7178bf14518b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Public\OBJ\Public_Object\TileMap">
       <UniqueIdentifier>{4733a461-8e6b-4f04-8607-5689fee036b4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
