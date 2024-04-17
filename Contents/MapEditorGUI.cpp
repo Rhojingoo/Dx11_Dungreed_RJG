@@ -87,17 +87,8 @@ void MapEditorGUI::Tick(ULevel* Level, float _Delta)
 		float4 MousePos = GEngine->EngineWindow.GetScreenMousePos();
 		MousePosWorld = Level->GetMainCamera()->ScreenPosToWorldPos(MousePos);
 
-		if (Delete == true)
-		{
-			TileRenderer->DeleteON();			
-		}
-
 		TileRenderer->SetTile(MousePosWorld, SelectSpriteIndex);
-
-
 	}
-
-
 }
 
 void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
@@ -132,12 +123,6 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 	if (true == ImGui::Button("Create"))
 	{
 		TileRenderer->CreateTileMap(spriteFilename, { TileSize[0], TileSize[1] }, TileCount[0], TileCount[1], 0);
-	}
-
-
-	if (true == ImGui::Button("DELETE"))
-	{
-		Delete = !Delete;
 	}
 
 	//dataToSave = {0};
@@ -213,9 +198,6 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 			TileCount[0] = std::stoi(Values[5]);
 			TileCount[1] = std::stoi(Values[7]);
 
-			//TileCount[0] = 10;
-			//TileCount[1] = 10;
-
 			Result.resize(TileCount[1]);
 			for (size_t y = 0; y < TileCount[1]; y++)
 			{
@@ -231,7 +213,6 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 				}
 			}
 
-			//TileRenderer->SetTiels(Result);
 			TileRenderer->CreateTileMap(spriteFilename, { 64, 64 }, TileCount[0], TileCount[1], 0);
 			for (size_t y = 0; y < TileCount[1]; y++)
 			{
@@ -239,64 +220,7 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 				{					
 					TileRenderer->SetTile(x,y, Result[y][x]);
 				}
-			}		
-		
-			//// 파일 경로 출력 및 파일 로딩				
-			//std::fstream fs(File.GetFullPath(), std::ios::in);
-			//if (fs.is_open())
-			//{
-			//	std::vector<std::vector<int>> Tiles;
-			//	std::string line;	
-			//	{
-			//		std::getline(fs, line, ',');
-			//		std::getline(fs, line, ',');
-			//		TileSize[0] = std::stoi(line);
-			//		std::getline(fs, line, ',');
-			//		std::getline(fs, line, ',');
-			//		TileSize[1] = std::stoi(line);
-			//	}
-			//	{
-			//		std::getline(fs, line, ',');
-			//		std::getline(fs, line, ',');
-			//		TileCount[0] = std::stoi(line);
-			//		std::getline(fs, line, ',');
-			//		std::getline(fs, line, ',');
-			//		TileCount[1] = std::stoi(line);		
-			//		std::getline(fs, line, '\n');
-			//	}
-			//	std::getline(fs, line);
-			//	while (std::getline(fs, line))
-			//	{
-			//		std::stringstream ss(line);
-			//		int Tile_Index;
-			//		int Count_X;
-
-			//		std::vector<int> Row_Tiles;
-			//		std::string number;
-			//
-			//		std::string s_num, s_row, s_col, s_tile_index;
-			//		std::getline(ss, s_num, ',');
-			//		std::getline(ss, s_row, ',');
-			//		//
-			//		std::getline(ss, s_col, ',');
-			//		Count_X = std::stoi(s_col);
-			//		std::getline(ss, s_tile_index);
-			//		Tile_Index = std::stoi(s_tile_index);
-			//		Row_Tiles.push_back(Tile_Index);
-
-			//		if (Count_X >= TileCount[0] - 1)
-			//		{
-			//			Tiles.push_back(Row_Tiles);
-			//			Row_Tiles.clear();
-			//		}					
-			//	}
-			//	Tiles;
-			//	TileRenderer->CreateTileMap(dataToLoad, { TileSize[0], TileSize[1] }, TileCount[0], TileCount[1], 0);
-			//	TileRenderer->GetTileMapData();
-			//	// TileRenderer->SetTile();
-
-			//	fs.close();
-			//}
+			}					
 		}
 	}			
 
@@ -309,17 +233,7 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 
 	
 	std::shared_ptr<UEngineSprite> Sprite = UEngineSprite::FindRes("Map4X(64)_Cut.png");
-	//std::shared_ptr<UEngineSprite> Sprite = UEngineSprite::FindRes("Map4X(64).png");
-
-
-	// 다이렉트 디바이스랑
-	// 다이렉트 컨텍스
-	// imgui는 내부에서 자신의 쉐이더를 사용합니다.
-
-	// imgui에서 사용하는 쉐이더에 내 텍스처가 들어간다.
-	// ImVec2
-
-	// IMgui는 무조건 char* Event체크를 합니다;
+	
 	if (SelectSpriteIndex != -1)
 	{
 		FSpriteInfo Info = Sprite->GetSpriteInfo(SelectSpriteIndex);
@@ -352,7 +266,6 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 
 		std::string Text = std::to_string(i);
 
-		// 줄바꿈을 자동으로 해준다.
 		if (true == ImGui::ImageButton(Text.c_str(), Info.Texture->GetSRV(), {64, 64}, UV0, UV1))
 		{
 			SelectSpriteIndex = i;
@@ -363,37 +276,7 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 			ImGui::SameLine();
 		}
 	}
-
-	// Index 내가 찍어야할 스프라이트
-	//ImGui::TextUnformatted("child_2");
-	//ImGui::GetWindowDrawList()->AddLine({ 0, 0 }, { 500, 500 }, 0xFFFFFFFF);
-	//ImGui::SetCursorPos({ 1500, 1500 });
-	//ImGui::TextUnformatted("hello");
+		
 	ImGui::EndChild();
 }
 
-void MapEditorGUI::saveData(const std::string_view _data, const std::string_view _filePath)
-{
-	//UEngineDirectory Dir;
-	//Dir.MoveToSearchChild("ContentsResources");
-	//Dir.Move("Image");
-	//Dir.Move("TileMap_Save");
-	//FEngineOption EngineOption;
-	//if (false==Dir.IsFile(_data))
-	//{
-	//	UEngineFile File = Dir.GetPathFromFile(_data);
-	//	//UEngineSerializer Ser;		
-	//	//EngineOption.Serialize(Ser);
-	//	File.Open(EIOOpenMode::Write, EIODataType::Text);
-	//	File.Save(Ser);
-	//}
-
-	{
-		//UEngineFile File = Dir.GetPathFromFile(_data);
-		//UEngineSerializer Ser;
-		//File = Dir.GetPathFromFile(_data);
-		//File.Open(EIOOpenMode::Read, EIODataType::Text);
-		//File.Load(Ser);
-		//EngineOption.DeSerialize(Ser);
-	}
-}

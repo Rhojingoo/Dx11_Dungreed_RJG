@@ -24,11 +24,6 @@ public:
 
 	float4 ConvertTileIndex(float4 _WorldXY);
 
-	void SetTiels(std::vector<std::vector<int>>& _Tiles)
-	{ 
-		Tiles = _Tiles; 
-	}
-
 	void SetTile(float4 _WorldXY, int _Index);
 
 	void SetTile(int _X, int _Y, int _Index);
@@ -37,7 +32,6 @@ public:
 	{
 		return Tiles;
 	}
-	void DeleteON() { Delete = true; }
 
 protected:
 	void BeginPlay() override;
@@ -48,6 +42,5 @@ protected:
 	FCuttingData CuttingDataValue;
 	std::shared_ptr<UEngineSprite> TileSprite;
 	float4 TileSize = {64, 64};
-	bool Delete = false;
 };
 

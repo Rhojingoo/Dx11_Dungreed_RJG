@@ -23,7 +23,6 @@ protected:
 
 	virtual void OnGui(ULevel* Level, float _Delta);
 
-	void saveData(const std::string_view _data, const std::string_view _filePath);
 
 private:
 	float4 MousePosWorld;
@@ -32,7 +31,6 @@ private:
 	float TileCount[2] = {};
 	char dataToSave[128] = "";
 	char dataToLoad[128] = "";
-	bool Delete = false;
 };
 
 
