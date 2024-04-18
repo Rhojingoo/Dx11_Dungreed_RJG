@@ -159,6 +159,11 @@ void ABoss::Boss_IntroStart()
 	IcePillar[2]->AddPos({ -Bullet,-Bullet });
 	IcePillar[3]->AddPos({ Bullet,-Bullet });
 
+	PlRotation[0] = IcePillar[0]->GetActorTransform().GetRotation();
+	PlRotation[1] = IcePillar[1]->GetActorTransform().GetRotation();
+	PlRotation[2] = IcePillar[2]->GetActorTransform().GetRotation();
+	PlRotation[3] = IcePillar[3]->GetActorTransform().GetRotation();
+
 	for (int a = 0; a < 4; a++)
 	{
 		//Bullet_Pos[0] = IcePillar[a]->GetPos();
@@ -189,8 +194,8 @@ void ABoss::Boss_Idle(float _DeltaTime)
 		Boss_Time += _DeltaTime;
 		if (Boss_Time > 3.f)
 		{
-			StateChange(BossState::Patton1);
-			//StateChange(BossState::Patton2);
+			//StateChange(BossState::Patton1);
+			StateChange(BossState::Patton2);
 			Boss_Time = 0.f;
 		}
 	}
@@ -204,7 +209,6 @@ void ABoss::Boss_IdleStart()
 	IcePillar[1]->AddPos({ 0.f,0.f });
 	IcePillar[2]->AddPos({ 0.f,0.f });
 	IcePillar[3]->AddPos({ 0.f,0.f });
-
 
 	//IcePillar[0]->StateChange(IcePillarState::Idle);
 	//IcePillar[1]->StateChange(IcePillarState::Idle);
@@ -303,22 +307,14 @@ void ABoss::Boss_Patton4(float _DeltaTime)
 {
 }
 
-void ABoss::Boss_ReadyStart()
-{
-	for (int a = 0; a < 4; a++)
-	{
-		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
-		IcePillar[a]->AttackEndFalse();
-		IcePillar[a]->StateChange(IcePillarState::Idle);
-	}
-}
+
 
 void ABoss::Boss_Ready2(float _DeltaTime)
 {	
 	for (int a = 0; a < 4; a++)
 	{
-		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
-		IcePillar[a]->AttackEndFalse();
+		//IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
+		//IcePillar[a]->AttackEndFalse();
 		IcePillar[a]->StateChange(IcePillarState::Idle);
 	}
 	StateChange(BossState::Idle);
@@ -330,8 +326,26 @@ void ABoss::Boss_ReadyStart2()
 	{
 		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
 		IcePillar[a]->AttackEndFalse();
+	}
+	IcePillar[0]->SetActorRotation({ PlRotation[0] });
+	IcePillar[1]->SetActorRotation({ PlRotation[1] });
+	IcePillar[2]->SetActorRotation({ PlRotation[2] });
+	IcePillar[3]->SetActorRotation({ PlRotation[3] });
+}
+
+void ABoss::Boss_ReadyStart()
+{
+	for (int a = 0; a < 4; a++)
+	{
+		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
+		IcePillar[a]->AttackEndFalse();
 		IcePillar[a]->StateChange(IcePillarState::Idle);
 	}
+
+	//IcePillar[0]->SetActorRotation({ 0.f, 0.f, 0.f });
+	//IcePillar[1]->SetActorRotation({ 0.f, 0.f, 0.f });
+	//IcePillar[2]->SetActorRotation({ 0.f, 0.f,0.f });
+	//IcePillar[3]->SetActorRotation({ 0.f, 0.f,0.f });
 }
 
 void ABoss::Boss_Ready(float _DeltaTime)

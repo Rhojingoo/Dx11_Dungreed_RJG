@@ -68,6 +68,8 @@ private:
 	std::shared_ptr<ABoss_IcePillar> IcePillar[4] = {};
 	BossState Boss_State = BossState::Idle;
 
+
+	FVector PlRotation[4] = {};
 	FVector Bullet_Pos[4] = {};
 	const float Bullet = 150.f;
 	float Boss_Time = 0.f;

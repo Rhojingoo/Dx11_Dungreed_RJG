@@ -132,7 +132,7 @@ void ABoss_IcePillar::IcePillar_Attack_2(float _DeltaTime)
 		DirPos.Z = 0;
 		FVector DegreeDirPos = DirPos * UEngineMath::RToD;
 		DirPos *= UEngineMath::DToR;
-		if (AttackCount < 2)
+		if (AttackCount < 3)
 		{
 			if (RootRENDERPos.Z >= 30.f + 45.f && RootRENDERPos.Z <= ((30.f + 45.f) + 1.f))
 			{
