@@ -90,6 +90,7 @@ void ABoss_IcePillar::StateUpdate(float _DeltaTime)
 void ABoss_IcePillar::IcePillar_Intro(float _DeltaTime)
 {
 	AddActorRotation(float4{ 0.0f, 0.0f, 1.0f } *180.0f * _DeltaTime);
+	Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
 	IntroCheck = Renderer->IsCurAnimationEnd();
 	//IntroCheck = true;
 	//if(IntroCheck == true)
@@ -103,6 +104,7 @@ void ABoss_IcePillar::IcePillar_IntroStart()
 
 void ABoss_IcePillar::IcePillar_Idle(float _DeltaTime)
 {
+	Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
 }
 
 void ABoss_IcePillar::IcePillar_IdleStart()
@@ -154,7 +156,7 @@ void ABoss_IcePillar::IcePillar_Attack(float _DeltaTime)
 		}
 	}
 
-	Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
+	//Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
 }
 
 void ABoss_IcePillar::IcePillar_AttackStart()

@@ -68,9 +68,9 @@ void ABoss::StateChange(BossState _State)
 		case BossState::Idle:
 			Boss_IdleStart();
 			break;
-			//case BossState::Patton1:
-			//	Boss_Patton1();
-			//	break;
+		case BossState::Patton1:
+			Boss_Patton1Start();
+			break;
 			//case BossState::Patton2:
 			//	Boss_Patton2();
 			//	break;
@@ -131,10 +131,15 @@ void ABoss::Boss_IntroStart()
 {
 	Renderer->ChangeAnimation("Boss_Enter");
 
-	IcePillar[0]->SetPos({ -200.f,200.f });
-	IcePillar[1]->SetPos({ 200.f,200.f });
-	IcePillar[2]->SetPos({ -200.f,-200.f });
-	IcePillar[3]->SetPos({ 200.f,-200.f });
+	//IcePillar[0]->SetPos({ -200.f,200.f });
+	//IcePillar[1]->SetPos({ 200.f,200.f });
+	//IcePillar[2]->SetPos({ -200.f,-200.f });
+	//IcePillar[3]->SetPos({ 200.f,-200.f });
+
+	IcePillar[0]->SetPos({ -150.f,150.f });
+	IcePillar[1]->SetPos({ 150.f,150.f });
+	IcePillar[2]->SetPos({ -150.f,-150.f });
+	IcePillar[3]->SetPos({ 150.f,-150.f });
 
 	IcePillar[0]->StateChange(IcePillarState::Intro);
 	IcePillar[1]->StateChange(IcePillarState::Intro);
@@ -148,14 +153,24 @@ void ABoss::Boss_Idle(float _DeltaTime)
 {
 	if (IntroOn == false)
 	{
-		Intro_time += _DeltaTime;
-		if (Intro_time > 3.f)
+		Boss_Time += _DeltaTime;
+		if (Boss_Time > 3.f)
 		{
 			StateChange(BossState::Intro);
 			IntroOn = true;
+			Boss_Time = 0.f;
 		}
 	}
-
+	else
+	{
+		Boss_Time += _DeltaTime;
+		if (Boss_Time > 3.f)
+		{
+			StateChange(BossState::Patton1);
+			IntroOn = true;
+			Boss_Time = 0.f;
+		}
+	}
 }
 
 void ABoss::Boss_IdleStart()
@@ -175,6 +190,33 @@ void ABoss::Boss_IdleStart()
 
 void ABoss::Boss_Patton1(float _DeltaTime)
 {
+	{
+		static float PosX = 0.f;
+		if (PosX < 7.f)
+		{
+			PosX += 50.f * _DeltaTime;
+			IcePillar[0]->SetPos({ -PosX, PosX/2 });
+			IcePillar[1]->SetPos({ PosX, PosX/2 });
+			IcePillar[2]->SetPos({ -PosX,-PosX/1000 });
+			IcePillar[3]->SetPos({ PosX,-PosX/1000 });
+		}
+		//IcePillar[0]->SetPos({ -PosX,0.f });
+		//IcePillar[1]->SetPos({ PosX,0.f });
+	/*	IcePillar[2]->SetPos({ -200.f,-200.f });
+		IcePillar[3]->SetPos({ 200.f,-200.f });*/
+	}
+	//IcePillar[0]->AddActorLocation({ -200.f,200.f });
+	//IcePillar[1]->AddActorLocation({ 200.f,200.f });
+	//IcePillar[2]->AddActorLocation({ -200.f,-200.f });
+	//IcePillar[3]->AddActorLocation({ 200.f,-200.f });
+}
+
+void ABoss::Boss_Patton1Start()
+{
+	IcePillar[0]->StateChange(IcePillarState::Attack);
+	IcePillar[1]->StateChange(IcePillarState::Attack);
+	IcePillar[2]->StateChange(IcePillarState::Attack);
+	IcePillar[3]->StateChange(IcePillarState::Attack);
 }
 
 void ABoss::Boss_Patton2(float _DeltaTime)
