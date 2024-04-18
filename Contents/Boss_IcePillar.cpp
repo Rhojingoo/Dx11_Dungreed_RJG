@@ -124,87 +124,106 @@ void ABoss_IcePillar::IcePillar_Attack_2(float _DeltaTime)
 {
 	if (SetBullet == true)
 	{
-		Root->GetWorldRotation();
-
-		GetActorTransform().GetRotation();;
-
+		FVector RootRENDERPos = Root->GetWorldRotation();
+		GetActorTransform().GetRotation();
 		FVector ParentPos =  GetActorLocation();
-		
-		FVector ChidPos = Renderer->GetLocalRotation();
-		FVector ChidPos_1 = Renderer->GetLocalPosition();
-
 		FVector ChidPos1 = Renderer->GetWorldPosition();
-		FVector ChidPos2 = Renderer->GetWorldRotation();
-		
-		
-
 		FVector DirPos = ChidPos1 - ParentPos;
 		DirPos.Normalize2D();
 		DirPos.Z = 0;
-
 		FVector DegreeDirPos = DirPos * UEngineMath::RToD;
 		DirPos *= UEngineMath::DToR;
 
-
-		float CursorAngleRad = ChidPos2.Z;
-		//CursorAngleRad = CursorAngleRad * UEngineMath::DToR;
-
-		if (CursorAngleRad >= (0.f) && CursorAngleRad <= ((0.f) + 0.02f))
-		{
-			IceBullet[0]->SetActorLocation(RenderPos);
-			IceBullet[0]->SetTarget(-DirPos);
-			IceBullet[0]->TargetOn();
-		}
-
-
-		if (CursorAngleRad >=15.f && CursorAngleRad <= ((15.f)+0.02f))
+		if (RootRENDERPos.Z >=30.f + 45.f && RootRENDERPos.Z <= ((30.f + 45.f)+ 1.f))
 		{
 			IceBullet[1]->SetActorLocation(RenderPos);
 			IceBullet[1]->SetTarget(-DirPos);
 			IceBullet[1]->TargetOn();
 		}
 
-		if (CursorAngleRad >= (30.f) && CursorAngleRad <= ((30.f) + 0.02f))
+		if (RootRENDERPos.Z >= (60.f + 45.f) && RootRENDERPos.Z <= ((60.f + 45.f) + 1.f))
 		{
 			IceBullet[2]->SetActorLocation(RenderPos);
 			IceBullet[2]->SetTarget(-DirPos);
 			IceBullet[2]->TargetOn();
 		}
 
-		if (CursorAngleRad >= (45.f) && CursorAngleRad <= ((45.f) + 0.02f))
+		if (RootRENDERPos.Z >= (90.f + 45.f) && RootRENDERPos.Z <= ((90.f + 45.f) + 1.f))
 		{
 			IceBullet[3]->SetActorLocation(RenderPos);
 			IceBullet[3]->SetTarget(-DirPos);
 			IceBullet[3]->TargetOn();
 		}
 
-		if (CursorAngleRad >= (60.f) && CursorAngleRad <= ((60.f) + 0.02f))
+		if (RootRENDERPos.Z >= (120.f + 45.f) && RootRENDERPos.Z <= ((120.f + 45.f) + 1.f))
 		{
 			IceBullet[4]->SetActorLocation(RenderPos);
 			IceBullet[4]->SetTarget(-DirPos);
 			IceBullet[4]->TargetOn();
 		}
 
+		if (RootRENDERPos.Z >= (150.f + 45.f - 180.f) && RootRENDERPos.Z <= ((150.f + 45.f - 180.f) + 1.f))
+		{
+			IceBullet[5]->SetActorLocation(RenderPos);
+			IceBullet[5]->SetTarget(-DirPos);
+			IceBullet[5]->TargetOn();
+		}
 
-		//for (int a = 0; a < 6; a++)
-		//{
-		//	if (CursorAngleRad >=(a* 25.f) && CursorAngleRad <= ((a * 25.f)+0.1f))
-		//	{
-		//		IceBullet[a]->SetActorLocation(RenderPos);
-		//		IceBullet[a]->SetTarget(-DirPos);
-		//		IceBullet[a]->TargetOn();
-		//	}
-		//}
-		//for (int a = 6; a < 12; a++)
-		//{
-		//	if (CursorAngleRad >= (a * -25.f) && CursorAngleRad <= ((a * -25.f) - 0.1f))
-		//	{
-		//		IceBullet[a]->SetActorLocation(RenderPos);
-		//		IceBullet[a]->SetTarget(-DirPos);
-		//		IceBullet[a]->TargetOn();
-		//	}
-		//}
-		int a = 0;		
+		if (RootRENDERPos.Z >= (180.f + 45.f -180.f) && RootRENDERPos.Z <= ((180.f + 45.f - 180.f) + 1.f))
+		{
+			IceBullet[6]->SetActorLocation(RenderPos);
+			IceBullet[6]->SetTarget(-DirPos);
+			IceBullet[6]->TargetOn();
+		}
+
+		if (RootRENDERPos.Z >= (-180.f + 45.f) && RootRENDERPos.Z <= ((-180.f + 45.f) + 1.f))
+		{
+			IceBullet[0]->SetActorLocation(RenderPos);
+			IceBullet[0]->SetTarget(-DirPos);
+			IceBullet[0]->TargetOn();
+		}
+
+		if (RootRENDERPos.Z >= (-150.f + 45.f) && RootRENDERPos.Z <= ((-150.f + 45.f) + 1.f))
+		{
+			IceBullet[7]->SetActorLocation(RenderPos);
+			IceBullet[7]->SetTarget(-DirPos);
+			IceBullet[7]->TargetOn();
+		}
+
+		if (RootRENDERPos.Z >= (-120.f + 45.f) && RootRENDERPos.Z <= ((-120.f + 45.f) + 1.f))
+		{
+			IceBullet[8]->SetActorLocation(RenderPos);
+			IceBullet[8]->SetTarget(-DirPos);
+			IceBullet[8]->TargetOn();
+		}
+
+		if (RootRENDERPos.Z >= (-90.f + 45.f) && RootRENDERPos.Z <= ((-90.f + 45.f) + 1.f))
+		{
+			IceBullet[9]->SetActorLocation(RenderPos);
+			IceBullet[9]->SetTarget(-DirPos);
+			IceBullet[9]->TargetOn();
+		}
+
+		if (RootRENDERPos.Z >= (-60.f + 45.f) && RootRENDERPos.Z <= ((-60.f + 45.f) + 1.f))
+		{
+			IceBullet[10]->SetActorLocation(RenderPos);
+			IceBullet[10]->SetTarget(-DirPos);
+			IceBullet[10]->TargetOn();
+		}
+
+		if (RootRENDERPos.Z >= (-30.f + 45.f) && RootRENDERPos.Z <= ((-30.f + 45.f) + 1.f))
+		{
+			IceBullet[11]->SetActorLocation(RenderPos);
+			IceBullet[11]->SetTarget(-DirPos);
+			IceBullet[11]->TargetOn();
+		}
+		if (RootRENDERPos.Z >= (-180.f+15.f) && RootRENDERPos.Z <= ((-180.f+15.f) + 1.f))
+		{
+			IceBullet[12]->SetActorLocation(RenderPos);
+			IceBullet[12]->SetTarget(-DirPos);
+			IceBullet[12]->TargetOn();
+		}
+
 	}
 	if (AttackEnd == true)
 	{
@@ -278,7 +297,7 @@ void ABoss_IcePillar::BeginPlay()
 {
 	Super::BeginPlay();
 
-	for (int Num = 0; Num < 12; Num++)
+	for (int Num = 0; Num <= 12; Num++)
 	{
 		IceBullet[Num] = GetWorld()->SpawnActor<AIceBullet>("IceBullet");
 		IceBullet[Num]->SetActorLocation({640.0f, -360.0f, 200.0f});

@@ -12,7 +12,7 @@ enum class IcePillarState
 	Attack02,
 };
 
-
+class UDefaultSceneComponent;
 class APlayer;
 class AIceBullet;
 class USpriteRenderer;
@@ -58,7 +58,7 @@ private:
 	std::shared_ptr<APlayer> Player = nullptr;
 	FVector PlayerPos = {};
 	//std::shared_ptr<AIceBullet> IceBullet = nullptr;
-	std::shared_ptr<AIceBullet> IceBullet[12] = {};
+	std::shared_ptr<AIceBullet> IceBullet[13] = {};
 	bool SetBullet = false;
 	bool AttackEnd = false;
 	bool AttackDirSet = false;
