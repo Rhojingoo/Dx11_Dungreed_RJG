@@ -32,6 +32,135 @@ ABoss_IcePillar::~ABoss_IcePillar()
 {
 }
 
+void ABoss_IcePillar::StateChange(IcePillarState _State)
+{
+	if (IcePillar_State != _State)
+	{
+		switch (_State)
+		{
+		case IcePillarState::None:
+			break;
+		case IcePillarState::Intro:
+			IcePillar_IntroStart();
+			break;
+		case IcePillarState::Idle:
+			IcePillar_IdleStart();
+			break;
+		case IcePillarState::Attack:
+			IcePillar_AttackStart();
+			break;
+		//case IcePillarState::Rotation:
+		//	break;
+		//case IcePillarState::Stop:
+		//	IcePillar_Stop(_DeltaTime);
+		//	break;
+		default:
+			break;
+		}
+	}
+	IcePillar_State = _State;
+}
+
+void ABoss_IcePillar::StateUpdate(float _DeltaTime)
+{
+	switch (IcePillar_State)
+	{
+	case IcePillarState::None:
+		break;
+	case IcePillarState::Intro:
+		IcePillar_Intro(_DeltaTime);
+		break;
+	case IcePillarState::Idle:
+		IcePillar_Idle(_DeltaTime);
+		break;
+	case IcePillarState::Rotation:
+		IcePillar_Rotation(_DeltaTime);
+		break;
+	case IcePillarState::Stop:
+		IcePillar_Stop(_DeltaTime);
+		break;
+	case IcePillarState::Attack:
+		IcePillar_Attack(_DeltaTime);
+		break;
+	default:
+		break;
+	}
+}
+
+void ABoss_IcePillar::IcePillar_Intro(float _DeltaTime)
+{
+	AddActorRotation(float4{ 0.0f, 0.0f, 1.0f } *180.0f * _DeltaTime);
+	IntroCheck = Renderer->IsCurAnimationEnd();
+	//IntroCheck = true;
+	//if(IntroCheck == true)
+	//	int a = 0;
+}
+
+void ABoss_IcePillar::IcePillar_IntroStart()
+{
+	Renderer->ChangeAnimation("IcePillar");
+}
+
+void ABoss_IcePillar::IcePillar_Idle(float _DeltaTime)
+{
+}
+
+void ABoss_IcePillar::IcePillar_IdleStart()
+{
+}
+
+void ABoss_IcePillar::IcePillar_Rotation(float _DeltaTime)
+{
+}
+
+void ABoss_IcePillar::IcePillar_Stop(float _DeltaTime)
+{
+}
+
+void ABoss_IcePillar::IcePillar_Attack(float _DeltaTime)
+{
+	if (UEngineInput::IsPress('1'))
+	{
+		SetBullet = true;
+	}
+	if (SetBullet == true)
+	{
+		static int Num = 0;
+		static float check = 0.0f;
+
+		FireTime += _DeltaTime;
+
+		if ((FireTime - check) >= 0.05f)
+		{
+			if (Num < 12)
+			{
+				IceBullet[Num]->SetActorLocation(RenderPos);
+				BulletDir = RenderPos - PlayerPos;
+				BulletDir.Normalize2D();
+				BulletDir.Z = 0;
+				BulletDir.X *= UEngineMath::DToR;
+				BulletDir.Y *= UEngineMath::DToR;
+				IceBullet[Num]->SetTarget(BulletDir);
+				IceBullet[Num]->TargetOn();
+
+				++Num;
+				check = FireTime;
+			}
+			else
+			{
+				Num = 0;
+				SetBullet = false;
+			}
+		}
+	}
+
+	Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
+}
+
+void ABoss_IcePillar::IcePillar_AttackStart()
+{
+}
+
 void ABoss_IcePillar::BeginPlay()
 {
 	Super::BeginPlay();
@@ -45,7 +174,7 @@ void ABoss_IcePillar::BeginPlay()
 	Renderer->SetAutoSize(4.0f, true);
 	Renderer->CreateAnimation("IcePillar", "IcePillar", 0.1f, false);
 	Renderer->CreateAnimation("IcePillarDestroy", "IcePillarDestroy", 0.1f);
-	Renderer->ChangeAnimation("IcePillar");
+
 	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
 }
 
@@ -54,77 +183,14 @@ void ABoss_IcePillar::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 	Pos = GetActorLocation();
 	RenderPos = Renderer->GetWorldPosition();
+	StateUpdate(_DeltaTime);
+
+	
 	if (Player != nullptr)
 	{
 		PlayerPos = Player->GetActorLocation();
 	}	
-	if (UEngineInput::IsPress('1'))//VK_NUMPAD1
-	{
-		SetBullet = true;
-	}
 
-	if (SetBullet == true)
-	{
-		static int Num = 0;
-		static float check = 0.0f; // 초기화가 필요합니다.
+	
 
-		FireTime += _DeltaTime;
-
-		if ((FireTime - check) >= 0.05f) // 총알 발사 조건
-		{
-			if (Num < 12)
-			{
-				IceBullet[Num]->SetActorLocation(RenderPos);
-				BulletDir = RenderPos - PlayerPos;
-				BulletDir.Normalize2D();
-				BulletDir.Z = 0;
-				BulletDir.X *= UEngineMath::DToR; // 각도 변환
-				BulletDir.Y *= UEngineMath::DToR; // 각도 변환
-				IceBullet[Num]->SetTarget(BulletDir);
-				IceBullet[Num]->TargetOn();
-
-				++Num;
-				check = FireTime; // 현재 발사 시간을 check에 저장
-			}
-			else
-			{
-				Num = 0;
-				SetBullet = false;
-			}
-		}
-
-
-
-/*		static int Num = 0;
-		static float check = FireTime;
-		FireTime += _DeltaTime;
-		
-		{
-			IceBullet[Num]->SetActorLocation(RenderPos);
-			BulletDir = RenderPos - PlayerPos;
-			BulletDir.Normalize2D();
-			BulletDir.Z = 0;
-			BulletDir.X = BulletDir.X * UEngineMath::DToR;
-			BulletDir.Y = BulletDir.Y * UEngineMath::DToR;
-			IceBullet[Num]->SetTarget(BulletDir);
-			IceBullet[Num]->TargetOn();
-		}
-		if ((FireTime - check) >= 0.5f)
-		{
-			if (Num < 11)
-			{
-				++Num;
-			}
-			else
-			{
-				Num = 0;
-				check = 0;
-				FireTime = 0;
-				SetBullet = false;
-			}
-		}	*/	
-	}
-
-	AddActorRotation(float4{ 0.0f, 0.0f, 1.0f } *180.0f * _DeltaTime);
-	Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
 }

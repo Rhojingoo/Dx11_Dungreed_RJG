@@ -41,10 +41,10 @@
       <Filter>Shader</Filter>
     </ClInclude>
     <ClInclude Include="Player_Attack_Effect.h">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Effect</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Player_Smoke_Effect.h">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Effect</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Effect</Filter>
     </ClInclude>
     <ClInclude Include="ContentsHelper.h">
       <Filter>ContentsHelper</Filter>
@@ -53,19 +53,19 @@
       <Filter>ContentsHelper</Filter>
     </ClInclude>
     <ClInclude Include="BackGround.h">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\BackGround</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\BackGround</Filter>
     </ClInclude>
     <ClInclude Include="Boss.h">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Boss</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Boss</Filter>
     </ClInclude>
     <ClInclude Include="Target.h">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Base</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Base</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Base</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Base</Filter>
     </ClInclude>
     <ClInclude Include="Player_Hand.h">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Base</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Base</Filter>
     </ClInclude>
     <ClInclude Include="Boss_BGPIXEL.h">
       <Filter>Level &amp; OBJ\Boss_Stage\Boss_Object</Filter>
@@ -98,13 +98,13 @@
       <Filter>Level &amp; OBJ\Monster_Stage\Monster03_Stage\OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Player_AfterImage.h">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Effect</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Boss_IcePillar.h">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Boss</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Boss</Filter>
     </ClInclude>
     <ClInclude Include="IceBullet.h">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Boss</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Boss</Filter>
     </ClInclude>
     <ClInclude Include="ContentsGUI.h">
       <Filter>GUI</Filter>
@@ -113,7 +113,7 @@
       <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="TileMap.h">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\TileMap</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\TileMap</Filter>
     </ClInclude>
     <ClInclude Include="TileMapLevel.h">
       <Filter>Level &amp; OBJ\Public\LEVEL</Filter>
@@ -163,31 +163,31 @@
       <Filter>Shader</Filter>
     </ClCompile>
     <ClCompile Include="Player_Attack_Effect.cpp">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Effect</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Player_Smoke_Effect.cpp">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Effect</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Effect</Filter>
     </ClCompile>
     <ClCompile Include="ContentsHelper.cpp">
       <Filter>ContentsHelper</Filter>
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\BackGround</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\BackGround</Filter>
     </ClCompile>
     <ClCompile Include="Boss.cpp">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Boss</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Boss</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Base</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Base</Filter>
     </ClCompile>
     <ClCompile Include="Player_Hand.cpp">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Base</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Base</Filter>
     </ClCompile>
     <ClCompile Include="PlayerState.cpp">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Base</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Base</Filter>
     </ClCompile>
     <ClCompile Include="Target.cpp">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Base</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Base</Filter>
     </ClCompile>
     <ClCompile Include="Boss_BGPIXEL.cpp">
       <Filter>Level &amp; OBJ\Boss_Stage\Boss_Object</Filter>
@@ -220,13 +220,13 @@
       <Filter>Level &amp; OBJ\Monster_Stage\Monster03_Stage\OBJ</Filter>
     </ClCompile>
     <ClCompile Include="Player_AfterImage.cpp">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Player\Effect</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Boss_IcePillar.cpp">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Boss</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Boss</Filter>
     </ClCompile>
     <ClCompile Include="IceBullet.cpp">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\Boss</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\Boss</Filter>
     </ClCompile>
     <ClCompile Include="ContentsGUI.cpp">
       <Filter>GUI</Filter>
@@ -235,7 +235,7 @@
       <Filter>GUI</Filter>
     </ClCompile>
     <ClCompile Include="TileMap.cpp">
-      <Filter>Level &amp; OBJ\Public\OBJ\Public_Object\TileMap</Filter>
+      <Filter>Level &amp; OBJ\Public\OBJ\TileMap</Filter>
     </ClCompile>
     <ClCompile Include="TileSet_Mode.cpp">
       <Filter>Level &amp; OBJ\Public\LEVEL</Filter>
@@ -329,25 +329,22 @@
     <Filter Include="Level &amp; OBJ\Public\OBJ">
       <UniqueIdentifier>{6c0f88d2-a2a2-41a3-a986-cbce80456566}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level &amp; OBJ\Public\OBJ\Public_Object">
-      <UniqueIdentifier>{6267f4e0-8c63-42b9-952b-2a66a73d5dfa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level &amp; OBJ\Public\OBJ\Public_Object\Player">
-      <UniqueIdentifier>{f4360ab8-18e2-4679-bc2d-42efdacfd90e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level &amp; OBJ\Public\OBJ\Public_Object\Player\Effect">
-      <UniqueIdentifier>{1312e8e1-92f9-4ee6-ae07-4bd786cffd54}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level &amp; OBJ\Public\OBJ\Public_Object\Player\Base">
-      <UniqueIdentifier>{ffe371bb-41ab-444e-a772-2ac0b43931b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level &amp; OBJ\Public\OBJ\Public_Object\BackGround">
+    <Filter Include="Level &amp; OBJ\Public\OBJ\BackGround">
       <UniqueIdentifier>{b6f0da8b-3e37-4e15-b3ad-cddfc08606b2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level &amp; OBJ\Public\OBJ\Public_Object\Boss">
+    <Filter Include="Level &amp; OBJ\Public\OBJ\Boss">
       <UniqueIdentifier>{6c88e587-ae6d-43d0-a298-7178bf14518b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level &amp; OBJ\Public\OBJ\Public_Object\TileMap">
+    <Filter Include="Level &amp; OBJ\Public\OBJ\Player">
+      <UniqueIdentifier>{f4360ab8-18e2-4679-bc2d-42efdacfd90e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Public\OBJ\Player\Effect">
+      <UniqueIdentifier>{1312e8e1-92f9-4ee6-ae07-4bd786cffd54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Public\OBJ\Player\Base">
+      <UniqueIdentifier>{ffe371bb-41ab-444e-a772-2ac0b43931b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Public\OBJ\TileMap">
       <UniqueIdentifier>{4733a461-8e6b-4f04-8607-5689fee036b4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
