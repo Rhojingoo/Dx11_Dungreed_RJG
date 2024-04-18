@@ -17,6 +17,10 @@ public:
 	void SetTarget(FVector _Set) { TargetPos = _Set; }
 	void TargetOn() { TargetSwitch = true; }
 
+	bool IsFire() { return Fire; }
+	void FireOn() { Fire = true; }
+	void FireOff() { Fire = false; }
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -26,5 +30,7 @@ private:
 	FVector TargetPos = {};
 	bool TargetSwitch = false;
 	float Speed = 150.f;
+
+	bool Fire = false;
 };
 

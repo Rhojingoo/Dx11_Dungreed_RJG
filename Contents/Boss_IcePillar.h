@@ -63,6 +63,7 @@ private:
 	bool AttackEnd = false;
 	bool AttackDirSet = false;
 	float FireTime = 0.f;
+	int AttackCount = 0;
 
 	UDefaultSceneComponent* Root = nullptr;
 	USpriteRenderer* Renderer = nullptr;
