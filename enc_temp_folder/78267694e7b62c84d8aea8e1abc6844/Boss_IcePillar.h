@@ -64,7 +64,6 @@ private:
 	bool AttackDirSet = false;
 	float FireTime = 0.f;
 
-	UDefaultSceneComponent* Root = nullptr;
 	USpriteRenderer* Renderer = nullptr;
 	USpriteRenderer* Center_Renderer = nullptr;
 	

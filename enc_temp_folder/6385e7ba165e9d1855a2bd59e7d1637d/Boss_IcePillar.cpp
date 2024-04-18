@@ -9,7 +9,7 @@
 
 ABoss_IcePillar::ABoss_IcePillar()
 {
-	Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
+	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
 
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Renderer->SetupAttachment(Root);
@@ -124,10 +124,6 @@ void ABoss_IcePillar::IcePillar_Attack_2(float _DeltaTime)
 {
 	if (SetBullet == true)
 	{
-		Root->GetWorldRotation();
-
-		GetActorTransform().GetRotation();;
-
 		FVector ParentPos =  GetActorLocation();
 		
 		FVector ChidPos = Renderer->GetLocalRotation();

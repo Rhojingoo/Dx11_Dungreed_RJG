@@ -10,6 +10,7 @@ enum class BossState
 	Patton2,
 	Patton3,
 	Patton4,
+	Ready,
 
 };
 
@@ -31,6 +32,8 @@ public:
 	ABoss& operator =(ABoss& _Other)noexcept		= delete;
 
 	void SetPlayer(std::shared_ptr<APlayer> _Set); 
+
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -46,8 +49,12 @@ protected:
 	void Boss_Patton1(float _DeltaTime);
 	void Boss_Patton1Start();
 	void Boss_Patton2(float _DeltaTime);
+	void Boss_Patton2Start();
 	void Boss_Patton3(float _DeltaTime);
 	void Boss_Patton4(float _DeltaTime);
+
+	void Boss_Ready(float _DeltaTime);
+	void Boss_ReadyStart();
 	//void RendererOff();
 	//void RendererOn();
 
@@ -57,8 +64,12 @@ private:
 	std::shared_ptr<ABoss_IcePillar> IcePillar[4] = {};
 	BossState Boss_State = BossState::Idle;
 
+	FVector Bullet_Pos[4] = {};
+	const float Bullet = 150.f;
 	float Boss_Time = 0.f;
 	bool IntroOn = false;
+	bool Attack_Check = false;
+	bool Attack_End = false;
 	void CreateIcePillar();
 	void Direction();
 };
