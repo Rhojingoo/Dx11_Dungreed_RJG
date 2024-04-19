@@ -107,6 +107,9 @@ void ABoss_IcePillar::IcePillar_Intro(float _DeltaTime)
 void ABoss_IcePillar::IcePillar_IntroStart()
 {
 	Renderer->ChangeAnimation("IcePillar");
+	
+	LocalRottation = Renderer->GetLocalRotation();
+	WorldRottation = Renderer->GetWorldRotation();
 }
 
 void ABoss_IcePillar::IcePillar_Idle(float _DeltaTime)
@@ -127,13 +130,85 @@ void ABoss_IcePillar::IcePillar_Stop(float _DeltaTime)
 }
 
 
+void ABoss_IcePillar::IcePillar_AttackStart_4()
+{
+	FVector Dir = Renderer->GetWorldPosition() - GetActorLocation();
+	Dir.Normalize2D();
+	Dir.Z = 0;
+	Dir.X *= UEngineMath::DToR;
+	Dir.Y *= UEngineMath::DToR;
+	float AngleRad2 = std::atan2(Dir.Y, Dir.X);
+	AngleRad2 = AngleRad2 * UEngineMath::RToD;
+	Renderer->SetRotationDeg(FVector(0.0f, 0.0f, AngleRad2-45.f));
+	IcePillarSetting = false;
+	FireTime = 0.f;
+	CheckTime = 0.f;
+	AttackCount = 0;
+}
 
 void ABoss_IcePillar::IcePillar_Attack_4(float _DeltaTime)
 {
-}
+	if (false == IcePillarSetting)
+	{
+		FireTime += _DeltaTime;
+		if (FireTime > 1.f)
+		{
+			IcePillarSetting = true;
+			FireTime = 0.f;
+			SetBullet = true;
+			return;
+		}
 
-void ABoss_IcePillar::IcePillar_AttackStart_4()
-{
+		FVector Center = GetActorLocation() - Player->GetActorLocation();
+		Center.Normalize2D();
+		Center.Z = 0;
+		Center.X *= UEngineMath::DToR;
+		Center.Y *= UEngineMath::DToR;
+		float AngleRad = std::atan2(Center.Y, Center.X);
+		AngleRad = AngleRad * UEngineMath::RToD;
+		SetActorRotation(FVector(0.0f, 0.0f, AngleRad - 45.f));
+	}
+	else
+	{
+		if (SetBullet == true)
+		{			
+			FireTime += _DeltaTime;
+			if ((FireTime - CheckTime) >= 0.05f)
+			{
+				if (AttackCount < 13)
+				{
+					if (AttackDirSet == false)
+					{
+						BulletDir = RenderPos - PlayerPos;
+						AttackDirSet = true;
+					}
+
+					IceBullet[AttackCount]->SetActorLocation(Renderer->GetWorldPosition());
+					BulletDir.Normalize2D();
+					BulletDir.Z = 0;
+					BulletDir.X *= UEngineMath::DToR;
+					BulletDir.Y *= UEngineMath::DToR;
+					IceBullet[AttackCount]->SetTarget(BulletDir);
+					IceBullet[AttackCount]->TargetOn();
+
+					++AttackCount;
+					CheckTime = FireTime;
+				}
+				else
+				{
+					AttackCount = 0;
+					SetBullet = false;
+					AttackEnd = true;
+					AttackDirSet = false;
+					CheckTime = 0.f;
+				}
+			}
+		}
+		if(AttackEnd == true)
+		{
+
+		}
+	}
 }
 
 
@@ -490,7 +565,6 @@ void ABoss_IcePillar::IcePillar_AttackStart_1()
 
 void ABoss_IcePillar::IcePillar_Attack_1(float _DeltaTime)
 {
-
 	if (SetBullet == true)
 	{
 		static int Num = 0;

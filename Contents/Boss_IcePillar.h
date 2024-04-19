@@ -57,14 +57,19 @@ private:
 	FVector BulletDir = {};
 	FVector Pos = {};
 	FVector RenderPos = {};
+	FVector WorldRottation = {};
+	FVector LocalRottation = {};
+
 	std::shared_ptr<APlayer> Player = nullptr;
 	FVector PlayerPos = {};
 	//std::shared_ptr<AIceBullet> IceBullet = nullptr;
 	std::shared_ptr<AIceBullet> IceBullet[13] = {};
 	bool SetBullet = false;
 	bool AttackEnd = false;
+	bool IcePillarSetting = false;
 	bool AttackDirSet = false;
 	float FireTime = 0.f;
+	float CheckTime = 0.f;
 	int AttackCount = 0;
 
 	UDefaultSceneComponent* Root = nullptr;

@@ -471,8 +471,10 @@ void APlayer::CalGravityVector(float _DeltaTime)
 	Color8Bit Color;
 	if (Foot_Collision_Check_At_Town == true)
 	{
-		PlayerPos.Y = -PlayerPos.Y;
-		Color = Tex->GetColor(PlayerPos, Color8Bit::Black);
+		float4 PlayerLocation = GetActorLocation();
+
+		PlayerLocation.Y = -PlayerLocation.Y;
+		Color = Tex->GetColor(PlayerLocation, Color8Bit::Black);
 	}
 	else
 	{
