@@ -15,6 +15,7 @@ public:
 	AIceBullet& operator =(AIceBullet& _Other)noexcept		= delete;
 
 	void SetTarget(FVector _Set) { TargetPos = _Set; }
+	void SetNomalTarget(FVector _Set) { TargetNomalPos = _Set; }
 	void TargetOn() { TargetSwitch = true; }
 
 	bool IsFire() { return Fire; }
@@ -28,8 +29,9 @@ protected:
 private:
 	USpriteRenderer* Renderer = nullptr;
 	FVector TargetPos = {};
+	FVector TargetNomalPos = {};
 	bool TargetSwitch = false;
-	float Speed = 150.f;
+	float Speed = 100.f;
 
 	bool Fire = false;
 };

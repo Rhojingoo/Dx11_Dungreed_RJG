@@ -52,7 +52,10 @@ protected:
 	void Boss_Patton2(float _DeltaTime);
 	void Boss_Patton2Start();
 	void Boss_Patton3(float _DeltaTime);
+	void Boss_Patton3Start();
 	void Boss_Patton4(float _DeltaTime);
+	void Boss_Patton4Start();
+
 
 	void Boss_Ready(float _DeltaTime);
 	void Boss_ReadyStart();

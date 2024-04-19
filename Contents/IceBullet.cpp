@@ -33,7 +33,7 @@ void AIceBullet::Tick(float _DeltaTime)
 
 	if (TargetSwitch == true)
 	{
-		FVector Target = -TargetPos * Speed /** _DeltaTime*/;
+		FVector Target = -TargetPos * Speed  /** _DeltaTime*/;
 		//SetActorLocation(Target);
 		AddActorLocation(Target);
 		float CursorAngleRad = std::atan2(TargetPos.Y, TargetPos.X);

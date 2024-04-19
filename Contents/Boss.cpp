@@ -79,14 +79,13 @@ void ABoss::StateChange(BossState _State)
 			break;
 		case BossState::Ready2:
 			Boss_ReadyStart2();
+			break;;
+		case BossState::Patton3:
+			Boss_Patton3Start();
 			break;
-;
-			//case BossState::Patton3:
-			//	Boss_Patton3();
-			//	break;
-			//case BossState::Patton4:
-			//	Boss_Patton4();
-			//	break;
+		case BossState::Patton4:
+			Boss_Patton4Start();
+			break;
 		default:
 			break;
 		}
@@ -149,11 +148,6 @@ void ABoss::Boss_IntroStart()
 {
 	Renderer->ChangeAnimation("Boss_Enter");
 
-	//IcePillar[0]->SetPos({ -200.f,200.f });
-	//IcePillar[1]->SetPos({ 200.f,200.f });
-	//IcePillar[2]->SetPos({ -200.f,-200.f });
-	//IcePillar[3]->SetPos({ 200.f,-200.f });
-
 	IcePillar[0]->AddPos({ -Bullet,Bullet });
 	IcePillar[1]->AddPos({ Bullet,Bullet });
 	IcePillar[2]->AddPos({ -Bullet,-Bullet });
@@ -191,11 +185,28 @@ void ABoss::Boss_Idle(float _DeltaTime)
 	}
 	else
 	{
+		if (UEngineInput::IsPress('1'))
+		{
+			StateChange(BossState::Patton1);
+			Boss_Time = 0.f;
+		}
+		if (UEngineInput::IsPress('2'))
+		{
+			StateChange(BossState::Patton2);
+			Boss_Time = 0.f;
+		}
+		if (UEngineInput::IsPress('3'))
+		{
+			StateChange(BossState::Patton3);
+			Boss_Time = 0.f;
+		}
+
 		Boss_Time += _DeltaTime;
 		if (Boss_Time > 3.f)
 		{
 			//StateChange(BossState::Patton1);
-			StateChange(BossState::Patton2);
+			//StateChange(BossState::Patton2);
+			//StateChange(BossState::Patton3);
 			Boss_Time = 0.f;
 		}
 	}
@@ -209,15 +220,6 @@ void ABoss::Boss_IdleStart()
 	IcePillar[1]->AddPos({ 0.f,0.f });
 	IcePillar[2]->AddPos({ 0.f,0.f });
 	IcePillar[3]->AddPos({ 0.f,0.f });
-
-	//IcePillar[0]->StateChange(IcePillarState::Idle);
-	//IcePillar[1]->StateChange(IcePillarState::Idle);
-	//IcePillar[2]->StateChange(IcePillarState::Idle);
-	//IcePillar[3]->StateChange(IcePillarState::Idle);
-	//IcePillar[0]->SetPos({ -200.f,200.f });
-	//IcePillar[1]->SetPos({ 200.f,200.f });
-	//IcePillar[2]->SetPos({ -200.f,-200.f });
-	//IcePillar[3]->SetPos({ 200.f,-200.f });
 }
 
 void ABoss::Boss_Patton1Start()
@@ -271,7 +273,6 @@ void ABoss::Boss_Patton1(float _DeltaTime)
 
 void ABoss::Boss_Patton2Start()
 {
-	IcePillar[0]->StateChange(IcePillarState::Attack02);
 	for (int a = 0; a < 4; a++)
 	{
 		IcePillar[a]->StateChange(IcePillarState::Attack02);
@@ -294,16 +295,72 @@ void ABoss::Boss_Patton2(float _DeltaTime)
 		Attack_Check = false;
 		StateChange(BossState::Ready2);
 	}
-
 }
 
+void ABoss::Boss_Patton3Start()
+{
+	for (int a = 0; a < 4; a++)
+	{
+		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
+		IcePillar[a]->AttackEndFalse();
+		IcePillar[a]->StateChange(IcePillarState::Attack03);
+		IcePillar[a]->SetActorRotation({ PlRotation[a] });
+	}
+	//IcePillar[0]->SetActorRotation({ PlRotation[0] });
+	//IcePillar[1]->SetActorRotation({ PlRotation[1] });
+	//IcePillar[2]->SetActorRotation({ PlRotation[2] });
+	//IcePillar[3]->SetActorRotation({ PlRotation[3] });
 
+	Attack_Check = true;	
+}
 
 void ABoss::Boss_Patton3(float _DeltaTime)
 {
+	static float IcePillarPos = 0.f;
+	if (Attack_Check == true)
+	{
+	
+		if (IcePillarPos < 7.f)
+		{
+			IcePillarPos += 50.f * _DeltaTime;
+			IcePillar[0]->AddPos({ -IcePillarPos, -IcePillarPos * 1.2f });
+			IcePillar[1]->AddPos({ IcePillarPos, -IcePillarPos * 1.2f });
+			//IcePillar[2]->AddPos({ -IcePillarPos,-IcePillarPos / 1000 });
+			//IcePillar[3]->AddPos({ IcePillarPos,-IcePillarPos / 1000 });
+			return;
+		}
+		else
+		{
+			for (int a = 0; a < 4; a++)
+			{
+				IcePillar[a]->FireOn();
+			}
+			Attack_Check = false;
+			//IcePillarPos = 0.f;
+		}
+	}
+	else
+	{
+		for (int a = 0; a < 4; a++)
+		{
+			if (true != IcePillar[a]->IsAttackEnd())
+			{
+				return;
+			}
+		}
+		StateChange(BossState::Ready);
+	}
 }
 
+
+
+
 void ABoss::Boss_Patton4(float _DeltaTime)
+{
+
+}
+
+void ABoss::Boss_Patton4Start()
 {
 }
 
@@ -326,11 +383,12 @@ void ABoss::Boss_ReadyStart2()
 	{
 		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
 		IcePillar[a]->AttackEndFalse();
+		IcePillar[a]->SetActorRotation({ PlRotation[a] });
 	}
-	IcePillar[0]->SetActorRotation({ PlRotation[0] });
-	IcePillar[1]->SetActorRotation({ PlRotation[1] });
-	IcePillar[2]->SetActorRotation({ PlRotation[2] });
-	IcePillar[3]->SetActorRotation({ PlRotation[3] });
+	//IcePillar[0]->SetActorRotation({ PlRotation[0] });
+	//IcePillar[1]->SetActorRotation({ PlRotation[1] });
+	//IcePillar[2]->SetActorRotation({ PlRotation[2] });
+	//IcePillar[3]->SetActorRotation({ PlRotation[3] });
 }
 
 void ABoss::Boss_ReadyStart()
@@ -341,11 +399,6 @@ void ABoss::Boss_ReadyStart()
 		IcePillar[a]->AttackEndFalse();
 		IcePillar[a]->StateChange(IcePillarState::Idle);
 	}
-
-	//IcePillar[0]->SetActorRotation({ 0.f, 0.f, 0.f });
-	//IcePillar[1]->SetActorRotation({ 0.f, 0.f, 0.f });
-	//IcePillar[2]->SetActorRotation({ 0.f, 0.f,0.f });
-	//IcePillar[3]->SetActorRotation({ 0.f, 0.f,0.f });
 }
 
 void ABoss::Boss_Ready(float _DeltaTime)

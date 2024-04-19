@@ -10,6 +10,8 @@ enum class IcePillarState
 	Stop,
 	Attack01,
 	Attack02,
+	Attack03,
+	Attack04,
 };
 
 class UDefaultSceneComponent;
@@ -87,6 +89,12 @@ private:
 
 	void IcePillar_Attack_2(float _DeltaTime);
 	void IcePillar_AttackStart_2();
+
+	void IcePillar_Attack_3(float _DeltaTime);
+	void IcePillar_AttackStart_3();
+
+	void IcePillar_Attack_4(float _DeltaTime);
+	void IcePillar_AttackStart_4();
 
 	bool IntroCheck = false;
 
