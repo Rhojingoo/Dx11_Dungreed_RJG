@@ -352,6 +352,14 @@ void ABoss::Boss_Patton3(float _DeltaTime)
 
 void ABoss::Boss_Patton4Start()
 {
+
+	for (int a = 0; a < 4; a++)
+	{
+		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
+		IcePillar[a]->AttackEndFalse();
+		IcePillar[a]->SetActorRotation({ PlRotation[a] });
+	}
+
 	for (int a = 0; a < 4; a++)
 	{
 		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });

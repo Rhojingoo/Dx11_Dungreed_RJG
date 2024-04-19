@@ -132,14 +132,14 @@ void ABoss_IcePillar::IcePillar_Stop(float _DeltaTime)
 
 void ABoss_IcePillar::IcePillar_AttackStart_4()
 {
-	FVector Dir = Renderer->GetWorldPosition() - GetActorLocation();
+	FVector Dir = Renderer->GetWorldPosition() - Root->GetWorldPosition();
 	Dir.Normalize2D();
 	Dir.Z = 0;
 	Dir.X *= UEngineMath::DToR;
 	Dir.Y *= UEngineMath::DToR;
 	float AngleRad2 = std::atan2(Dir.Y, Dir.X);
 	AngleRad2 = AngleRad2 * UEngineMath::RToD;
-	Renderer->SetRotationDeg(FVector(0.0f, 0.0f, AngleRad2-45.f));
+	Renderer->SetRotationDeg(FVector(0.0f, 0.0f, AngleRad2-90.f));
 	IcePillarSetting = false;
 	FireTime = 0.f;
 	CheckTime = 0.f;
