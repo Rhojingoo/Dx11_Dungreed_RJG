@@ -221,14 +221,23 @@ void ABoss::Boss_IdleStart()
 {
 	Renderer->ChangeAnimation("Boss_Idle");
 
-	IcePillar[0]->AddPos({ 0.f,0.f });
-	IcePillar[1]->AddPos({ 0.f,0.f });
-	IcePillar[2]->AddPos({ 0.f,0.f });
-	IcePillar[3]->AddPos({ 0.f,0.f });
+	for (int a = 0; a < 4; a++)
+	{
+		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
+		IcePillar[a]->AttackEndFalse();
+		IcePillar[a]->SetActorRotation({ PlRotation[a] });
+	}
 }
 
 void ABoss::Boss_Patton1Start()
 {	
+	for (int a = 0; a < 4; a++)
+	{
+		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
+		IcePillar[a]->AttackEndFalse();
+		IcePillar[a]->SetActorRotation({ PlRotation[a] });
+	}
+
 	for (int a = 0; a < 4; a++)
 	{
 		IcePillar[a]->StateChange(IcePillarState::Attack01);

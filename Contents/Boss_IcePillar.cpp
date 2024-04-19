@@ -212,7 +212,6 @@ void ABoss_IcePillar::IcePillar_Attack_4(float _DeltaTime)
 }
 
 
-
 void ABoss_IcePillar::IcePillar_AttackStart_3()
 {
 }
@@ -403,7 +402,6 @@ void ABoss_IcePillar::IcePillar_Attack_3(float _DeltaTime)
 	}
 	Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
 }
-
 
 
 void ABoss_IcePillar::IcePillar_AttackStart_2()
@@ -626,7 +624,6 @@ void ABoss_IcePillar::BeginPlay()
 
 	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
 }
-
 
 void ABoss_IcePillar::Tick(float _DeltaTime)
 {
