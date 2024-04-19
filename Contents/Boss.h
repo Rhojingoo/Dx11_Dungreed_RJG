@@ -12,6 +12,7 @@ enum class BossState
 	Patton4,
 	Ready,
 	Ready2,
+	Ready3,
 
 };
 
@@ -62,6 +63,9 @@ protected:
 
 	void Boss_Ready2(float _DeltaTime);
 	void Boss_ReadyStart2();
+
+	void Boss_Ready3(float _DeltaTime);
+	void Boss_ReadyStart3();
 	//void RendererOff();
 	//void RendererOn();
 

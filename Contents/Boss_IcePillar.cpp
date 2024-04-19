@@ -324,7 +324,7 @@ void ABoss_IcePillar::IcePillar_Attack_3(float _DeltaTime)
 	}
 	if (AttackEnd == true)
 	{
-		//AttackCount = 0;
+		AttackCount = 0;
 	}
 	Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
 }
