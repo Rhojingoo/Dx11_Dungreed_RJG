@@ -1,12 +1,13 @@
 #include "PreCompile.h"
-#include "IceSpear.h"
+#include "Icicle_Bullet.h"
 #include "Player.h"
 #include <EngineCore/Renderer.h>
 #include "ContentsHelper.h"
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/DefaultSceneComponent.h>
 
-AIceSpear::AIceSpear()
+
+AIcicle_Bullet::AIcicle_Bullet()
 {
 	Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
 
@@ -20,33 +21,33 @@ AIceSpear::AIceSpear()
 	SetRoot(Root);
 }
 
-AIceSpear::~AIceSpear()
+AIcicle_Bullet::~AIcicle_Bullet()
 {
 }
 
-void AIceSpear::AttackOn()
+void AIcicle_Bullet::AttackOn()
 {
 	Attack_Start = true;
-	EffectRenderer->ChangeAnimation("SpearCreat_Effect");	
+	EffectRenderer->ChangeAnimation("Icicle_Effect");
 }
 
-void AIceSpear::BeginPlay()
+void AIcicle_Bullet::BeginPlay()
 {
 	Super::BeginPlay();
 	Renderer->SetAutoSize(3.f, true);
-	Renderer->CreateAnimation("IceSpear", "IceSpear", 0.1f, false);
+	Renderer->CreateAnimation("Icicle_Bullet", "Icicle_Bullet", 0.1f, false);
 	//Renderer->ChangeAnimation("IceSpear");
 	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
 	Renderer->AddPosition({ 0.f, 0.f, 0.f });
 
 
-	EffectRenderer->CreateAnimation("SpearCreat_Effect", "SpearCreat_Effect", 0.1f, false);
+	EffectRenderer->CreateAnimation("Icicle_Effect", "Icicle_Effect", 0.1f, false);
 	EffectRenderer->SetOrder(ERenderOrder::Effect_Front);
 	EffectRenderer->SetAutoSize(4.f, true);
-	EffectRenderer->AddPosition({ 0.f, 0.f, 0.f });
+	EffectRenderer->AddPosition({ 0.f, 250.f, 0.f });
 }
 
-void AIceSpear::Tick(float _DeltaTime)
+void AIcicle_Bullet::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
@@ -54,82 +55,73 @@ void AIceSpear::Tick(float _DeltaTime)
 }
 
 
-void AIceSpear::EffectStart()
+void AIcicle_Bullet::EffectStart()
 {
-	EffectRenderer->ChangeAnimation("SpearCreat_Effect");
+	EffectRenderer->ChangeAnimation("Icicle_Effect");
 }
-void AIceSpear::Effect(float _DeltaTime)
+void AIcicle_Bullet::Effect(float _DeltaTime)
 {
 	if (Attack_Start == true)
 	{
 		if (EffectRenderer->IsCurAnimationEnd() == true)
 		{
 			EffectEnd = true;
-			ChangeState(Spearstate::Spear);
+			ChangeState(Iciclestate::Icicle);
 		}
 	}
 }
 
 
 
-void AIceSpear::SpearStart()
+void AIcicle_Bullet::SpearStart()
 {
-	Renderer->ChangeAnimation("IceSpear");
+	Renderer->ChangeAnimation("Icicle_Bullet");
 }
 
-
-void AIceSpear::Spear(float _DeltaTime)
+void AIcicle_Bullet::Spear(float _DeltaTime)
 {
 	if (Renderer->IsCurAnimationEnd() == true)
 	{
 		EffectEnd = true;
-		ChangeState(Spearstate::Attack);
+		ChangeState(Iciclestate::Attack);
 	}
 }
 
 
 
-void AIceSpear::AttackStart()
+void AIcicle_Bullet::AttackStart()
 {
 }
-void AIceSpear::Attack(float _DeltaTime)
+
+void AIcicle_Bullet::Attack(float _DeltaTime)
 {
-	if (RightAttack == true)
-	{
-		
-		AttPos += FVector::Right * Speed * _DeltaTime;
-		AddActorLocation(AttPos);
-	}
-	else if(LeftAttack = true)
-	{		
-		AttPos += FVector::Left * Speed * _DeltaTime;
-		AddActorLocation(AttPos);
-	}
+	AttPos += FVector::Down * Speed * _DeltaTime;
+	AddActorLocation(AttPos);
 
 	Destroy_Time += _DeltaTime;
 	if (Destroy_Time > 5.5f)
 	{
 		Destroy();
 	}
-
-	//if (Player->GetActorLocation().X - GetActorLocation().X >= 0.f) {}
 }
 
 
 
-void AIceSpear::ChangeState(Spearstate _Set)
+
+
+void AIcicle_Bullet::ChangeState(Iciclestate _Set)
 {
-	if (Spear_state != _Set)
+	if (Icicle_state != _Set)
 	{
 		switch (_Set)
 		{
-		case Spearstate::Effect:
+		case Iciclestate::Effect:
 			EffectStart();
 			break;
-		case Spearstate::Spear:
+		case Iciclestate::Icicle:
 			SpearStart();
 			break;
-		case Spearstate::Attack:
+		case Iciclestate::Attack:
 			AttackStart();
 			break;
 		default:
@@ -137,21 +129,21 @@ void AIceSpear::ChangeState(Spearstate _Set)
 		}
 	}
 
-	Spear_state = _Set;
+	Icicle_state = _Set;
 }
 
-void AIceSpear::StateUpdate(float _DeltaTime)
+void AIcicle_Bullet::StateUpdate(float _DeltaTime)
 {
-	switch (Spear_state)
+	switch (Icicle_state)
 	{
-	case Spearstate::Effect:
+	case Iciclestate::Effect:
 		Effect(_DeltaTime);
 		break;
-	case Spearstate::Spear:
-		Spear( _DeltaTime);
+	case Iciclestate::Icicle:
+		Spear(_DeltaTime);
 		break;
-	case Spearstate::Attack:
-		Attack( _DeltaTime);
+	case Iciclestate::Attack:
+		Attack(_DeltaTime);
 		break;
 	default:
 		break;

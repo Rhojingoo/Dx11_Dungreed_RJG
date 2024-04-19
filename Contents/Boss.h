@@ -10,7 +10,7 @@ enum class BossState
 	Patton2,
 	Patton3,
 	Patton4,
-
+	Patton5,
 
 	Ready,
 	Ready2,
@@ -58,7 +58,8 @@ protected:
 	void Boss_Patton3Start();
 	void Boss_Patton4(float _DeltaTime);
 	void Boss_Patton4Start();
-
+	void Boss_Patton5(float _DeltaTime);
+	void Boss_Patton5Start();
 
 	void IceSpear_Aattack();
 
@@ -92,5 +93,6 @@ private:
 	void CreateIcePillar();
 	void Direction();
 	bool SpearCreat = false;
+	bool IcicleCreat = false;
 };
 

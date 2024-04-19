@@ -2,6 +2,7 @@
 #include "Boss.h"
 #include "Boss_IcePillar.h"
 #include "IceSpear.h"
+#include "Icicle_Bullet.h"
 #include "Player.h"
 #include <EngineCore/Renderer.h>
 
@@ -89,6 +90,9 @@ void ABoss::StateChange(BossState _State)
 		case BossState::Patton4:
 			Boss_Patton4Start();
 			break;
+		case BossState::Patton5:
+			Boss_Patton5Start();
+			break;
 
 		default:
 			break;
@@ -118,6 +122,9 @@ void ABoss::StateUpdate(float _DeltaTime)
 		break;
 	case BossState::Patton4:
 		Boss_Patton4(_DeltaTime);
+		break;
+	case BossState::Patton5:
+		Boss_Patton5(_DeltaTime);
 		break;
 
 	case BossState::Ready:
@@ -170,8 +177,6 @@ void ABoss::Boss_IntroStart()
 		Bullet_Pos[a] = IcePillar[a]->GetPos();
 		IcePillar[a]->StateChange(IcePillarState::Intro);
 	}
-
-
 }
 
 
@@ -209,7 +214,12 @@ void ABoss::Boss_Idle(float _DeltaTime)
 			StateChange(BossState::Patton4);
 			Boss_Time = 0.f;
 		}
-		if (UEngineInput::IsDown('5'))
+		if (UEngineInput::IsPress('5'))
+		{
+			StateChange(BossState::Patton5);
+			Boss_Time = 0.f;
+		}
+		if (UEngineInput::IsDown('6'))
 		{
 			SpearCreat = false;
 			IceSpear_Aattack();
@@ -388,6 +398,56 @@ void ABoss::Boss_Patton4Start()
 	}	
 }
 
+void ABoss::Boss_Patton5Start()
+{
+	FVector Setpos = Player->GetActorLocation();
+	std::shared_ptr<AIcicle_Bullet> Bullet[4];
+
+	for (int i = 0; i < 4; i++)
+	{
+		Bullet[i] = GetWorld()->SpawnActor<AIcicle_Bullet>("IcicleBullet");
+		float offset = (i - 1.5) * 30.f; 
+		Bullet[i]->SetActorLocation({ Setpos.X + offset, Setpos.Y-20.f });
+		Bullet[i]->AttackOn();
+	}
+
+	IcicleCreat = false;
+
+	//Bullet[0] = GetWorld()->SpawnActor<AIcicle_Bullet>("IcicleBullet");
+	//Bullet[1] = GetWorld()->SpawnActor<AIcicle_Bullet>("IcicleBullet");
+	//Bullet[2] = GetWorld()->SpawnActor<AIcicle_Bullet>("IcicleBullet");
+	//Bullet[3] = GetWorld()->SpawnActor<AIcicle_Bullet>("IcicleBullet");
+
+	//Bullet[0]->SetActorLocation({ Setpos.X-60,Setpos.Y });
+	//Bullet[1]->SetActorLocation({ Setpos.X-30, Setpos.Y});
+	//Bullet[2]->SetActorLocation({ Setpos.X+30, Setpos.Y });
+	//Bullet[3]->SetActorLocation({ Setpos.X + 60,Setpos.Y });
+}
+void ABoss::Boss_Patton5(float _DeltaTime)
+{
+	if (IcicleCreat == false)
+	{
+		FVector Setpos = Player->GetActorLocation();
+		std::shared_ptr<AIcicle_Bullet> Bullet[4];
+
+		for (int i = 0; i < 4; i++)
+		{
+			Bullet[i] = GetWorld()->SpawnActor<AIcicle_Bullet>("IcicleBullet");
+			int offset = (i - 1.5) * 50;
+			Bullet[i]->SetActorLocation({ Setpos.X + offset, Setpos.Y - 30.f });
+			Bullet[i]->AttackOn();
+		}
+		IcicleCreat = true;
+	}
+
+	if (IcicleCreat == true)
+	{
+		StateChange(BossState::Idle);
+	}
+}
+
+
+
 void ABoss::IceSpear_Aattack()
 {
 	if (SpearCreat == false)
@@ -405,11 +465,9 @@ void ABoss::IceSpear_Aattack()
 	if (Player->GetActorLocation().X - GetActorLocation().X >= 0.f)
 	{
 		IceSpear->Attack_Left();
-		//IceSpear->SetActorRotation(FVector{ 0.f, 0.f, 90.f });
 	}
 	else
 	{
-		//IceSpear->SetActorRotation(FVector{ 0.f, 0.f, -90.f });
 		IceSpear->Attack_Right();
 	}
 }

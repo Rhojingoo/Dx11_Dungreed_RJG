@@ -124,6 +124,9 @@
     <ClInclude Include="IceSpear.h">
       <Filter>Level &amp; OBJ\Public\OBJ\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="Icicle_Bullet.h">
+      <Filter>Level &amp; OBJ\Public\OBJ\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -247,6 +250,9 @@
       <Filter>Level &amp; OBJ\Public\LEVEL</Filter>
     </ClCompile>
     <ClCompile Include="IceSpear.cpp">
+      <Filter>Level &amp; OBJ\Public\OBJ\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Icicle_Bullet.cpp">
       <Filter>Level &amp; OBJ\Public\OBJ\Boss</Filter>
     </ClCompile>
   </ItemGroup>
