@@ -389,6 +389,15 @@ void ABoss::Boss_Patton4(float _DeltaTime)
 	}
 	else
 	{
+		for (int a = 0; a < 4; a++)
+		{
+			if (true != IcePillar[a]->IsAttackEnd())
+			{
+				return;
+			}
+		}
+		StateChange(BossState::Ready2);
+
 		if (UEngineInput::IsDown('1'))
 		{
 			StateChange(BossState::Idle);
@@ -418,10 +427,6 @@ void ABoss::Boss_ReadyStart2()
 		IcePillar[a]->AttackEndFalse();
 		IcePillar[a]->SetActorRotation({ PlRotation[a] });
 	}
-	//IcePillar[0]->SetActorRotation({ PlRotation[0] });
-	//IcePillar[1]->SetActorRotation({ PlRotation[1] });
-	//IcePillar[2]->SetActorRotation({ PlRotation[2] });
-	//IcePillar[3]->SetActorRotation({ PlRotation[3] });
 }
 
 void ABoss::Boss_Ready2(float _DeltaTime)

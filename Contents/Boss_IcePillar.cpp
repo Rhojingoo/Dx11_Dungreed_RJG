@@ -583,7 +583,6 @@ void ABoss_IcePillar::IcePillar_Attack_1(float _DeltaTime)
 				}
 
 				IceBullet[Num]->SetActorLocation(Renderer->GetWorldPosition());
-				//BulletDir = RenderPos - CPlayerpos;
 				BulletDir.Normalize2D();
 				BulletDir.Z = 0;
 				BulletDir.X *= UEngineMath::DToR;
