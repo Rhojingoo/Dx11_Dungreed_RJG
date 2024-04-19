@@ -135,6 +135,8 @@ void ABoss_IcePillar::IcePillar_IdleStart()
 {
 }
 
+
+
 void ABoss_IcePillar::IcePillar_Rotation(float _DeltaTime)
 {
 }
@@ -142,6 +144,7 @@ void ABoss_IcePillar::IcePillar_Rotation(float _DeltaTime)
 void ABoss_IcePillar::IcePillar_Stop(float _DeltaTime)
 {
 }
+
 
 
 void ABoss_IcePillar::IcePillar_AttackStart_4()

@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Boss.h"
 #include "Boss_IcePillar.h"
+#include "IceSpear.h"
 #include "Player.h"
 #include <EngineCore/Renderer.h>
 
@@ -88,6 +89,7 @@ void ABoss::StateChange(BossState _State)
 		case BossState::Patton4:
 			Boss_Patton4Start();
 			break;
+
 		default:
 			break;
 		}
@@ -117,6 +119,7 @@ void ABoss::StateUpdate(float _DeltaTime)
 	case BossState::Patton4:
 		Boss_Patton4(_DeltaTime);
 		break;
+
 	case BossState::Ready:
 		Boss_Ready(_DeltaTime);
 		break;
@@ -206,6 +209,14 @@ void ABoss::Boss_Idle(float _DeltaTime)
 			StateChange(BossState::Patton4);
 			Boss_Time = 0.f;
 		}
+		if (UEngineInput::IsDown('5'))
+		{
+			SpearCreat = false;
+			IceSpear_Aattack();
+			Boss_Time = 0.f;
+		}
+
+
 		Boss_Time += _DeltaTime;
 		if (Boss_Time > 3.f)
 		{
@@ -361,7 +372,6 @@ void ABoss::Boss_Patton3(float _DeltaTime)
 
 void ABoss::Boss_Patton4Start()
 {
-
 	for (int a = 0; a < 4; a++)
 	{
 		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
@@ -377,6 +387,34 @@ void ABoss::Boss_Patton4Start()
 		IcePillar[a]->SetActorRotation({ 0.f,0.f,0.f });
 	}	
 }
+
+void ABoss::IceSpear_Aattack()
+{
+	if (SpearCreat == false)
+	{
+		IceSpear = GetWorld()->SpawnActor<AIceSpear>("IcePillar");
+		FVector Setpos = Player->GetActorLocation();
+		Setpos.Y -= 35;
+
+		IceSpear->SetActorLocation({ Setpos});
+		IceSpear->SetPlayer(Player);
+		IceSpear->AttackOn();
+		SpearCreat = true;
+	}
+	
+	if (Player->GetActorLocation().X - GetActorLocation().X >= 0.f)
+	{
+		IceSpear->Attack_Left();
+		//IceSpear->SetActorRotation(FVector{ 0.f, 0.f, 90.f });
+	}
+	else
+	{
+		//IceSpear->SetActorRotation(FVector{ 0.f, 0.f, -90.f });
+		IceSpear->Attack_Right();
+	}
+}
+
+
 
 void ABoss::Boss_Patton4(float _DeltaTime)
 {

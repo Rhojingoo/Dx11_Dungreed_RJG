@@ -10,13 +10,15 @@ enum class BossState
 	Patton2,
 	Patton3,
 	Patton4,
+
+
 	Ready,
 	Ready2,
 	Ready3,
 
 };
 
-
+class AIceSpear;
 class APlayer;
 class ABoss_IcePillar;
 class USpriteRenderer;
@@ -58,6 +60,9 @@ protected:
 	void Boss_Patton4Start();
 
 
+	void IceSpear_Aattack();
+
+
 	void Boss_Ready(float _DeltaTime);
 	void Boss_ReadyStart();
 
@@ -73,6 +78,7 @@ private:
 	USpriteRenderer* Renderer = nullptr;
 	std::shared_ptr<APlayer> Player = nullptr;
 	std::shared_ptr<ABoss_IcePillar> IcePillar[4] = {};
+	std::shared_ptr<AIceSpear> IceSpear = nullptr;
 	BossState Boss_State = BossState::Idle;
 
 
@@ -85,5 +91,6 @@ private:
 	bool Attack_End = false;
 	void CreateIcePillar();
 	void Direction();
+	bool SpearCreat = false;
 };
 
