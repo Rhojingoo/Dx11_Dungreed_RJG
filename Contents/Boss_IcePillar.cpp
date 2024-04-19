@@ -97,6 +97,20 @@ void ABoss_IcePillar::StateUpdate(float _DeltaTime)
 	}
 }
 
+void ABoss_IcePillar::CreatBullet(FVector _Dir, FVector _Pos)
+{
+	std::shared_ptr<AIceBullet> Bullet = GetWorld()->SpawnActor<AIceBullet>("IceBullet");
+
+	Bullet->SetActorLocation(_Pos);
+	_Dir.Normalize2D();
+	_Dir.Z = 0;
+	_Dir.X *= UEngineMath::DToR;
+	_Dir.Y *= UEngineMath::DToR;
+	Bullet->SetTarget(-_Dir);
+	Bullet->FireSecondBullet();
+	CheckTime = FireTime;	
+}
+
 void ABoss_IcePillar::IcePillar_Intro(float _DeltaTime)
 {
 	AddActorRotation(float4{ 0.0f, 0.0f, 1.0f } *180.0f * _DeltaTime);
@@ -170,27 +184,29 @@ void ABoss_IcePillar::IcePillar_Attack_4(float _DeltaTime)
 	}
 	else
 	{
+		FVector Position = Renderer->GetWorldPosition();
+
 		if (SetBullet == true)
 		{			
 			FireTime += _DeltaTime;
-			if ((FireTime - CheckTime) >= 0.05f)
+			if ((FireTime - CheckTime) >= 0.1f)
 			{
-				if (AttackCount < 13)
-				{
-					if (AttackDirSet == false)
-					{
-						BulletDir = RenderPos - PlayerPos;
+				if (AttackCount < 25)
+				{					
+					if (AttackDirSet == false)		
+					{						
+						UpPosition = Position; CenterPosition = Position; BotPosition = Position;
+						UpPosition.Y = Position.Y + 60.f;
+						UpDir = UpPosition - PlayerPos;
+						CenterDir = CenterPosition - PlayerPos;
+						BotPosition.Y = Position.Y - 60.f;
+						BotDir = BotPosition - PlayerPos;
 						AttackDirSet = true;
 					}
-
-					IceBullet[AttackCount]->SetActorLocation(Renderer->GetWorldPosition());
-					BulletDir.Normalize2D();
-					BulletDir.Z = 0;
-					BulletDir.X *= UEngineMath::DToR;
-					BulletDir.Y *= UEngineMath::DToR;
-					IceBullet[AttackCount]->SetTarget(BulletDir);
-					IceBullet[AttackCount]->TargetOn();
-
+					CreatBullet(UpDir, UpPosition);				
+					CreatBullet(CenterDir, CenterPosition);		
+					CreatBullet(BotDir, BotPosition);
+					
 					++AttackCount;
 					CheckTime = FireTime;
 				}

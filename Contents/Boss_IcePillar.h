@@ -52,6 +52,7 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	void StateUpdate(float _DeltaTime);
+	void CreatBullet(FVector _Dir, FVector _Pos);
 
 private:
 	FVector BulletDir = {};
@@ -103,5 +104,13 @@ private:
 
 	bool IntroCheck = false;
 
+
+
+	FVector UpDir = {};
+	FVector CenterDir = {};
+	FVector BotDir = {};
+	FVector UpPosition = {};
+	FVector CenterPosition = {};
+	FVector BotPosition = {};
 };
 

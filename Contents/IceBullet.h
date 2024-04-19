@@ -21,6 +21,8 @@ public:
 	bool IsFire() { return Fire; }
 	void FireOn() { Fire = true; }
 	void FireOff() { Fire = false; }
+	void FireSecondBullet() { OtherBulletFire = true, TargetSwitch = true; }
+
 
 protected:
 	void BeginPlay() override;
@@ -31,8 +33,10 @@ private:
 	FVector TargetPos = {};
 	FVector TargetNomalPos = {};
 	bool TargetSwitch = false;
-	float Speed = 100.f;
+	float Speed = 200.f;
 
 	bool Fire = false;
+	bool OtherBulletFire = false;	
+	float DestroyTime = 0.f;
 };
 

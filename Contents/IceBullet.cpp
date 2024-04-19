@@ -33,11 +33,28 @@ void AIceBullet::Tick(float _DeltaTime)
 
 	if (TargetSwitch == true)
 	{
-		FVector Target = -TargetPos * Speed  /** _DeltaTime*/;
-		//SetActorLocation(Target);
-		AddActorLocation(Target);
-		float CursorAngleRad = std::atan2(TargetPos.Y, TargetPos.X);
-		CursorAngleRad = CursorAngleRad *UEngineMath::RToD;
-		SetActorRotation(FVector(0.0f, 0.0f, CursorAngleRad+90));
+		if (OtherBulletFire == false)
+		{
+			FVector Target = -TargetPos * Speed  /** _DeltaTime*/;
+		
+			AddActorLocation(Target);
+			float CursorAngleRad = std::atan2(TargetPos.Y, TargetPos.X);
+			CursorAngleRad = CursorAngleRad * UEngineMath::RToD;
+			SetActorRotation(FVector(0.0f, 0.0f, CursorAngleRad + 90));
+		}
+		else
+		{
+			FVector Target = -TargetPos * Speed;
+			AddActorLocation(-Target);
+			float CursorAngleRad = std::atan2(TargetPos.Y, TargetPos.X);
+			CursorAngleRad = CursorAngleRad * UEngineMath::RToD;
+			SetActorRotation(FVector(0.0f, 0.0f, CursorAngleRad + 90));
+
+			DestroyTime += _DeltaTime;
+			if (DestroyTime > 7.f)
+			{
+				Destroy();
+			}
+		}
 	}
 }
