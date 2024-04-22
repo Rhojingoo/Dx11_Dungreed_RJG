@@ -229,6 +229,7 @@
     <ClInclude Include="RenderUnit.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Widget.h" />
+    <ClInclude Include="BlurEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp">
@@ -376,6 +377,7 @@
     <ClCompile Include="RenderUnit.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="Widget.cpp" />
+    <ClCompile Include="BlurEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="ThirdParty\DirectxTex\Debug\DirectXTex.lib">

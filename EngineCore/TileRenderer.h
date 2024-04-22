@@ -27,6 +27,8 @@ public:
 
 	void SetTile(int _X, int _Y, int _Index);
 
+	void SetAllTile(int _Index);
+
 	std::vector<std::vector<int>> GetTileMapData()
 	{
 		return Tiles;
@@ -37,7 +39,7 @@ protected:
 	bool Render(float _DeltaTime) override;
 
 	std::vector<std::vector<int>> Tiles;
-	ResultColorValue ColorData;
+	FResultColorValue ColorData;
 	FCuttingData CuttingDataValue;
 	std::shared_ptr<UEngineSprite> TileSprite;
 	float4 TileSize = {64, 64};

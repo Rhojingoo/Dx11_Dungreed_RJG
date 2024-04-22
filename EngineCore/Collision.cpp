@@ -50,6 +50,12 @@ bool UCollision::Collision(int _TargetGroup,
 	std::function<void(std::shared_ptr<UCollision>)> _Exit /*= nullptr*/)
 {
 	// Group 상대 그룹
+	bool IsColCheck = false;
+	if (nullptr == _Enter && nullptr == _Stay && nullptr == _Exit)
+	{
+		IsColCheck = true;
+	}
+
 
 	auto Test = GetWorld()->Collisions;
 
@@ -74,34 +80,44 @@ bool UCollision::Collision(int _TargetGroup,
 
 		if (true == Transform.Collision(ThisType, OtherType, OtherCollision->Transform))
 		{
-			bool IsFirst = false;
-
-			if (false == OtherCheck.contains(CollisionPtr))
+			if (true == IsColCheck)
 			{
-				IsFirst = true;
-			}
-			else {
-				IsFirst = false;
+				return true;
 			}
 
-			if (nullptr != _Enter || nullptr != _Exit)
+			if (false == FirstCheck.contains(CollisionPtr) && false == OtherCheck.contains(CollisionPtr))
 			{
-				OtherCheck.insert(CollisionPtr);
+				FirstCheck.insert(CollisionPtr);
+				if (nullptr != _Enter)
+				{
+					_Enter(OtherCollision);
+				}
 			}
 
-			if (true == IsFirst && nullptr != _Enter)
+			//if (true == FirstCheck.contains(CollisionPtr) && false == OtherCheck.contains(CollisionPtr))
+			//{
+			//	if (nullptr != _Enter)
+			//	{
+			//		_Enter(OtherCollision);
+			//	}
+			//}
+
+			
+			if (true == OtherCheck.contains(CollisionPtr))
 			{
-				_Enter(OtherCollision);
-			}
-			else if (false == IsFirst && nullptr != _Stay)
-			{
-				_Stay(OtherCollision);
+				if (nullptr != _Stay)
+				{
+					_Stay(OtherCollision);
+				}
 			}
 		}
-		else if(true == OtherCheck.contains(CollisionPtr) && nullptr != _Exit)
+		else if(true == OtherCheck.contains(CollisionPtr))
 		{
 			OtherCheck.erase(CollisionPtr);
-			_Exit(OtherCollision);
+			if (nullptr != _Exit)
+			{
+				_Exit(OtherCollision);
+			}
 		}
 	}
 
@@ -126,6 +142,15 @@ void UCollision::SetOrder(int _Order)
 void UCollision::Tick(float _Delta)
 {
 	Super::Tick(_Delta);
+
+
+	for (UCollision* Col : FirstCheck)
+	{
+		OtherCheck.insert(Col);
+	}
+	FirstCheck.clear();
+
+
 	if (false == GEngine->IsDebug)
 	{
 		return;
@@ -148,7 +173,7 @@ void UCollision::Tick(float _Delta)
 		float4x4 PPos;
 
 		PScale.Scale(Scale);
-		PPos.Scale(Pos);
+		PPos.Position(Pos);
 
 		Trans.World = Trans.ScaleMat * Trans.PositionMat * PScale * PPos;
 		Trans.WVP = Trans.World * Trans.View * Trans.Projection;

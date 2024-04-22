@@ -171,6 +171,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="BlurEffect.h" />
     <ClInclude Include="Camera.h">
       <SubType>
       </SubType>
@@ -285,6 +286,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="BlurEffect.cpp" />
     <ClCompile Include="Camera.cpp">
       <SubType>
       </SubType>

@@ -15,6 +15,12 @@
     <FxCompile Include="ColorShader.fx">
       <Filter>2D</Filter>
     </FxCompile>
+    <FxCompile Include="TargetCopyShader.fx">
+      <Filter>2D</Filter>
+    </FxCompile>
+    <FxCompile Include="BlurEffectShader.fx">
+      <Filter>2D</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="EngineVertex.hlsli">
