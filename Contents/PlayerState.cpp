@@ -184,6 +184,7 @@ void APlayer::RunStart()
 
 void APlayer::Run(float _DeltaTime)
 {
+	Move_PixelCheck = true;
 	if (true == Renderer->IsCurAnimationEnd())
 	{
 		int a = 0;
@@ -483,10 +484,11 @@ void APlayer::CalGravityVector(float _DeltaTime)
 	{
 		float4 PlayerLocation = GetActorLocation();
 		float4 PlayerUpLocation = GetActorLocation();		
+		float4 PlayerDownLocation;
 		PlayerUpLocation.Y = -PlayerUpLocation.Y-15;
 		UPColor = Tex->GetColor(PlayerUpLocation, Color8Bit::Black);
 
-		if (UPColor == Color8Bit::Black)
+		if (UPColor == Color8Bit::Black/*|| UPColor == Color8Bit::Red*/)
 		{
 			GravityVector += GravityAcc * _DeltaTime;
 			Color = Color8Bit::Blue;			
@@ -494,31 +496,8 @@ void APlayer::CalGravityVector(float _DeltaTime)
 		else
 		{
 			PlayerLocation.Y = -PlayerLocation.Y;
-			Color = Tex->GetColor(PlayerLocation, Color8Bit::Black);
-			if (PlayerMoveDir == true)	//왼쪽
-			{
-				float4 HillCheck= GetActorLocation();
-				HillCheck.X = HillCheck.X - 15;
-				HillCheck.Y = -HillCheck.Y;
-				HillColor = Tex->GetColor(HillCheck, Color8Bit::Red);		
-				if (HillColor == Color8Bit::Red)
-				{
-					GravityVector = FVector::Zero;
-					AddActorLocation({0.f, 0.001f});
-				}		
-			}
-			else		//오른쪽
-			{
-				float4 HillCheck = GetActorLocation();
-				HillCheck.X = HillCheck.X + 15;
-				HillCheck.Y = -HillCheck.Y;
-				HillColor = Tex->GetColor(HillCheck, Color8Bit::Red);
-				if (HillColor == Color8Bit::Red)
-				{			
-					GravityVector = FVector::Zero;
-					AddActorLocation({ 0.f, 0.001f });
-				}
-			}
+			Color = Tex->GetColor(PlayerLocation, Color8Bit::Black);	
+			HillColor = Tex->GetColor(PlayerLocation, Color8Bit::Red);
 		}
 	}
 	else
@@ -537,7 +516,7 @@ void APlayer::CalGravityVector(float _DeltaTime)
 			JumpOn = false;
 		}
 	}		
-	if (Color == Color8Bit::Black)
+	if (Color == Color8Bit::Black|| HillColor == Color8Bit::Red)
 	{
 		GravityVector = FVector::Zero;	
 		JumpOn = false;	
@@ -562,39 +541,105 @@ void APlayer::MoveUpdate(float _DeltaTime)
 
 void APlayer::GroundUp(float _DeltaTime)
 {
-//	std::shared_ptr<UEngineTexture> Tex = UContentsHelper::MapTex;
-//
-//#ifdef _DEBUG
-//	if (nullptr == Tex)
-//	{
-//		MsgBoxAssert("이미지 충돌체크중 이미지가 존재하지 않습니다.");
-//	}
-//#endif
-//
-//	Direction();
-//	PlayerPos.Y = PlayerPos.Y - 44;
-//	PlayerPos.Y = -PlayerPos.Y;
-//
-//	Color8Bit Color = Tex->GetColor(PlayerPos, Color8Bit::Black);
-//
-//	if (Color != Color8Bit::Black)
-//	{
-//		AddActorLocation(float4::Down * _DeltaTime * 350.0f);
-//	}
+	Color8Bit HillColor;
+	Color8Bit Hill_FrontCheck;
+	std::shared_ptr<UEngineTexture> Tex = UContentsHelper::MapTex;
+	float4 FrontLocation = GetActorLocation(); FrontLocation.Y = -FrontLocation.Y;
+	
+	while (true)
+	{		
+		colorsetting();
+		float4 PlayerLocation = GetActorLocation();
+		//if (State.GetCurStateName() == "Player_Jump")
+		//{
+		//	break;
+		//}
+		if (State.GetCurStateName() == "Player_Dash")
+		{
+			break;
+		}
 
-	//while (true)
-	//{
-	//	Color8Bit Color = UContentsHelper::ColMapImage->GetColor(GetActorLocation().iX(), GetActorLocation().iY(), Color8Bit::MagentaA);
-	//	if (Color == Color8Bit(255, 0, 255, 0))
-	//	{
-	//		AddActorLocation(FVector::Up);
-	//	}
-	//	else
-	//	{
-	//		break;
-	//	}
-	//}
+
+		if (UpSlope == true)
+		{
+			PlayerLocation.Y = -PlayerLocation.Y - 3.f;					
+		}
+		else if (DownSlope ==true)
+		{			
+			if (State.GetCurStateName() == "Player_Jump")			
+				PlayerLocation.Y = -PlayerLocation.Y - 3.f;			
+			else			
+				PlayerLocation.Y = -PlayerLocation.Y;			
+		}
+		HillColor = Tex->GetColor(PlayerLocation, Color8Bit::Red);
+		if (HillColor == Color8Bit::Red)
+		{
+		 AddActorLocation(FVector::Up);
+		}
+		else 
+		{
+			break;
+		}
+	}		
 }
+
+void APlayer::colorsetting()
+{
+	if (UEngineInput::IsPress('A'))
+	{
+		PlayerMoveDir = true;
+	}
+
+	if (UEngineInput::IsPress('D'))
+	{
+		PlayerMoveDir = false;
+	}
+
+	Color8Bit Hill_Down;
+	Color8Bit Hill_Up;
+	std::shared_ptr<UEngineTexture> Tex = UContentsHelper::MapTex;
+	float4 DownLocation = GetActorLocation(); DownLocation.Y = -DownLocation.Y + 5.f;
+	float4 UpLocation = GetActorLocation();	UpLocation.Y = -UpLocation.Y - 5.f;
+	if (PlayerMoveDir == true)
+	{
+		DownLocation.X = DownLocation.X - 20.f;
+		UpLocation.X = UpLocation.X - 20.f;
+		{
+			Hill_Down = Tex->GetColor(DownLocation, Color8Bit::Red);
+			Hill_Up = Tex->GetColor(UpLocation, Color8Bit::Red);
+			if (Hill_Down == Color8Bit::Red)
+			{
+				DownSlope = true;
+				UpSlope = false;
+			}
+			if (Hill_Up == Color8Bit::Red)
+			{
+				UpSlope = true;
+				DownSlope = false;
+			}
+		}
+	}
+	else
+	{
+		DownLocation.X = DownLocation.X + 20.f;
+		UpLocation.X = UpLocation.X + 20.f;
+		{
+			Hill_Down = Tex->GetColor(DownLocation, Color8Bit::Red);
+			Hill_Up = Tex->GetColor(UpLocation, Color8Bit::Red);
+			if (Hill_Down == Color8Bit::Red)
+			{
+				DownSlope = true;
+				UpSlope = false;
+			}
+			if (Hill_Up == Color8Bit::Red)
+			{
+				UpSlope = true;
+				DownSlope = false;
+			}
+		}
+	}
+}
+
 
 void APlayer::AddMoveVector(const FVector& _DirDelta)
 {
@@ -634,49 +679,4 @@ void APlayer::PlayAfterImage(float _DeltaTime, FVector _PlayerPos)
 			}
 		}
 	}
-}
-
-void APlayer::colorsetting()
-{
-	//if (true == IsPress('W'))
-	//{
-	//	AddActorLocation(FVector::Up * _DeltaTime * Speed);
-	//}
-
-	//if (true == IsPress('S'))
-	//{
-	//	AddActorLocation(FVector::Down * _DeltaTime * Speed);
-	//}
-
-	//if (true == IsPress(VK_NUMPAD1))
-	//{
-	//	// AddActorRotation(float4{0.0f, 0.0f, 1.0f} * 360.0f * _DeltaTime);
-	//	// Color.X += _DeltaTime;
-	//}
-
-	//if (true == IsPress(VK_NUMPAD2))
-	//{
-	//	Color.X -= _DeltaTime;
-	//}
-
-	//if (true == IsPress(VK_NUMPAD4))
-	//{
-	//	Color.Y += _DeltaTime;
-	//}
-
-	//if (true == IsPress(VK_NUMPAD5))
-	//{
-	//	Color.Y -= _DeltaTime;
-	//}
-
-	//if (true == IsPress(VK_NUMPAD7))
-	//{
-	//	Color.Z += _DeltaTime;
-	//}
-
-	//if (true == IsPress(VK_NUMPAD8))
-	//{
-	//	Color.Z -= _DeltaTime;
-	//}
-
 }
