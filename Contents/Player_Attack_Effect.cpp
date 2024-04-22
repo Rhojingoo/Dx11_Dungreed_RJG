@@ -4,6 +4,8 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/DefaultSceneComponent.h>
 #include "ContentsHelper.h"
+#include "IceBullet.h"
+#include "Icicle_Bullet.h"
 
 APlayer_Attack_Effect::APlayer_Attack_Effect()
 {
@@ -41,6 +43,18 @@ void APlayer_Attack_Effect::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
+
+	Collision->CollisionEnter(EColOrder::Boss_IceBullet, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			AActor* Actors = _Collison->GetActor();
+			AIceBullet* IceBullet = dynamic_cast<AIceBullet*>(Actors);
+			if (IceBullet != nullptr)
+			{
+				IceBullet->BombBullet();
+				return;
+			}
+		}
+	);
 
 	if (Attack == true)
 	{

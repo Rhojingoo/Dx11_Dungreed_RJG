@@ -99,8 +99,9 @@ void APlayer::StateInit()
 
 	State.CreateState("");
 	
-	// 체인지
+	// 체인지Player_Idle
 	State.ChangeState("Player_Debug");
+	//State.ChangeState("Player_Idle");
 }
 
 

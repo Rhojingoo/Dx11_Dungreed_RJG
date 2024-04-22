@@ -53,7 +53,6 @@ void APlayer::BeginPlay()
 	}
 	
 
-
 	Renderer->CreateAnimation("Player_Idle", "Player_Idle",0.1f);
 	Renderer->CreateAnimation("Player_Jump", "Player_Jump", 0.1f);
 	Renderer->CreateAnimation("Player_Run", "Player_Run", 0.1f);
@@ -105,16 +104,11 @@ void APlayer::Tick(float _DeltaTime)
 	//	}
 	//);
 
-
-
 	//Collision->CollisionStay(EColOrder::Boss_IceBullet, [=](std::shared_ptr<UCollision> _Collison)
 	//	{
 	//		int a = 0;
 	//	}
 	//);
-
-
-
 }
 
 
