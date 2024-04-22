@@ -257,6 +257,10 @@ void ABoss::Boss_Patton1Start()
 		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
 		IcePillar[a]->AttackEndFalse();
 		IcePillar[a]->SetActorRotation({ PlRotation[a] });
+	}
+
+	for (int a = 0; a < 4; a++)
+	{
 		IcePillar[a]->StateChange(IcePillarState::Attack01);
 	}
 	Attack_Check = true;
@@ -372,7 +376,6 @@ void ABoss::Boss_Patton3(float _DeltaTime)
 				return;
 			}
 		}
-		IcePillarPos = 0.f;
 		StateChange(BossState::Ready2);
 	}
 }
@@ -410,6 +413,16 @@ void ABoss::Boss_Patton5Start()
 	}
 
 	IcicleCreat = false;
+
+	//Bullet[0] = GetWorld()->SpawnActor<AIcicle_Bullet>("IcicleBullet");
+	//Bullet[1] = GetWorld()->SpawnActor<AIcicle_Bullet>("IcicleBullet");
+	//Bullet[2] = GetWorld()->SpawnActor<AIcicle_Bullet>("IcicleBullet");
+	//Bullet[3] = GetWorld()->SpawnActor<AIcicle_Bullet>("IcicleBullet");
+
+	//Bullet[0]->SetActorLocation({ Setpos.X-60,Setpos.Y });
+	//Bullet[1]->SetActorLocation({ Setpos.X-30, Setpos.Y});
+	//Bullet[2]->SetActorLocation({ Setpos.X+30, Setpos.Y });
+	//Bullet[3]->SetActorLocation({ Setpos.X + 60,Setpos.Y });
 }
 void ABoss::Boss_Patton5(float _DeltaTime)
 {
