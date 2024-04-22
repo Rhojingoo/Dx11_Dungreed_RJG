@@ -1,6 +1,15 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
+enum class IceBulletState
+{
+	None,
+	Attack,
+	Collision,
+	End,
+};
+
+
 class UCollision;
 class USpriteRenderer;
 class AIceBullet : public AActor
@@ -23,13 +32,25 @@ public:
 	void FireOn() { Fire = true; }
 	void FireOff() { Fire = false; }
 	void FireSecondBullet() { OtherBulletFire = true, TargetSwitch = true; }
+	
+	void BombBullet() { ChangeState(IceBulletState::Collision); }
 
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	void AttackStart();
+	void Attack(float _DeltaTime);
+
+	void ColEnterStart();
+	void ColEnter(float _DeltaTime);
+
+	void ChangeState(IceBulletState _Set);
+	void StateUpdate(float _DeltaTime);
+
 private:
+	IceBulletState IceState = IceBulletState::Attack;
 	USpriteRenderer* Renderer = nullptr;
 	UCollision* Collision = nullptr;
 	FVector TargetPos = {};

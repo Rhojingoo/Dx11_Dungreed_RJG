@@ -8,6 +8,8 @@
 #include "Target.h"
 #include "Player_Smoke_Effect.h"
 #include "Player_AfterImage.h"
+#include "IceBullet.h"
+#include "Icicle_Bullet.h"
 
 APlayer::APlayer()
 {
@@ -84,24 +86,35 @@ void APlayer::Tick(float _DeltaTime)
 	PlayAfterImage(_DeltaTime, PlayerPos);	
 
 
-	Collision->CollisionStay(EColOrder::Boss_IceBullet, [=](std::shared_ptr<UCollision> _Collison)
-		{
-			int a = 0;
-		}
-	);
-
 	Collision->CollisionEnter(EColOrder::Boss_IceBullet, [=](std::shared_ptr<UCollision> _Collison)
-		{
+		{		
+			AActor* Actors =_Collison->GetActor();
+			AIceBullet* IceBullet = dynamic_cast<AIceBullet*>(Actors);
+			if (IceBullet != nullptr)
+			{
+				IceBullet->BombBullet();
+				return;
+			}
 			int a = 0;
 		}
 	);
 
-	Collision->CollisionExit(EColOrder::Boss_IceBullet, [=](std::shared_ptr<UCollision> _Collison)
-		{
-			int a = 0;
-			// _Collison[0]->GetActor()->Destroy();
-		}
-	);
+	//Collision->CollisionExit(EColOrder::Boss_IceBullet, [=](std::shared_ptr<UCollision> _Collison)
+	//	{
+	//		int a = 0;
+	//	}
+	//);
+
+
+
+	//Collision->CollisionStay(EColOrder::Boss_IceBullet, [=](std::shared_ptr<UCollision> _Collison)
+	//	{
+	//		int a = 0;
+	//	}
+	//);
+
+
+
 }
 
 

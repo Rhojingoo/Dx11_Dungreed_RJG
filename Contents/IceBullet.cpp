@@ -21,30 +21,18 @@ AIceBullet::~AIceBullet()
 {
 }
 
-void AIceBullet::BeginPlay()
+void AIceBullet::AttackStart()
 {
-	Super::BeginPlay();
-	Renderer->SetAutoSize(4.0f, true);
-
-	Renderer->CreateAnimation("IceBullet", "IceBullet", 0.1f, false);
-	Renderer->CreateAnimation("IceBulletEfferct", "IceBulletEfferct", 0.1f);
-	Renderer->ChangeAnimation("IceBullet");
-	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
-
-	Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2, Renderer->GetWorldScale().Z });
-	Collision->AddPosition({ 0.f, 0.25f });
 }
 
-void AIceBullet::Tick(float _DeltaTime)
+void AIceBullet::Attack(float _DeltaTime)
 {
-	Super::Tick(_DeltaTime);
-
 	if (TargetSwitch == true)
 	{
 		if (OtherBulletFire == false)
 		{
 			FVector Target = -TargetPos * Speed;
-		
+
 			AddActorLocation(Target);
 			float CursorAngleRad = std::atan2(TargetPos.Y, TargetPos.X);
 			CursorAngleRad = CursorAngleRad * UEngineMath::RToD;
@@ -65,4 +53,76 @@ void AIceBullet::Tick(float _DeltaTime)
 			}
 		}
 	}
+}
+
+void AIceBullet::ColEnterStart()
+{
+	Renderer->ChangeAnimation("IceBulletEfferct");
+}
+
+void AIceBullet::ColEnter(float _DeltaTime)
+{
+	if (Renderer->IsCurAnimationEnd())
+	{
+		Destroy();
+	}
+}
+
+void AIceBullet::ChangeState(IceBulletState _Set)
+{
+	if (_Set != IceState)
+	{
+		switch (_Set)
+		{
+		case IceBulletState::Attack:
+			AttackStart();
+			break;
+		case IceBulletState::Collision:
+			ColEnterStart();
+			break;
+		case IceBulletState::End:
+			break;
+		default:
+			break;
+		}
+	}
+	IceState = _Set;
+}
+
+void AIceBullet::StateUpdate(float _DeltaTime)
+{
+	switch (IceState)
+	{
+	case IceBulletState::Attack:
+		Attack(_DeltaTime);
+		break;
+	case IceBulletState::Collision:
+		ColEnter(_DeltaTime);
+		break;
+	case IceBulletState::End:
+		break;
+	default:
+		break;
+	}	
+}
+
+void AIceBullet::BeginPlay()
+{
+	Super::BeginPlay();
+	Renderer->SetAutoSize(4.0f, true);
+
+	Renderer->CreateAnimation("IceBullet", "IceBullet", 0.1f, false);
+	Renderer->CreateAnimation("IceBulletEfferct", "IceBulletEfferct", 0.1f, false);
+	Renderer->ChangeAnimation("IceBullet");
+	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
+
+	Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2, Renderer->GetWorldScale().Z });
+	Collision->AddPosition({ 0.f, 0.25f });
+}
+
+void AIceBullet::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+
+	StateUpdate(_DeltaTime);	
 }
