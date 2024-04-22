@@ -599,7 +599,27 @@ void ABoss_IcePillar::IcePillar_Attack_1(float _DeltaTime)
 					AttackDirSet = true;
 				}
 
+	/*			IceBullet[Num]->SetActorLocation(Renderer->GetWorldPosition());
+				BulletDir.Normalize2D();
+				BulletDir.Z = 0;
+				BulletDir.X *= UEngineMath::DToR;
+				BulletDir.Y *= UEngineMath::DToR;
+				IceBullet[Num]->SetTarget(BulletDir);
+				IceBullet[Num]->TargetOn();*/
+
 				CreatBullet(BulletDir, Renderer->GetWorldPosition());
+				/*{
+					std::shared_ptr<AIceBullet> Bullet = GetWorld()->SpawnActor<AIceBullet>("IceBullet");
+
+					Bullet->SetActorLocation(_Pos);
+					_Dir.Normalize2D();
+					_Dir.Z = 0;
+					_Dir.X *= UEngineMath::DToR;
+					_Dir.Y *= UEngineMath::DToR;
+					Bullet->SetTarget(-_Dir);
+					Bullet->FireSecondBullet();
+					CheckTime = FireTime;
+				}*/
 
 				++Num;
 				check = FireTime;
