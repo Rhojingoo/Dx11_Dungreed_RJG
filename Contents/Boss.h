@@ -94,5 +94,6 @@ private:
 	void Direction();
 	bool SpearCreat = false;
 	bool IcicleCreat = false;
+	static float IcePillarPos;
 };
 

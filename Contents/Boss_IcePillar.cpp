@@ -129,6 +129,7 @@ void ABoss_IcePillar::IcePillar_IntroStart()
 void ABoss_IcePillar::IcePillar_Idle(float _DeltaTime)
 {
 	Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
+	AddActorRotation(float4{ 0.0f, 0.0f, 1.0f } *180.0f * _DeltaTime);
 }
 
 void ABoss_IcePillar::IcePillar_IdleStart()
@@ -634,9 +635,12 @@ void ABoss_IcePillar::IcePillar_Attack_1(float _DeltaTime)
 			else
 			{
 				Num = 0;
+				check = 0;
+				FireTime = 0;
 				SetBullet = false;
 				AttackEnd = true;
 				AttackDirSet = false;
+				return;
 			}
 		}
 	}

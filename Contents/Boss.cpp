@@ -6,6 +6,8 @@
 #include "Player.h"
 #include <EngineCore/Renderer.h>
 
+float ABoss::IcePillarPos = 0.f;
+
 
 ABoss::ABoss()
 {
@@ -78,12 +80,6 @@ void ABoss::StateChange(BossState _State)
 		case BossState::Patton2:
 			Boss_Patton2Start();
 			break;
-		case BossState::Ready:
-			Boss_ReadyStart(); 
-			break;
-		case BossState::Ready2:
-			Boss_ReadyStart2();
-			break;;
 		case BossState::Patton3:
 			Boss_Patton3Start();
 			break;
@@ -93,6 +89,12 @@ void ABoss::StateChange(BossState _State)
 		case BossState::Patton5:
 			Boss_Patton5Start();
 			break;
+		case BossState::Ready:
+			Boss_ReadyStart(); 
+			break;
+		case BossState::Ready2:
+			Boss_ReadyStart2();
+			break;;
 
 		default:
 			break;
@@ -260,12 +262,12 @@ void ABoss::Boss_Patton1Start()
 		IcePillar[a]->StateChange(IcePillarState::Attack01);
 	}
 	Attack_Check = true;
+	IcePillarPos = 0.f;
 }
 
 void ABoss::Boss_Patton1(float _DeltaTime)
 {
-	{		
-		static float IcePillarPos = 0.f;
+	{			
 		if (Attack_Check == true)
 		{
 			if (IcePillarPos < 7.f)
@@ -284,7 +286,7 @@ void ABoss::Boss_Patton1(float _DeltaTime)
 					IcePillar[a]->FireOn();
 				}
 				Attack_Check = false;
-				IcePillarPos = 0.f;				
+				//IcePillarPos = 0.f;				
 			}
 		}
 		else
@@ -296,7 +298,13 @@ void ABoss::Boss_Patton1(float _DeltaTime)
 					return;
 				}
 			}
-			StateChange(BossState::Ready);
+			for (int a = 0; a < 4; a++)
+			{
+				IcePillar[a]->StateChange(IcePillarState::Idle);
+			}
+			StateChange(BossState::Ready); 
+			IcePillarPos = 0.f;
+			return;
 		}
 	}
 }
@@ -313,7 +321,6 @@ void ABoss::Boss_Patton2Start()
 
 void ABoss::Boss_Patton2(float _DeltaTime)
 {
-	static float IcePillarPos = 0.f;
 	if (Attack_Check == true)
 	{
 		for (int a = 0; a < 4; a++)
@@ -322,6 +329,10 @@ void ABoss::Boss_Patton2(float _DeltaTime)
 			{
 				return;
 			}
+		}
+		for (int a = 0; a < 4; a++)
+		{
+			IcePillar[a]->StateChange(IcePillarState::Idle);
 		}
 		Attack_Check = false;
 		StateChange(BossState::Ready2);
@@ -338,11 +349,11 @@ void ABoss::Boss_Patton3Start()
 		IcePillar[a]->SetActorRotation({ PlRotation[a] });
 	}
 	Attack_Check = true;	
+	IcePillarPos = 0.f;
 }
 
 void ABoss::Boss_Patton3(float _DeltaTime)
-{
-	static float IcePillarPos = 0.f;
+{	
 	if (Attack_Check == true)
 	{	
 		if (IcePillarPos < 7.f)
@@ -358,8 +369,7 @@ void ABoss::Boss_Patton3(float _DeltaTime)
 			{
 				IcePillar[a]->FireOn();
 			}
-			Attack_Check = false;
-			IcePillarPos = 0.f;
+			Attack_Check = false;			
 		}
 	}
 	else
@@ -368,12 +378,16 @@ void ABoss::Boss_Patton3(float _DeltaTime)
 		{
 			if (true != IcePillar[a]->IsAttackEnd())
 			{
-				IcePillarPos = 0.f;
 				return;
 			}
 		}
-		IcePillarPos = 0.f;
+		for (int a = 0; a < 4; a++)
+		{
+			IcePillar[a]->StateChange(IcePillarState::Idle);
+		}
 		StateChange(BossState::Ready2);
+		IcePillarPos = 0.f;
+		return;
 	}
 }
 
@@ -393,8 +407,46 @@ void ABoss::Boss_Patton4Start()
 		IcePillar[a]->AttackEndFalse();
 		IcePillar[a]->StateChange(IcePillarState::Attack04);
 		IcePillar[a]->SetActorRotation({ 0.f,0.f,0.f });
-	}	
+	}
 }
+void ABoss::Boss_Patton4(float _DeltaTime)
+{
+	if (Attack_Check == false)
+	{
+		FVector AttrackDir = Player->GetActorLocation() - GetActorLocation();
+		AttrackDir.Normalize2D();
+		AttrackDir.Z = 0;
+		AttrackDir.X *= UEngineMath::DToR;
+		AttrackDir.Y *= UEngineMath::DToR;
+		float CursorAngleRad = std::atan2(AttrackDir.Y, AttrackDir.X);
+		CursorAngleRad = CursorAngleRad * UEngineMath::RToD;
+		//IcePillar[0]->SetActorRotation({ 0.f,0.f,CursorAngleRad - 45.f });
+		for (int a = 0; a < 4; a++)
+		{
+			IcePillar[a]->SetActorRotation({ 0.f,0.f,CursorAngleRad - 45.f });
+		}
+		Attack_Check = true;
+	}
+	else
+	{
+		for (int a = 0; a < 4; a++)
+		{
+			if (true != IcePillar[a]->IsAttackEnd())
+			{
+				return;
+			}
+		}
+		StateChange(BossState::Ready2);
+		Attack_Check = false;
+		return;
+		if (UEngineInput::IsDown('1'))
+		{
+			StateChange(BossState::Idle);
+			Boss_Time = 0.f;
+		}
+	}
+}
+
 
 void ABoss::Boss_Patton5Start()
 {
@@ -408,7 +460,6 @@ void ABoss::Boss_Patton5Start()
 		Bullet[i]->SetActorLocation({ Setpos.X + offset, Setpos.Y-20.f });
 		Bullet[i]->AttackOn();
 	}
-
 	IcicleCreat = false;
 }
 void ABoss::Boss_Patton5(float _DeltaTime)
@@ -462,43 +513,6 @@ void ABoss::IceSpear_Aattack()
 
 
 
-void ABoss::Boss_Patton4(float _DeltaTime)
-{
-	if (Attack_Check == false)
-	{
-		FVector AttrackDir = Player->GetActorLocation() - GetActorLocation();
-		AttrackDir.Normalize2D();
-		AttrackDir.Z = 0;
-		AttrackDir.X *= UEngineMath::DToR;
-		AttrackDir.Y *= UEngineMath::DToR;
-		float CursorAngleRad = std::atan2(AttrackDir.Y, AttrackDir.X);
-		CursorAngleRad = CursorAngleRad * UEngineMath::RToD;
-		//IcePillar[0]->SetActorRotation({ 0.f,0.f,CursorAngleRad - 45.f });
-		for (int a = 0; a < 4; a++)
-		{
-			IcePillar[a]->SetActorRotation({ 0.f,0.f,CursorAngleRad-45.f });
-		}
-		Attack_Check = true;
-	}
-	else
-	{
-		for (int a = 0; a < 4; a++)
-		{
-			if (true != IcePillar[a]->IsAttackEnd())
-			{
-				return;
-			}
-		}
-		StateChange(BossState::Ready2);
-
-		if (UEngineInput::IsDown('1'))
-		{
-			StateChange(BossState::Idle);
-			Boss_Time = 0.f;
-		}
-	}
-}
-
 
 
 
@@ -519,18 +533,21 @@ void ABoss::Boss_ReadyStart2()
 		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
 		IcePillar[a]->AttackEndFalse();
 		IcePillar[a]->SetActorRotation({ PlRotation[a] });
+		IcePillar[a]->StateChange(IcePillarState::Idle);
 	}
+	int a = 0;
 }
 
 void ABoss::Boss_Ready2(float _DeltaTime)
 {
 	for (int a = 0; a < 4; a++)
 	{
-		//IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
-		//IcePillar[a]->AttackEndFalse();
+		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
+		IcePillar[a]->AttackEndFalse();
 		IcePillar[a]->StateChange(IcePillarState::Idle);
 	}
 	StateChange(BossState::Idle);
+	return;
 }
 
 
@@ -556,8 +573,7 @@ void ABoss::Boss_Ready(float _DeltaTime)
 		IcePillar[3]->AddPos({ -IcePillarPos,IcePillarPos / 1000 });
 	}
 	else
-	{
-		IcePillarPos = 0;
+	{		
 		for (int a = 0; a < 4; a++)
 		{
 			IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
@@ -566,6 +582,7 @@ void ABoss::Boss_Ready(float _DeltaTime)
 		}
 		StateChange(BossState::Idle);
 		IcePillarPos = 7.f;
+		return;
 	}
 }
 
