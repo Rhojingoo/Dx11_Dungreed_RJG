@@ -66,6 +66,7 @@ private:
 	//std::shared_ptr<AIceBullet> IceBullet = nullptr;
 	std::shared_ptr<AIceBullet> IceBullet[13] = {};
 	bool SetBullet = false;
+	bool Create_Bullets = false;
 	bool AttackEnd = false;
 	bool IcePillarSetting = false;
 	bool AttackDirSet = false;

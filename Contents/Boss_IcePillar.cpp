@@ -442,106 +442,116 @@ void ABoss_IcePillar::IcePillar_Attack_2(float _DeltaTime)
 		DirPos *= UEngineMath::DToR;
 		if (AttackCount < 3)
 		{
-			if (RootRENDERPos.Z >= 30.f + 45.f && RootRENDERPos.Z <= ((30.f + 45.f) + 1.f))
+			if (Create_Bullets == false)
+			{
+				for (int Num = 0; Num <= 12; Num++)
+				{
+					IceBullet[Num] = GetWorld()->SpawnActor<AIceBullet>("IceBullet");
+					//IceBullet[Num]->SetActorLocation({ 640.0f, -360.0f, 200.0f });
+				}
+				Create_Bullets = true;
+			}
+
+			if (RootRENDERPos.Z >= 30.f + 45.f && RootRENDERPos.Z <= ((30.f + 45.f) + 5.f))
 			{
 				IceBullet[1]->SetActorLocation(RenderPos);
-				IceBullet[1]->SetTarget(-DirPos);
-				IceBullet[1]->TargetOn();
+				IceBullet[1]->SetTarget(DirPos);
+				IceBullet[1]->FireSecondBullet();
 				IceBullet[1]->FireOn();
 			}
 
-			if (RootRENDERPos.Z >= (60.f + 45.f) && RootRENDERPos.Z <= ((60.f + 45.f) + 1.f))
+			if (RootRENDERPos.Z >= (60.f + 45.f) && RootRENDERPos.Z <= ((60.f + 45.f) + 5.f))
 			{
 				IceBullet[2]->SetActorLocation(RenderPos);
-				IceBullet[2]->SetTarget(-DirPos);
-				IceBullet[2]->TargetOn();
+				IceBullet[2]->SetTarget(DirPos);
+				IceBullet[2]->FireSecondBullet();
 				IceBullet[2]->FireOn();
 			}
 
-			if (RootRENDERPos.Z >= (90.f + 45.f) && RootRENDERPos.Z <= ((90.f + 45.f) + 1.f))
+			if (RootRENDERPos.Z >= (90.f + 45.f) && RootRENDERPos.Z <= ((90.f + 45.f) + 5.f))
 			{
 				IceBullet[3]->SetActorLocation(RenderPos);
-				IceBullet[3]->SetTarget(-DirPos);
-				IceBullet[3]->TargetOn();
+				IceBullet[3]->SetTarget(DirPos);
+				IceBullet[3]->FireSecondBullet();
 				IceBullet[3]->FireOn();
 			}
 
-			if (RootRENDERPos.Z >= (120.f + 45.f) && RootRENDERPos.Z <= ((120.f + 45.f) + 1.f))
+			if (RootRENDERPos.Z >= (120.f + 45.f) && RootRENDERPos.Z <= ((120.f + 45.f) + 5.f))
 			{
 				IceBullet[4]->SetActorLocation(RenderPos);
-				IceBullet[4]->SetTarget(-DirPos);
-				IceBullet[4]->TargetOn();
+				IceBullet[4]->SetTarget(DirPos);
+				IceBullet[4]->FireSecondBullet();
 				IceBullet[4]->FireOn();
 			}
 
-			if (RootRENDERPos.Z >= (150.f + 45.f - 180.f) && RootRENDERPos.Z <= ((150.f + 45.f - 180.f) + 1.f))
+			if (RootRENDERPos.Z >= (150.f + 45.f - 180.f) && RootRENDERPos.Z <= ((150.f + 45.f - 180.f) + 5.f))
 			{
 				IceBullet[5]->SetActorLocation(RenderPos);
-				IceBullet[5]->SetTarget(-DirPos);
-				IceBullet[5]->TargetOn();
+				IceBullet[5]->SetTarget(DirPos);
+				IceBullet[5]->FireSecondBullet();
 				IceBullet[5]->FireOn();
 			}
 
-			if (RootRENDERPos.Z >= (180.f + 45.f - 180.f) && RootRENDERPos.Z <= ((180.f + 45.f - 180.f) + 1.f))
+			if (RootRENDERPos.Z >= (180.f + 45.f - 180.f) && RootRENDERPos.Z <= ((180.f + 45.f - 180.f) + 5.f))
 			{
 				IceBullet[6]->SetActorLocation(RenderPos);
-				IceBullet[6]->SetTarget(-DirPos);
-				IceBullet[6]->TargetOn();
+				IceBullet[6]->SetTarget(DirPos);
+				IceBullet[6]->FireSecondBullet();
 				IceBullet[6]->FireOn();
 			}
 
-			if (RootRENDERPos.Z >= (-180.f + 45.f) && RootRENDERPos.Z <= ((-180.f + 45.f) + 1.f))
+			if (RootRENDERPos.Z >= (-180.f + 45.f) && RootRENDERPos.Z <= ((-180.f + 45.f) + 5.f))
 			{
 				IceBullet[0]->SetActorLocation(RenderPos);
-				IceBullet[0]->SetTarget(-DirPos);
-				IceBullet[0]->TargetOn();
+				IceBullet[0]->SetTarget(DirPos);
+				IceBullet[0]->FireSecondBullet();
 				IceBullet[0]->FireOn();
 			}
 
-			if (RootRENDERPos.Z >= (-150.f + 45.f) && RootRENDERPos.Z <= ((-150.f + 45.f) + 1.f))
+			if (RootRENDERPos.Z >= (-150.f + 45.f) && RootRENDERPos.Z <= ((-150.f + 45.f) + 5.f))
 			{
 				IceBullet[7]->SetActorLocation(RenderPos);
-				IceBullet[7]->SetTarget(-DirPos);
-				IceBullet[7]->TargetOn();
+				IceBullet[7]->SetTarget(DirPos);
+				IceBullet[7]->FireSecondBullet();
 				IceBullet[7]->FireOn();
 			}
 
-			if (RootRENDERPos.Z >= (-120.f + 45.f) && RootRENDERPos.Z <= ((-120.f + 45.f) + 1.f))
+			if (RootRENDERPos.Z >= (-120.f + 45.f) && RootRENDERPos.Z <= ((-120.f + 45.f) + 5.f))
 			{
 				IceBullet[8]->SetActorLocation(RenderPos);
-				IceBullet[8]->SetTarget(-DirPos);
-				IceBullet[8]->TargetOn();
+				IceBullet[8]->SetTarget(DirPos);
+				IceBullet[8]->FireSecondBullet();
 				IceBullet[8]->FireOn();
 			}
 
-			if (RootRENDERPos.Z >= (-90.f + 45.f) && RootRENDERPos.Z <= ((-90.f + 45.f) + 1.f))
+			if (RootRENDERPos.Z >= (-90.f + 45.f) && RootRENDERPos.Z <= ((-90.f + 45.f) + 5.f))
 			{
 				IceBullet[9]->SetActorLocation(RenderPos);
-				IceBullet[9]->SetTarget(-DirPos);
-				IceBullet[9]->TargetOn();
+				IceBullet[9]->SetTarget(DirPos);
+				IceBullet[9]->FireSecondBullet();
 				IceBullet[9]->FireOn();
 			}
 
-			if (RootRENDERPos.Z >= (-60.f + 45.f) && RootRENDERPos.Z <= ((-60.f + 45.f) + 1.f))
+			if (RootRENDERPos.Z >= (-60.f + 45.f) && RootRENDERPos.Z <= ((-60.f + 45.f) + 5.f))
 			{
 				IceBullet[10]->SetActorLocation(RenderPos);
-				IceBullet[10]->SetTarget(-DirPos);
-				IceBullet[10]->TargetOn();
+				IceBullet[10]->SetTarget(DirPos);
+				IceBullet[10]->FireSecondBullet();
 				IceBullet[10]->FireOn();
 			}
 
-			if (RootRENDERPos.Z >= (-30.f + 45.f) && RootRENDERPos.Z <= ((-30.f + 45.f) + 1.f))
+			if (RootRENDERPos.Z >= (-30.f + 45.f) && RootRENDERPos.Z <= ((-30.f + 45.f) + 5.f))
 			{
 				IceBullet[11]->SetActorLocation(RenderPos);
-				IceBullet[11]->SetTarget(-DirPos);
-				IceBullet[11]->TargetOn();
+				IceBullet[11]->SetTarget(DirPos);
+				IceBullet[11]->FireSecondBullet();
 				IceBullet[11]->FireOn();
 			}
-			if (RootRENDERPos.Z >= (-180.f + 15.f) && RootRENDERPos.Z <= ((-180.f + 15.f) + 1.f))
+			if (RootRENDERPos.Z >= (-180.f + 15.f) && RootRENDERPos.Z <= ((-180.f + 15.f) + 5.f))
 			{
 				IceBullet[12]->SetActorLocation(RenderPos);
-				IceBullet[12]->SetTarget(-DirPos);
-				IceBullet[12]->TargetOn();
+				IceBullet[12]->SetTarget(DirPos);
+				IceBullet[12]->FireSecondBullet();
 				IceBullet[12]->FireOn();
 			}
 
@@ -559,6 +569,7 @@ void ABoss_IcePillar::IcePillar_Attack_2(float _DeltaTime)
 			for (int a = 0; a < 13; a++)
 			{
 				IceBullet[a]->FireOff();
+				Create_Bullets = false;
 			}
 		}
 		else
@@ -625,11 +636,11 @@ void ABoss_IcePillar::BeginPlay()
 {
 	Super::BeginPlay();
 
-	for (int Num = 0; Num <= 12; Num++)
-	{
-		IceBullet[Num] = GetWorld()->SpawnActor<AIceBullet>("IceBullet");
-		IceBullet[Num]->SetActorLocation({640.0f, -360.0f, 200.0f});
-	}
+	//for (int Num = 0; Num <= 12; Num++)
+	//{
+	//	IceBullet[Num] = GetWorld()->SpawnActor<AIceBullet>("IceBullet");
+	//	IceBullet[Num]->SetActorLocation({640.0f, -360.0f, 200.0f});
+	//}
 
 	Renderer->SetAutoSize(4.0f, true);
 	Renderer->CreateAnimation("IcePillar", "IcePillar", 0.1f, false);
