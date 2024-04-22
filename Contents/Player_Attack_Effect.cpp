@@ -9,6 +9,11 @@ APlayer_Attack_Effect::APlayer_Attack_Effect()
 {
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderers");
 	SetRoot(Renderer);
+
+	Collision = CreateDefaultSubObject<UCollision>("Collision");
+	Collision->SetupAttachment(Renderer);
+	Collision->SetCollisionGroup(EColOrder::Wapon);
+	Collision->SetCollisionType(ECollisionType::RotRect);
 	//Renderer->SetPivot(EPivot::BOT);
 }
 
@@ -26,16 +31,79 @@ void APlayer_Attack_Effect::BeginPlay()
 	Renderer->SetAutoSize(5.f, true);
 	Renderer->SetOrder(ERenderOrder::Attack_Effect);
 	//Renderer->ChangeAnimation("Sword_Swing_Legend");
+
+	Collision->SetScale(Renderer->GetWorldScale());
+	//Collision->AddPosition({ 0.f, 0.25f });
 }
 
 void APlayer_Attack_Effect::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	StateUpdate(_DeltaTime);
+
 	if (Attack == true)
 	{
-		Renderer->ChangeAnimation("Sword_Swing_Legend");
-		Attack = false;
+		ChangeState(AttackState::Attack);
 	}
+}
 
+void APlayer_Attack_Effect::Effect_AttackStart()
+{
+	Renderer->ChangeAnimation("Sword_Swing_Legend");
+	Renderer->SetActive(true);
+	Collision->SetActive(true);
+	Attack = false;	
+}
+
+void APlayer_Attack_Effect::Effect_Attack(float _DeltaTime)
+{
+	if (Renderer->IsCurAnimationEnd() == true)
+	{
+		ChangeState(AttackState::AttackEnd);
+	}
+}
+
+void APlayer_Attack_Effect::Effect_EndStart()
+{
+	Collision->SetActive(false);
+	Renderer->SetActive(false);
+}
+
+void APlayer_Attack_Effect::Effect_End(float _DeltaTime)
+{
+}
+
+void APlayer_Attack_Effect::ChangeState(AttackState _Set)
+{	
+	if (WapponState != _Set)
+	{
+		switch (_Set)
+		{
+		case AttackState::Attack:
+			Effect_AttackStart();
+			break;
+		case AttackState::AttackEnd:
+			Effect_EndStart();
+			break;
+		default:
+			break;
+		}
+	}
+	WapponState = _Set;
+}
+
+void APlayer_Attack_Effect::StateUpdate(float _DeltaTime)
+{
+	switch (WapponState)
+	{
+	case AttackState::Attack:
+		Effect_Attack(_DeltaTime);
+		break;
+	case AttackState::AttackEnd:
+		Effect_End(_DeltaTime);
+		break;
+	default:
+		break;
+	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
+class UCollision;
 class USpriteRenderer;
 class AIceBullet : public AActor
 {
@@ -30,6 +31,7 @@ protected:
 
 private:
 	USpriteRenderer* Renderer = nullptr;
+	UCollision* Collision = nullptr;
 	FVector TargetPos = {};
 	FVector TargetNomalPos = {};
 	bool TargetSwitch = false;

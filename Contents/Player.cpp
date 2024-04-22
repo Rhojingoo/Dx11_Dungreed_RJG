@@ -18,9 +18,12 @@ APlayer::APlayer()
 	Renderer->SetPivot(EPivot::BOT);
 
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
-	Collision->SetupAttachment(Renderer);
-	//Collision->SetScale(FVector(1000.f, 0.5f, 1.0f));
-	//Collision->AddPosition({ 0.0f, 0.f, 0.0f });
+	Collision->SetupAttachment(Renderer);	
+	Collision->SetCollisionGroup(EColOrder::Player);
+	Collision->SetCollisionType(ECollisionType::RotRect);
+	
+
+
 	SetRoot(Renderer);
 }
 
@@ -62,9 +65,10 @@ void APlayer::BeginPlay()
 
 	//Renderer->SetSprite("CuttingTest.png", 11);
 	Renderer->SetAutoSize(3.f, true);
+	
 	Renderer->SetOrder(ERenderOrder::Player);	
-
-	Collision->SetOrder(ERenderOrder::Collision);	
+	Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2, Renderer->GetWorldScale().Z});
+	Collision->AddPosition({0.f, 0.25f });
 	
 	Renderer->ChangeAnimation("Player_Idle");
 	StateInit();
@@ -78,6 +82,26 @@ void APlayer::Tick(float _DeltaTime)
 	FVector PlayerPos = GetActorLocation();
 	Right_Hand->SetActorLocation({ PlayerPos });	
 	PlayAfterImage(_DeltaTime, PlayerPos);	
+
+
+	Collision->CollisionStay(EColOrder::Boss_IceBullet, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			int a = 0;
+		}
+	);
+
+	Collision->CollisionEnter(EColOrder::Boss_IceBullet, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			int a = 0;
+		}
+	);
+
+	Collision->CollisionExit(EColOrder::Boss_IceBullet, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			int a = 0;
+			// _Collison[0]->GetActor()->Destroy();
+		}
+	);
 }
 
 

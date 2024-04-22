@@ -31,3 +31,15 @@ enum class ERenderOrder
 	Player,
 	Cursor,
 };
+
+enum class EColOrder
+{
+	Monster_Col,
+	Monster,
+	Boss_Col,
+	Boss_IceBullet,
+	Boss,
+	Wapon,
+	Player,
+	Cursor,
+};

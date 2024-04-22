@@ -33,11 +33,7 @@ APlayer_Hand::APlayer_Hand()
 	//Sword_Renderer->SetSprite("DemonSword.png");
 	//Sword_Renderer->SetScale(FVector(6.0f, 20.0f, 100.0f));
 	//Sword_Renderer->AddPosition({ 1.0f, 10.0f, -1.0f });
-	Sword_Renderer->SetupAttachment(Hand_Renderer);
-
-	Collision = CreateDefaultSubObject<UCollision>("Collision");
-	Collision->SetupAttachment(Sword_Renderer);
-	
+	Sword_Renderer->SetupAttachment(Hand_Renderer);	
 
 	SetRoot(Root);
 }

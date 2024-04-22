@@ -388,6 +388,10 @@ void APlayer::DebugFunction()
 		std::string Msg = std::format("MousePos : {}\n", GEngine->EngineWindow.GetScreenMousePos().ToString());
 		UEngineDebugMsgWindow::PushMsg(Msg);
 	}
+	{
+		std::string Msg = std::format("PlayerCollisionPos : {}\n", Collision->GetWorldPosition().ToString());
+		UEngineDebugMsgWindow::PushMsg(Msg);
+	}
 }
 
 void APlayer::Direction()

@@ -10,6 +10,11 @@ AIceBullet::AIceBullet()
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	SetRoot(Renderer);
 	Renderer->SetPivot(EPivot::BOT);
+
+	Collision = CreateDefaultSubObject<UCollision>("Collision");
+	Collision->SetupAttachment(Renderer);
+	Collision->SetCollisionGroup(EColOrder::Boss_IceBullet);
+	Collision->SetCollisionType(ECollisionType::RotRect);
 }
 
 AIceBullet::~AIceBullet()
@@ -25,6 +30,9 @@ void AIceBullet::BeginPlay()
 	Renderer->CreateAnimation("IceBulletEfferct", "IceBulletEfferct", 0.1f);
 	Renderer->ChangeAnimation("IceBullet");
 	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
+
+	Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2, Renderer->GetWorldScale().Z });
+	Collision->AddPosition({ 0.f, 0.25f });
 }
 
 void AIceBullet::Tick(float _DeltaTime)
@@ -35,7 +43,7 @@ void AIceBullet::Tick(float _DeltaTime)
 	{
 		if (OtherBulletFire == false)
 		{
-			FVector Target = -TargetPos * Speed  /** _DeltaTime*/;
+			FVector Target = -TargetPos * Speed;
 		
 			AddActorLocation(Target);
 			float CursorAngleRad = std::atan2(TargetPos.Y, TargetPos.X);

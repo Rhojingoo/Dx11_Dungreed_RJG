@@ -36,7 +36,7 @@ protected:
 private:
 	USpriteRenderer* Renderer = nullptr;
 	USpriteRenderer* ChildRenderer = nullptr;
-	UCollision* Collision;
+	UCollision* Collision = nullptr;
 	float4 Color;
 	std::shared_ptr<ATarget> Cursor = nullptr;
 	std::shared_ptr<APlayer_Hand> Right_Hand = nullptr;

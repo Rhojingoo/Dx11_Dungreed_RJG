@@ -50,11 +50,7 @@ void ABoss_IcePillar::StateChange(IcePillarState _State)
 		case IcePillarState::Attack04:
 			IcePillar_AttackStart_4();
 			break;
-		//case IcePillarState::Rotation:
-		//	break;
-		//case IcePillarState::Stop:
-		//	IcePillar_Stop(_DeltaTime);
-		//	break;
+
 		default:
 			break;
 		}
