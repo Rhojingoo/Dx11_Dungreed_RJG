@@ -184,58 +184,61 @@ void ABoss::Boss_IntroStart()
 
 void ABoss::Boss_Idle(float _DeltaTime)
 {
-	if (IntroOn == false)
+	Boss_Time += _DeltaTime;
+	if (Boss_Time > 3.f)
 	{
-		Boss_Time += _DeltaTime;
-		if (Boss_Time > 3.f)
+		if (IntroOn == false)
 		{
-			StateChange(BossState::Intro);
-			IntroOn = true;
-			Boss_Time = 0.f;
+
+			{
+				StateChange(BossState::Intro);
+				IntroOn = true;
+				Boss_Time = 0.f;
+			}
 		}
-	}
-	else
-	{
-		if (UEngineInput::IsPress('1'))
+		else
 		{
-			StateChange(BossState::Patton1);
-			Boss_Time = 0.f;
-		}
-		if (UEngineInput::IsPress('2'))
-		{
-			StateChange(BossState::Patton2);
-			Boss_Time = 0.f;
-		}
-		if (UEngineInput::IsPress('3'))
-		{
-			StateChange(BossState::Patton3);
-			Boss_Time = 0.f;
-		}
-		if (UEngineInput::IsPress('4'))
-		{
-			StateChange(BossState::Patton4);
-			Boss_Time = 0.f;
-		}
-		if (UEngineInput::IsPress('5'))
-		{
-			StateChange(BossState::Patton5);
-			Boss_Time = 0.f;
-		}
-		if (UEngineInput::IsDown('6'))
-		{
-			SpearCreat = false;
-			IceSpear_Aattack();
-			Boss_Time = 0.f;
-		}
+			if (UEngineInput::IsPress('1'))
+			{
+				StateChange(BossState::Patton1);
+				Boss_Time = 0.f;
+			}
+			if (UEngineInput::IsPress('2'))
+			{
+				StateChange(BossState::Patton2);
+				Boss_Time = 0.f;
+			}
+			if (UEngineInput::IsPress('3'))
+			{
+				StateChange(BossState::Patton3);
+				Boss_Time = 0.f;
+			}
+			if (UEngineInput::IsPress('4'))
+			{
+				StateChange(BossState::Patton4);
+				Boss_Time = 0.f;
+			}
+			if (UEngineInput::IsPress('5'))
+			{
+				StateChange(BossState::Patton5);
+				Boss_Time = 0.f;
+			}
+			if (UEngineInput::IsDown('6'))
+			{
+				SpearCreat = false;
+				IceSpear_Aattack();
+				Boss_Time = 0.f;
+			}
 
 
-		Boss_Time += _DeltaTime;
-		if (Boss_Time > 3.f)
-		{
-			//StateChange(BossState::Patton1);
-			//StateChange(BossState::Patton2);
-			//StateChange(BossState::Patton3);
-			Boss_Time = 0.f;
+			//Boss_Time += _DeltaTime;
+			//if (Boss_Time > 3.f)
+			//{
+			//	//StateChange(BossState::Patton1);
+			//	//StateChange(BossState::Patton2);
+			//	//StateChange(BossState::Patton3);
+			//	Boss_Time = 0.f;
+			//}
 		}
 	}
 }
@@ -335,7 +338,7 @@ void ABoss::Boss_Patton2(float _DeltaTime)
 			IcePillar[a]->StateChange(IcePillarState::Idle);
 		}
 		Attack_Check = false;
-		StateChange(BossState::Ready2);
+		StateChange(BossState::Ready);
 	}
 }
 
@@ -385,7 +388,7 @@ void ABoss::Boss_Patton3(float _DeltaTime)
 		{
 			IcePillar[a]->StateChange(IcePillarState::Idle);
 		}
-		StateChange(BossState::Ready2);
+		StateChange(BossState::Ready);
 		IcePillarPos = 0.f;
 		return;
 	}

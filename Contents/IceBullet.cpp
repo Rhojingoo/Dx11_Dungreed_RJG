@@ -51,7 +51,7 @@ void AIceBullet::Tick(float _DeltaTime)
 			SetActorRotation(FVector(0.0f, 0.0f, CursorAngleRad + 90));
 
 			DestroyTime += _DeltaTime;
-			if (DestroyTime > 7.f)
+			if (DestroyTime > 5.f)
 			{
 				Destroy();
 			}
