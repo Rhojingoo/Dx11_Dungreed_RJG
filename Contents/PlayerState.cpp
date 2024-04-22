@@ -150,6 +150,7 @@ void APlayer::JumpStart()
 void APlayer::Jump(float _DeltaTime)
 {
 	float Speed = 50.0f;
+
 	if (UEngineInput::IsPress('A'))
 	{
 		AddMoveVector(FVector::Left * _DeltaTime * Speed);
@@ -158,7 +159,8 @@ void APlayer::Jump(float _DeltaTime)
 	if (UEngineInput::IsPress('D'))
 	{
 		AddMoveVector(FVector::Right * _DeltaTime * Speed);
-	}
+	}	
+
 	if (true == IsPress(VK_SPACE))
 	{
 		if (JumpVector.Y <= 1200.f)
@@ -195,7 +197,7 @@ void APlayer::Run(float _DeltaTime)
 
 	if (UEngineInput::IsPress('A'))
 	{
-		AddMoveVector(FVector::Left * _DeltaTime* Speed);
+		AddMoveVector(FVector::Left * _DeltaTime * Speed);
 		if (Smoke_Effect->CanPlayEffect() == true)
 		{
 			Smoke_Effect->SetActorLocation({ GetActorLocation().X + 15, GetActorLocation().Y , GetActorLocation().Z + 1 });
@@ -207,7 +209,7 @@ void APlayer::Run(float _DeltaTime)
 
 	if (UEngineInput::IsPress('D'))
 	{
-		AddMoveVector(FVector::Right * _DeltaTime* Speed);
+		AddMoveVector(FVector::Right * _DeltaTime * Speed);
 		if (Smoke_Effect->CanPlayEffect() == true)
 		{
 			Smoke_Effect->SetActorLocation({ GetActorLocation().X - 15, GetActorLocation().Y , GetActorLocation().Z + 1 });
@@ -216,6 +218,7 @@ void APlayer::Run(float _DeltaTime)
 			PlayerMoveDir = false;
 		}
 	}
+	
 
 	if (true == IsUp('A') || true == IsUp('D'))
 	{
@@ -475,16 +478,15 @@ void APlayer::CalGravityVector(float _DeltaTime)
 #endif
 
 	Direction();
-
 	Color8Bit Color;
 	Color8Bit UPColor;
 	Color8Bit HillColor;
-	Color8Bit WallColor;
+	Color8Bit SkyGrColor;
+
 	if (Foot_Collision_Check_At_Town == true)
 	{
 		float4 PlayerLocation = GetActorLocation();
-		float4 PlayerUpLocation = GetActorLocation();		
-		float4 PlayerDownLocation;
+		float4 PlayerUpLocation = GetActorLocation();			
 		PlayerUpLocation.Y = -PlayerUpLocation.Y-15;
 		UPColor = Tex->GetColor(PlayerUpLocation, Color8Bit::Black);
 
@@ -502,19 +504,43 @@ void APlayer::CalGravityVector(float _DeltaTime)
 	}
 	else
 	{
+		TileMap_ColorSet();
 		std::shared_ptr<UEngineTexture> Tex = UContentsHelper::MapTex;
-
 		float4 PlayerLocation = GetActorLocation();
-
-		PlayerLocation.Y = (Tex->GetScale().Y * 64.0f) - PlayerLocation.Y-25;
+		PlayerLocation.Y = (Tex->GetScale().Y * 64.0f) - PlayerLocation.Y;
 		PlayerLocation /= UContentsHelper::TileSize;
 		Color = Tex->GetColor(PlayerLocation, Color8Bit::Black);
 
-		if (Color == Color8Bit::Black)
+
+		float4 PlayerUpLocation = GetActorLocation();
+		PlayerUpLocation = PlayerLocation;
+		PlayerUpLocation.Y = PlayerUpLocation.Y + 0.9f;
+		UPColor = Tex->GetColor(PlayerUpLocation, Color8Bit::Green);
+
+		float4 PlayerSkyLocation = PlayerLocation;
+		PlayerSkyLocation.Y = PlayerSkyLocation.Y - 0.05f;
+		SkyGrColor = Tex->GetColor(PlayerSkyLocation, Color8Bit::Green);
+
+	
+		if (Color == Color8Bit::Black || SkyGrColor == Color8Bit::Green)
 		{
-			GravityVector = FVector::Zero;
-			JumpOn = false;
+			if (UPColor == Color8Bit::Green)
+			{
+				SkyGround = true;
+				if (State.GetCurStateName() == "Player_Jump")
+					return;
+			}
+			else if(SkyGround == true || Color == Color8Bit::Black)
+			{   
+				//SkyGround = true;
+				GravityVector = FVector::Zero;
+				JumpOn = false;
+
+				if (State.GetCurStateName() == "Player_Jump")
+					SkyGround = false;
+			}	
 		}
+
 	}		
 	if (Color == Color8Bit::Black|| HillColor == Color8Bit::Red)
 	{
@@ -545,45 +571,42 @@ void APlayer::GroundUp(float _DeltaTime)
 	Color8Bit Hill_FrontCheck;
 	std::shared_ptr<UEngineTexture> Tex = UContentsHelper::MapTex;
 	float4 FrontLocation = GetActorLocation(); FrontLocation.Y = -FrontLocation.Y;
-	
-	while (true)
-	{		
-		colorsetting();
-		float4 PlayerLocation = GetActorLocation();
-		//if (State.GetCurStateName() == "Player_Jump")
-		//{
-		//	break;
-		//}
-		if (State.GetCurStateName() == "Player_Dash")
+	if (Foot_Collision_Check_At_Town == true)
+	{
+		while (true)
 		{
-			break;
-		}
+			Town_ColorSet();
+			float4 PlayerLocation = GetActorLocation();
 
-
-		if (UpSlope == true)
-		{
-			PlayerLocation.Y = -PlayerLocation.Y - 3.f;					
+			if (State.GetCurStateName() == "Player_Dash")
+			{
+				break;
+			}
+			if (UpSlope == true)
+			{
+				PlayerLocation.Y = -PlayerLocation.Y - 3.f;
+			}
+			else if (DownSlope == true)
+			{
+				if (State.GetCurStateName() == "Player_Jump")
+					PlayerLocation.Y = -PlayerLocation.Y - 3.f;
+				else
+					PlayerLocation.Y = -PlayerLocation.Y;
+			}
+			HillColor = Tex->GetColor(PlayerLocation, Color8Bit::Red);
+			if (HillColor == Color8Bit::Red)
+			{
+				AddActorLocation(FVector::Up);
+			}
+			else
+			{
+				break;
+			}
 		}
-		else if (DownSlope ==true)
-		{			
-			if (State.GetCurStateName() == "Player_Jump")			
-				PlayerLocation.Y = -PlayerLocation.Y - 3.f;			
-			else			
-				PlayerLocation.Y = -PlayerLocation.Y;			
-		}
-		HillColor = Tex->GetColor(PlayerLocation, Color8Bit::Red);
-		if (HillColor == Color8Bit::Red)
-		{
-		 AddActorLocation(FVector::Up);
-		}
-		else 
-		{
-			break;
-		}
-	}		
+	}
 }
 
-void APlayer::colorsetting()
+void APlayer::Town_ColorSet()
 {
 	if (UEngineInput::IsPress('A'))
 	{
@@ -638,6 +661,65 @@ void APlayer::colorsetting()
 			}
 		}
 	}
+}
+
+void APlayer::TileMap_ColorSet()
+{
+	Color8Bit WallMid;
+	Color8Bit WallTop;
+	std::shared_ptr<UEngineTexture> Tex = UContentsHelper::MapTex;
+	float4 PlayerSideCheck = GetActorLocation();
+	float4 PlayerSideTopCheck = GetActorLocation();
+	PlayerSideCheck.Y = (Tex->GetScale().Y * 64.0f) - PlayerSideCheck.Y - 15.f;
+	PlayerSideCheck /= UContentsHelper::TileSize;
+	PlayerSideTopCheck.Y = (Tex->GetScale().Y * 64.0f) - PlayerSideTopCheck.Y - 64.f;
+	PlayerSideTopCheck /= UContentsHelper::TileSize;
+	if (PlayerMoveDir == true)
+	{
+		PlayerSideCheck.X = PlayerSideCheck.X - 0.5f;
+		PlayerSideTopCheck.X = PlayerSideTopCheck.X - 0.65f;
+
+	}
+	else
+	{
+		PlayerSideCheck.X = PlayerSideTopCheck.X + 0.5f;
+		PlayerSideTopCheck.X = PlayerSideTopCheck.X + 0.65f;
+	}
+	WallMid = Tex->GetColor(PlayerSideCheck, Color8Bit::Black);
+	WallTop = Tex->GetColor(PlayerSideTopCheck, Color8Bit::Black);
+	if (WallMid == Color8Bit::Black)
+	{
+		MoveVector = FVector::Zero;
+		DashVector = FVector::Zero;
+		SecondDashVector = FVector::Zero;
+		LastMoveVector = FVector::Zero;
+
+		if (PlayerMoveDir == true)
+		{
+			AddActorLocation(FVector::Right);
+		}
+		else
+		{
+			AddActorLocation(FVector::Left);
+		}
+	}
+	if (WallTop == Color8Bit::Black)
+	{
+		MoveVector = FVector::Zero;
+		DashVector = FVector::Zero;
+		SecondDashVector = FVector::Zero;
+		LastMoveVector = FVector::Zero;
+
+		if (PlayerMoveDir == true)
+		{
+			AddActorLocation(FVector::Right);
+		}
+		else
+		{
+			AddActorLocation(FVector::Left);
+		}
+	}
+
 }
 
 

@@ -117,11 +117,17 @@ private:
 	bool AfterImageSwitch = false;
 	float AfterImage_Time = 0.f;
 	bool AfterImageRight = false;
-	bool PlayerMoveDir = false; // false 면 오른쪽 true면 왼쪽
-	bool Move_PixelCheck = false;
-	bool UpSlope = false;
-	bool DownSlope = false;
 
-	void colorsetting();
+
+	//픽셀충돌
+	bool PlayerMoveDir = false; // false 면 오른쪽 true면 왼쪽
+	bool Move_PixelCheck = false; //타운용
+	bool UpSlope = false;		//타운맵용(경사)
+	bool DownSlope = false;		//타운맵용(경사)
+	bool MoveStop = false;		//타일맵용(움직임제한)
+	bool SkyGround = false;		//타일맵용(공중맵)
+
+	void Town_ColorSet();
+	void TileMap_ColorSet();
 };
 
