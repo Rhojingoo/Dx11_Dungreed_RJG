@@ -372,6 +372,7 @@ void ABoss::Boss_Patton3(float _DeltaTime)
 		{
 			if (true != IcePillar[a]->IsAttackEnd())
 			{
+				IcePillarPos = 0.f;
 				return;
 			}
 		}

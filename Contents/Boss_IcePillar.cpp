@@ -252,144 +252,155 @@ void ABoss_IcePillar::IcePillar_Attack_3(float _DeltaTime)
 		if (AttackCount < 3)
 		{
 
+			if (Create_Bullets == false)
+			{
+				for (int Num = 0; Num <= 12; Num++)
+				{
+					IceBullet[Num] = GetWorld()->SpawnActor<AIceBullet>("IceBullet");
+				}
+				Create_Bullets = true;
+			}
+
+
+
 			if (false == IceBullet[1]->IsFire())
 			{
-				if (ChildRot.Z >= 30.f + 45.f && ChildRot.Z <= ((30.f + 45.f) + 1.5f))
+				if (ChildRot.Z >= 30.f + 45.f && ChildRot.Z <= ((30.f + 45.f) + 5.0f))
 				{
 					IceBullet[1]->SetActorLocation(RenderPos);
 					IceBullet[1]->SetTarget(-ChidRotNomal);
-					IceBullet[1]->TargetOn();
+					IceBullet[1]->FireSecondBullet();
 					IceBullet[1]->FireOn();
 				}
 			}
 
 			if (false == IceBullet[2]->IsFire())
 			{
-				if (ChildRot.Z >= (60.f + 45.f) && ChildRot.Z <= ((60.f + 45.f) + 1.5f))
+				if (ChildRot.Z >= (60.f + 45.f) && ChildRot.Z <= ((60.f + 45.f) + 5.0f))
 				{
 					IceBullet[2]->SetActorLocation(RenderPos);
 					IceBullet[2]->SetTarget(-ChidRotNomal);
-					IceBullet[2]->TargetOn();
+					IceBullet[2]->FireSecondBullet();
 					IceBullet[2]->FireOn();
 				}
 			}
 
 			if (false == IceBullet[3]->IsFire())
 			{
-				if (ChildRot.Z >= (90.f + 45.f) && ChildRot.Z <= ((90.f + 45.f) + 1.5f))
+				if (ChildRot.Z >= (90.f + 45.f) && ChildRot.Z <= ((90.f + 45.f) + 5.0f))
 				{
 					IceBullet[3]->SetActorLocation(RenderPos);
 					IceBullet[3]->SetTarget(-ChidRotNomal);
-					IceBullet[3]->TargetOn();
+					IceBullet[3]->FireSecondBullet();
 					IceBullet[3]->FireOn();
 				}
 			}
 			if (false == IceBullet[4]->IsFire())
 			{
-				if (ChildRot.Z >= (120.f + 45.f) && ChildRot.Z <= ((120.f + 45.f) + 1.5f))
+				if (ChildRot.Z >= (120.f + 45.f) && ChildRot.Z <= ((120.f + 45.f) + 5.0f))
 				{
 					IceBullet[4]->SetActorLocation(RenderPos);
 					IceBullet[4]->SetTarget(-ChidRotNomal);
-					IceBullet[4]->TargetOn();
+					IceBullet[4]->FireSecondBullet();
 					IceBullet[4]->FireOn();
 				}
 			}
 
 			if (false == IceBullet[5]->IsFire())
 			{
-				if (ChildRot.Z >= (150.f + 45.f - 180.f) && ChildRot.Z <= ((150.f + 45.f - 180.f) + 1.5f))
+				if (ChildRot.Z >= (150.f + 45.f - 180.f) && ChildRot.Z <= ((150.f + 45.f - 180.f) + 5.0f))
 				{
 					IceBullet[5]->SetActorLocation(RenderPos);
 					IceBullet[5]->SetTarget(-ChidRotNomal);
-					IceBullet[5]->TargetOn();
+					IceBullet[5]->FireSecondBullet();
 					IceBullet[5]->FireOn();
 				}
 			}
 
 			if (false == IceBullet[6]->IsFire())
 			{
-				if (ChildRot.Z >= (180.f + 45.f - 180.f) && ChildRot.Z <= ((180.f + 45.f - 180.f) + 1.5f))
+				if (ChildRot.Z >= (180.f + 45.f - 180.f) && ChildRot.Z <= ((180.f + 45.f - 180.f) + 5.0f))
 				{
 					IceBullet[6]->SetActorLocation(RenderPos);
 					IceBullet[6]->SetTarget(-ChidRotNomal);
-					IceBullet[6]->TargetOn();
+					IceBullet[6]->FireSecondBullet();
 					IceBullet[6]->FireOn();
 				}
 			}
 
 			if (false == IceBullet[0]->IsFire())
 			{
-				if (ChildRot.Z >= (-180.f + 45.f) && ChildRot.Z <= ((-180.f + 45.f) + 1.5f))
+				if (ChildRot.Z >= (-180.f + 45.f) && ChildRot.Z <= ((-180.f + 45.f) + 5.0f))
 				{
 					IceBullet[0]->SetActorLocation(RenderPos);
 					IceBullet[0]->SetTarget(-ChidRotNomal);
-					IceBullet[0]->TargetOn();
+					IceBullet[0]->FireSecondBullet();
 					IceBullet[0]->FireOn();
 				}
 			}
 
 			if (false == IceBullet[7]->IsFire())
 			{
-				if (ChildRot.Z >= (-150.f + 45.f) && ChildRot.Z <= ((-150.f + 45.f) + 1.5f))
+				if (ChildRot.Z >= (-150.f + 45.f) && ChildRot.Z <= ((-150.f + 45.f) + 5.0f))
 				{
 					IceBullet[7]->SetActorLocation(RenderPos);
 					IceBullet[7]->SetTarget(-ChidRotNomal);
-					IceBullet[7]->TargetOn();
+					IceBullet[7]->FireSecondBullet();
 					IceBullet[7]->FireOn();
 				}
 			}
 
 			if (false == IceBullet[8]->IsFire())
 			{
-				if (ChildRot.Z >= (-120.f + 45.f) && ChildRot.Z <= ((-120.f + 45.f) + 1.5f))
+				if (ChildRot.Z >= (-120.f + 45.f) && ChildRot.Z <= ((-120.f + 45.f) + 5.0f))
 				{
 					IceBullet[8]->SetActorLocation(RenderPos);
 					IceBullet[8]->SetTarget(-ChidRotNomal);
-					IceBullet[8]->TargetOn();
+					IceBullet[8]->FireSecondBullet();
 					IceBullet[8]->FireOn();
 				}
 			}
 
 			if (false == IceBullet[9]->IsFire())
 			{
-				if (ChildRot.Z >= (-90.f + 45.f) && ChildRot.Z <= ((-90.f + 45.f) + 1.5f))
+				if (ChildRot.Z >= (-90.f + 45.f) && ChildRot.Z <= ((-90.f + 45.f) + 5.0f))
 				{
 					IceBullet[9]->SetActorLocation(RenderPos);
 					IceBullet[9]->SetTarget(-ChidRotNomal);
-					IceBullet[9]->TargetOn();
+					IceBullet[9]->FireSecondBullet();
 					IceBullet[9]->FireOn();
 				}
 			}
 
 			if (false == IceBullet[10]->IsFire())
 			{
-				if (ChildRot.Z >= (-60.f + 45.f) && ChildRot.Z <= ((-60.f + 45.f) + 1.5f))
+				if (ChildRot.Z >= (-60.f + 45.f) && ChildRot.Z <= ((-60.f + 45.f) + 5.0f))
 				{
 					IceBullet[10]->SetActorLocation(RenderPos);
 					IceBullet[10]->SetTarget(-ChidRotNomal);
-					IceBullet[10]->TargetOn();
+					IceBullet[10]->FireSecondBullet();
 					IceBullet[10]->FireOn();
 				}
 			}
 
 			if (false == IceBullet[11]->IsFire())
 			{
-				if (ChildRot.Z >= (-30.f + 45.f) && ChildRot.Z <= ((-30.f + 45.f) + 1.5f))
+				if (ChildRot.Z >= (-30.f + 45.f) && ChildRot.Z <= ((-30.f + 45.f) + 5.0f))
 				{
 					IceBullet[11]->SetActorLocation(RenderPos);
 					IceBullet[11]->SetTarget(-ChidRotNomal);
-					IceBullet[11]->TargetOn();
+					IceBullet[11]->FireSecondBullet();
 					IceBullet[11]->FireOn();
 				}
 			}
 
 			if (false == IceBullet[12]->IsFire())
 			{
-				if (ChildRot.Z >= (-180.f + 15.f) && ChildRot.Z <= ((-180.f + 15.f) + 1.5f))
+				if (ChildRot.Z >= (-180.f + 15.f) && ChildRot.Z <= ((-180.f + 15.f) + 5.0f))
 				{
 					IceBullet[12]->SetActorLocation(RenderPos);
 					IceBullet[12]->SetTarget(-ChidRotNomal);
-					IceBullet[12]->TargetOn();
+					IceBullet[12]->FireSecondBullet();
 					IceBullet[12]->FireOn();
 				}
 			}
@@ -407,17 +418,21 @@ void ABoss_IcePillar::IcePillar_Attack_3(float _DeltaTime)
 			for (int a = 0; a < 13; a++)
 			{
 				IceBullet[a]->FireOff();
+				Create_Bullets = false;
 			}
 		}
 		else
 		{
 			AttackEnd = true;
+			Create_Bullets = false;
+
 		}
 
 	}
 	if (AttackEnd == true)
 	{
 		AttackCount = 0;
+		//eate_Bullets = false;
 	}
 	Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
 }
@@ -574,6 +589,7 @@ void ABoss_IcePillar::IcePillar_Attack_2(float _DeltaTime)
 		}
 		else
 		{
+			Create_Bullets = false;
 			AttackEnd = true;
 		}
 
