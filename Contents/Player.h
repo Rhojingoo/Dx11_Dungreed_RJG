@@ -117,6 +117,8 @@ private:
 	bool AfterImageSwitch = false;
 	float AfterImage_Time = 0.f;
 	bool AfterImageRight = false;
+	bool PlayerMoveDir = false; // false 면 오른쪽 true면 왼쪽
+
 
 	void colorsetting();
 };

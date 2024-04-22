@@ -100,8 +100,8 @@ void APlayer::StateInit()
 	State.CreateState("");
 	
 	// 체인지Player_Idle
-	State.ChangeState("Player_Debug");
-	//State.ChangeState("Player_Idle");
+	//State.ChangeState("Player_Debug");
+	State.ChangeState("Player_Idle");
 }
 
 
@@ -200,6 +200,7 @@ void APlayer::Run(float _DeltaTime)
 			Smoke_Effect->SetActorLocation({ GetActorLocation().X + 15, GetActorLocation().Y , GetActorLocation().Z + 1 });
 			Smoke_Effect->Run_Smoke_On();
 			Smoke_Effect->Left_Dir();
+			PlayerMoveDir = true;
 		}
 	}
 
@@ -211,6 +212,7 @@ void APlayer::Run(float _DeltaTime)
 			Smoke_Effect->SetActorLocation({ GetActorLocation().X - 15, GetActorLocation().Y , GetActorLocation().Z + 1 });
 			Smoke_Effect->Run_Smoke_On();
 			Smoke_Effect->Right_Dir();
+			PlayerMoveDir = false;
 		}
 	}
 
@@ -474,12 +476,50 @@ void APlayer::CalGravityVector(float _DeltaTime)
 	Direction();
 
 	Color8Bit Color;
+	Color8Bit UPColor;
+	Color8Bit HillColor;
+	Color8Bit WallColor;
 	if (Foot_Collision_Check_At_Town == true)
 	{
 		float4 PlayerLocation = GetActorLocation();
+		float4 PlayerUpLocation = GetActorLocation();		
+		PlayerUpLocation.Y = -PlayerUpLocation.Y-15;
+		UPColor = Tex->GetColor(PlayerUpLocation, Color8Bit::Black);
 
-		PlayerLocation.Y = -PlayerLocation.Y;
-		Color = Tex->GetColor(PlayerLocation, Color8Bit::Black);
+		if (UPColor == Color8Bit::Black)
+		{
+			GravityVector += GravityAcc * _DeltaTime;
+			Color = Color8Bit::Blue;			
+		}
+		else
+		{
+			PlayerLocation.Y = -PlayerLocation.Y;
+			Color = Tex->GetColor(PlayerLocation, Color8Bit::Black);
+			if (PlayerMoveDir == true)	//왼쪽
+			{
+				float4 HillCheck= GetActorLocation();
+				HillCheck.X = HillCheck.X - 15;
+				HillCheck.Y = -HillCheck.Y;
+				HillColor = Tex->GetColor(HillCheck, Color8Bit::Red);		
+				if (HillColor == Color8Bit::Red)
+				{
+					GravityVector = FVector::Zero;
+					AddActorLocation({0.f, 0.001f});
+				}		
+			}
+			else		//오른쪽
+			{
+				float4 HillCheck = GetActorLocation();
+				HillCheck.X = HillCheck.X + 15;
+				HillCheck.Y = -HillCheck.Y;
+				HillColor = Tex->GetColor(HillCheck, Color8Bit::Red);
+				if (HillColor == Color8Bit::Red)
+				{			
+					GravityVector = FVector::Zero;
+					AddActorLocation({ 0.f, 0.001f });
+				}
+			}
+		}
 	}
 	else
 	{

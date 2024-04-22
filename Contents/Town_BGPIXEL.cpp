@@ -16,8 +16,7 @@ void ATown_BGPIXEL::BeginPlay()
 	SetActorScale3D(FVector(1000.0f, 300.0f, 100.0f));
 	Renderer->SetSprite("TownModelPX.png"); // 원래
 
-	Renderer->SetOrder(ERenderOrder::PixelMap);//원래
-	Renderer->SetOrder(ERenderOrder::PixelMap);
+	Renderer->SetOrder(ERenderOrder::Effect_Back);//원래
 }
 
 void ATown_BGPIXEL::Tick(float _DeltaTime)
