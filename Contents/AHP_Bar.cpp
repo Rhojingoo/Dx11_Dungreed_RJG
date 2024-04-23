@@ -25,6 +25,7 @@ void AHP_Bar::BeginPlay()
 		PlayerLifeBase->SetAutoSize(4.f, true);
 		PlayerLifeBase->SetPosition({ -450, 300 });
 		PlayerLifeBase->SetOrder(3);
+		
 
 
 		PlayerLifeBack = CreateWidget<UImage>(GetWorld(), "PlayerLifeBack ");
@@ -39,27 +40,30 @@ void AHP_Bar::BeginPlay()
 		LifeBar->AddToViewPort(1);
 		LifeBar->SetSprite("LifeBar.png");
 		//LifeBar->SetAutoSize(4.f, true);
+		LifeBar->SetParent({ PlayerLifeBase });
 		LifeBar->SetScale({ 200.f,50.f });
-		LifeBar->SetPosition({ -410, 300 });
+		//LifeBar->SetPosition({ 0, 300 });
 		LifeBar->SetOrder(1);
 
 
 		LifeBarWave = CreateWidget<UImage>(GetWorld(), "LifeBarWave ");
 		LifeBarWave->AddToViewPort(2);
 		LifeBarWave->CreateAnimation("LifeBar_LifeWave", "LifeBar_LifeWave", 0.1f);
-		LifeBarWave->SetAutoSize(4.f, true);
-		LifeBarWave->SetScale({ 20.f,50.f });
-
-		//LifeBarWave->ChangeAnimation("LifeBar_LifeWave");
+		//LifeBarWave->SetAutoSize(0.05f, true);
 		LifeBarWave->SetParent(LifeBar);
-		LifeBarWave->SetPosition({ LifeBar->GetLocalPosition().X+100,LifeBar->GetLocalPosition().Y,LifeBar->GetLocalPosition().Z });
+		LifeBarWave->SetScale({ 0.15f,1.f });
+		LifeBarWave->AddPosition({ 0.55f,0.f });
+		//LifeBarWave->SetPosition({ LifeBar->GetLocalPosition().X+100,LifeBar->GetLocalPosition().Y,LifeBar->GetLocalPosition().Z });
 		LifeBarWave->SetOrder(2);
+		//LifeBarWave->ChangeAnimation("LifeBar_LifeWave");
+
+
+
+
+
 		// 자기자신이 자기자신을 std::shared_ptr<UImage>로 가지고 있어도 난다.
 		// 언리얼 따라한것
 		// 언리얼 안나옵니다.
-
-
-
 		//호버기능
 		//Image->SetUnHover([=]()
 		//	{
@@ -92,13 +96,21 @@ void AHP_Bar::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 	if (UEngineInput::IsDown('M'))
-	{
+	{	
+		EnergyDown = true;
 		Life -= 10;
-		float Setratio = Life / MaxLife;
-		LifePos = Setratio * Life_POSX;
+		float Setratio = (Life / MaxLife);  // 체력 비율을 계산
+		float fullWidth = LifeBar->GetWorldScale().X;  // 이미지 전체 길이
+		float basePos = -410;  // 기본 위치
+		LifePos = basePos - ((MaxLife/2) * (1 - Setratio));  // 깎인 만큼 왼쪽으로 이동
+		if (EnergyDown == true)
+		{
+			LifeBarWave->ChangeAnimation("LifeBar_LifeWave");
+			//LifeBarWave-> SetPosition({ LifePos+10, LifeBar->GetLocalPosition().Y });
+		}
 	}
-	LifeBar->SetScale({ Life,50 });
-	LifeBar->SetPosition({ LifePos, 300 });
+	LifeBar->SetScale({ Life, 50.f });
+	LifeBar->SetPosition({ LifePos, 300.f });
 }
 	
 

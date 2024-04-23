@@ -24,10 +24,12 @@ private:
 	UImage* LifeBar = nullptr;
 	UImage* LifeBarWave = nullptr;
 
-	const int MaxLife = 200;
-	int Life = MaxLife;
+	const float MaxLife = 200.f;
+	float Life = MaxLife;
 
-	const int Life_POSX = -410;
-	int LifePos = MaxLife;
+	const float Life_POSX = -410.f;
+	float LifePos = Life_POSX;
+
+	bool EnergyDown = false;
 };
 
