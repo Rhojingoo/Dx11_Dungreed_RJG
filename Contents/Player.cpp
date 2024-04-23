@@ -45,6 +45,10 @@ void APlayer::BeginPlay()
 	Smoke_Effect = GetWorld()->SpawnActor<APlayer_Smoke_Effect>("Smoke");
 	Smoke_Effect->SetActorLocation({0.0f, 0.0f, 200.0f });	
 
+	Player_HpBAR = GetWorld()->SpawnActor<AHP_Bar>("AHP_Bar");
+
+
+
 	for (int a = 0; a < 10; a++)
 	{
 		After_Image[a] = GetWorld()->SpawnActor<APlayer_AfterImage>("AfterImage");

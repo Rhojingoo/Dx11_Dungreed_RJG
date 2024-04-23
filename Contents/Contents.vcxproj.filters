@@ -127,6 +127,9 @@
     <ClInclude Include="Icicle_Bullet.h">
       <Filter>Level &amp; OBJ\Public\OBJ\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="AHP_Bar.h">
+      <Filter>Level &amp; OBJ\Public\OBJ\TileMap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -255,6 +258,9 @@
     <ClCompile Include="Icicle_Bullet.cpp">
       <Filter>Level &amp; OBJ\Public\OBJ\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="AHP_Bar.cpp">
+      <Filter>Level &amp; OBJ\Public\OBJ\TileMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -358,6 +364,9 @@
     </Filter>
     <Filter Include="Level &amp; OBJ\Public\OBJ\TileMap">
       <UniqueIdentifier>{4733a461-8e6b-4f04-8607-5689fee036b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Public\OBJ\UI">
+      <UniqueIdentifier>{2846fc29-4683-41b7-9a5f-a9fe78cb50fd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

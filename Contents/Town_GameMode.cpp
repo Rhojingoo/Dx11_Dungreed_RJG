@@ -7,7 +7,7 @@
 #include <EngineCore/Camera.h>
 #include "ContentsHelper.h"
 #include "Target.h"
-
+#include <EngineCore/Image.h>
 
 
 ATown_GameMode::ATown_GameMode()
@@ -53,14 +53,11 @@ void ATown_GameMode::BeginPlay()
 	std::shared_ptr<ATown_BackGround> BackGr = GetWorld()->SpawnActor<ATown_BackGround>("TOWNBack", EOBJ_Order::BackGround);
 	float TileSize = UContentsHelper::TileSize;
 	float4 TexScale = UContentsHelper::MapTexScale;	
-	//float4 ImageScale = { TexScale.X * TileSize, TexScale.Y * TileSize, 0.0f };
-	//BackGr->SetActorScale3D(ImageScale);
-	//BackGr->SetActorLocation({ ImageScale.hX(), -ImageScale.hY(), 500.0f });
-	BackGr->SetActorScale3D(TexScale); //원래 통짜맵 사용할때
-	BackGr->SetActorLocation({ TexScale.hX(), -TexScale.hY(), 500.0f });//원래 통짜맵 사용할때
+	BackGr->SetActorScale3D(TexScale); //통짜맵 사용할때
+	BackGr->SetActorLocation({ TexScale.hX(), -TexScale.hY(), 500.0f });//통짜맵 사용할때
 	
 	std::shared_ptr<ATown_BGPIXEL> Back = GetWorld()->SpawnActor<ATown_BGPIXEL>("TOWNBackPX", EOBJ_Order::PixelGround);
-	float4 ImageScale = UContentsHelper::MapTexScale;//원래 통짜맵 사용할때
+	float4 ImageScale = UContentsHelper::MapTexScale;//통짜맵 사용할때
 	Back->SetActorScale3D(ImageScale);
 	Back->SetActorLocation({ ImageScale.hX(), -ImageScale.hY(), 500.0f }); 	
 }

@@ -1,8 +1,9 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include <EngineCore/StateManager.h>
-
+#include "AHP_Bar.h"
 // Ό³Έν :
+
 class ATarget;
 class APlayer_Hand;
 class APlayer_AfterImage;
@@ -43,6 +44,7 @@ private:
 	//std::shared_ptr<APlayer_Hand> Left_Hand = nullptr;
 	std::shared_ptr<APlayer_Smoke_Effect> Smoke_Effect = nullptr;
 	std::shared_ptr<APlayer_AfterImage> After_Image[10] = {};
+	std::shared_ptr<AHP_Bar>Player_HpBAR = nullptr;
 
 	
 	
@@ -90,7 +92,6 @@ private:
 	void GroundUp(float _DeltaTime);
 	void AddMoveVector(const FVector& _DirDelta);
 	void PlayAfterImage(float _DeltaTime, FVector _PlayerPos);
-	
 
 	FVector MoveVector = FVector::Zero;
 	FVector MoveAcc = FVector::Right * 500.0f;
