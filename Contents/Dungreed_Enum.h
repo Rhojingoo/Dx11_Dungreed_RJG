@@ -24,6 +24,8 @@ enum class ERenderOrder
 	AfterImage,
 	Monster_Bullet,
 	Monster,
+	Monster_HpBack,
+	Monster_Hp,
 	Boss_Bullet,
 	Boss,
 	Attack_Effect,

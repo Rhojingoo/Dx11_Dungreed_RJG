@@ -25,10 +25,10 @@ private:
 	USpriteRenderer* LifeBar = nullptr;
 	UDefaultSceneComponent* Root = nullptr;
 
-	const float MaxLife = 200.f;
+	float MaxLife = 0.f;
 	float Life = MaxLife;
 
-	const float Life_POSX = -410.f;
+	float Life_POSX = 0.f;
 	float LifePos = Life_POSX;
 };
 

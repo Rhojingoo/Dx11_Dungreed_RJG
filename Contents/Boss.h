@@ -18,6 +18,7 @@ enum class BossState
 
 };
 
+class ABoss_HpBar;
 class AIceSpear;
 class APlayer;
 class ABoss_IcePillar;
@@ -80,6 +81,7 @@ private:
 	std::shared_ptr<APlayer> Player = nullptr;
 	std::shared_ptr<ABoss_IcePillar> IcePillar[4] = {};
 	std::shared_ptr<AIceSpear> IceSpear = nullptr;
+	std::shared_ptr<ABoss_HpBar>Boss_HpBAR = nullptr;
 	BossState Boss_State = BossState::Idle;
 
 

@@ -10,7 +10,7 @@ class APlayer_Hand;
 class APlayer_AfterImage;
 class APlayer_Smoke_Effect;
 class UCollision;
-class USpriteRenderer;
+
 class APlayer : public AActor
 {
 	GENERATED_BODY(AActor)

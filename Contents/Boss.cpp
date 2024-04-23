@@ -5,6 +5,7 @@
 #include "Icicle_Bullet.h"
 #include "Player.h"
 #include <EngineCore/Renderer.h>
+#include "Boss_HpBar.h"
 
 float ABoss::IcePillarPos = 0.f;
 
@@ -44,6 +45,8 @@ void ABoss::BeginPlay()
 	Renderer->CreateAnimation("Boss_Idle", "Boss_Idle", 0.1f);
 
 	Renderer->SetAutoSize(3.f, true);
+
+	Boss_HpBAR = GetWorld()->SpawnActor<ABoss_HpBar>("Boss_HPBar");
 	//Renderer->ChangeAnimation("Boss_Idle");
 
 	Renderer->SetOrder(ERenderOrder::Boss);

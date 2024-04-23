@@ -23,8 +23,6 @@ void APlayer_HpBar::BeginPlay()
 		PlayerLifeBase->SetAutoSize(4.f, true);
 		PlayerLifeBase->SetPosition({ -450, 300 });
 		PlayerLifeBase->SetOrder(3);
-		
-
 
 		PlayerLifeBack = CreateWidget<UImage>(GetWorld(), "PlayerLifeBack ");
 		PlayerLifeBack->AddToViewPort(0);
@@ -52,38 +50,7 @@ void APlayer_HpBar::BeginPlay()
 		LifeBarWave->AddPosition({ 0.55f,0.f });
 		LifeBarWave->SetOrder(2);
 		//LifeBarWave->ChangeAnimation("Player_LifeWave");
-
-
-
-
-
-		// 자기자신이 자기자신을 std::shared_ptr<UImage>로 가지고 있어도 난다.
-		// 언리얼 따라한것
-		// 언리얼 안나옵니다.
-		//호버기능
-		//Image->SetUnHover([=]()
-		//	{
-		//		Image->SetSprite("HPBar.png");
-		//		// UEngineDebugMsgWindow::PushMsg("Hover!!!");
-		//	});
-
-		//Image->SetHover([=]()
-		//	{
-		//		Image->SetSprite("Back.png");
-		//		Image->SetAutoSize(1.0f, false);
-		//		// UEngineDebugMsgWindow::PushMsg("Hover!!!");
-		//	});
-
-	/*	Image->SetDown([=]()
-			{
-				UEngineDebugMsgWindow::PushMsg("Down!!!");
-			});*/
-
-			// Image->SetScale({200, 200});
-
-			// 화면에 떠야 한다.
-			// Image->SetSprite("HPBar");
-			// Image->SetScale();
+		
 	}
 }
 
@@ -108,4 +75,33 @@ void APlayer_HpBar::Tick(float _DeltaTime)
 	LifeBar->SetPosition({ LifePos, 300.f });
 }
 	
+//호버사용
+//{
+	// 자기자신이 자기자신을 std::shared_ptr<UImage>로 가지고 있어도 난다.
+			// 언리얼 따라한것
+			// 언리얼 안나옵니다.
+			//호버기능
+			//Image->SetUnHover([=]()
+			//	{
+			//		Image->SetSprite("HPBar.png");
+			//		// UEngineDebugMsgWindow::PushMsg("Hover!!!");
+			//	});
 
+			//Image->SetHover([=]()
+			//	{
+			//		Image->SetSprite("Back.png");
+			//		Image->SetAutoSize(1.0f, false);
+			//		// UEngineDebugMsgWindow::PushMsg("Hover!!!");
+			//	});
+
+		/*	Image->SetDown([=]()
+				{
+					UEngineDebugMsgWindow::PushMsg("Down!!!");
+				});*/
+
+				// Image->SetScale({200, 200});
+
+				// 화면에 떠야 한다.
+				// Image->SetSprite("HPBar");
+				// Image->SetScale();
+//}

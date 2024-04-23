@@ -37,11 +37,13 @@ void ABoss_IcePillar::BeginPlay()
 	Super::BeginPlay();
 
 	Hp_Bar = GetWorld()->SpawnActor<AMonster_HpBar>("IcePillar_HP");
+	Hp_Bar->SetActorLocation({ 1040.0f, -850.0f, 201.f});
 
 	Renderer->SetAutoSize(4.0f, true);
 	Renderer->CreateAnimation("IcePillar", "IcePillar", 0.1f, false);
 	Renderer->CreateAnimation("IcePillarDestroy", "IcePillarDestroy", 0.1f);
 	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
+	Renderer->SetPivot(EPivot::BOT);
 
 	//Collision->SetScale({ Renderer->GetWorldScale().X / 8, Renderer->GetWorldScale().Y / 8,1.f });
 	//Collision->AddPosition({ 0.f, 0.25f });
@@ -54,8 +56,7 @@ void ABoss_IcePillar::Tick(float _DeltaTime)
 	RenderPos = Renderer->GetWorldPosition();
 	//Collision->GetLocalPosition() = RenderPos;
 	StateUpdate(_DeltaTime);
-	//Hp_Bar->SetActorLocation(Renderer->GetLocalPosition());
-	Hp_Bar->GetActorTransform().LocalPosition = Renderer->GetLocalPosition();
+	Hp_Bar->SetActorLocation(RenderPos);
 	if (Player != nullptr)
 	{
 		PlayerPos = Player->GetActorLocation();

@@ -3,17 +3,17 @@
 
 
 class UImage;
-class Boss_HpBar : public AActor
+class ABoss_HpBar : public AActor
 {
 	GENERATED_BODY(AActor)
 public:
-	Boss_HpBar();
-	~Boss_HpBar();
+	ABoss_HpBar();
+	~ABoss_HpBar();
 
-	Boss_HpBar(const Boss_HpBar& _Other)					= delete;
-	Boss_HpBar(Boss_HpBar& _Other) noexcept					= delete;
-	Boss_HpBar& operator =(const 	Boss_HpBar& _Other)		= delete;
-	Boss_HpBar& operator =(Boss_HpBar& _Other)noexcept		= delete;
+	ABoss_HpBar(const ABoss_HpBar& _Other)					= delete;
+	ABoss_HpBar(ABoss_HpBar& _Other) noexcept					= delete;
+	ABoss_HpBar& operator =(const 	ABoss_HpBar& _Other)		= delete;
+	ABoss_HpBar& operator =(ABoss_HpBar& _Other)noexcept		= delete;
 
 
 protected:
@@ -23,11 +23,12 @@ private:
 	UImage* BossLifeBase = nullptr;
 	UImage* BossLifeBack = nullptr;
 	UImage* LifeBar = nullptr;
+	UImage* BossHpImage = nullptr;
 
-	const float MaxLife = 200.f;
+	float MaxLife = 0.f;
 	float Life = MaxLife;
 
-	const float Life_POSX = -410.f;
+	float Life_POSX = 0.f;
 	float LifePos = Life_POSX;
 };
 
