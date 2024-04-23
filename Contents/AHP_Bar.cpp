@@ -90,5 +90,15 @@ void AHP_Bar::BeginPlay()
 void AHP_Bar::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	if (UEngineInput::IsDown('M'))
+	{
+		Life -= 10;
+		float Setratio = Life / MaxLife;
+		LifePos = Setratio * Life_POSX;
+	}
+	LifeBar->SetScale({ Life,50 });
+	LifeBar->SetPosition({ LifePos, 300 });
 }
+	
 

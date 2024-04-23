@@ -23,5 +23,11 @@ private:
 	UImage* PlayerLifeBack = nullptr;
 	UImage* LifeBar = nullptr;
 	UImage* LifeBarWave = nullptr;
+
+	const int MaxLife = 200;
+	int Life = MaxLife;
+
+	const int Life_POSX = -410;
+	int LifePos = MaxLife;
 };
 
