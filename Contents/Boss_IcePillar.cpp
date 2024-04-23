@@ -7,6 +7,7 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/DefaultSceneComponent.h>
 #include "Monster_HpBar.h"
+#include "Player_Attack_Effect.h"
 
 ABoss_IcePillar::ABoss_IcePillar()
 {
@@ -61,6 +62,20 @@ void ABoss_IcePillar::Tick(float _DeltaTime)
 	{
 		PlayerPos = Player->GetActorLocation();
 	}
+
+	Collision->CollisionEnter(EColOrder::Wapon, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			
+			AActor* Actors = _Collison->GetActor();
+			APlayer_Attack_Effect* Wapon = dynamic_cast<APlayer_Attack_Effect*>(Actors);
+			if (Wapon != nullptr)
+			{
+				//Hp_Bar->S
+			}
+			int a = 0;
+		}
+	);
+
 }
 
 
