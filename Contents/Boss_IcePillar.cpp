@@ -98,7 +98,7 @@ void ABoss_IcePillar::CreatBullet(FVector _Dir, FVector _Pos)
 	std::shared_ptr<AIceBullet> Bullet = GetWorld()->SpawnActor<AIceBullet>("IceBullet");
 
 	Bullet->SetActorLocation(_Pos);
-	_Dir.Normalize2D();
+	//_Dir.Normalize2D();
 	_Dir.Z = 0;
 	_Dir.X *= UEngineMath::DToR;
 	_Dir.Y *= UEngineMath::DToR;
@@ -243,8 +243,9 @@ void ABoss_IcePillar::IcePillar_Attack_3(float _DeltaTime)
 		ChidRotNomal.Z = 0;
 		ChidRotNomal.X = cos(ChildRot.Z) ;
 		ChidRotNomal.Y = sin(ChildRot.Z) ;
-		ChidRotNomal.Normalize2D();
-		ChidRotNomal *= UEngineMath::DToR;
+		//ChidRotNomal.Normalize2D();
+		//ChidRotNomal *= UEngineMath::DToR;
+
 
 		if (AttackCount < 3)
 		{
@@ -449,7 +450,7 @@ void ABoss_IcePillar::IcePillar_Attack_2(float _DeltaTime)
 		FVector ParentPos =  GetActorLocation();
 		FVector ChidPos1 = Renderer->GetWorldPosition();
 		FVector DirPos = ChidPos1 - ParentPos;
-		DirPos.Normalize2D();
+		//DirPos.Normalize2D();
 		DirPos.Z = 0;
 		DirPos *= UEngineMath::DToR;
 		if (AttackCount < 3)
@@ -624,6 +625,19 @@ void ABoss_IcePillar::IcePillar_Attack_1(float _DeltaTime)
 				}
 
 				CreatBullet(BulletDir, Renderer->GetWorldPosition());
+
+				//std::shared_ptr<AIceBullet> Bullet = GetWorld()->SpawnActor<AIceBullet>("IceBullet");
+
+				//Bullet->SetActorLocation(_Pos);
+				//_Dir.Normalize2D();
+				//_Dir.Z = 0;
+				//_Dir.X *= UEngineMath::DToR;
+				//_Dir.Y *= UEngineMath::DToR;
+				//Bullet->SetTarget(-_Dir);
+				//Bullet->FireSecondBullet();
+				//CheckTime = FireTime;
+
+
 
 				++Num;
 				check = FireTime;

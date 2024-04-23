@@ -13,20 +13,20 @@
 
 APlayer::APlayer()
 {
-	//UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
-	//Renderer->SetupAttachment(Root);
+	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
 
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Renderer->SetPivot(EPivot::BOT);
+	Renderer->SetupAttachment(Root);
 
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
-	Collision->SetupAttachment(Renderer);	
+	Collision->SetupAttachment(Root);
 	Collision->SetCollisionGroup(EColOrder::Player);
 	Collision->SetCollisionType(ECollisionType::RotRect);
 	
 
 
-	SetRoot(Renderer);
+	SetRoot(Root);
 }
 
 APlayer::~APlayer()
@@ -68,7 +68,7 @@ void APlayer::BeginPlay()
 	Renderer->SetAutoSize(3.f, true);
 	
 	Renderer->SetOrder(ERenderOrder::Player);	
-	Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2, Renderer->GetWorldScale().Z});
+	Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2,1.f});
 	Collision->AddPosition({0.f, 0.25f });
 	
 	Renderer->ChangeAnimation("Player_Idle");

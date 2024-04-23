@@ -40,7 +40,7 @@ void AIceBullet::Attack(float _DeltaTime)
 		}
 		else
 		{
-			FVector Target = -TargetPos * Speed;
+			FVector Target = -TargetPos * Speed* _DeltaTime;
 			AddActorLocation(-Target);
 			float CursorAngleRad = std::atan2(TargetPos.Y, TargetPos.X);
 			CursorAngleRad = CursorAngleRad * UEngineMath::RToD;
@@ -116,13 +116,20 @@ void AIceBullet::BeginPlay()
 	Renderer->ChangeAnimation("IceBullet");
 	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
 
-	Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2, Renderer->GetWorldScale().Z });
-	Collision->AddPosition({ 0.f, 0.25f });
+	Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2, 1.f });
+	Collision->AddPosition({ 0.85f, 0.0f });
 }
 
 void AIceBullet::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	Collision->SetPosition({ Renderer->GetWorldPosition()*0.0001f });
+
+	{
+		std::string Msg = std::format("BulletCollisionPos : {}\n", Collision->GetWorldPosition().ToString());
+		UEngineDebugMsgWindow::PushMsg(Msg);
+	}
 
 	StateUpdate(_DeltaTime);	
 }
