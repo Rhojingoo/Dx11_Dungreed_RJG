@@ -19,9 +19,6 @@
     <Filter Include="Object\Rendering">
       <UniqueIdentifier>{4b3075e2-c506-4bbb-b56a-edce257bae27}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Rendering\Component">
-      <UniqueIdentifier>{2e32c226-d634-4c1d-aff2-e496be89f8e6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Component">
       <UniqueIdentifier>{b5908208-ae7f-4116-a0b6-4296c605c8f1}</UniqueIdentifier>
     </Filter>
@@ -76,6 +73,27 @@
     <Filter Include="Object\Rendering\Contents">
       <UniqueIdentifier>{3f7d87f9-cdd7-476b-9666-a289010a7d58}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{0d679389-6506-4dba-8817-c137792e8d0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{693ce251-8159-4c63-ae03-cd04eec84f8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\Collision">
+      <UniqueIdentifier>{6720c6dc-3ff8-43bd-aa34-2d6275469174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\Rendering">
+      <UniqueIdentifier>{820cc4c8-e355-4412-b27e-6b902375409b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\Rendering\Contents">
+      <UniqueIdentifier>{42d54b9a-14f2-48f3-90e4-5fbefcd41a35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI">
+      <UniqueIdentifier>{1047bcec-0c0c-4875-a116-f2fa92e01c32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI\Contents">
+      <UniqueIdentifier>{003e466d-57cf-4db8-81f2-75caa4ddcb0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineCore.h">
@@ -98,9 +116,6 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Object\Rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Object\Rendering\Component</Filter>
     </ClInclude>
     <ClInclude Include="SceneComponent.h">
       <Filter>Object\Component</Filter>
@@ -180,11 +195,6 @@
     <ClInclude Include="EngineSampler.h">
       <Filter>Resources\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteRenderer.h">
-      <Filter>Object\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineBlend.h" />
-    <ClInclude Include="StateManager.h" />
     <ClInclude Include="imconfig.h">
       <Filter>Editor\Imgui</Filter>
     </ClInclude>
@@ -218,19 +228,51 @@
     <ClInclude Include="EngineEditorWindow.h">
       <Filter>Editor</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.h" />
-    <ClInclude Include="EngineDebug3D.h" />
-    <ClInclude Include="TileRenderer.h">
-      <Filter>Object\Rendering\Contents</Filter>
-    </ClInclude>
     <ClInclude Include="EngineStruct.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="RenderUnit.h" />
-    <ClInclude Include="Image.h" />
-    <ClInclude Include="Widget.h" />
-    <ClInclude Include="BlurEffect.h" />
-    <ClInclude Include="EngineStructuredBuffer.h" />
+    <ClInclude Include="StateManager.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineDebug3D.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Object\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="InstancingRender.h">
+      <Filter>Object\Component\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderUnit.h">
+      <Filter>Object\Component\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Object\Component\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Object\Component\Rendering\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteInstancingRender.h">
+      <Filter>Object\Component\Rendering\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="TileRenderer.h">
+      <Filter>Object\Component\Rendering\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="BlurEffect.h">
+      <Filter>Object\Rendering\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget.h">
+      <Filter>Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Object\UI\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineStructuredBuffer.h">
+      <Filter>Resources\ShaderResources</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineBlend.h">
+      <Filter>Resources\RenderingSetting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp">
@@ -253,9 +295,6 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Object\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Object\Rendering\Component</Filter>
     </ClCompile>
     <ClCompile Include="SceneComponent.cpp">
       <Filter>Object\Component</Filter>
@@ -332,11 +371,6 @@
     <ClCompile Include="EngineSprite.cpp">
       <Filter>Resources\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>Object\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineBlend.cpp" />
-    <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="imgui.cpp">
       <Filter>Editor\Imgui</Filter>
     </ClCompile>
@@ -367,19 +401,51 @@
     <ClCompile Include="EngineEditorWindow.cpp">
       <Filter>Editor</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="EngineDebug3D.cpp" />
-    <ClCompile Include="TileRenderer.cpp">
-      <Filter>Object\Rendering\Contents</Filter>
-    </ClCompile>
     <ClCompile Include="EngineStruct.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="RenderUnit.cpp" />
-    <ClCompile Include="Image.cpp" />
-    <ClCompile Include="Widget.cpp" />
-    <ClCompile Include="BlurEffect.cpp" />
-    <ClCompile Include="EngineStructuredBuffer.cpp" />
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineDebug3D.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Object\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="InstancingRender.cpp">
+      <Filter>Object\Component\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderUnit.cpp">
+      <Filter>Object\Component\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Object\Component\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Object\Component\Rendering\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteInstancingRender.cpp">
+      <Filter>Object\Component\Rendering\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="TileRenderer.cpp">
+      <Filter>Object\Component\Rendering\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="BlurEffect.cpp">
+      <Filter>Object\Rendering\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget.cpp">
+      <Filter>Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Object\UI\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineBlend.cpp">
+      <Filter>Resources\RenderingSetting</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineStructuredBuffer.cpp">
+      <Filter>Resources\ShaderResources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="ThirdParty\DirectxTex\Debug\DirectXTex.lib">

@@ -247,6 +247,7 @@
     <ClInclude Include="imstb_rectpack.h" />
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
+    <ClInclude Include="InstancingRender.h" />
     <ClInclude Include="Level.h">
       <SubType>
       </SubType>
@@ -261,6 +262,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="SpriteInstancingRender.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="ThirdParty\DirectxTex\inc\DirectXTex.h" />
@@ -359,6 +361,7 @@
     <ClCompile Include="imgui_impl_win32.cpp" />
     <ClCompile Include="imgui_tables.cpp" />
     <ClCompile Include="imgui_widgets.cpp" />
+    <ClCompile Include="InstancingRender.cpp" />
     <ClCompile Include="Level.cpp">
       <SubType>
       </SubType>
@@ -378,6 +381,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="SpriteInstancingRender.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="TickObject.cpp">

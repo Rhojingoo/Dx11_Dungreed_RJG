@@ -23,8 +23,6 @@ APlayer::APlayer()
 	Collision->SetupAttachment(Root);
 	Collision->SetCollisionGroup(EColOrder::Player);
 	Collision->SetCollisionType(ECollisionType::RotRect);
-	
-
 
 	SetRoot(Root);
 }
