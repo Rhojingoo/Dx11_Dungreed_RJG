@@ -7,14 +7,19 @@
 
 AIceBullet::AIceBullet()
 {
+	Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
+
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	SetRoot(Renderer);
+	Renderer->SetupAttachment(Root);
 	Renderer->SetPivot(EPivot::BOT);
 
+
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
-	Collision->SetupAttachment(Renderer);
+	Collision->SetupAttachment(Root);
 	Collision->SetCollisionGroup(EColOrder::Boss_IceBullet);
 	Collision->SetCollisionType(ECollisionType::RotRect);
+
+	SetRoot(Root);
 }
 
 AIceBullet::~AIceBullet()
@@ -24,6 +29,36 @@ AIceBullet::~AIceBullet()
 void AIceBullet::AttackStart()
 {
 }
+
+
+void AIceBullet::BeginPlay()
+{
+	Super::BeginPlay();
+	Renderer->SetAutoSize(4.0f, true);
+
+	Renderer->CreateAnimation("IceBullet", "IceBullet", 0.1f, false);
+	Renderer->CreateAnimation("IceBulletEfferct", "IceBulletEfferct", 0.1f, false);
+	Renderer->ChangeAnimation("IceBullet");
+	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
+
+	Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2, 1.f });
+	//Collision->AddPosition({ 0.85f, 0.0f });
+}
+
+void AIceBullet::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+
+	Collision->SetPosition({ Renderer->GetWorldPosition() * 0.0001f });
+
+	{
+		std::string Msg = std::format("BulletCollisionPos : {}\n", Collision->GetWorldPosition().ToString());
+		UEngineDebugMsgWindow::PushMsg(Msg);
+	}
+
+	StateUpdate(_DeltaTime);
+}
+
 
 void AIceBullet::Attack(float _DeltaTime)
 {
@@ -104,32 +139,4 @@ void AIceBullet::StateUpdate(float _DeltaTime)
 	default:
 		break;
 	}	
-}
-
-void AIceBullet::BeginPlay()
-{
-	Super::BeginPlay();
-	Renderer->SetAutoSize(4.0f, true);
-
-	Renderer->CreateAnimation("IceBullet", "IceBullet", 0.1f, false);
-	Renderer->CreateAnimation("IceBulletEfferct", "IceBulletEfferct", 0.1f, false);
-	Renderer->ChangeAnimation("IceBullet");
-	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
-
-	Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2, 1.f });
-	Collision->AddPosition({ 0.85f, 0.0f });
-}
-
-void AIceBullet::Tick(float _DeltaTime)
-{
-	Super::Tick(_DeltaTime);
-
-	Collision->SetPosition({ Renderer->GetWorldPosition()*0.0001f });
-
-	{
-		std::string Msg = std::format("BulletCollisionPos : {}\n", Collision->GetWorldPosition().ToString());
-		UEngineDebugMsgWindow::PushMsg(Msg);
-	}
-
-	StateUpdate(_DeltaTime);	
 }

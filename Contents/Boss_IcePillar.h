@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
+
 enum class IcePillarState
 {
 	None,
@@ -14,6 +15,9 @@ enum class IcePillarState
 	Attack04,
 };
 
+
+class UCollision;
+class AMonster_HpBar;
 class UDefaultSceneComponent;
 class APlayer;
 class AIceBullet;
@@ -62,6 +66,9 @@ private:
 	FVector LocalRottation = {};
 
 	std::shared_ptr<APlayer> Player = nullptr;
+	std::shared_ptr<AMonster_HpBar> Hp_Bar = nullptr;
+	
+
 	FVector PlayerPos = {};
 	//std::shared_ptr<AIceBullet> IceBullet = nullptr;
 	std::shared_ptr<AIceBullet> IceBullet[13] = {};
@@ -77,7 +84,8 @@ private:
 	UDefaultSceneComponent* Root = nullptr;
 	USpriteRenderer* Renderer = nullptr;
 	USpriteRenderer* Center_Renderer = nullptr;
-	
+	UCollision* Collision = nullptr;
+
 	bool Create_Check = false;
 
 	IcePillarState IcePillar_State = IcePillarState::None;

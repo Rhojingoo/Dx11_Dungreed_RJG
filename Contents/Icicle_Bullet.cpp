@@ -44,7 +44,7 @@ void AIcicle_Bullet::BeginPlay()
 	EffectRenderer->CreateAnimation("Icicle_Effect", "Icicle_Effect", 0.1f, false);
 	EffectRenderer->SetOrder(ERenderOrder::Effect_Front);
 	EffectRenderer->SetAutoSize(4.f, true);
-	EffectRenderer->AddPosition({ 0.f, 250.f, 0.f });
+	EffectRenderer->AddPosition({ 0.f, 0.f, 0.f });
 }
 
 void AIcicle_Bullet::Tick(float _DeltaTime)

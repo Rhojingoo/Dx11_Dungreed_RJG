@@ -2,18 +2,19 @@
 #include <EngineCore/Actor.h>
 
 class UImage;
-class AHP_Bar : public AActor
+class USpriteRenderer;
+class APlayer_HpBar : public AActor
 {
 	GENERATED_BODY(AActor)
 public:
-	AHP_Bar();
-	~AHP_Bar();
+	APlayer_HpBar();
+	~APlayer_HpBar();
 
 	// delete Function
-	AHP_Bar(const AHP_Bar& _Other) = delete;
-	AHP_Bar(AHP_Bar&& _Other) noexcept = delete;
-	AHP_Bar& operator=(const AHP_Bar& _Other) = delete;
-	AHP_Bar& operator=(AHP_Bar&& _Other) noexcept = delete;
+	APlayer_HpBar(const APlayer_HpBar& _Other) = delete;
+	APlayer_HpBar(APlayer_HpBar&& _Other) noexcept = delete;
+	APlayer_HpBar& operator=(const APlayer_HpBar& _Other) = delete;
+	APlayer_HpBar& operator=(APlayer_HpBar&& _Other) noexcept = delete;
 
 protected:
 	void BeginPlay() override;

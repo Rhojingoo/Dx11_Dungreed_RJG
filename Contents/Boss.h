@@ -90,8 +90,12 @@ private:
 	bool IntroOn = false;
 	bool Attack_Check = false;
 	bool Attack_End = false;
+
 	void CreateIcePillar();
+	void IcePillarPosSetting();
 	void Direction();
+
+
 	bool SpearCreat = false;
 	bool IcicleCreat = false;
 	static float IcePillarPos;

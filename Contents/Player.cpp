@@ -10,6 +10,8 @@
 #include "Player_AfterImage.h"
 #include "IceBullet.h"
 #include "Icicle_Bullet.h"
+#include "Player_HpBar.h"
+
 
 APlayer::APlayer()
 {
@@ -45,7 +47,7 @@ void APlayer::BeginPlay()
 	Smoke_Effect = GetWorld()->SpawnActor<APlayer_Smoke_Effect>("Smoke");
 	Smoke_Effect->SetActorLocation({0.0f, 0.0f, 200.0f });	
 
-	Player_HpBAR = GetWorld()->SpawnActor<AHP_Bar>("AHP_Bar");
+	Player_HpBAR = GetWorld()->SpawnActor<APlayer_HpBar>("AHP_Bar");
 
 
 

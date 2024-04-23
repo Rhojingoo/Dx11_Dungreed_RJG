@@ -1,9 +1,10 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include <EngineCore/StateManager.h>
-#include "AHP_Bar.h"
+
 // Ό³Έν :
 
+class APlayer_HpBar;
 class ATarget;
 class APlayer_Hand;
 class APlayer_AfterImage;
@@ -44,7 +45,7 @@ private:
 	//std::shared_ptr<APlayer_Hand> Left_Hand = nullptr;
 	std::shared_ptr<APlayer_Smoke_Effect> Smoke_Effect = nullptr;
 	std::shared_ptr<APlayer_AfterImage> After_Image[10] = {};
-	std::shared_ptr<AHP_Bar>Player_HpBAR = nullptr;
+	std::shared_ptr<APlayer_HpBar>Player_HpBAR = nullptr;
 
 	
 	

@@ -144,11 +144,6 @@ void ABoss::Boss_Intro(float _DeltaTime)
 {
 	for (int a = 0; a < 4; a++)
 	{
-		//if (IcePillar[0]->ISIntro() != true)
-		//{
-		//	return;
-		//}
-
 		if (IcePillar[a]->ISIntro() != true)
 		{
 			return;
@@ -174,8 +169,6 @@ void ABoss::Boss_IntroStart()
 
 	for (int a = 0; a < 4; a++)
 	{
-		//Bullet_Pos[0] = IcePillar[0]->GetPos();
-		//IcePillar[0]->StateChange(IcePillarState::Intro);
 		Bullet_Pos[a] = IcePillar[a]->GetPos();
 		IcePillar[a]->StateChange(IcePillarState::Intro);
 	}
@@ -189,7 +182,6 @@ void ABoss::Boss_Idle(float _DeltaTime)
 	{
 		if (IntroOn == false)
 		{
-
 			{
 				StateChange(BossState::Intro);
 				IntroOn = true;
@@ -198,32 +190,34 @@ void ABoss::Boss_Idle(float _DeltaTime)
 		}
 		else
 		{
-			if (UEngineInput::IsPress('1'))
+			//UEngineInput::IsDown('1')
+
+			if (UEngineInput::IsPress('3'))
 			{
 				StateChange(BossState::Patton1);
 				Boss_Time = 0.f;
 			}
-			if (UEngineInput::IsPress('2'))
+			if (UEngineInput::IsPress('4'))
 			{
 				StateChange(BossState::Patton2);
 				Boss_Time = 0.f;
 			}
-			if (UEngineInput::IsPress('3'))
+			if (UEngineInput::IsPress('5'))
 			{
 				StateChange(BossState::Patton3);
 				Boss_Time = 0.f;
 			}
-			if (UEngineInput::IsPress('4'))
+			if (UEngineInput::IsPress('6'))
 			{
 				StateChange(BossState::Patton4);
 				Boss_Time = 0.f;
 			}
-			if (UEngineInput::IsPress('5'))
+			if (UEngineInput::IsPress('7'))
 			{
 				StateChange(BossState::Patton5);
 				Boss_Time = 0.f;
 			}
-			if (UEngineInput::IsDown('6'))
+			if (UEngineInput::IsDown('8'))
 			{
 				SpearCreat = false;
 				IceSpear_Aattack();
@@ -247,22 +241,31 @@ void ABoss::Boss_IdleStart()
 {
 	Renderer->ChangeAnimation("Boss_Idle");
 
-	for (int a = 0; a < 4; a++)
+	for (int Num = 0; Num < 4; Num++)
 	{
-		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
-		IcePillar[a]->AttackEndFalse();
-		IcePillar[a]->SetActorRotation({ PlRotation[a] });
+		if (IcePillar[Num] == nullptr)
+		{
+			continue;
+		}
+
+		IcePillar[Num]->SetPos({ Bullet_Pos[Num].X, Bullet_Pos[Num].Y });
+		IcePillar[Num]->AttackEndFalse();
+		IcePillar[Num]->SetActorRotation({ PlRotation[Num] });
 	}
 }
 
 void ABoss::Boss_Patton1Start()
 {	
-	for (int a = 0; a < 4; a++)
+	for (int Num = 0; Num < 4; Num++)
 	{
-		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
-		IcePillar[a]->AttackEndFalse();
-		IcePillar[a]->SetActorRotation({ PlRotation[a] });
-		IcePillar[a]->StateChange(IcePillarState::Attack01);
+		if (IcePillar[Num] == nullptr)
+		{
+			continue;
+		}
+		IcePillar[Num]->SetPos({ Bullet_Pos[Num].X, Bullet_Pos[Num].Y });
+		IcePillar[Num]->AttackEndFalse();
+		IcePillar[Num]->SetActorRotation({ PlRotation[Num] });
+		IcePillar[Num]->StateChange(IcePillarState::Attack01);
 	}
 	Attack_Check = true;
 	IcePillarPos = 0.f;
@@ -276,17 +279,25 @@ void ABoss::Boss_Patton1(float _DeltaTime)
 			if (IcePillarPos < 7.f)
 			{
 				IcePillarPos += 50.f * _DeltaTime;
-				IcePillar[0]->AddPos({ -IcePillarPos, IcePillarPos / 2 });
-				IcePillar[1]->AddPos({ IcePillarPos, IcePillarPos / 2 });
-				IcePillar[2]->AddPos({ -IcePillarPos,-IcePillarPos / 1000 });
-				IcePillar[3]->AddPos({ IcePillarPos,-IcePillarPos / 1000 });
-				return;
+				if (IcePillar[0] != nullptr)
+					IcePillar[0]->AddPos({ -IcePillarPos, IcePillarPos / 2 });
+				if (IcePillar[1] != nullptr)
+					IcePillar[1]->AddPos({ IcePillarPos, IcePillarPos / 2 });
+				if (IcePillar[2] != nullptr)
+					IcePillar[2]->AddPos({ -IcePillarPos,-IcePillarPos / 1000 });
+				if (IcePillar[3] != nullptr)
+					IcePillar[3]->AddPos({ IcePillarPos,-IcePillarPos / 1000 });
 			}
 			else
 			{	
-				for (int a = 0; a < 4; a++)
+				for (int Num = 0; Num < 4; Num++)
 				{
-					IcePillar[a]->FireOn();
+					if (IcePillar[Num] == nullptr)
+					{
+						continue;
+					}
+
+					IcePillar[Num]->FireOn();
 				}
 				Attack_Check = false;
 				//IcePillarPos = 0.f;				
@@ -294,16 +305,25 @@ void ABoss::Boss_Patton1(float _DeltaTime)
 		}
 		else
 		{
-			for (int a = 0; a < 4; a++)
+			for (int Num = 0; Num < 4; Num++)
 			{
-				if (true != IcePillar[a]->IsAttackEnd())
+				if (IcePillar[Num] == nullptr)
+				{
+					continue;
+				}
+
+				if (true != IcePillar[Num]->IsAttackEnd())
 				{
 					return;
 				}
 			}
-			for (int a = 0; a < 4; a++)
+			for (int Num = 0; Num < 4; Num++)
 			{
-				IcePillar[a]->StateChange(IcePillarState::Idle);
+				if (IcePillar[Num] == nullptr)
+				{
+					continue;
+				}
+				IcePillar[Num]->StateChange(IcePillarState::Idle);
 			}
 			StateChange(BossState::Ready); 
 			IcePillarPos = 0.f;
@@ -315,9 +335,13 @@ void ABoss::Boss_Patton1(float _DeltaTime)
 
 void ABoss::Boss_Patton2Start()
 {
-	for (int a = 0; a < 4; a++)
+	for (int Num = 0; Num < 4; Num++)
 	{
-		IcePillar[a]->StateChange(IcePillarState::Attack02);
+		if (IcePillar[Num] == nullptr)
+		{
+			continue;
+		}
+		IcePillar[Num]->StateChange(IcePillarState::Attack02);
 	}
 	Attack_Check = true;
 }
@@ -326,16 +350,24 @@ void ABoss::Boss_Patton2(float _DeltaTime)
 {
 	if (Attack_Check == true)
 	{
-		for (int a = 0; a < 4; a++)
+		for (int Num = 0; Num < 4; Num++)
 		{
-			if (true != IcePillar[a]->IsAttackEnd())
+			if (IcePillar[Num] == nullptr)
+			{
+				continue;
+			}
+			if (true != IcePillar[Num]->IsAttackEnd())
 			{
 				return;
 			}
 		}
-		for (int a = 0; a < 4; a++)
+		for (int Num = 0; Num < 4; Num++)
 		{
-			IcePillar[a]->StateChange(IcePillarState::Idle);
+			if (IcePillar[Num] == nullptr)
+			{
+				continue;
+			}
+			IcePillar[Num]->StateChange(IcePillarState::Idle);
 		}
 		Attack_Check = false;
 		StateChange(BossState::Ready);
@@ -344,12 +376,16 @@ void ABoss::Boss_Patton2(float _DeltaTime)
 
 void ABoss::Boss_Patton3Start()
 {
-	for (int a = 0; a < 4; a++)
+	for (int Num = 0; Num < 4; Num++)
 	{
-		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
-		IcePillar[a]->AttackEndFalse();
-		IcePillar[a]->StateChange(IcePillarState::Attack03);
-		IcePillar[a]->SetActorRotation({ PlRotation[a] });
+		if (IcePillar[Num] == nullptr)
+		{
+			continue;
+		}
+		IcePillar[Num]->SetPos({ Bullet_Pos[Num].X, Bullet_Pos[Num].Y });
+		IcePillar[Num]->AttackEndFalse();
+		IcePillar[Num]->StateChange(IcePillarState::Attack03);
+		IcePillar[Num]->SetActorRotation({ PlRotation[Num] });
 	}
 	Attack_Check = true;	
 	IcePillarPos = 0.f;
@@ -362,31 +398,45 @@ void ABoss::Boss_Patton3(float _DeltaTime)
 		if (IcePillarPos < 7.f)
 		{
 			IcePillarPos += 50.f * _DeltaTime;
+			if (IcePillar[0] != nullptr)
 			IcePillar[0]->AddPos({ -IcePillarPos, -IcePillarPos * 1.3f });
+			if (IcePillar[1] != nullptr)
 			IcePillar[1]->AddPos({ IcePillarPos, -IcePillarPos * 1.3f });
 			return;
 		}
 		else
 		{
-			for (int a = 0; a < 4; a++)
+			for (int Num = 0; Num < 4; Num++)
 			{
-				IcePillar[a]->FireOn();
+				if (IcePillar[Num] == nullptr)
+				{
+					continue;
+				}
+				IcePillar[Num]->FireOn();
 			}
 			Attack_Check = false;			
 		}
 	}
 	else
 	{
-		for (int a = 0; a < 4; a++)
+		for (int Num = 0; Num < 4; Num++)
 		{
-			if (true != IcePillar[a]->IsAttackEnd())
+			if (IcePillar[Num] == nullptr)
+			{
+				continue;
+			}
+			if (true != IcePillar[Num]->IsAttackEnd())
 			{
 				return;
 			}
 		}
-		for (int a = 0; a < 4; a++)
+		for (int Num = 0; Num < 4; Num++)
 		{
-			IcePillar[a]->StateChange(IcePillarState::Idle);
+			if (IcePillar[Num] == nullptr)
+			{
+				continue;
+			}
+			IcePillar[Num]->StateChange(IcePillarState::Idle);
 		}
 		StateChange(BossState::Ready);
 		IcePillarPos = 0.f;
@@ -397,19 +447,27 @@ void ABoss::Boss_Patton3(float _DeltaTime)
 
 void ABoss::Boss_Patton4Start()
 {
-	for (int a = 0; a < 4; a++)
+	for (int Num = 0; Num < 4; Num++)
 	{
-		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
-		IcePillar[a]->AttackEndFalse();
-		IcePillar[a]->SetActorRotation({ PlRotation[a] });
+		if (IcePillar[Num] == nullptr)
+		{
+			continue;
+		}
+		IcePillar[Num]->SetPos({ Bullet_Pos[Num].X, Bullet_Pos[Num].Y });
+		IcePillar[Num]->AttackEndFalse();
+		IcePillar[Num]->SetActorRotation({ PlRotation[Num] });
 	}
 
-	for (int a = 0; a < 4; a++)
+	for (int Num = 0; Num < 4; Num++)
 	{
-		IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
-		IcePillar[a]->AttackEndFalse();
-		IcePillar[a]->StateChange(IcePillarState::Attack04);
-		IcePillar[a]->SetActorRotation({ 0.f,0.f,0.f });
+		if (IcePillar[Num] == nullptr)
+		{
+			continue;
+		}
+		IcePillar[Num]->SetPos({ Bullet_Pos[Num].X, Bullet_Pos[Num].Y });
+		IcePillar[Num]->AttackEndFalse();
+		IcePillar[Num]->StateChange(IcePillarState::Attack04);
+		IcePillar[Num]->SetActorRotation({ 0.f,0.f,0.f });
 	}
 }
 void ABoss::Boss_Patton4(float _DeltaTime)
@@ -424,17 +482,25 @@ void ABoss::Boss_Patton4(float _DeltaTime)
 		float CursorAngleRad = std::atan2(AttrackDir.Y, AttrackDir.X);
 		CursorAngleRad = CursorAngleRad * UEngineMath::RToD;
 		//IcePillar[0]->SetActorRotation({ 0.f,0.f,CursorAngleRad - 45.f });
-		for (int a = 0; a < 4; a++)
+		for (int Num = 0; Num < 4; Num++)
 		{
-			IcePillar[a]->SetActorRotation({ 0.f,0.f,CursorAngleRad - 45.f });
+			if (IcePillar[Num] == nullptr)
+			{
+				continue;
+			}
+			IcePillar[Num]->SetActorRotation({ 0.f,0.f,CursorAngleRad - 45.f });
 		}
 		Attack_Check = true;
 	}
 	else
 	{
-		for (int a = 0; a < 4; a++)
+		for (int Num = 0; Num < 4; Num++)
 		{
-			if (true != IcePillar[a]->IsAttackEnd())
+			if (IcePillar[Num] == nullptr)
+			{
+				continue;
+			}
+			if (true != IcePillar[Num]->IsAttackEnd())
 			{
 				return;
 			}
@@ -442,11 +508,11 @@ void ABoss::Boss_Patton4(float _DeltaTime)
 		StateChange(BossState::Ready2);
 		Attack_Check = false;
 		return;
-		if (UEngineInput::IsDown('1'))
-		{
-			StateChange(BossState::Idle);
-			Boss_Time = 0.f;
-		}
+		//if (UEngineInput::IsDown('1'))
+		//{
+		//	StateChange(BossState::Idle);
+		//	Boss_Time = 0.f;
+		//}
 	}
 }
 
@@ -456,12 +522,13 @@ void ABoss::Boss_Patton5Start()
 	FVector Setpos = Player->GetActorLocation();
 	std::shared_ptr<AIcicle_Bullet> Bullet[4];
 
-	for (int i = 0; i < 4; i++)
+	for (int Num = 0; Num < 4; Num++)
 	{
-		Bullet[i] = GetWorld()->SpawnActor<AIcicle_Bullet>("IcicleBullet");
-		float offset = (i - 1.5) * 30.f; 
-		Bullet[i]->SetActorLocation({ Setpos.X + offset, Setpos.Y-20.f });
-		Bullet[i]->AttackOn();
+		Bullet[Num] = GetWorld()->SpawnActor<AIcicle_Bullet>("IcicleBullet");
+		float offset = (Num - 1.5) * 100.f; 
+		Bullet[Num]->SetActorLocation({ Setpos.X + offset, Setpos.Y+200, Setpos.Z+1 });
+		FVector asd =Bullet[Num]->GetActorLocation();
+		Bullet[Num]->AttackOn();
 	}
 	IcicleCreat = false;
 }
@@ -472,20 +539,26 @@ void ABoss::Boss_Patton5(float _DeltaTime)
 		FVector Setpos = Player->GetActorLocation();
 		std::shared_ptr<AIcicle_Bullet> Bullet[4];
 
-		for (int i = 0; i < 4; i++)
+		for (int Num = 0; Num < 4; Num++)
 		{
-			Bullet[i] = GetWorld()->SpawnActor<AIcicle_Bullet>("IcicleBullet");
-			int offset = (i - 1.5) * 50;
-			Bullet[i]->SetActorLocation({ Setpos.X + offset, Setpos.Y - 30.f });
-			Bullet[i]->AttackOn();
+			Bullet[Num] = GetWorld()->SpawnActor<AIcicle_Bullet>("IcicleBullet");
+			int offset = (Num - 1.5) * 150;
+			Bullet[Num]->SetActorLocation({ Setpos.X + offset, Setpos.Y + 200.f,Setpos.Z + 1 });
+			Bullet[Num]->AttackOn();
 		}
 		IcicleCreat = true;
 	}
 
-	if (IcicleCreat == true)
+	if (UEngineInput::IsDown('1'))
 	{
 		StateChange(BossState::Idle);
+		Boss_Time = 0.f;
 	}
+
+	//if (IcicleCreat == true)
+	//{
+	//	StateChange(BossState::Idle);
+	//}
 }
 
 
@@ -593,12 +666,27 @@ void ABoss::Boss_Ready(float _DeltaTime)
 
 void ABoss::CreateIcePillar()
 {
-	//IcePillar[0] = GetWorld()->SpawnActor<ABoss_IcePillar>("IcePillar");
-	//IcePillar[0]->SetActorLocation({ 640.0f, -360.0f, 200.0f });
 	for (int Num = 0; Num < 4; Num++)
 	{
 		IcePillar[Num] = GetWorld()->SpawnActor<ABoss_IcePillar>("IcePillar");
 		IcePillar[Num]->SetActorLocation({ 640.0f, -360.0f, 200.0f });
+	}
+	
+	//IcePillarPosSetting();
+}
+
+void ABoss::IcePillarPosSetting()
+{
+	IcePillar[0]->AddPos({ -Bullet,Bullet });
+	IcePillar[1]->AddPos({ Bullet,Bullet });
+	IcePillar[2]->AddPos({ -Bullet,-Bullet });
+	IcePillar[3]->AddPos({ Bullet,-Bullet });
+
+	for (int Num = 0; Num < 4; Num++)
+	{
+		PlRotation[Num] = IcePillar[Num]->GetActorTransform().GetRotation();
+		Bullet_Pos[Num] = IcePillar[Num]->GetPos();
+		IcePillar[Num]->StateChange(IcePillarState::Intro);
 	}
 }
 

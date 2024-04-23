@@ -53,7 +53,7 @@ private:
 
 	bool Attack_Start = false;
 	bool EffectEnd = false;
-	float Speed = 250.f;
+	float Speed = 5.f;
 	FVector AttPos = {};
 	float Destroy_Time = 0.f;
 };

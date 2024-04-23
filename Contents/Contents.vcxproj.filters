@@ -127,8 +127,14 @@
     <ClInclude Include="Icicle_Bullet.h">
       <Filter>Level &amp; OBJ\Public\OBJ\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="AHP_Bar.h">
-      <Filter>Level &amp; OBJ\Public\OBJ\TileMap</Filter>
+    <ClInclude Include="Monster_HpBar.h">
+      <Filter>Level &amp; OBJ\Public\OBJ\Hp</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss_HpBar.h">
+      <Filter>Level &amp; OBJ\Public\OBJ\Hp</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_HpBar.h">
+      <Filter>Level &amp; OBJ\Public\OBJ\Hp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -258,8 +264,14 @@
     <ClCompile Include="Icicle_Bullet.cpp">
       <Filter>Level &amp; OBJ\Public\OBJ\Boss</Filter>
     </ClCompile>
-    <ClCompile Include="AHP_Bar.cpp">
-      <Filter>Level &amp; OBJ\Public\OBJ\TileMap</Filter>
+    <ClCompile Include="Monster_HpBar.cpp">
+      <Filter>Level &amp; OBJ\Public\OBJ\Hp</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss_HpBar.cpp">
+      <Filter>Level &amp; OBJ\Public\OBJ\Hp</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_HpBar.cpp">
+      <Filter>Level &amp; OBJ\Public\OBJ\Hp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -367,6 +379,9 @@
     </Filter>
     <Filter Include="Level &amp; OBJ\Public\OBJ\UI">
       <UniqueIdentifier>{2846fc29-4683-41b7-9a5f-a9fe78cb50fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Public\OBJ\Hp">
+      <UniqueIdentifier>{13ddd34e-169e-4ea3-b3b3-c019eeac6b7e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

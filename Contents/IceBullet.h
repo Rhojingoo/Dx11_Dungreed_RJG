@@ -11,6 +11,7 @@ enum class IceBulletState
 
 
 class UCollision;
+class UDefaultSceneComponent;
 class USpriteRenderer;
 class AIceBullet : public AActor
 {
@@ -51,6 +52,7 @@ protected:
 
 private:
 	IceBulletState IceState = IceBulletState::Attack;
+	UDefaultSceneComponent* Root = nullptr;
 	USpriteRenderer* Renderer = nullptr;
 	UCollision* Collision = nullptr;
 	FVector TargetPos = {};

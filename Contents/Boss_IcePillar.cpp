@@ -6,6 +6,7 @@
 #include "ContentsHelper.h"
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/DefaultSceneComponent.h>
+#include "Monster_HpBar.h"
 
 ABoss_IcePillar::ABoss_IcePillar()
 {
@@ -17,12 +18,50 @@ ABoss_IcePillar::ABoss_IcePillar()
 	Renderer->SetScale(FVector(62.0f, 33.0f, 100.0f));
 	Renderer->AddPosition({ 0.0f, 0.0f, 0.0f });
 
+	Collision = CreateDefaultSubObject<UCollision>("Collision");
+	Collision->SetupAttachment(Renderer);
+	Collision->SetCollisionGroup(EColOrder::Boss_IcePillar);
+	Collision->SetCollisionType(ECollisionType::RotRect);
+
 	SetRoot(Root);
 }
 
 ABoss_IcePillar::~ABoss_IcePillar()
 {
+	
 }
+
+
+void ABoss_IcePillar::BeginPlay()
+{
+	Super::BeginPlay();
+
+	Hp_Bar = GetWorld()->SpawnActor<AMonster_HpBar>("IcePillar_HP");
+
+	Renderer->SetAutoSize(4.0f, true);
+	Renderer->CreateAnimation("IcePillar", "IcePillar", 0.1f, false);
+	Renderer->CreateAnimation("IcePillarDestroy", "IcePillarDestroy", 0.1f);
+	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
+
+	//Collision->SetScale({ Renderer->GetWorldScale().X / 8, Renderer->GetWorldScale().Y / 8,1.f });
+	//Collision->AddPosition({ 0.f, 0.25f });
+}
+
+void ABoss_IcePillar::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+	Pos = GetActorLocation();
+	RenderPos = Renderer->GetWorldPosition();
+	//Collision->GetLocalPosition() = RenderPos;
+	StateUpdate(_DeltaTime);
+	//Hp_Bar->SetActorLocation(Renderer->GetLocalPosition());
+	Hp_Bar->GetActorTransform().LocalPosition = Renderer->GetLocalPosition();
+	if (Player != nullptr)
+	{
+		PlayerPos = Player->GetActorLocation();
+	}
+}
+
 
 void ABoss_IcePillar::StateChange(IcePillarState _State)
 {
@@ -93,19 +132,7 @@ void ABoss_IcePillar::StateUpdate(float _DeltaTime)
 	}
 }
 
-void ABoss_IcePillar::CreatBullet(FVector _Dir, FVector _Pos)
-{
-	std::shared_ptr<AIceBullet> Bullet = GetWorld()->SpawnActor<AIceBullet>("IceBullet");
 
-	Bullet->SetActorLocation(_Pos);
-	//_Dir.Normalize2D();
-	_Dir.Z = 0;
-	_Dir.X *= UEngineMath::DToR;
-	_Dir.Y *= UEngineMath::DToR;
-	Bullet->SetTarget(-_Dir);
-	Bullet->FireSecondBullet();
-	CheckTime = FireTime;	
-}
 
 void ABoss_IcePillar::IcePillar_Intro(float _DeltaTime)
 {
@@ -662,33 +689,17 @@ void ABoss_IcePillar::IcePillar_Attack_1(float _DeltaTime)
 }
 
 
-void ABoss_IcePillar::BeginPlay()
+
+void ABoss_IcePillar::CreatBullet(FVector _Dir, FVector _Pos)
 {
-	Super::BeginPlay();
+	std::shared_ptr<AIceBullet> Bullet = GetWorld()->SpawnActor<AIceBullet>("IceBullet");
 
-	//for (int Num = 0; Num <= 12; Num++)
-	//{
-	//	IceBullet[Num] = GetWorld()->SpawnActor<AIceBullet>("IceBullet");
-	//	IceBullet[Num]->SetActorLocation({640.0f, -360.0f, 200.0f});
-	//}
-
-	Renderer->SetAutoSize(4.0f, true);
-	Renderer->CreateAnimation("IcePillar", "IcePillar", 0.1f, false);
-	Renderer->CreateAnimation("IcePillarDestroy", "IcePillarDestroy", 0.1f);
-
-	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
-}
-
-void ABoss_IcePillar::Tick(float _DeltaTime)
-{
-	Super::Tick(_DeltaTime);
-	Pos = GetActorLocation();
-	RenderPos = Renderer->GetWorldPosition();
-	StateUpdate(_DeltaTime);
-
-	
-	if (Player != nullptr)
-	{
-		PlayerPos = Player->GetActorLocation();
-	}	
+	Bullet->SetActorLocation(_Pos);
+	//_Dir.Normalize2D();
+	_Dir.Z = 0;
+	_Dir.X *= UEngineMath::DToR;
+	_Dir.Y *= UEngineMath::DToR;
+	Bullet->SetTarget(-_Dir);
+	Bullet->FireSecondBullet();
+	CheckTime = FireTime;
 }

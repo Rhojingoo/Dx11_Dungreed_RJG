@@ -38,6 +38,7 @@ enum class EColOrder
 	Monster,
 	Boss_Col,
 	Boss_IceBullet,
+	Boss_IcePillar,
 	Boss,
 	Wapon,
 	Player,
