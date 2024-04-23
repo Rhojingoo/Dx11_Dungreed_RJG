@@ -46,11 +46,13 @@ void APlayer_Smoke_Effect::Tick(float _DeltaTime)
 	}
 	if (Dash_SmokeOn == true)
 	{
+		Renderer->AnimationReset();
 		Renderer->ChangeAnimation("Dash_Smoke");
 		Dash_SmokeOn = false;
 	}
 	if (Run_SmokeON == true)
 	{
+		Renderer->AnimationReset();
 		Renderer->ChangeAnimation("Run_Smoke");
 		Run_SmokeON = false;
 	}

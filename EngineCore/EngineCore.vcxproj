@@ -223,6 +223,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineStructuredBuffer.h" />
     <ClInclude Include="EngineTexture.h" />
     <ClInclude Include="EngineVertex.h">
       <SubType>
@@ -338,6 +339,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EngineStructuredBuffer.cpp" />
     <ClCompile Include="EngineTexture.cpp" />
     <ClCompile Include="EngineVertex.cpp" />
     <ClCompile Include="EngineVertexBuffer.cpp">

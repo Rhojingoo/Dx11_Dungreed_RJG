@@ -64,6 +64,7 @@ void APlayer_Attack_Effect::Tick(float _DeltaTime)
 
 void APlayer_Attack_Effect::Effect_AttackStart()
 {
+	Renderer->AnimationReset();
 	Renderer->ChangeAnimation("Sword_Swing_Legend");
 	Renderer->SetActive(true);
 	Collision->SetActive(true);

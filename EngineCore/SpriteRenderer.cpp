@@ -154,6 +154,15 @@ void USpriteRenderer::SetSpriteInfo(const FSpriteInfo& _Info)
 		CuttingDataValue.PivotMat.Position(Scale);
 		break;
 	}
+	case EPivot::LEFTBOTTOM:
+	{
+		float4 Scale = Transform.WorldScale;
+		Scale.X = abs(Scale.X) * 0.5f;
+		Scale.Y = abs(Scale.Y) * 0.5f;
+		Scale.Z = 0.0f;
+		CuttingDataValue.PivotMat.Position(Scale);
+		break;
+	}
 	case EPivot::RIGHTBOTTOM:
 	{
 		float4 Scale = Transform.WorldScale;
@@ -310,6 +319,11 @@ void USpriteRenderer::CreateAnimation(
 
 void USpriteRenderer::ChangeAnimation(std::string_view _AnimationName)
 {
+	if (nullptr != CurAnimation && _AnimationName == CurAnimation->GetName())
+	{
+		return;
+	}
+
 	std::string UpperName = UEngineString::ToUpper(_AnimationName);
 
 	if (false == Animations.contains(UpperName))
@@ -347,6 +361,7 @@ void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::stri
 	NewAnimation->Inter = _Inter;
 	NewAnimation->Frame = _Frame;
 	NewAnimation->Loop = _Loop;
+	NewAnimation->SetName(_AnimationName);
 	NewAnimation->Reset();
 
 	Animations[UpperName] = NewAnimation;
