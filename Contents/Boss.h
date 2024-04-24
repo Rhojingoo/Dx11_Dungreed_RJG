@@ -17,8 +17,10 @@ enum class BossState
 	Ready3,
 	TeleportIn,
 	TeleportOut,
+	Death,
 };
 
+class UCollision;
 class ABoss_HpBar;
 class AIceSpear;
 class APlayer;
@@ -81,8 +83,11 @@ protected:
 
 	void Boss_TeleportOut(float _DeltaTime);
 	void Boss_TeleportOutStart();
-		
 
+	void Boss_Death(float _DeltaTime);
+	void Boss_DeathStart();
+		
+	
 private:
 	USpriteRenderer* Renderer = nullptr;
 	USpriteRenderer* Effect_Renderer = nullptr;
@@ -91,6 +96,7 @@ private:
 	std::shared_ptr<AIceSpear> IceSpear = nullptr;
 	std::shared_ptr<ABoss_HpBar>Boss_HpBAR = nullptr;
 	BossState Boss_State = BossState::Idle;
+	UCollision* Collision = nullptr;
 
 	FVector GravityAcc = FVector::Down * 250.0f;
 	FVector GravityVector = FVector::Zero;
@@ -116,6 +122,9 @@ private:
 	bool DamageOn = false;
 	bool Regenerate = false;
 
+	const float Max_Hp = 2500.f;
+	float Hp = Max_Hp;
+	bool CollisionStart = false;
 
 	const float MaxX_Map_Pos = 2080.f;
 	const float MinX_Map_Pos = 400.f;

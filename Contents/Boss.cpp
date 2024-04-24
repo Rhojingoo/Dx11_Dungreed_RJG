@@ -7,6 +7,7 @@
 #include <EngineCore/Renderer.h>
 #include <EngineCore/DefaultSceneComponent.h>
 #include "Boss_HpBar.h"
+#include "Player_Attack_Effect.h"
 
 float ABoss::IcePillarPos = 0.f;
 
@@ -22,6 +23,11 @@ ABoss::ABoss()
 	Effect_Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Effect_Renderer->SetupAttachment(Root);
 	Effect_Renderer->SetPivot(EPivot::BOT);
+
+	Collision = CreateDefaultSubObject<UCollision>("Collision");
+	Collision->SetupAttachment(Renderer);
+	Collision->SetCollisionGroup(EColOrder::Boss);
+	Collision->SetCollisionType(ECollisionType::RotRect);
 
 	SetRoot(Root);
 }
@@ -63,6 +69,8 @@ void ABoss::BeginPlay()
 	Effect_Renderer->CreateAnimation("Stun", "Stun.png", 0.1f, true);
 
 
+	Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2,200.f });
+	Collision->AddPosition({ 0.f, 0.25f });
 
 	Boss_HpBAR = GetWorld()->SpawnActor<ABoss_HpBar>("Boss_HPBar");
 
@@ -82,6 +90,40 @@ void ABoss::Tick(float _DeltaTime)
 	StateUpdate(_DeltaTime);
 	Direction();
 	IcePallarCheck();
+	{
+		std::string Msg = std::format("BossCollisionPos : {}\n", Collision->GetWorldPosition().ToString());
+		UEngineDebugMsgWindow::PushMsg(Msg);
+	}
+
+	Collision->CollisionEnter(EColOrder::Wapon, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			AActor* Actors = _Collison->GetActor();
+			APlayer_Attack_Effect* Wapon = dynamic_cast<APlayer_Attack_Effect*>(Actors);
+			if (Wapon != nullptr)
+			{
+				if (DamageOn == true)
+				{
+					float Damage = Wapon->AttackDamage();
+					Hp -= Damage;
+					float Damageratio = Hp / Max_Hp;
+					Damageratio = 1 - Damageratio;
+					if (Hp <= 0.f)
+					{
+						StateChange(BossState::Death);
+						Damageratio = 0;
+						Boss_HpBAR->AttackDamege(1);
+						return;
+					}
+					Boss_HpBAR->AttackDamege(Damageratio);
+				}		
+
+				//Hp_Bar->AttackDamege(Damageratio);
+				//Boss_HpBAR;
+
+				return;
+			}
+		}
+	);
 }
 
 void ABoss::StateChange(BossState _State)
@@ -125,6 +167,9 @@ void ABoss::StateChange(BossState _State)
 			break;
 		case BossState::TeleportOut:
 			Boss_TeleportOutStart();
+			break;
+		case BossState::Death:
+			Boss_DeathStart();
 			break;
 
 		default:
@@ -175,7 +220,9 @@ void ABoss::StateUpdate(float _DeltaTime)
 	case BossState::TeleportOut:
 		Boss_TeleportOut(_DeltaTime);
 		break;
-
+	case BossState::Death:
+		Boss_Death(_DeltaTime);
+		break;
 	default:
 		break;
 	}
@@ -230,7 +277,6 @@ void ABoss::Boss_IdleStart()
 		{
 			continue;
 		}
-
 		IcePillar[Num]->SetPos({ Bullet_Pos[Num].X, Bullet_Pos[Num].Y });
 		IcePillar[Num]->AttackEndFalse();
 		IcePillar[Num]->SetActorRotation({ PlRotation[Num] });
@@ -332,7 +378,6 @@ void ABoss::Boss_Patton1Start()
 	IcePillarPos = 0.f;
 	Boss_Time = 0.f;
 }
-
 void ABoss::Boss_Patton1(float _DeltaTime)
 {
 	{			
@@ -394,7 +439,6 @@ void ABoss::Boss_Patton1(float _DeltaTime)
 	}
 }
 
-
 void ABoss::Boss_Patton2Start()
 {
 	for (int Num = 0; Num < 4; Num++)
@@ -407,7 +451,6 @@ void ABoss::Boss_Patton2Start()
 	}
 	Attack_Check = true;
 }
-
 void ABoss::Boss_Patton2(float _DeltaTime)
 {
 	if (Attack_Check == true)
@@ -452,7 +495,6 @@ void ABoss::Boss_Patton3Start()
 	Attack_Check = true;	
 	IcePillarPos = 0.f;
 }
-
 void ABoss::Boss_Patton3(float _DeltaTime)
 {	
 	if (Attack_Check == true)
@@ -505,7 +547,6 @@ void ABoss::Boss_Patton3(float _DeltaTime)
 		return;
 	}
 }
-
 
 void ABoss::Boss_Patton4Start()
 {
@@ -578,7 +619,6 @@ void ABoss::Boss_Patton4(float _DeltaTime)
 	}
 }
 
-
 void ABoss::Boss_Patton5Start()
 {
 	FVector Setpos = Player->GetActorLocation();
@@ -594,7 +634,6 @@ void ABoss::Boss_Patton5Start()
 	}
 	IcicleCreat = false;
 }
-
 void ABoss::IcePallarCheck()
 {
 	for (int Num = 0; Num < 4; Num++)
@@ -607,7 +646,6 @@ void ABoss::IcePallarCheck()
 	StateChange(BossState::Fainting);
 }
 
-
 void ABoss::Boss_FaintingStart()
 {
 	Effect_Renderer->SetActive(true);
@@ -615,7 +653,6 @@ void ABoss::Boss_FaintingStart()
 	DamageOn = true;
 	Boss_Time = 0.f;
 }
-
 void ABoss::Boss_Fainting(float _DeltaTime)
 {
 	std::shared_ptr<UEngineTexture> Tex = UContentsHelper::MapTex;
@@ -645,6 +682,9 @@ void ABoss::Boss_Fainting(float _DeltaTime)
 	GroundColor = Tex->GetColor(PlayerLocation, Color8Bit::Black);
 	SkyGRColor = Tex->GetColor(PlayerLocation, Color8Bit::Green);
 
+
+
+
 	if (GroundColor == Color8Bit::Black|| SkyGRColor == Color8Bit::Green)
 	{
 		Boss_Time += _DeltaTime;
@@ -655,13 +695,13 @@ void ABoss::Boss_Fainting(float _DeltaTime)
 			{
 				IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
 				IcePillar[a]->AttackEndFalse();
-				//IcePillar[a]->StateChange(IcePillarState::Regenerate);
 				IcePillar[a]->SetActive(true);
 				IcePillar[a]->Regenerate();
 			}
 			Regenerate = true;
 			StateChange(BossState::TeleportOut);
 			Effect_Renderer->SetActive(false);
+			DamageOn = false;
 		}
 	}
 	else
@@ -671,6 +711,10 @@ void ABoss::Boss_Fainting(float _DeltaTime)
 		FVector Bosspos = GetActorLocation();
 		AddActorLocation({ GravityVector * _DeltaTime });
 	}
+
+
+
+
 }
 
 
@@ -776,8 +820,18 @@ void ABoss::Boss_TeleportIn(float _DeltaTime)
 void ABoss::Boss_TeleportOutStart()
 {	
 	Renderer->ChangeAnimation("Boss_Exit");
-	//Renderer->ChangeAnimation("Boss_Die");
 }
+
+
+void ABoss::Boss_DeathStart()
+{
+	Renderer->ChangeAnimation("Boss_Die");
+}
+void ABoss::Boss_Death(float _DeltaTime)
+{
+}
+
+
 void ABoss::Boss_TeleportOut(float _DeltaTime)
 {
 	if (Renderer->IsCurAnimationEnd() == true)

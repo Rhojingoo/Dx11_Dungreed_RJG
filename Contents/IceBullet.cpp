@@ -14,8 +14,13 @@ AIceBullet::AIceBullet()
 	Renderer->SetupAttachment(Root);
 	Renderer->SetPivot(EPivot::BOT);
 
+	EffectRenderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	EffectRenderer->SetupAttachment(Root);
+	EffectRenderer->SetPivot(EPivot::BOT);
+
+
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
-	Collision->SetupAttachment(Root);
+	Collision->SetupAttachment(Renderer);
 	Collision->SetCollisionGroup(EColOrder::Boss_IceBullet);
 	Collision->SetCollisionType(ECollisionType::RotRect);
 
@@ -37,13 +42,15 @@ void AIceBullet::BeginPlay()
 	Renderer->SetAutoSize(4.0f, true);
 
 	Renderer->CreateAnimation("IceBullet", "IceBullet", 0.1f, false);
-	//Renderer->CreateAnimation("IceBulletEfferct", "IceBulletEfferct", 0.1f, false);
 	Renderer->ChangeAnimation("IceBullet");
 	Renderer->SetOrder(ERenderOrder::Boss_IceBullet);
 
+	EffectRenderer->CreateAnimation("IceBulletEfferct", "IceBulletEfferct", 0.1f, false);
+	EffectRenderer->SetOrder(ERenderOrder::Boss_IceBullet_Effect);
+	
 	//GetWorld()->InstancingOn<USpriteInstancingRender>(ERenderOrder::Boss_IceBullet);
-	Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2, 1.f });
-	//Collision->AddPosition({ 0.85f, 0.0f });
+	//Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2, 10.f });
+	//aaaaaCollision->AddPosition({ 0.85f, 0.0f });
 }
 
 void AIceBullet::Tick(float _DeltaTime)
@@ -93,11 +100,18 @@ void AIceBullet::Attack(float _DeltaTime)
 
 void AIceBullet::ColEnterStart()
 {
+	Renderer->SetActive(false);
+	EffectRenderer->ChangeAnimation("IceBulletEfferct");
 	//Renderer->ChangeAnimation("IceBulletEfferct");
 }
 
 void AIceBullet::ColEnter(float _DeltaTime)
 {
+	if (EffectRenderer->IsCurAnimationEnd())
+	{
+		Destroy();
+	}
+
 	//if (Renderer->IsCurAnimationEnd())
 	//{
 	//	Destroy();

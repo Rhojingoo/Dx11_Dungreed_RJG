@@ -15,6 +15,7 @@ public:
 	ABoss_HpBar& operator =(const 	ABoss_HpBar& _Other)		= delete;
 	ABoss_HpBar& operator =(ABoss_HpBar& _Other)noexcept		= delete;
 
+	void AttackDamege(float _Set) { Ratio = _Set, Attack = true; }
 
 protected:
 	void BeginPlay() override;
@@ -30,5 +31,7 @@ private:
 
 	float Life_POSX = 0.f;
 	float LifePos = Life_POSX;
+	float Ratio = 0.f;
+	bool Attack = false;
 };
 

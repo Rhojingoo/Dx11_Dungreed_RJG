@@ -170,7 +170,7 @@ void UCollision::Tick(float _Delta)
 		Trans.World = Trans.ScaleMat * Trans.PositionMat * PScale * PPos;
 		Trans.WVP = Trans.World * Trans.View * Trans.Projection;
 
-		UEngineDebug::DrawDebugRender(EDebugRenderType::Rect, Trans, float4::Black);
+		UEngineDebug::DrawDebugRender(EDebugRenderType::Rect, Trans, float4::Green);
 		break;
 	}
 	case ECollisionType::CirCle:
@@ -179,7 +179,7 @@ void UCollision::Tick(float _Delta)
 		break;
 	case ECollisionType::RotRect:
 	case ECollisionType::RotBox:
-		UEngineDebug::DrawDebugRender(EDebugRenderType::Rect, Transform, float4::Black);
+		UEngineDebug::DrawDebugRender(EDebugRenderType::Rect, Transform, float4::Green);
 		break;
 	case ECollisionType::Max:
 		break;

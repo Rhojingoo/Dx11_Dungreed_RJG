@@ -47,6 +47,6 @@ private:
 	bool Attack = false;
 	float4 Color;
 
-	float Attack_Damage = 250.f;
+	float Attack_Damage = 100.f;
 };
 

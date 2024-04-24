@@ -26,6 +26,12 @@ AMonster_HpBar::~AMonster_HpBar()
 {
 }
 
+void AMonster_HpBar::Regenerate()
+{
+	Life = MaxLife;
+	LifeBar->AddScale({ 1.f,0.f });
+}
+
 void AMonster_HpBar::AttackDamege(float _Attackratio)
 {
 	Attackratio = _Attackratio;
@@ -81,7 +87,7 @@ void AMonster_HpBar::Tick(float _DeltaTime)
 		LifePos = ((MaxLife / 2) * (1 - Setratio));  // ±ðÀÎ ¸¸Å­ ¿ÞÂÊÀ¸·Î ÀÌµ¿		
 		LifeBar->SetPosition({ -LifePos, LifeBar->GetLocalPosition().Y });
 
-		if (TimeCheck > 1.f)
+		if (TimeCheck > 2.5f)
 		{
 			Attack = false;
 			LifeBack->SetActive(false);

@@ -16,6 +16,7 @@ public:
 	AMonster_HpBar& operator =(const 	AMonster_HpBar& _Other)		= delete;
 	AMonster_HpBar& operator =(AMonster_HpBar& _Other)noexcept		= delete;
 
+	void Regenerate();
 	void AttackDamege(float _Attackratio);
 
 protected:

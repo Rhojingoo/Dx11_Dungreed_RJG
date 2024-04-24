@@ -24,6 +24,7 @@ ABoss_IcePillar::ABoss_IcePillar()
 	Collision->SetCollisionGroup(EColOrder::Boss_IcePillar);
 	Collision->SetCollisionType(ECollisionType::RotRect);
 
+
 	SetRoot(Root);
 }
 
@@ -46,8 +47,8 @@ void ABoss_IcePillar::BeginPlay()
 	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
 	Renderer->SetPivot(EPivot::BOT);
 
-	//Collision->SetScale({ Renderer->GetWorldScale().X / 8, Renderer->GetWorldScale().Y / 8,1.f });
-	//Collision->AddPosition({ 0.f, 0.25f });
+	//Collision->SetScale({ Renderer->GetWorldScale() });
+	//Collision->SetPosition({ Renderer-> });
 }
 
 void ABoss_IcePillar::Tick(float _DeltaTime)
@@ -111,6 +112,7 @@ void ABoss_IcePillar::Regenerate()
 {
 	Death = false;
 	Hp = MaxHp; 
+	Hp_Bar->Regenerate();
 }
 
 

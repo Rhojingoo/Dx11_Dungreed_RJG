@@ -54,6 +54,7 @@ private:
 	IceBulletState IceState = IceBulletState::Attack;
 	UDefaultSceneComponent* Root = nullptr;
 	USpriteRenderer* Renderer = nullptr;
+	USpriteRenderer* EffectRenderer = nullptr;
 	UCollision* Collision = nullptr;
 	FVector TargetPos = {};
 	FVector TargetNomalPos = {};

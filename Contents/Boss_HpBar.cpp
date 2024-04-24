@@ -55,9 +55,22 @@ void ABoss_HpBar::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 	Life = LifeBar->GetLocalScale().X;
+
+	if (Attack == true)
+	{
+		Life -=  Life * Ratio;
+		LifeBar->SetScale({ Life, 1.f });
+		float Setratio = (Life / MaxLife);  // 체력 비율을 계산
+		float fullWidth = LifeBar->GetWorldScale().X;  // 이미지 전체 길이		
+		LifePos = ((MaxLife / 2) * (1 - Setratio));  // 깎인 만큼 왼쪽으로 이동		
+		LifeBar->SetPosition({ -LifePos, LifeBar->GetLocalPosition().Y });
+		Attack = false;
+	}
+
+
 	if (UEngineInput::IsDown('L'))
 	{	
-		Life -= Life / 10;
+		Life -= Life * Ratio;
 		float Setratio = (Life / MaxLife);  // 체력 비율을 계산
 		float fullWidth = LifeBar->GetWorldScale().X;  // 이미지 전체 길이	
 		float basePos = LifeBar->GetLocalPosition().X/2;
