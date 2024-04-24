@@ -49,6 +49,13 @@ public:
 		ChildUpdate();
 	}
 
+	void SetPosition(FVector _Value)
+	{
+		Transform.SetPosition(_Value);
+		ChildUpdate();
+	}
+
+
 	FVector GetLocalPosition() const
 	{
 		return Transform.LocalPosition;
@@ -59,11 +66,6 @@ public:
 		return Transform.WorldPosition;
 	}
 
-	void SetPosition(FVector _Value)
-	{
-		Transform.SetPosition(_Value);
-		ChildUpdate();
-	}
 
 	void AddScale(FVector _Value)
 	{

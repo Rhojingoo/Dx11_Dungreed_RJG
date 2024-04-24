@@ -32,33 +32,17 @@ ABoss_IcePillar::~ABoss_IcePillar()
 	
 }
 
-
-void ABoss_IcePillar::DeathCheck()
-{
-	if (Hp <= 0.f && Death==false)
-	{
-		Root->SetActive(false);
-		Renderer->SetActive(false);
-		Death = true;
-	}
-}
-
-void ABoss_IcePillar::Regenerate()
-{
-	Death = false;
-	Hp = MaxHp; 
-}
-
 void ABoss_IcePillar::BeginPlay()
 {
 	Super::BeginPlay();
 
 	Hp_Bar = GetWorld()->SpawnActor<AMonster_HpBar>("IcePillar_HP");
-	Hp_Bar->SetActorLocation({ 1040.0f, -850.0f, 201.f});
+	Hp_Bar->SetActorLocation({ 1040.0f, -850.0f, 201.f });
 
 	Renderer->SetAutoSize(4.0f, true);
 	Renderer->CreateAnimation("IcePillar", "IcePillar", 0.1f, false);
-	Renderer->CreateAnimation("IcePillarDestroy", "IcePillarDestroy", 0.1f);
+	Renderer->CreateAnimation("IcePillarDestroy", "IcePillarDestroy", 0.1f, false);
+	//Renderer->CreateAnimation("IcePillarDestroy", "IcePillarDestroy", 0.1f);
 	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
 	Renderer->SetPivot(EPivot::BOT);
 
@@ -79,27 +63,56 @@ void ABoss_IcePillar::Tick(float _DeltaTime)
 		PlayerPos = Player->GetActorLocation();
 	}
 	DeathCheck();
+
+
 	Collision->CollisionEnter(EColOrder::Wapon, [=](std::shared_ptr<UCollision> _Collison)
-		{			
+		{
 			AActor* Actors = _Collison->GetActor();
 			APlayer_Attack_Effect* Wapon = dynamic_cast<APlayer_Attack_Effect*>(Actors);
 			if (Wapon != nullptr)
-			{			
+			{
 				float Damage = Wapon->AttackDamage();
 				Hp -= Damage;
 				float Damageratio = Hp / MaxHp;
 				if (Hp <= 0.f)
 				{
+					StateChange(IcePillarState::Death);
 					Damageratio = 0;
 					Hp_Bar->AttackDamege(1);
 					return;
 				}
 				Hp_Bar->AttackDamege(Damageratio);
-			}			
+			}
 		}
 	);
 
 }
+
+
+
+void ABoss_IcePillar::DeathCheck()
+{
+	if (Hp <= 0.f && Death== true)
+	{
+		if (Renderer->IsCurAnimationEnd() == true)
+		{
+			Root->SetActive(false);
+			Renderer->SetActive(false);			
+		}	
+	}
+	else if(Hp>0 && Death==false)
+	{
+		Root->SetActive(true);
+		Renderer->SetActive(true);
+	}
+}
+
+void ABoss_IcePillar::Regenerate()
+{
+	Death = false;
+	Hp = MaxHp; 
+}
+
 
 
 void ABoss_IcePillar::StateChange(IcePillarState _State)
@@ -128,7 +141,12 @@ void ABoss_IcePillar::StateChange(IcePillarState _State)
 		case IcePillarState::Attack04:
 			IcePillar_AttackStart_4();
 			break;
-
+		case IcePillarState::Regenerate:
+			IcePillar_RegenerateStart();
+			break;
+		case IcePillarState::Death:
+			IcePillar_DeathStart();
+			break;
 		default:
 			break;
 		}
@@ -166,6 +184,12 @@ void ABoss_IcePillar::StateUpdate(float _DeltaTime)
 	case IcePillarState::Attack04:
 		IcePillar_Attack_4(_DeltaTime);
 		break;
+	case IcePillarState::Regenerate:
+		IcePillar_Regenerate(_DeltaTime);
+		break;
+	case IcePillarState::Death:
+		IcePillar_Death(_DeltaTime);
+		break;
 	default:
 		break;
 	}
@@ -173,29 +197,31 @@ void ABoss_IcePillar::StateUpdate(float _DeltaTime)
 
 
 
+void ABoss_IcePillar::IcePillar_IntroStart()
+{
+	Renderer->ChangeAnimation("IcePillar");
+
+	LocalRottation = Renderer->GetLocalRotation();
+	WorldRottation = Renderer->GetWorldRotation();
+}
+
 void ABoss_IcePillar::IcePillar_Intro(float _DeltaTime)
 {
-	AddActorRotation(float4{ 0.0f, 0.0f, 1.0f } *180.0f * _DeltaTime);
+	//AddActorRotation(float4{ 0.0f, 0.0f, 1.0f } *180.0f * _DeltaTime);
 	Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
 	IntroCheck = Renderer->IsCurAnimationEnd();
 }
 
-void ABoss_IcePillar::IcePillar_IntroStart()
+
+
+void ABoss_IcePillar::IcePillar_IdleStart()
 {
-	Renderer->ChangeAnimation("IcePillar");
-	
-	LocalRottation = Renderer->GetLocalRotation();
-	WorldRottation = Renderer->GetWorldRotation();
 }
 
 void ABoss_IcePillar::IcePillar_Idle(float _DeltaTime)
 {
 	Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
 	AddActorRotation(float4{ 0.0f, 0.0f, 1.0f } *180.0f * _DeltaTime);
-}
-
-void ABoss_IcePillar::IcePillar_IdleStart()
-{
 }
 
 
@@ -207,6 +233,35 @@ void ABoss_IcePillar::IcePillar_Rotation(float _DeltaTime)
 void ABoss_IcePillar::IcePillar_Stop(float _DeltaTime)
 {
 }
+
+
+void ABoss_IcePillar::IcePillar_DeathStart()
+{
+	Renderer->ChangeAnimation("IcePillarDestroy");
+	Death = true;
+}
+
+void ABoss_IcePillar::IcePillar_Death(float _DeltaTime)
+{
+}
+
+
+
+void ABoss_IcePillar::IcePillar_RegenerateStart()
+{
+	Renderer->ChangeAnimation("IcePillar");
+	RegenerateCheck = false;
+}
+
+void ABoss_IcePillar::IcePillar_Regenerate(float _DeltaTime)
+{
+	if (Renderer->IsCurAnimationEnd() == true)
+	{
+		RegenerateCheck = true;
+	}
+	Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
+}
+
 
 
 
@@ -680,6 +735,7 @@ void ABoss_IcePillar::IcePillar_Attack_2(float _DeltaTime)
 	else
 	{
 		AttackEnd = true;
+		SetBullet = false;
 	}
 	Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
 	AddActorRotation(float4{ 0.0f, 0.0f, 1.0f } *500.0f * _DeltaTime);
@@ -692,9 +748,9 @@ void ABoss_IcePillar::IcePillar_AttackStart_1()
 
 void ABoss_IcePillar::IcePillar_Attack_1(float _DeltaTime)
 {
-	if(Death ==false)
+	if (SetBullet == true)
 	{
-		if (SetBullet == true)
+		if (Death == false)
 		{
 			static int Num = 0;
 			static float check = 0.0f;
@@ -730,11 +786,8 @@ void ABoss_IcePillar::IcePillar_Attack_1(float _DeltaTime)
 		else
 		{
 			AttackEnd = true;
+			SetBullet = false;
 		}
-	}
-	else
-	{
-		AttackEnd = true;
 	}
 	if (AttackEnd == true)
 	{

@@ -15,7 +15,8 @@ enum class BossState
 	Ready,
 	Ready2,
 	Ready3,
-
+	TeleportIn,
+	TeleportOut,
 };
 
 class ABoss_HpBar;
@@ -31,7 +32,7 @@ public:
 	ABoss();
 	~ABoss();
 
-	ABoss(const ABoss& _Other)					= delete;
+	ABoss(const ABoss& _Other)						= delete;
 	ABoss(ABoss& _Other) noexcept					= delete;
 	ABoss& operator =(const 	ABoss& _Other)		= delete;
 	ABoss& operator =(ABoss& _Other)noexcept		= delete;
@@ -62,13 +63,12 @@ protected:
 	void Boss_Patton5(float _DeltaTime);
 	void Boss_Patton5Start();
 
+
 	void IcePallarCheck();
 	void Boss_Fainting(float _DeltaTime);
 	void Boss_FaintingStart();
 	
-
 	void IceSpear_Aattack();
-
 
 	void Boss_Ready(float _DeltaTime);
 	void Boss_ReadyStart();
@@ -76,12 +76,12 @@ protected:
 	void Boss_Ready2(float _DeltaTime);
 	void Boss_ReadyStart2();
 
-	void Boss_Ready3(float _DeltaTime);
-	void Boss_ReadyStart3();
-	//void RendererOff();
-	//void RendererOn();
+	void Boss_TeleportIn(float _DeltaTime);
+	void Boss_TeleportInStart();
 
-	
+	void Boss_TeleportOut(float _DeltaTime);
+	void Boss_TeleportOutStart();
+		
 
 private:
 	USpriteRenderer* Renderer = nullptr;
@@ -97,7 +97,7 @@ private:
 
 	FVector PlRotation[4] = {};
 	FVector Bullet_Pos[4] = {};
-	const float Bullet = 250.f;
+	const float Bullet = 150.f;
 	float Boss_Time = 0.f;
 	bool IntroOn = false;
 	bool Attack_Check = false;
@@ -114,5 +114,12 @@ private:
 
 	bool Foot_Collision_Check_At_Town = false;
 	bool DamageOn = false;
+	bool Regenerate = false;
+
+
+	const float MaxX_Map_Pos = 2080.f;
+	const float MinX_Map_Pos = 400.f;
+	const float MaxY_Map_Pos = 750.f;
+	const float MinY_Map_Pos = 450.f;
 };
 

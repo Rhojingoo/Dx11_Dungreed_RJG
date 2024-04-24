@@ -9,10 +9,12 @@ enum class IcePillarState
 	Idle,
 	Rotation,
 	Stop,
+	Regenerate,
 	Attack01,
 	Attack02,
 	Attack03,
 	Attack04,
+	Death,
 };
 
 
@@ -43,6 +45,11 @@ public:
 	{
 		Renderer->SetPosition({ _Set.X, _Set.Y, 0.0f });
 	}
+	void ClearRocation()
+	{
+		Renderer->SetRotationDeg({ 0.0f, 0.0f, 0.0f });
+	}
+
 	FVector GetPos() { return Renderer->GetLocalPosition(); };
 
 	void SetPlayer(std::shared_ptr<APlayer> _Set) { Player = _Set; }
@@ -51,8 +58,11 @@ public:
 	bool IsAttackEnd() { return AttackEnd; }
 	void AttackEndFalse() { AttackEnd = false; }
 	void FireOn() { SetBullet = true; }
-	void DeathCheck();
+
 	bool IsDeath() {return Death;}
+
+
+	bool ISREgenerate() { return RegenerateCheck; }
 	void Regenerate();
 
 protected:
@@ -60,6 +70,9 @@ protected:
 	void Tick(float _DeltaTime) override;
 	void StateUpdate(float _DeltaTime);
 	void CreatBullet(FVector _Dir, FVector _Pos);
+	void DeathCheck();
+
+
 
 private:
 	FVector BulletDir = {};
@@ -114,8 +127,15 @@ private:
 	void IcePillar_Attack_4(float _DeltaTime);
 	void IcePillar_AttackStart_4();
 
-	bool IntroCheck = false;
+	void IcePillar_Regenerate(float _DeltaTime);
+	void IcePillar_RegenerateStart();
 
+	void IcePillar_Death(float _DeltaTime);
+	void IcePillar_DeathStart();
+
+	
+	bool IntroCheck = false;
+	bool RegenerateCheck = false;
 
 
 	FVector UpDir = {};

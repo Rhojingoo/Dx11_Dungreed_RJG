@@ -105,7 +105,7 @@ void UGameCore::Initialize()
 	GEngine->CreateLevel<AMonster03_GameMode>("Mon03_Level");
 	GEngine->CreateLevel<ABoss_GameMode>("BossLevel");
 
-	GEngine->ChangeLevel("TitleLevel");
+	GEngine->ChangeLevel("BossLevel");
 
 
 

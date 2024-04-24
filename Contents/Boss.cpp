@@ -116,10 +116,16 @@ void ABoss::StateChange(BossState _State)
 			break;
 		case BossState::Ready2:
 			Boss_ReadyStart2();
-			break;;
+			break;
 		case BossState::Fainting:
 			Boss_FaintingStart();
-			break;;
+			break;
+		case BossState::TeleportIn:
+			Boss_TeleportInStart();
+			break;
+		case BossState::TeleportOut:
+			Boss_TeleportOutStart();
+			break;
 
 		default:
 			break;
@@ -160,27 +166,21 @@ void ABoss::StateUpdate(float _DeltaTime)
 	case BossState::Ready2:
 		Boss_Ready2(_DeltaTime);
 		break;
-
 	case BossState::Fainting:
 		Boss_Fainting(_DeltaTime);
 		break;;
+	case BossState::TeleportIn:
+		Boss_TeleportIn(_DeltaTime);
+		break;
+	case BossState::TeleportOut:
+		Boss_TeleportOut(_DeltaTime);
+		break;
+
 	default:
 		break;
 	}
 }
 
-void ABoss::Boss_Intro(float _DeltaTime)
-{
-	for (int a = 0; a < 4; a++)
-	{
-		if (IcePillar[a]->ISIntro() != true)
-		{
-			return;
-		}		
-	}
-
-	StateChange(BossState::Idle);
-}
 
 void ABoss::Boss_IntroStart()
 {
@@ -203,6 +203,39 @@ void ABoss::Boss_IntroStart()
 	}
 }
 
+void ABoss::Boss_Intro(float _DeltaTime)
+{
+	for (int Num = 0; Num < 4; Num++)
+	{
+		if (IcePillar[Num]->ISIntro() != true)
+		{
+			return;
+		}		
+	}
+	for (int Num = 0; Num < 4; Num++)
+	{
+		IcePillar[Num]->StateChange(IcePillarState::Idle);
+	}
+	StateChange(BossState::Idle);
+}
+
+
+void ABoss::Boss_IdleStart()
+{
+	Renderer->ChangeAnimation("Boss_Idle");
+
+	for (int Num = 0; Num < 4; Num++)
+	{
+		if (IcePillar[Num] == nullptr)
+		{
+			continue;
+		}
+
+		IcePillar[Num]->SetPos({ Bullet_Pos[Num].X, Bullet_Pos[Num].Y });
+		IcePillar[Num]->AttackEndFalse();
+		IcePillar[Num]->SetActorRotation({ PlRotation[Num] });
+	}
+}
 
 void ABoss::Boss_Idle(float _DeltaTime)
 {
@@ -217,31 +250,46 @@ void ABoss::Boss_Idle(float _DeltaTime)
 				Boss_Time = 0.f;
 			}
 		}
+		else if (Regenerate == true)
+		{
+			for (int Num = 0; Num < 4; Num++)
+			{
+				if (IcePillar[Num]->ISREgenerate() != true)
+				{
+					return;
+				}
+			}
+			for (int Num = 0; Num < 4; Num++)
+			{
+				IcePillar[Num]->StateChange(IcePillarState::Idle);
+			}
+			Regenerate = false;
+		}
 		else
 		{
 			//UEngineInput::IsDown('1')
 
-			if (UEngineInput::IsPress('3'))
+			if (UEngineInput::IsDown('3'))
 			{
 				StateChange(BossState::Patton1);
 				Boss_Time = 0.f;
 			}
-			if (UEngineInput::IsPress('4'))
+			if (UEngineInput::IsDown('4'))
 			{
 				StateChange(BossState::Patton2);
 				Boss_Time = 0.f;
 			}
-			if (UEngineInput::IsPress('5'))
+			if (UEngineInput::IsDown('5'))
 			{
 				StateChange(BossState::Patton3);
 				Boss_Time = 0.f;
 			}
-			if (UEngineInput::IsPress('6'))
+			if (UEngineInput::IsDown('6'))
 			{
 				StateChange(BossState::Patton4);
 				Boss_Time = 0.f;
 			}
-			if (UEngineInput::IsPress('7'))
+			if (UEngineInput::IsDown('7'))
 			{
 				StateChange(BossState::Patton5);
 				Boss_Time = 0.f;
@@ -266,22 +314,6 @@ void ABoss::Boss_Idle(float _DeltaTime)
 	}
 }
 
-void ABoss::Boss_IdleStart()
-{
-	Renderer->ChangeAnimation("Boss_Idle");
-
-	for (int Num = 0; Num < 4; Num++)
-	{
-		if (IcePillar[Num] == nullptr)
-		{
-			continue;
-		}
-
-		IcePillar[Num]->SetPos({ Bullet_Pos[Num].X, Bullet_Pos[Num].Y });
-		IcePillar[Num]->AttackEndFalse();
-		IcePillar[Num]->SetActorRotation({ PlRotation[Num] });
-	}
-}
 
 void ABoss::Boss_Patton1Start()
 {	
@@ -581,6 +613,7 @@ void ABoss::Boss_FaintingStart()
 	Effect_Renderer->SetActive(true);
 	Effect_Renderer->ChangeAnimation("Stun");
 	DamageOn = true;
+	Boss_Time = 0.f;
 }
 
 void ABoss::Boss_Fainting(float _DeltaTime)
@@ -615,18 +648,19 @@ void ABoss::Boss_Fainting(float _DeltaTime)
 	if (GroundColor == Color8Bit::Black|| SkyGRColor == Color8Bit::Green)
 	{
 		Boss_Time += _DeltaTime;
-		if (Boss_Time > 2.f)
+		if (Boss_Time > 3.5f)
 		{
 			Boss_Time = 0.f;
 			for (int a = 0; a < 4; a++)
 			{
 				IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
 				IcePillar[a]->AttackEndFalse();
-				IcePillar[a]->StateChange(IcePillarState::Idle);
+				//IcePillar[a]->StateChange(IcePillarState::Regenerate);
 				IcePillar[a]->SetActive(true);
 				IcePillar[a]->Regenerate();
 			}
-			StateChange(BossState::Idle);
+			Regenerate = true;
+			StateChange(BossState::TeleportOut);
 			Effect_Renderer->SetActive(false);
 		}
 	}
@@ -665,7 +699,6 @@ void ABoss::Boss_Patton5(float _DeltaTime)
 }
 
 
-
 void ABoss::IceSpear_Aattack()
 {
 	if (SpearCreat == false)
@@ -692,15 +725,70 @@ void ABoss::IceSpear_Aattack()
 
 
 
-
-void ABoss::Boss_ReadyStart3()
+void ABoss::Boss_TeleportInStart()
 {
+	Renderer->ChangeAnimation("Boss_Enter");
+
+	for (int a = 0; a < 4; a++)
+	{
+		IcePillar[a]->ClearRocation();
+		IcePillar[a]->SetPos({ 0.f ,0.f });
+	}
+	IcePillar[0]->AddPos({ -Bullet,Bullet });
+	IcePillar[1]->AddPos({ Bullet,Bullet });
+	IcePillar[2]->AddPos({ -Bullet,-Bullet });
+	IcePillar[3]->AddPos({ Bullet,-Bullet });
+
+	for (int a = 0; a < 4; a++)
+	{
+		IcePillar[a]->StateChange(IcePillarState::Regenerate);
+	}
+	//IcePillar[0]->ClearRocation();
+	//IcePillar[1]->ClearRocation();
+	//IcePillar[2]->ClearRocation();
+	//IcePillar[3]->ClearRocation();
+
+	//IcePillar[0]->SetPos({ 0.f ,0.f});
+	//IcePillar[1]->SetPos({ 0.f ,0.f });
+	//IcePillar[2]->SetPos({ 0.f ,0.f });
+	//IcePillar[3]->SetPos({ 0.f ,0.f });
+}
+void ABoss::Boss_TeleportIn(float _DeltaTime)
+{
+	if (Renderer->IsCurAnimationEnd() == true)
+	{
+		for (int a = 0; a < 4; a++)
+		{
+			if (IcePillar[a]->ISREgenerate() == false)
+			{
+				return;
+			}
+		}
+
+		for (int a = 0; a < 4; a++)
+		{
+			IcePillar[a]->StateChange(IcePillarState::Idle);
+		}
+		StateChange(BossState::Idle);
+	}
 }
 
-void ABoss::Boss_Ready3(float _DeltaTime)
-{
+void ABoss::Boss_TeleportOutStart()
+{	
+	Renderer->ChangeAnimation("Boss_Exit");
+	//Renderer->ChangeAnimation("Boss_Die");
 }
-
+void ABoss::Boss_TeleportOut(float _DeltaTime)
+{
+	if (Renderer->IsCurAnimationEnd() == true)
+	{
+		float X_Pos = UContentsHelper::Random(MinX_Map_Pos, MaxX_Map_Pos);
+		float Y_Pos = UContentsHelper::Random(MinY_Map_Pos, MaxY_Map_Pos);
+		float Z_Pos = GetActorLocation().Z;
+		SetActorLocation(FVector{ X_Pos , Y_Pos ,Z_Pos });
+		StateChange(BossState::TeleportIn);
+	}
+}
 
 
 void ABoss::Boss_ReadyStart2()

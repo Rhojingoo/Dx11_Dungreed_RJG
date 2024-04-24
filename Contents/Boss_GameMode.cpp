@@ -2,6 +2,7 @@
 #include "Boss_GameMode.h"
 #include "MapEditorGUI.h"
 #include "Player.h"
+#include "Boss.h"
 #include "Target.h"
 #include "Boss_BackGround.h"
 #include "Boss_BGPIXEL.h"
@@ -49,6 +50,11 @@ void ABoss_GameMode::BeginPlay()
 	Player = GetWorld()->SpawnActor<APlayer>("Player", EOBJ_Order::Player);
 	Player->SetActorLocation({ 640.0f, 360.0f, 200.0f });
 	FVector assad = Player->GetActorLocation();
+
+	Boss = GetWorld()->SpawnActor<ABoss>("Boss", EOBJ_Order::Monster);
+	Boss->SetActorLocation({ 1200.0f, 750.0f, 200.0f });
+	Boss->SetPlayer(Player);
+
 
 	std::shared_ptr<ATarget> Cursor = GetWorld()->SpawnActor<ATarget>("Player2");
 	Cursor->SetActorLocation({ 640.0f, -360.0f, 200.0f });
