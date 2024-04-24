@@ -4,6 +4,7 @@
 #include "ContentsHelper.h"
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/DefaultSceneComponent.h>
+#include <EngineCore/SpriteInstancingRender.h>
 
 AIceBullet::AIceBullet()
 {
@@ -12,7 +13,6 @@ AIceBullet::AIceBullet()
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Renderer->SetupAttachment(Root);
 	Renderer->SetPivot(EPivot::BOT);
-
 
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
 	Collision->SetupAttachment(Root);
@@ -37,10 +37,11 @@ void AIceBullet::BeginPlay()
 	Renderer->SetAutoSize(4.0f, true);
 
 	Renderer->CreateAnimation("IceBullet", "IceBullet", 0.1f, false);
-	Renderer->CreateAnimation("IceBulletEfferct", "IceBulletEfferct", 0.1f, false);
+	//Renderer->CreateAnimation("IceBulletEfferct", "IceBulletEfferct", 0.1f, false);
 	Renderer->ChangeAnimation("IceBullet");
-	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
+	Renderer->SetOrder(ERenderOrder::Boss_IceBullet);
 
+	//GetWorld()->InstancingOn<USpriteInstancingRender>(ERenderOrder::Boss_IceBullet);
 	Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2, 1.f });
 	//Collision->AddPosition({ 0.85f, 0.0f });
 }
@@ -92,15 +93,15 @@ void AIceBullet::Attack(float _DeltaTime)
 
 void AIceBullet::ColEnterStart()
 {
-	Renderer->ChangeAnimation("IceBulletEfferct");
+	//Renderer->ChangeAnimation("IceBulletEfferct");
 }
 
 void AIceBullet::ColEnter(float _DeltaTime)
 {
-	if (Renderer->IsCurAnimationEnd())
-	{
-		Destroy();
-	}
+	//if (Renderer->IsCurAnimationEnd())
+	//{
+	//	Destroy();
+	//}
 }
 
 void AIceBullet::ChangeState(IceBulletState _Set)

@@ -83,7 +83,7 @@ void APlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 	State.Update(_DeltaTime);
-	DebugFunction();
+	DebugFunction(_DeltaTime);
 	FVector PlayerPos = GetActorLocation();
 	Right_Hand->SetActorLocation({ PlayerPos });	
 	PlayAfterImage(_DeltaTime, PlayerPos);	

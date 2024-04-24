@@ -27,6 +27,7 @@ enum class ERenderOrder
 	Monster_HpBack,
 	Monster_Hp,
 	Boss_Bullet,
+	Boss_IceBullet,
 	Boss,
 	Attack_Effect,
 	Wapon,

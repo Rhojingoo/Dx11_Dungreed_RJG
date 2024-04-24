@@ -79,7 +79,7 @@ private:
 	void SecondDashStart();
 	void SecondDash(float _DeltaTime);
 
-	void DebugFunction();
+	void DebugFunction(float _Delta);
 
 	void Direction();
 	void Dash_Direction(float _DeltaTime);

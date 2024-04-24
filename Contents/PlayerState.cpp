@@ -385,7 +385,7 @@ void APlayer::SecondDash(float _DeltaTime)
 	}
 }
 
-void APlayer::DebugFunction()
+void APlayer::DebugFunction(float _Delta)
 {
 	{
 		std::string Msg = std::format("PlayerPos : {}\n", GetActorLocation().ToString());
@@ -399,6 +399,12 @@ void APlayer::DebugFunction()
 		std::string Msg = std::format("PlayerCollisionPos : {}\n", Collision->GetWorldPosition().ToString());
 		UEngineDebugMsgWindow::PushMsg(Msg);
 	}
+
+	{
+		std::string Msg = std::format("Frame : {}\n", 1.0f / _Delta);
+		UEngineDebugMsgWindow::PushMsg(Msg);
+	}
+
 }
 
 void APlayer::Direction()
