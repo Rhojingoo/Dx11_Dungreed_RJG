@@ -53,6 +53,7 @@ public:
 	void FireOn() { SetBullet = true; }
 	void DeathCheck();
 	bool IsDeath() {return Death;}
+	void Regenerate();
 
 protected:
 	void BeginPlay() override;

@@ -92,7 +92,7 @@ private:
 	std::shared_ptr<ABoss_HpBar>Boss_HpBAR = nullptr;
 	BossState Boss_State = BossState::Idle;
 
-	FVector GravityAcc = FVector::Down * 150.0f;
+	FVector GravityAcc = FVector::Down * 250.0f;
 	FVector GravityVector = FVector::Zero;
 
 	FVector PlRotation[4] = {};
@@ -113,5 +113,6 @@ private:
 	static float IcePillarPos;
 
 	bool Foot_Collision_Check_At_Town = false;
+	bool DamageOn = false;
 };
 

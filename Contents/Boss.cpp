@@ -298,6 +298,7 @@ void ABoss::Boss_Patton1Start()
 	}
 	Attack_Check = true;
 	IcePillarPos = 0.f;
+	Boss_Time = 0.f;
 }
 
 void ABoss::Boss_Patton1(float _DeltaTime)
@@ -579,6 +580,7 @@ void ABoss::Boss_FaintingStart()
 {
 	Effect_Renderer->SetActive(true);
 	Effect_Renderer->ChangeAnimation("Stun");
+	DamageOn = true;
 }
 
 void ABoss::Boss_Fainting(float _DeltaTime)
@@ -612,7 +614,21 @@ void ABoss::Boss_Fainting(float _DeltaTime)
 
 	if (GroundColor == Color8Bit::Black|| SkyGRColor == Color8Bit::Green)
 	{
-
+		Boss_Time += _DeltaTime;
+		if (Boss_Time > 2.f)
+		{
+			Boss_Time = 0.f;
+			for (int a = 0; a < 4; a++)
+			{
+				IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
+				IcePillar[a]->AttackEndFalse();
+				IcePillar[a]->StateChange(IcePillarState::Idle);
+				IcePillar[a]->SetActive(true);
+				IcePillar[a]->Regenerate();
+			}
+			StateChange(BossState::Idle);
+			Effect_Renderer->SetActive(false);
+		}
 	}
 	else
 	{
@@ -621,7 +637,6 @@ void ABoss::Boss_Fainting(float _DeltaTime)
 		FVector Bosspos = GetActorLocation();
 		AddActorLocation({ GravityVector * _DeltaTime });
 	}
-	
 }
 
 
@@ -674,8 +689,6 @@ void ABoss::IceSpear_Aattack()
 		IceSpear->Attack_Right();
 	}
 }
-
-
 
 
 

@@ -43,6 +43,12 @@ void ABoss_IcePillar::DeathCheck()
 	}
 }
 
+void ABoss_IcePillar::Regenerate()
+{
+	Death = false;
+	Hp = MaxHp; 
+}
+
 void ABoss_IcePillar::BeginPlay()
 {
 	Super::BeginPlay();
@@ -244,47 +250,55 @@ void ABoss_IcePillar::IcePillar_Attack_4(float _DeltaTime)
 	}
 	else
 	{
-		FVector Position = Renderer->GetWorldPosition();
+		if (Death == false)
+		{
+			FVector Position = Renderer->GetWorldPosition();
 
-		if (SetBullet == true)
-		{			
-			FireTime += _DeltaTime;
-			if ((FireTime - CheckTime) >= 0.1f)
+			if (SetBullet == true)
 			{
-				if (AttackCount < 25)
-				{					
-					if (AttackDirSet == false)		
-					{						
-						UpPosition = Position; CenterPosition = Position; BotPosition = Position;
-						UpPosition.Y = Position.Y + 60.f;
-						UpDir = UpPosition - PlayerPos;
-						CenterDir = CenterPosition - PlayerPos;
-						BotPosition.Y = Position.Y - 60.f;
-						BotDir = BotPosition - PlayerPos;
-						AttackDirSet = true;
-					}
-					CreatBullet(UpDir, UpPosition);				
-					CreatBullet(CenterDir, CenterPosition);		
-					CreatBullet(BotDir, BotPosition);
-					
-					++AttackCount;
-					CheckTime = FireTime;
-				}
-				else
+				FireTime += _DeltaTime;
+				if ((FireTime - CheckTime) >= 0.1f)
 				{
-					AttackCount = 0;
-					SetBullet = false;
-					AttackEnd = true;
-					AttackDirSet = false;
-					CheckTime = 0.f;
+					if (AttackCount < 25)
+					{
+						if (AttackDirSet == false)
+						{
+							UpPosition = Position; CenterPosition = Position; BotPosition = Position;
+							UpPosition.Y = Position.Y + 60.f;
+							UpDir = UpPosition - PlayerPos;
+							CenterDir = CenterPosition - PlayerPos;
+							BotPosition.Y = Position.Y - 60.f;
+							BotDir = BotPosition - PlayerPos;
+							AttackDirSet = true;
+						}
+						CreatBullet(UpDir, UpPosition);
+						CreatBullet(CenterDir, CenterPosition);
+						CreatBullet(BotDir, BotPosition);
+
+						++AttackCount;
+						CheckTime = FireTime;
+					}
+					else
+					{
+						AttackCount = 0;
+						SetBullet = false;
+						AttackEnd = true;
+						AttackDirSet = false;
+						CheckTime = 0.f;
+					}
 				}
-			}
+			}	
 		}
-		if(AttackEnd == true)
+		else
+		{
+			AttackEnd = true;
+		}
+		if (AttackEnd == true)
 		{
 
 		}
 	}
+	
 }
 
 
@@ -294,10 +308,9 @@ void ABoss_IcePillar::IcePillar_AttackStart_3()
 
 void ABoss_IcePillar::IcePillar_Attack_3(float _DeltaTime)
 {
-	if (AttackEnd == true)
+	if (SetBullet == true)
 	{
-
-		if (SetBullet == true)
+		if (Death == false)
 		{
 			FVector ChildRot = Renderer->GetWorldRotation();
 			float ChildRotZ = ChildRot.Z * UEngineMath::DToR;
@@ -485,12 +498,13 @@ void ABoss_IcePillar::IcePillar_Attack_3(float _DeltaTime)
 				Create_Bullets = false;
 			}
 		}
-	}
-	else
-	{
-		AttackEnd = true;
-		Create_Bullets = false;
-	}
+		else
+		{
+			AttackEnd = true;
+			Create_Bullets = false;
+		}
+	}	
+
 	if (AttackEnd == true)
 	{
 		AttackCount = 0;
