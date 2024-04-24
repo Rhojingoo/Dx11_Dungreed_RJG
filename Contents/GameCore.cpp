@@ -66,7 +66,8 @@ void UGameCore::Initialize()
 		UEngineSprite::CreateCutting("CuttingTest.png", 4, 3);
 		UEngineSprite::CreateCutting("Map4X(64).png", 12, 4);
 		UEngineSprite::CreateCutting("Map4X(64)_Cut.png", 13, 4);
-	
+		UEngineSprite::CreateCutting("Stun.png", 6, 1);
+		
 	}
 	//UEngineDirectory Dir;
 	//Dir.MoveToSearchChild("ContentsResources");

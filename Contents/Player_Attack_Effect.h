@@ -26,6 +26,7 @@ public:
 	{ 
 		Attack = true;	
 	}
+	float AttackDamage() { return Attack_Damage; }
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -45,5 +46,7 @@ private:
 	AttackState WapponState = AttackState::None;
 	bool Attack = false;
 	float4 Color;
+
+	float Attack_Damage = 250.f;
 };
 

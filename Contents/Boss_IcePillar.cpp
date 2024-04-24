@@ -33,6 +33,16 @@ ABoss_IcePillar::~ABoss_IcePillar()
 }
 
 
+void ABoss_IcePillar::DeathCheck()
+{
+	if (Hp <= 0.f && Death==false)
+	{
+		Root->SetActive(false);
+		Renderer->SetActive(false);
+		Death = true;
+	}
+}
+
 void ABoss_IcePillar::BeginPlay()
 {
 	Super::BeginPlay();
@@ -62,17 +72,24 @@ void ABoss_IcePillar::Tick(float _DeltaTime)
 	{
 		PlayerPos = Player->GetActorLocation();
 	}
-
+	DeathCheck();
 	Collision->CollisionEnter(EColOrder::Wapon, [=](std::shared_ptr<UCollision> _Collison)
-		{
-			
+		{			
 			AActor* Actors = _Collison->GetActor();
 			APlayer_Attack_Effect* Wapon = dynamic_cast<APlayer_Attack_Effect*>(Actors);
 			if (Wapon != nullptr)
-			{
-				//Hp_Bar->S
-			}
-			int a = 0;
+			{			
+				float Damage = Wapon->AttackDamage();
+				Hp -= Damage;
+				float Damageratio = Hp / MaxHp;
+				if (Hp <= 0.f)
+				{
+					Damageratio = 0;
+					Hp_Bar->AttackDamege(1);
+					return;
+				}
+				Hp_Bar->AttackDamege(Damageratio);
+			}			
 		}
 	);
 

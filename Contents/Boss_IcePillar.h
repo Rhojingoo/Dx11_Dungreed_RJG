@@ -51,6 +51,8 @@ public:
 	bool IsAttackEnd() { return AttackEnd; }
 	void AttackEndFalse() { AttackEnd = false; }
 	void FireOn() { SetBullet = true; }
+	void DeathCheck();
+	bool IsDeath() {return Death;}
 
 protected:
 	void BeginPlay() override;
@@ -121,5 +123,9 @@ private:
 	FVector UpPosition = {};
 	FVector CenterPosition = {};
 	FVector BotPosition = {};
+
+	const float MaxHp = 500.f;
+	float Hp = MaxHp;
+	bool Death = false;
 };
 

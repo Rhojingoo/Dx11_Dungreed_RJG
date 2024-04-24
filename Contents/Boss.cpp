@@ -5,6 +5,7 @@
 #include "Icicle_Bullet.h"
 #include "Player.h"
 #include <EngineCore/Renderer.h>
+#include <EngineCore/DefaultSceneComponent.h>
 #include "Boss_HpBar.h"
 
 float ABoss::IcePillarPos = 0.f;
@@ -12,9 +13,17 @@ float ABoss::IcePillarPos = 0.f;
 
 ABoss::ABoss()
 {
+	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
+
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	SetRoot(Renderer);
+	Renderer->SetupAttachment(Root);
 	Renderer->SetPivot(EPivot::BOT);
+
+	Effect_Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	Effect_Renderer->SetupAttachment(Root);
+	Effect_Renderer->SetPivot(EPivot::BOT);
+
+	SetRoot(Root);
 }
 
 ABoss::~ABoss()
@@ -43,11 +52,20 @@ void ABoss::BeginPlay()
 	Renderer->CreateAnimation("Boss_Enter", "Boss_Enter", 0.1f, false);
 	Renderer->CreateAnimation("Boss_Exit", "Boss_Exit", 0.1f, false);
 	Renderer->CreateAnimation("Boss_Idle", "Boss_Idle", 0.1f);
-
 	Renderer->SetAutoSize(3.f, true);
 
+
+	//이펙트 렌더 설정
+	Effect_Renderer->SetOrder(ERenderOrder::Effect_Front);
+	Effect_Renderer->SetActive(false);
+	Effect_Renderer->SetAutoSize(3.f, true);
+	Effect_Renderer->AddPosition({ 0.f,100.f});
+	Effect_Renderer->CreateAnimation("Stun", "Stun.png", 0.1f, true);
+
+
+
 	Boss_HpBAR = GetWorld()->SpawnActor<ABoss_HpBar>("Boss_HPBar");
-	//Renderer->ChangeAnimation("Boss_Idle");
+
 
 	Renderer->SetOrder(ERenderOrder::Boss);
 }
@@ -63,6 +81,7 @@ void ABoss::Tick(float _DeltaTime)
 	}
 	StateUpdate(_DeltaTime);
 	Direction();
+	IcePallarCheck();
 }
 
 void ABoss::StateChange(BossState _State)
@@ -97,6 +116,9 @@ void ABoss::StateChange(BossState _State)
 			break;
 		case BossState::Ready2:
 			Boss_ReadyStart2();
+			break;;
+		case BossState::Fainting:
+			Boss_FaintingStart();
 			break;;
 
 		default:
@@ -138,6 +160,10 @@ void ABoss::StateUpdate(float _DeltaTime)
 	case BossState::Ready2:
 		Boss_Ready2(_DeltaTime);
 		break;
+
+	case BossState::Fainting:
+		Boss_Fainting(_DeltaTime);
+		break;;
 	default:
 		break;
 	}
@@ -535,6 +561,70 @@ void ABoss::Boss_Patton5Start()
 	}
 	IcicleCreat = false;
 }
+
+void ABoss::IcePallarCheck()
+{
+	for (int Num = 0; Num < 4; Num++)
+	{
+		if (IcePillar[Num]->IsDeath() == false)
+		{
+			return;
+		}		
+	}
+	StateChange(BossState::Fainting);
+}
+
+
+void ABoss::Boss_FaintingStart()
+{
+	Effect_Renderer->SetActive(true);
+	Effect_Renderer->ChangeAnimation("Stun");
+}
+
+void ABoss::Boss_Fainting(float _DeltaTime)
+{
+	std::shared_ptr<UEngineTexture> Tex = UContentsHelper::MapTex;
+
+	#ifdef _DEBUG
+		if (nullptr == Tex)
+		{
+			MsgBoxAssert("이미지 충돌체크중 이미지가 존재하지 않습니다.");
+		}
+	#endif
+
+	Color8Bit GroundColor;
+	Color8Bit SkyGRColor;
+
+	float4 PlayerLocation = GetActorLocation();
+	if (Foot_Collision_Check_At_Town == true)
+	{
+		PlayerLocation.Y = -PlayerLocation.Y;
+	}
+	else
+	{
+		PlayerLocation.Y = (Tex->GetScale().Y * 64.0f) - PlayerLocation.Y;
+		PlayerLocation /= UContentsHelper::TileSize;
+	}
+
+
+	GroundColor = Tex->GetColor(PlayerLocation, Color8Bit::Black);
+	SkyGRColor = Tex->GetColor(PlayerLocation, Color8Bit::Green);
+
+	if (GroundColor == Color8Bit::Black|| SkyGRColor == Color8Bit::Green)
+	{
+
+	}
+	else
+	{
+		GravityVector += GravityAcc * _DeltaTime;
+		GravityVector.Z = 0.f;
+		FVector Bosspos = GetActorLocation();
+		AddActorLocation({ GravityVector * _DeltaTime });
+	}
+	
+}
+
+
 void ABoss::Boss_Patton5(float _DeltaTime)
 {
 	if (IcicleCreat == false)
@@ -557,11 +647,6 @@ void ABoss::Boss_Patton5(float _DeltaTime)
 		StateChange(BossState::Idle);
 		Boss_Time = 0.f;
 	}
-
-	//if (IcicleCreat == true)
-	//{
-	//	StateChange(BossState::Idle);
-	//}
 }
 
 

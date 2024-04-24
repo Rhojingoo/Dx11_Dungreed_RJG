@@ -11,11 +11,12 @@ public:
 	AMonster_HpBar();
 	~AMonster_HpBar();
 
-	AMonster_HpBar(const AMonster_HpBar& _Other)						= delete;
+	AMonster_HpBar(const AMonster_HpBar& _Other)					= delete;
 	AMonster_HpBar(AMonster_HpBar& _Other) noexcept					= delete;
 	AMonster_HpBar& operator =(const 	AMonster_HpBar& _Other)		= delete;
 	AMonster_HpBar& operator =(AMonster_HpBar& _Other)noexcept		= delete;
 
+	void AttackDamege(float _Attackratio);
 
 protected:
 	void BeginPlay() override;
@@ -30,6 +31,10 @@ private:
 
 	float Life_POSX = 0.f;
 	float LifePos = Life_POSX;
+
+	bool Attack = false;
+	float Attackratio = 0.f;
+	float TimeCheck = 0.f;
 };
 
 

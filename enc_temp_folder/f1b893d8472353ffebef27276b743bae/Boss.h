@@ -97,7 +97,7 @@ private:
 
 	FVector PlRotation[4] = {};
 	FVector Bullet_Pos[4] = {};
-	const float Bullet = 250.f;
+	const float Bullet = 150.f;
 	float Boss_Time = 0.f;
 	bool IntroOn = false;
 	bool Attack_Check = false;
