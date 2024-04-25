@@ -711,7 +711,7 @@ void ABoss::Boss_Fainting(float _DeltaTime)
 	if (GroundColor == Color8Bit::Black|| SkyGRColor == Color8Bit::Green)
 	{
 
-		if (SkyUpGRColor == Color8Bit::Green/)
+		if (SkyUpGRColor == Color8Bit::Green)
 		{				
 			return;
 		}

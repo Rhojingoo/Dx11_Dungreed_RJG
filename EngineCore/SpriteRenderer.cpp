@@ -17,6 +17,21 @@ void USpriteRenderer::SetFrameCallback(std::string_view _AnimationName, int _Ind
 
 }
 
+void USpriteRenderer::SetLastFrameCallback(std::string_view _AnimationName, std::function<void()> _Function)
+{
+	std::string UpperName = UEngineString::ToUpper(_AnimationName);
+
+	if (false == Animations.contains(UpperName))
+	{
+		MsgBoxAssert("존재하지 않는 애니메이션에 콜백을 지정할수 없습니다." + std::string(_AnimationName));
+		return;
+	}
+
+	std::shared_ptr<USpriteAnimation> Animation = Animations[UpperName];
+	int LastIndex = static_cast<int>(Animation->Frame.size()) - 1;
+	Animations[UpperName]->FrameCallback[LastIndex] = _Function;
+}
+
 void USpriteAnimation::FrameCallBackCheck()
 {
 	if (false == FrameCallback.contains(CurFrame))
@@ -317,7 +332,7 @@ void USpriteRenderer::CreateAnimation(
 	CreateAnimation(_AnimationName, _SpriteName, Inter, Frame, _Loop);
 }
 
-void USpriteRenderer::ChangeAnimation(std::string_view _AnimationName)
+void USpriteRenderer::ChangeAnimation(std::string_view _AnimationName, int StartFrame)
 {
 	if (nullptr != CurAnimation && _AnimationName == CurAnimation->GetName())
 	{
@@ -334,6 +349,8 @@ void USpriteRenderer::ChangeAnimation(std::string_view _AnimationName)
 
 	CurAnimation = Animations[UpperName];
 	CurAnimation->Reset();
+	CurAnimation->CurFrame = StartFrame;
+
 	CurAnimation->FrameCallBackCheck();
 }
 

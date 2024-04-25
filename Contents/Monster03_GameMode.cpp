@@ -19,12 +19,21 @@ void AMonster03_GameMode::LevelStart(ULevel* _PrevLevel)
 	Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation(FVector(640.0f, 360.0f, -200.0f));
 
+	Player = GetWorld()->SpawnActor<APlayer>("Player", EOBJ_Order::Player);
+	Player->SetActorLocation({ 640.0f, 360.0f, 200.0f });
+
+	Cursor = GetWorld()->SpawnActor<ATarget>("Player2");
+	Cursor->SetActorLocation({ 640.0f, 360.0f, 200.0f });
+
 	UContentsHelper::MapTex = UEngineTexture::FindRes("Monster_03PX.png");
 	UContentsHelper::MapTexScale = UContentsHelper::MapTex->GetScale();
 }
 
 void AMonster03_GameMode::LevelEnd(ULevel* _NextLevel)
 {
+	Player->Destroy();
+	Camera->Destroy();
+	Cursor->Destroy();
 }
 
 void AMonster03_GameMode::BeginPlay()
@@ -38,13 +47,6 @@ void AMonster03_GameMode::BeginPlay()
 	UContentsHelper::MapTex = UEngineTexture::FindRes("Monster_03PX.png");
 	UContentsHelper::MapTexScale = UContentsHelper::MapTex->GetScale();
 
-
-	Player = GetWorld()->SpawnActor<APlayer>("Player", EOBJ_Order::Player);
-	Player->SetActorLocation({ 640.0f, 360.0f, 200.0f });
-	FVector assad = Player->GetActorLocation();
-
-	std::shared_ptr<ATarget> Cursor = GetWorld()->SpawnActor<ATarget>("Player2");
-	Cursor->SetActorLocation({ 640.0f, 360.0f, 200.0f });
 
 	std::shared_ptr<AMonster03_BackGround> BackGr = GetWorld()->SpawnActor<AMonster03_BackGround>("Monster03_Bg", EOBJ_Order::BackGround);
 	float TileSize = UContentsHelper::TileSize;
@@ -66,5 +68,9 @@ void AMonster03_GameMode::Tick(float _DeltaTime)
 	{
 		GEngine->ChangeLevel("BossLevel");
 	}
-	Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y });
+
+	if (Camera != nullptr)
+	{
+		Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y });
+	}
 }

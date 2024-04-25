@@ -62,7 +62,7 @@ bool UCollision::Collision(int _TargetGroup,
 
 	for (std::shared_ptr<UCollision> OtherCollision : Group)
 	{
- 		if (false == OtherCollision->IsActive())
+		if (false == OtherCollision->IsActive())
 		{
 			continue;
 		}

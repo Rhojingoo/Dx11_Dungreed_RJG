@@ -2,6 +2,7 @@
 //#include <EngineCore/GameMode.h>
 #include "TileSet_Mode.h"
 
+class ATarget;
 class ABoss;
 class MapEditorGUI;
 class APlayer;
@@ -33,6 +34,7 @@ private:
 	std::shared_ptr<UCamera> Camera = nullptr;
 	std::shared_ptr<APlayer> Player = nullptr;
 	std::shared_ptr<ABoss> Boss = nullptr;
+	std::shared_ptr<ATarget> Cursor = nullptr;
 
 	const float MaxX_Map_Pos = 2080.f;
 	const float MaxX_Min_Pos = 400.f;

@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/GameMode.h>
 
+class ATarget;
 class ABoss;
 class APlayer;
 class UCamera;
@@ -28,5 +29,6 @@ private:
 	std::shared_ptr<UCamera> Camera = nullptr;
 	std::shared_ptr<APlayer> Player = nullptr;
 	std::shared_ptr<ABoss> Boss = nullptr;
+	std::shared_ptr<ATarget> Cursor = nullptr;
 };
 

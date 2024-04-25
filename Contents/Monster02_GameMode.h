@@ -1,6 +1,7 @@
 #pragma once
 #include "TileSet_Mode.h"
 
+class ATarget;
 class APlayer;
 class UCamera;
 class AMonster02_GameMode : public ATileMapLevel
@@ -24,4 +25,5 @@ protected:
 private:
 	std::shared_ptr<UCamera> Camera = nullptr;
 	std::shared_ptr<APlayer> Player = nullptr;
+	std::shared_ptr<ATarget> Cursor = nullptr;
 };

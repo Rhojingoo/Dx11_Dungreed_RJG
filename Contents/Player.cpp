@@ -31,6 +31,7 @@ APlayer::APlayer()
 
 APlayer::~APlayer()
 {
+	int a = 0;
 }
 
 void APlayer::BeginPlay()

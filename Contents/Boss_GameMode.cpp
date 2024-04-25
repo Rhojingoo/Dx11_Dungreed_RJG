@@ -25,12 +25,26 @@ void ABoss_GameMode::LevelStart(ULevel* _PrevLevel)
 	Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation(FVector(640.0f, 360.0f, -200.0f));
 
+	Player = GetWorld()->SpawnActor<APlayer>("Player", EOBJ_Order::Player);
+	Player->SetActorLocation({ 640.0f, 360.0f, 200.0f });
+
+	Cursor = GetWorld()->SpawnActor<ATarget>("Player2");
+	Cursor->SetActorLocation({ 640.0f, -360.0f, 200.0f });
+
+	Boss = GetWorld()->SpawnActor<ABoss>("Boss", EOBJ_Order::Monster);
+	Boss->SetActorLocation({ 1200.0f, 750.0f, 200.0f });
+	Boss->SetPlayer(Player);
+
 	UContentsHelper::MapTex = UEngineTexture::FindRes("NIflheimRoom_Pixel.png");
 	UContentsHelper::MapTexScale = UContentsHelper::MapTex->GetScale();
 }
 
 void ABoss_GameMode::LevelEnd(ULevel* _NextLevel)
 {
+	Camera->Destroy();
+	Player->Destroy();
+	Cursor->Destroy();
+	Boss->Destroy();
 }
 
 void ABoss_GameMode::BeginPlay()
@@ -44,20 +58,6 @@ void ABoss_GameMode::BeginPlay()
 	UContentsHelper::MapTex = UEngineTexture::FindRes("NIflheimRoom_Pixel.png");
 	UContentsHelper::MapTexScale = UContentsHelper::MapTex->GetScale();
 	
-	Camera = GetWorld()->GetMainCamera();
-	Camera->SetActorLocation(FVector(640.0f, 360.0f, -200.0f));
-
-	Player = GetWorld()->SpawnActor<APlayer>("Player", EOBJ_Order::Player);
-	Player->SetActorLocation({ 640.0f, 360.0f, 200.0f });
-	FVector assad = Player->GetActorLocation();
-
-	Boss = GetWorld()->SpawnActor<ABoss>("Boss", EOBJ_Order::Monster);
-	Boss->SetActorLocation({ 1200.0f, 750.0f, 200.0f });
-	Boss->SetPlayer(Player);
-
-
-	std::shared_ptr<ATarget> Cursor = GetWorld()->SpawnActor<ATarget>("Player2");
-	Cursor->SetActorLocation({ 640.0f, -360.0f, 200.0f });
 
 	std::shared_ptr<ABoss_BackGround> BackGr = GetWorld()->SpawnActor<ABoss_BackGround>("Boss_Bg", EOBJ_Order::BackGround);
 	float TileSize = UContentsHelper::TileSize;
@@ -79,5 +79,8 @@ void ABoss_GameMode::Tick(float _DeltaTime)
 	{
 		//GEngine->ChangeLevel("BossLevel");
 	}
-	Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y });
+	if (Camera != nullptr)
+	{
+		Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y });
+	}
 }

@@ -62,12 +62,13 @@ public:
 
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<float> _Inter, std::vector<int> _Frame, bool _Loop = true);
 	
-	void ChangeAnimation(std::string_view _AnimationName);
+	void ChangeAnimation(std::string_view _AnimationName, int StartFrame = 0);
 
 	void SetAutoSize(float _ScaleRatio, bool _AutoSize);
 	void SetSpriteInfo(const FSpriteInfo& _Info);
 
 	void SetFrameCallback(std::string_view _AnimationName, int _Index, std::function<void()> _Function);
+	void SetLastFrameCallback(std::string_view _AnimationName, std::function<void()> _Function);
 
 	void SetDir(EEngineDir _Dir);
 

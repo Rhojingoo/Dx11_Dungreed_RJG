@@ -16,6 +16,11 @@ void UTickObject::BeginPlay()
 
 void UTickObject::Tick(float _DeltaTime)
 {
+	if (true == IsActive())
+	{
+		return;
+	}
+
 	for (size_t i = 0; i < CallBacks.size(); i++)
 	{
 		if (nullptr == CallBacks[i])
