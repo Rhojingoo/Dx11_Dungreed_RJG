@@ -34,6 +34,9 @@ void APlayer_Attack_Effect::BeginPlay()
 	Renderer->SetOrder(ERenderOrder::Attack_Effect);
 	//Renderer->ChangeAnimation("Sword_Swing_Legend");
 
+	//Collision->SetScale(Renderer->GetLocalScale());
+	FVector asd1 = Renderer->GetLocalScale();
+	FVector asd = Renderer->GetWorldScale();
 	Collision->SetScale(Renderer->GetWorldScale());
 	//Collision->AddPosition({ 0.f, 0.25f });
 }
@@ -41,7 +44,7 @@ void APlayer_Attack_Effect::BeginPlay()
 void APlayer_Attack_Effect::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-
+	Collision->SetScale(Renderer->GetWorldScale());
 	StateUpdate(_DeltaTime);
 
 	Collision->CollisionEnter(EColOrder::Boss_IceBullet, [=](std::shared_ptr<UCollision> _Collison)
@@ -68,6 +71,7 @@ void APlayer_Attack_Effect::Effect_AttackStart()
 	Renderer->ChangeAnimation("Sword_Swing_Legend");
 	Renderer->SetActive(true);
 	Collision->SetActive(true);
+	//Collision->SetScale(Renderer->GetWorldScale());
 	Attack = false;	
 }
 
@@ -83,10 +87,12 @@ void APlayer_Attack_Effect::Effect_EndStart()
 {
 	Collision->SetActive(false);
 	Renderer->SetActive(false);
+	//Collision->SetScale({0.f, 0.f});
 }
 
 void APlayer_Attack_Effect::Effect_End(float _DeltaTime)
 {
+	Destroy();
 }
 
 void APlayer_Attack_Effect::ChangeState(AttackState _Set)

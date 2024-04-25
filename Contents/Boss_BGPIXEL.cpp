@@ -15,10 +15,19 @@ void ABoss_BGPIXEL::BeginPlay()
 	Super::BeginPlay();
 	SetActorScale3D(FVector(1000.0f, 300.0f, 100.0f));
 	Renderer->SetSprite("NIflheimRoom_Pixel.png");
-	//Renderer->SetOrder(ERenderOrder::PixelMap);
+	Renderer->SetOrder(ERenderOrder::PixelMap);
 }
 
 void ABoss_BGPIXEL::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+	if (UEngineInput::IsDown('O'))
+	{
+		Renderer->SetActive(false);
+	}
+	if (UEngineInput::IsDown('I'))
+	{
+		Renderer->SetActive(true);
+	}
+
 }

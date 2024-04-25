@@ -124,6 +124,7 @@ void APlayer_Hand::Right()
 
 
 			Attack_EffectDir = Attack_EffectDir * UEngineMath::DToR;
+			Swing_EF = GetWorld()->SpawnActor<APlayer_Attack_Effect>("R_Hand");
 			Swing_EF->SetActorLocation({ GetActorLocation().X - (15.0f* Attack_EffectDir.X), GetActorLocation().Y - (15.0f * Attack_EffectDir.Y),190.f});
 			Swing_EF->SetActorRotation({0.f,0.f,Attack_Degree + 90.f });
 			Swing_EF->AttackOn();
@@ -138,6 +139,7 @@ void APlayer_Hand::Right()
 			Hand_Renderer->Transform.LocalPosition = { MainRender_World.X-20.f, MainRender_World.Y - 15.f,0.f };
 
 			Attack_EffectDir = Attack_EffectDir * UEngineMath::DToR;
+			Swing_EF = GetWorld()->SpawnActor<APlayer_Attack_Effect>("R_Hand");
 			Swing_EF->SetActorLocation( { GetActorLocation().X - 15.0f * Attack_EffectDir.X,  GetActorLocation().Y - (15.0f * Attack_EffectDir.Y),190.f });
 			Swing_EF->SetActorRotation({ 0.f,0.f,Attack_Degree + 90.f });
 			Swing_EF->AttackOn();
@@ -180,6 +182,7 @@ void APlayer_Hand::Left()
 
 
 			Attack_EffectDir = Attack_EffectDir * UEngineMath::DToR;
+			Swing_EF = GetWorld()->SpawnActor<APlayer_Attack_Effect>("R_Hand");
 			Swing_EF->SetActorLocation({ GetActorLocation().X - (15.0f * Attack_EffectDir.X), GetActorLocation().Y - (15.0f * Attack_EffectDir.Y),190.f });
 			Swing_EF->SetActorRotation({ 0.f,0.f,Attack_Degree + 90.f });
 			Swing_EF->AttackOn();
@@ -194,6 +197,7 @@ void APlayer_Hand::Left()
 
 
 			Attack_EffectDir = Attack_EffectDir * UEngineMath::DToR;
+			Swing_EF = GetWorld()->SpawnActor<APlayer_Attack_Effect>("R_Hand");
 			Swing_EF->SetActorLocation({ GetActorLocation().X - (15.0f * Attack_EffectDir.X), GetActorLocation().Y - (15.0f * Attack_EffectDir.Y),190.f });
 			Swing_EF->SetActorRotation({ 0.f,0.f,Attack_Degree + 90.f });
 			Swing_EF->AttackOn();

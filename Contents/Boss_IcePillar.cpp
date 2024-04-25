@@ -15,7 +15,7 @@ ABoss_IcePillar::ABoss_IcePillar()
 
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Renderer->SetupAttachment(Root);
-	Renderer->SetPivot(EPivot::BOT);
+	//Renderer->SetPivot(EPivot::);
 	Renderer->SetScale(FVector(62.0f, 33.0f, 100.0f));
 	Renderer->AddPosition({ 0.0f, 0.0f, 0.0f });
 
@@ -43,12 +43,7 @@ void ABoss_IcePillar::BeginPlay()
 	Renderer->SetAutoSize(4.0f, true);
 	Renderer->CreateAnimation("IcePillar", "IcePillar", 0.1f, false);
 	Renderer->CreateAnimation("IcePillarDestroy", "IcePillarDestroy", 0.1f, false);
-	//Renderer->CreateAnimation("IcePillarDestroy", "IcePillarDestroy", 0.1f);
 	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
-	Renderer->SetPivot(EPivot::BOT);
-
-	//Collision->SetScale({ Renderer->GetWorldScale() });
-	//Collision->SetPosition({ Renderer-> });
 }
 
 void ABoss_IcePillar::Tick(float _DeltaTime)
@@ -56,7 +51,7 @@ void ABoss_IcePillar::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 	Pos = GetActorLocation();
 	RenderPos = Renderer->GetWorldPosition();
-	//Collision->GetLocalPosition() = RenderPos;
+
 	StateUpdate(_DeltaTime);
 	Hp_Bar->SetActorLocation(RenderPos);
 	if (Player != nullptr)
@@ -64,6 +59,21 @@ void ABoss_IcePillar::Tick(float _DeltaTime)
 		PlayerPos = Player->GetActorLocation();
 	}
 	DeathCheck();
+	{
+		std::string Msg = std::format("IcePalliarCollisionPos : {}\n", Collision->GetWorldPosition().ToString());
+		UEngineDebugMsgWindow::PushMsg(Msg);
+	}
+	{
+		std::string Msg = std::format("IcePalliarRendererisionPos : {}\n", Renderer->GetWorldPosition().ToString());
+		UEngineDebugMsgWindow::PushMsg(Msg);
+	}
+
+
+	if (true == UEngineInput::IsDown('K'))
+	{
+		StateChange(IcePillarState::Death);
+		Hp_Bar->AttackDamege(1);
+	}
 
 
 	Collision->CollisionEnter(EColOrder::Wapon, [=](std::shared_ptr<UCollision> _Collison)
@@ -86,6 +96,19 @@ void ABoss_IcePillar::Tick(float _DeltaTime)
 			}
 		}
 	);
+
+	Collision->CollisionExit(EColOrder::Wapon, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			AActor* Actors = _Collison->GetActor();
+			APlayer_Attack_Effect* Wapon = dynamic_cast<APlayer_Attack_Effect*>(Actors);
+			
+			if (Wapon != nullptr)
+			{
+				int a= 0;
+			}
+		}
+	);
+
 
 }
 
@@ -222,8 +245,8 @@ void ABoss_IcePillar::IcePillar_IdleStart()
 
 void ABoss_IcePillar::IcePillar_Idle(float _DeltaTime)
 {
-	Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
-	AddActorRotation(float4{ 0.0f, 0.0f, 1.0f } *180.0f * _DeltaTime);
+	//Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
+	//AddActorRotation(float4{ 0.0f, 0.0f, 1.0f } *180.0f * _DeltaTime);
 }
 
 

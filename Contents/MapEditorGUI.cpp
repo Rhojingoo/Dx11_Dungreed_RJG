@@ -33,25 +33,25 @@ void MapEditorGUI::Tick(ULevel* Level, float _Delta)
 	Level->GetMainCamera();
 	float Speed = 500.0f;
 
-	if (true == UEngineInput::IsPress('A'))
-	{
-		Level->GetMainCamera()->AddActorLocation(float4::Left * _Delta * Speed);
-	}
+	//if (true == UEngineInput::IsPress('A'))
+	//{
+	//	Level->GetMainCamera()->AddActorLocation(float4::Left * _Delta * Speed);
+	//}
 
-	if (true == UEngineInput::IsPress('D'))
-	{
-		Level->GetMainCamera()->AddActorLocation(float4::Right * _Delta * Speed);
-	}
+	//if (true == UEngineInput::IsPress('D'))
+	//{
+	//	Level->GetMainCamera()->AddActorLocation(float4::Right * _Delta * Speed);
+	//}
 
-	if (true == UEngineInput::IsPress('W'))
-	{
-		Level->GetMainCamera()->AddActorLocation(float4::Up * _Delta * Speed);
-	}
+	//if (true == UEngineInput::IsPress('W'))
+	//{
+	//	Level->GetMainCamera()->AddActorLocation(float4::Up * _Delta * Speed);
+	//}
 
-	if (true == UEngineInput::IsPress('S'))
-	{
-		Level->GetMainCamera()->AddActorLocation(float4::Down * _Delta * Speed);
-	}
+	//if (true == UEngineInput::IsPress('S'))
+	//{
+	//	Level->GetMainCamera()->AddActorLocation(float4::Down * _Delta * Speed);
+	//}
 
 	std::string LevelName = Level->GetName();
 	std::shared_ptr<AGameMode> Mode = Level->GetGameMode();

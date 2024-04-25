@@ -25,14 +25,13 @@ void ABoss_HpBar::BeginPlay()
 	BossLifeBack->AddToViewPort(0);
 	BossLifeBack->SetSprite("BossLifeBack.png");
 	BossLifeBack->SetAutoSize(4.f, true);
-	//BossLifeBack->SetPosition({ 0, -280 });
 	BossLifeBack->SetOrder(0);
 
 	LifeBar = CreateWidget<UImage>(GetWorld(), "LifeBar2");
 	LifeBar->AddToViewPort(1);
 	LifeBar->SetSprite("LifeBar.png");
 	LifeBar->SetParent({ BossLifeBase });
-	LifeBar->SetScale({ 0.82f,0.9f });
+	LifeBar->SetScale({ 0.80f,0.9f });
 	LifeBar->AddPosition({ 0.09f,0.f });
 	LifeBar->SetOrder(1);
 	BossLifeBase->SetPosition({ 0, -280 });
@@ -58,7 +57,8 @@ void ABoss_HpBar::Tick(float _DeltaTime)
 
 	if (Attack == true)
 	{
-		Life -=  Life * Ratio;
+		float ratioLife = MaxLife* Ratio;
+		Life = MaxLife - ratioLife;
 		LifeBar->SetScale({ Life, 1.f });
 		float Setratio = (Life / MaxLife);  // 체력 비율을 계산
 		float fullWidth = LifeBar->GetWorldScale().X;  // 이미지 전체 길이		
@@ -74,7 +74,6 @@ void ABoss_HpBar::Tick(float _DeltaTime)
 		float Setratio = (Life / MaxLife);  // 체력 비율을 계산
 		float fullWidth = LifeBar->GetWorldScale().X;  // 이미지 전체 길이	
 		float basePos = LifeBar->GetLocalPosition().X/2;
-
 		LifePos = ((MaxLife / 2) * (1 - Setratio))- Life_POSX;  // 깎인 만큼 왼쪽으로 이동
 		LifeBar->SetScale({ Life, 0.9f });
 		LifeBar->SetPosition({ -LifePos, LifeBar->GetLocalPosition().Y });

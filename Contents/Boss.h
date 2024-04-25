@@ -130,5 +130,7 @@ private:
 	const float MinX_Map_Pos = 400.f;
 	const float MaxY_Map_Pos = 750.f;
 	const float MinY_Map_Pos = 450.f;
+
+	bool Death = false;
 };
 

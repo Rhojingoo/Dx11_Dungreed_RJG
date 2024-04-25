@@ -157,11 +157,6 @@ public:
 		TransformUpdate();
 	}
 
-	void AddPosition(FVector _Value)
-	{
-		SetPosition(LocalPosition + _Value);
-	}
-
 	void SetPosition(FVector _Value)
 	{
 		LocalPosition = _Value;
@@ -219,6 +214,10 @@ public:
 	}
 
 
+	void AddPosition(FVector _Value)
+	{
+		SetPosition(LocalPosition + _Value);
+	}
 
 	FVector GetPosition() const
 	{

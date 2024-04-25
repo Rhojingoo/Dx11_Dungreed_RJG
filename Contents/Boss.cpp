@@ -39,7 +39,6 @@ ABoss::~ABoss()
 void ABoss::SetPlayer(std::shared_ptr<APlayer> _Set)
 {
 	Player = _Set;
-//	IcePillar[0]->SetPlayer(_Set);
 	for (int Num = 0; Num < 4; Num++)
 	{
 		IcePillar[Num]->SetPlayer(_Set);
@@ -54,7 +53,7 @@ void ABoss::BeginPlay()
 	CreateIcePillar();
 
 	Renderer->CreateAnimation("Boss_Attack", "Boss_Attack", 0.1f);
-	Renderer->CreateAnimation("Boss_Die", "Boss_Die", 0.1f);
+	Renderer->CreateAnimation("Boss_Die", "Boss_Die", 0.1f, false);
 	Renderer->CreateAnimation("Boss_Enter", "Boss_Enter", 0.1f, false);
 	Renderer->CreateAnimation("Boss_Exit", "Boss_Exit", 0.1f, false);
 	Renderer->CreateAnimation("Boss_Idle", "Boss_Idle", 0.1f);
@@ -64,8 +63,8 @@ void ABoss::BeginPlay()
 	//ÀÌÆåÆ® ·»´õ ¼³Á¤
 	Effect_Renderer->SetOrder(ERenderOrder::Effect_Front);
 	Effect_Renderer->SetActive(false);
-	Effect_Renderer->SetAutoSize(3.f, true);
-	Effect_Renderer->AddPosition({ 0.f,100.f});
+	Effect_Renderer->SetAutoSize(1.5f, true);
+	Effect_Renderer->AddPosition({ 0.f,50.f});
 	Effect_Renderer->CreateAnimation("Stun", "Stun.png", 0.1f, true);
 
 
@@ -88,11 +87,14 @@ void ABoss::Tick(float _DeltaTime)
 		IcePillar[Num]->SetActorLocation({BossPos});
 	}
 	StateUpdate(_DeltaTime);
-	Direction();
-	IcePallarCheck();
+	if (Death == false)
 	{
-		std::string Msg = std::format("BossCollisionPos : {}\n", Collision->GetWorldPosition().ToString());
-		UEngineDebugMsgWindow::PushMsg(Msg);
+		Direction();
+		IcePallarCheck();
+	}
+	{
+		//std::string Msg = std::format("BossCollisionPos : {}\n", Collision->GetWorldPosition().ToString());
+		//UEngineDebugMsgWindow::PushMsg(Msg);
 	}
 
 	Collision->CollisionEnter(EColOrder::Wapon, [=](std::shared_ptr<UCollision> _Collison)
@@ -109,17 +111,15 @@ void ABoss::Tick(float _DeltaTime)
 					Damageratio = 1 - Damageratio;
 					if (Hp <= 0.f)
 					{
+						Effect_Renderer->SetActive(false);
 						StateChange(BossState::Death);
 						Damageratio = 0;
 						Boss_HpBAR->AttackDamege(1);
+						Death = true;
 						return;
 					}
 					Boss_HpBAR->AttackDamege(Damageratio);
 				}		
-
-				//Hp_Bar->AttackDamege(Damageratio);
-				//Boss_HpBAR;
-
 				return;
 			}
 		}
@@ -665,9 +665,11 @@ void ABoss::Boss_Fainting(float _DeltaTime)
 	#endif
 
 	Color8Bit GroundColor;
+	Color8Bit SkyUpGRColor;
 	Color8Bit SkyGRColor;
 
 	float4 PlayerLocation = GetActorLocation();
+	float4 PlayerUpLocation = GetActorLocation();
 	if (Foot_Collision_Check_At_Town == true)
 	{
 		PlayerLocation.Y = -PlayerLocation.Y;
@@ -676,32 +678,61 @@ void ABoss::Boss_Fainting(float _DeltaTime)
 	{
 		PlayerLocation.Y = (Tex->GetScale().Y * 64.0f) - PlayerLocation.Y;
 		PlayerLocation /= UContentsHelper::TileSize;
+		PlayerUpLocation = PlayerLocation;
+		PlayerUpLocation.Y = PlayerUpLocation.Y - 1.f;
 	}
 
 
 	GroundColor = Tex->GetColor(PlayerLocation, Color8Bit::Black);
 	SkyGRColor = Tex->GetColor(PlayerLocation, Color8Bit::Green);
+	SkyUpGRColor = Tex->GetColor(PlayerUpLocation, Color8Bit::Green);
 
 
 
+	//if (Color == Color8Bit::Black || SkyGrColor == Color8Bit::Green)
+	//{
+	//	if (UPColor == Color8Bit::Green)
+	//	{
+	//		SkyGround = true;
+	//		if (State.GetCurStateName() == "Player_Jump")
+	//			return;
+	//	}
+	//	else if (SkyGround == true || Color == Color8Bit::Black)
+	//	{
+	//		//SkyGround = true;
+	//		GravityVector = FVector::Zero;
+	//		JumpOn = false;
+
+	//		if (State.GetCurStateName() == "Player_Jump")
+	//			SkyGround = false;
+	//	}
+	//}
 
 	if (GroundColor == Color8Bit::Black|| SkyGRColor == Color8Bit::Green)
 	{
-		Boss_Time += _DeltaTime;
-		if (Boss_Time > 3.5f)
+
+		if (SkyUpGRColor == Color8Bit::Green/)
+		{				
+			return;
+		}
+		else
 		{
-			Boss_Time = 0.f;
-			for (int a = 0; a < 4; a++)
+			Boss_Time += _DeltaTime;
+			if (Boss_Time > 3.5f)
 			{
-				IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
-				IcePillar[a]->AttackEndFalse();
-				IcePillar[a]->SetActive(true);
-				IcePillar[a]->Regenerate();
+				Boss_Time = 0.f;
+				for (int a = 0; a < 4; a++)
+				{
+					IcePillar[a]->SetPos({ Bullet_Pos[a].X, Bullet_Pos[a].Y });
+					IcePillar[a]->AttackEndFalse();
+					IcePillar[a]->SetActive(true);
+					IcePillar[a]->Regenerate();
+				}
+				Regenerate = true;
+				StateChange(BossState::TeleportOut);
+				Effect_Renderer->SetActive(false);
+				DamageOn = false;
 			}
-			Regenerate = true;
-			StateChange(BossState::TeleportOut);
-			Effect_Renderer->SetActive(false);
-			DamageOn = false;
 		}
 	}
 	else
@@ -711,10 +742,6 @@ void ABoss::Boss_Fainting(float _DeltaTime)
 		FVector Bosspos = GetActorLocation();
 		AddActorLocation({ GravityVector * _DeltaTime });
 	}
-
-
-
-
 }
 
 
@@ -741,7 +768,6 @@ void ABoss::Boss_Patton5(float _DeltaTime)
 		Boss_Time = 0.f;
 	}
 }
-
 
 void ABoss::IceSpear_Aattack()
 {
@@ -787,15 +813,6 @@ void ABoss::Boss_TeleportInStart()
 	{
 		IcePillar[a]->StateChange(IcePillarState::Regenerate);
 	}
-	//IcePillar[0]->ClearRocation();
-	//IcePillar[1]->ClearRocation();
-	//IcePillar[2]->ClearRocation();
-	//IcePillar[3]->ClearRocation();
-
-	//IcePillar[0]->SetPos({ 0.f ,0.f});
-	//IcePillar[1]->SetPos({ 0.f ,0.f });
-	//IcePillar[2]->SetPos({ 0.f ,0.f });
-	//IcePillar[3]->SetPos({ 0.f ,0.f });
 }
 void ABoss::Boss_TeleportIn(float _DeltaTime)
 {
@@ -808,7 +825,6 @@ void ABoss::Boss_TeleportIn(float _DeltaTime)
 				return;
 			}
 		}
-
 		for (int a = 0; a < 4; a++)
 		{
 			IcePillar[a]->StateChange(IcePillarState::Idle);
