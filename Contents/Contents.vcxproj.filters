@@ -136,6 +136,9 @@
     <ClInclude Include="Player_HpBar.h">
       <Filter>Level &amp; OBJ\Public\OBJ\Hp</Filter>
     </ClInclude>
+    <ClInclude Include="Town_DungeonDoor.h">
+      <Filter>Level &amp; OBJ\Town_Stage\Town_Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -272,6 +275,9 @@
     </ClCompile>
     <ClCompile Include="Player_HpBar.cpp">
       <Filter>Level &amp; OBJ\Public\OBJ\Hp</Filter>
+    </ClCompile>
+    <ClCompile Include="Town_DungeonDoor.cpp">
+      <Filter>Level &amp; OBJ\Town_Stage\Town_Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

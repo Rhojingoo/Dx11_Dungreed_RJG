@@ -6,6 +6,7 @@ enum class EOBJ_Order
 	Wapon,
 	Bullet,
 	Monster,
+	Door,
 	BackGround,
 	PixelGround,
 };
@@ -17,7 +18,7 @@ enum class ERenderOrder
 	ForeGround,
 	PixelMap,
 	TileMap,
-	Collision,
+
 	Effect_Back,
 	Effect_Mid,
 	Effect_Front,
@@ -26,6 +27,7 @@ enum class ERenderOrder
 	Monster,
 	Monster_HpBack,
 	Monster_Hp,
+	Door,
 	Boss_Bullet,
 	Boss_IceBullet_Effect,
 	Boss_IceBullet,
@@ -34,10 +36,12 @@ enum class ERenderOrder
 	Wapon,
 	Player,
 	Cursor,
+	Collision,
 };
 
 enum class EColOrder
 {
+	Door,
 	Monster_Col,
 	Monster,
 	Boss_Col,

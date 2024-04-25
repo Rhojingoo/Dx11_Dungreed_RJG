@@ -12,6 +12,7 @@
 #include "Icicle_Bullet.h"
 #include "IceSpear.h"
 #include "Player_HpBar.h"
+#include "Town_DungeonDoor.h"
 
 
 APlayer::APlayer()
@@ -123,6 +124,20 @@ void APlayer::CollisionCheckFunction()
 			if (IceSpear != nullptr)
 			{
 				//IceSpear->BombBullet();
+				int a = 0;
+				return;
+			}
+		}
+	);
+
+
+	Collision->CollisionEnter(EColOrder::Door, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			AActor* Actors = _Collison->GetActor();
+			ATown_DungeonDoor* Town = dynamic_cast<ATown_DungeonDoor*>(Actors);
+			if (Town != nullptr)
+			{
+				Town->Dungeon_Enter();
 				int a = 0;
 				return;
 			}

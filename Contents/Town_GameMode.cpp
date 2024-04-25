@@ -8,6 +8,7 @@
 #include "ContentsHelper.h"
 #include "Target.h"
 #include <EngineCore/Image.h>
+#include "Town_DungeonDoor.h"
 
 
 ATown_GameMode::ATown_GameMode()
@@ -25,13 +26,15 @@ void ATown_GameMode::LevelStart(ULevel* _PrevLevel)
 
 	Player = GetWorld()->SpawnActor<APlayer>("Player", EOBJ_Order::Player);
 	Player->SetActorLocation({ 640.0f, -360.0f, 200.0f });
-	//Player->SetColTown();
+	Player->SetColTown();
 	Cursor = GetWorld()->SpawnActor<ATarget>("Player2");
 	Cursor->SetActorLocation({ 640.0f, -360.0f, 200.0f });
 
 	UContentsHelper::MapTex = UEngineTexture::FindRes("TownModelPX.png");
 	UContentsHelper::MapTexScale = UContentsHelper::MapTex->GetScale();
-	Player->SetColTown();
+
+	Town_Door = GetWorld()->SpawnActor<ATown_DungeonDoor>("Door", EOBJ_Order::Door);
+	Town_Door->SetActorLocation({ 5050.0f, -1450.0f, 200.0f });
 }
 
 void ATown_GameMode::LevelEnd(ULevel* _NextLevel)
@@ -39,6 +42,7 @@ void ATown_GameMode::LevelEnd(ULevel* _NextLevel)
 	Player->Destroy();
 	Camera->Destroy();
 	Cursor->Destroy();
+	Town_Door->Destroy();
 }
 
 void ATown_GameMode::BeginPlay()

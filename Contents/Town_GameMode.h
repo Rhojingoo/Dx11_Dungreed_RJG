@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/GameMode.h>
 
+class ATown_DungeonDoor;
 class ATarget;
 class ABoss;
 class APlayer;
@@ -30,5 +31,7 @@ private:
 	std::shared_ptr<APlayer> Player = nullptr;
 	std::shared_ptr<ABoss> Boss = nullptr;
 	std::shared_ptr<ATarget> Cursor = nullptr;
+	std::shared_ptr<ATown_DungeonDoor> Town_Door = nullptr;
+
 };
 
