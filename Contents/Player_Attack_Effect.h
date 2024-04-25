@@ -4,8 +4,8 @@
 enum class Sword_Type
 {
 	None,
-	Lasli_Sword,
-	Fire_Sword,
+	Demon_Sword,
+	Demon_Blade,
 	AttackEnd,
 };
 
@@ -61,11 +61,11 @@ private:
 	bool Attack = false;
 	float4 Color;
 
-	const float Lasli_Sword_MaxDamage = 140.f;
-	const float Lasli_Sword_MinDamage = 125.f;
+	const float DemonSword_MaxDamage = 140.f;
+	const float DemonSword_MinDamage = 125.f;
 
-	const float Fire_Sword_MaxDamage = 150.f;
-	const float Fire_Sword_MinDamage = 120.f;
+	const float DemonBlade_MaxDamage = 220.f;
+	const float DemonBlade_MinDamage = 150.f;
 
 	float Sword_Damage = 50.f;
 

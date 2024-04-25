@@ -20,6 +20,7 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 private:
+	UImage* PlayerPicture = nullptr;
 	UImage* PlayerLifeBase = nullptr;
 	UImage* PlayerLifeBack = nullptr;
 	UImage* LifeBar = nullptr;

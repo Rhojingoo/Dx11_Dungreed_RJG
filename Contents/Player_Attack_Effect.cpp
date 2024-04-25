@@ -7,7 +7,7 @@
 #include "IceBullet.h"
 #include "Icicle_Bullet.h"
 
-Sword_Type APlayer_Attack_Effect::SwordType = Sword_Type::Lasli_Sword;
+Sword_Type APlayer_Attack_Effect::SwordType = Sword_Type::Demon_Sword;
 
 
 APlayer_Attack_Effect::APlayer_Attack_Effect()
@@ -33,6 +33,7 @@ void APlayer_Attack_Effect::BeginPlay()
 	Renderer->CreateAnimation("Sword_Swing_Normal", "Sword_Swing_Normal", 0.1f, false);
 	Renderer->CreateAnimation("Sword_Swing_Legend", "Sword_Swing_Legend", 0.1f, false);
 	Renderer->CreateAnimation("FireSword_Swing_Legend", "FireSword_Swing_Legend", 0.1f, false);	
+	Renderer->CreateAnimation("Demon_Blade_Swing_Legend", "Demon_Blade_Swing_Legend", 0.1f, false);
 	Renderer->SetAutoSize(5.f, true);
 	Renderer->SetOrder(ERenderOrder::Attack_Effect);
 
@@ -40,13 +41,13 @@ void APlayer_Attack_Effect::BeginPlay()
 	FVector asd1 = Renderer->GetLocalScale();
 	FVector asd = Renderer->GetWorldScale();
 	Collision->SetScale(Renderer->GetWorldScale());
-	if (SwordType == Sword_Type::Lasli_Sword)
-	{
-		Renderer->ChangeAnimation("Sword_Swing_Legend");
-	}
-	else if (SwordType == Sword_Type::Fire_Sword)
+	if (SwordType == Sword_Type::Demon_Sword)
 	{
 		Renderer->ChangeAnimation("FireSword_Swing_Legend");
+	}
+	else if (SwordType == Sword_Type::Demon_Blade)
+	{
+		Renderer->ChangeAnimation("Demon_Blade_Swing_Legend");
 	}
 }	 
 
@@ -66,16 +67,16 @@ void APlayer_Attack_Effect::Tick(float _DeltaTime)
 void APlayer_Attack_Effect::Effect_AttackStart()
 {
 	Renderer->AnimationReset();
-	if (SwordType == Sword_Type::Lasli_Sword)
-	{
-		Renderer->ChangeAnimation("Sword_Swing_Legend");
-
-		Sword_Damage = UContentsHelper::Random(Lasli_Sword_MinDamage, Lasli_Sword_MaxDamage);
-	}
-	else if (SwordType == Sword_Type::Fire_Sword)
+	if (SwordType == Sword_Type::Demon_Sword)
 	{
 		Renderer->ChangeAnimation("FireSword_Swing_Legend");
-		Sword_Damage = UContentsHelper::Random(Fire_Sword_MinDamage, Fire_Sword_MaxDamage);
+
+		Sword_Damage = UContentsHelper::Random(DemonSword_MinDamage, DemonSword_MaxDamage);
+	}
+	else if (SwordType == Sword_Type::Demon_Blade)
+	{
+		Renderer->ChangeAnimation("Demon_Blade_Swing_Legend");
+		Sword_Damage = UContentsHelper::Random(DemonBlade_MinDamage, DemonBlade_MaxDamage);
 	}
 	Renderer->SetActive(true);
 	Collision->SetActive(true);

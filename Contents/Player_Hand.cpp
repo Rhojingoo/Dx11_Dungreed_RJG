@@ -2,10 +2,11 @@
 #include "Player_Hand.h"
 #include <EngineCore/Renderer.h>
 #include "ContentsHelper.h"
+#include <EngineCore/Image.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/DefaultSceneComponent.h>
 
-SwordHand_Type APlayer_Hand::SwordType = SwordHand_Type::Lasli_Sword;
+SwordHand_Type APlayer_Hand::SwordType = SwordHand_Type::Demon_Sword;
 
 APlayer_Hand::APlayer_Hand()
 {
@@ -27,7 +28,7 @@ APlayer_Hand::APlayer_Hand()
 
 	Sword_Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer2");
 	Sword_Renderer->CreateAnimation("Demon_Sword", "Demon_Sword.png", 0.1f);
-	Sword_Renderer->CreateAnimation("Fire_Sword", "Fire_Sword.png", 0.1f); // 별개의 검 (손이랑 좌표 안맞음)
+	Sword_Renderer->CreateAnimation("Demon_Blade", "Demon_Blade.png", 0.1f); // 별개의 검 (손이랑 좌표 안맞음)
 	Sword_Renderer->ChangeAnimation("Demon_Sword"); 
 	Sword_Renderer->SetScale(FVector(6.0f, 20.0f, 100.0f));
 	Sword_Renderer->AddPosition({ 1.0f, 10.0f, -1.0f });
@@ -51,6 +52,34 @@ void APlayer_Hand::BeginPlay()
 {
 	Super::BeginPlay();
 
+
+	Weapon_Front_UI = CreateWidget<UImage>(GetWorld(), "Weapon_Front_UI");
+	Weapon_Front_UI->AddToViewPort(1);
+	Weapon_Front_UI->SetSprite("Wapone_UI_First.png");
+	//Weapon_Front_UI->SetSprite("Wapone_UI_Second.png");
+	Weapon_Front_UI->SetAutoSize(4.f, true);
+	Weapon_Front_UI->SetPosition({ 540, -280 });
+	Weapon_Front_UI->SetOrder(1);
+
+	Weapon_Back_UI = CreateWidget<UImage>(GetWorld(), "Weapon_Back_UI");
+	Weapon_Back_UI->AddToViewPort(0);
+	Weapon_Back_UI->SetSprite("Wapone_UI_Second.png");
+	Weapon_Back_UI->SetAutoSize(4.f, true);
+	Weapon_Back_UI->SetPosition({ 550, -270 });
+	Weapon_Back_UI->SetOrder(0);
+
+
+	WeaponType = CreateWidget<UImage>(GetWorld(), "WeaponType");
+	WeaponType->AddToViewPort(1);
+	WeaponType->SetSprite("DemonSword_UI.png");
+	//WeaponType->SetSprite("DemonBlade_UI.png");
+	WeaponType->SetAutoSize(2.5f, true);
+	WeaponType->SetPosition({ 540, -280 });
+	WeaponType->SetOrder(1);
+	
+
+
+
 	Renderer->CreateAnimation("Player_Hand", "Player_Hand", 0.1f);
 	Renderer->ChangeAnimation("Player_Hand");
 	Renderer->SetOrder(ERenderOrder::Wapon);
@@ -58,13 +87,17 @@ void APlayer_Hand::BeginPlay()
 	Hand_Renderer->SetOrder(ERenderOrder::Wapon);
 	InputOn();
 
-	if (SwordType == SwordHand_Type::Lasli_Sword)
+	if (SwordType == SwordHand_Type::Demon_Sword)
 	{
 		Sword_Renderer->ChangeAnimation("Demon_Sword");
+		Weapon_Front_UI->SetSprite("Wapone_UI_First.png");
+		WeaponType->SetSprite("DemonSword_UI.png");
 	}
-	else if (SwordType == SwordHand_Type::Fire_Sword)
+	else if (SwordType == SwordHand_Type::Demon_Blade)
 	{
-		Sword_Renderer->ChangeAnimation("Fire_Sword");
+		Sword_Renderer->ChangeAnimation("Demon_Blade");
+		Weapon_Front_UI->SetSprite("Wapone_UI_Second.png");
+		WeaponType->SetSprite("DemonBlade_UI.png");
 	}
 }
 
@@ -308,13 +341,17 @@ void APlayer_Hand::SwordType_Choice()
 {
 	if (UEngineInput::IsPress('1'))
 	{
-		ChangeSwordType(SwordHand_Type::Lasli_Sword);
-		Swing_EF->SwordEffectType_Choice(Sword_Type::Lasli_Sword);
+		ChangeSwordType(SwordHand_Type::Demon_Sword);
+		Swing_EF->SwordEffectType_Choice(Sword_Type::Demon_Sword);
+		Weapon_Front_UI->SetSprite("Wapone_UI_First.png");
+		WeaponType->SetSprite("DemonSword_UI.png");
 	}
 	if (UEngineInput::IsPress('2'))
 	{
-		ChangeSwordType(SwordHand_Type::Fire_Sword);
-		Swing_EF->SwordEffectType_Choice(Sword_Type::Fire_Sword);
+		ChangeSwordType(SwordHand_Type::Demon_Blade);
+		Swing_EF->SwordEffectType_Choice(Sword_Type::Demon_Blade);
+		Weapon_Front_UI->SetSprite("Wapone_UI_Second.png");
+		WeaponType->SetSprite("DemonBlade_UI.png");
 	}
 
 }
@@ -324,11 +361,11 @@ void APlayer_Hand::ChangeSwordType(SwordHand_Type _Set)
 	{
 		switch (_Set)
 		{
-		case SwordHand_Type::Lasli_Sword:
+		case SwordHand_Type::Demon_Sword:
 			LasliSword_Choice();
 			break;
-		case SwordHand_Type::Fire_Sword:
-			FireSword_Choice();
+		case SwordHand_Type::Demon_Blade:
+			DemonBlade_Choice();
 			break;
 
 		default:
@@ -337,9 +374,9 @@ void APlayer_Hand::ChangeSwordType(SwordHand_Type _Set)
 	}
 	SwordType = _Set;
 }
-void APlayer_Hand::FireSword_Choice()
+void APlayer_Hand::DemonBlade_Choice()
 {
-	Sword_Renderer->ChangeAnimation("Fire_Sword"); 
+	Sword_Renderer->ChangeAnimation("Demon_Blade"); 
 }
 void APlayer_Hand::LasliSword_Choice()
 {

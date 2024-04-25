@@ -60,7 +60,7 @@ void UGameCore::Initialize()
 		// 자른 스프라이트 데이터 변경한다.
 		UEngineSprite::CreateCutting("Title_Bird.png", 8, 1);
 		UEngineSprite::CreateCutting("Demon_Sword.png", 9, 1);
-		UEngineSprite::CreateCutting("Fire_Sword.png", 13, 1);
+		UEngineSprite::CreateCutting("Demon_Blade.png", 13, 1);
 		UEngineSprite::CreateCutting("Dash_Smoke.png", 5, 1);
 		UEngineSprite::CreateCutting("Run_Smoke.png", 6, 1);
 		UEngineSprite::CreateCutting("CuttingTest.png", 4, 3);
@@ -105,8 +105,6 @@ void UGameCore::Initialize()
 	GEngine->CreateLevel<AMonster03_GameMode>("Mon03_Level");
 	GEngine->CreateLevel<ABoss_GameMode>("BossLevel");
 
-	GEngine->ChangeLevel("BossLevel");
-
-
+	GEngine->ChangeLevel("TownLevel");
 
 }

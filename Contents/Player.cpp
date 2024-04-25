@@ -52,14 +52,11 @@ void APlayer::BeginPlay()
 
 	Player_HpBAR = GetWorld()->SpawnActor<APlayer_HpBar>("AHP_Bar");
 
-
-
 	for (int a = 0; a < 10; a++)
 	{
 		After_Image[a] = GetWorld()->SpawnActor<APlayer_AfterImage>("AfterImage");
 	}
 	
-
 	Renderer->CreateAnimation("Player_Idle", "Player_Idle",0.1f);
 	Renderer->CreateAnimation("Player_Jump", "Player_Jump", 0.1f);
 	Renderer->CreateAnimation("Player_Run", "Player_Run", 0.1f);
@@ -71,7 +68,6 @@ void APlayer::BeginPlay()
 	Renderer->CreateAnimation("Boss_Exit", "Boss_Exit", 0.1f);
 	Renderer->CreateAnimation("Boss_Idle", "Boss_Idle", 0.1f);
 
-	//Renderer->SetSprite("CuttingTest.png", 11);
 	Renderer->SetAutoSize(3.f, true);
 	
 	Renderer->SetOrder(ERenderOrder::Player);	

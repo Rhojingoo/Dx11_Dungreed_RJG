@@ -7,8 +7,8 @@
 enum class SwordHand_Type
 {
 	None,
-	Lasli_Sword,
-	Fire_Sword,
+	Demon_Sword,
+	Demon_Blade,
 	AttackEnd,
 };
 
@@ -20,6 +20,7 @@ enum class Hand_LeftRight
 	End
 };
 
+class UImage;
 class UCollision;
 class USpriteRenderer;
 class APlayer_Hand : public AActor
@@ -55,11 +56,16 @@ protected:
 
 	void SwordType_Choice();
 	void ChangeSwordType(SwordHand_Type _Set);
-	void FireSword_Choice();
+	void DemonBlade_Choice();
 	void LasliSword_Choice();
 
 private:
 	static SwordHand_Type SwordType;
+
+	UImage* Weapon_Front_UI = nullptr;
+	UImage* Weapon_Back_UI = nullptr;
+	UImage* WeaponType = nullptr;
+
 
 	USpriteRenderer* Renderer = nullptr;
 	USpriteRenderer* Hand_Renderer = nullptr;
