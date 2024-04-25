@@ -3,6 +3,16 @@
 #include "Target.h"
 #include "Player_Attack_Effect.h"
 
+
+enum class SwordHand_Type
+{
+	None,
+	Lasli_Sword,
+	Fire_Sword,
+	AttackEnd,
+};
+
+
 enum class Hand_LeftRight
 {
 	Left,
@@ -41,7 +51,18 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+
+	void SwordType_Choice();
+	void SwordType_Update();
+	void ChangeSwordType(SwordHand_Type _Set);
+	void FireSword_Choice();
+	void FireSword_ChoiceStart();
+	void LasliSword_Choice();
+	void LasliSword_ChoiceStart();
+
 private:
+	static SwordHand_Type SwordType;
+
 	USpriteRenderer* Renderer = nullptr;
 	USpriteRenderer* Hand_Renderer = nullptr;
 	USpriteRenderer* Sword_Renderer = nullptr;

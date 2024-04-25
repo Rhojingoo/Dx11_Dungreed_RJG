@@ -5,6 +5,8 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/DefaultSceneComponent.h>
 
+SwordHand_Type APlayer_Hand::SwordType = SwordHand_Type::Lasli_Sword;
+
 APlayer_Hand::APlayer_Hand()
 {
 	//SetRoot(Renderer);
@@ -26,7 +28,7 @@ APlayer_Hand::APlayer_Hand()
 	Sword_Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer2");
 	Sword_Renderer->CreateAnimation("Demon_Sword", "Demon_Sword.png", 0.1f);
 	Sword_Renderer->CreateAnimation("Fire_Sword", "Fire_Sword.png", 0.1f); // 별개의 검 (손이랑 좌표 안맞음)
-	Sword_Renderer->ChangeAnimation("Demon_Sword");
+	Sword_Renderer->ChangeAnimation("Demon_Sword"); 
 	Sword_Renderer->SetScale(FVector(6.0f, 20.0f, 100.0f));
 	Sword_Renderer->AddPosition({ 1.0f, 10.0f, -1.0f });
 	//Sword_Renderer->SetPivot(EPivot::BOT);//Sword.png
@@ -65,10 +67,8 @@ void APlayer_Hand::Tick(float _DeltaTime)
 	CursorPos = Cursor->GetPos();
 
 	Hand_Dir();
-
 	 
-	Attack_Effect_Dir();	
-	
+	Attack_Effect_Dir();		
 
 	switch (Hand_RL)
 	{
@@ -83,6 +83,31 @@ void APlayer_Hand::Tick(float _DeltaTime)
 	 break;
 	}
 	SetActorRotation(SwordRotation);
+}
+
+void APlayer_Hand::SwordType_Choice()
+{
+}
+
+void APlayer_Hand::SwordType_Update()
+{
+}
+
+
+void APlayer_Hand::FireSword_Choice()
+{
+}
+
+void APlayer_Hand::FireSword_ChoiceStart()
+{
+}
+
+void APlayer_Hand::LasliSword_Choice()
+{
+}
+
+void APlayer_Hand::LasliSword_ChoiceStart()
+{
 }
 
 
@@ -296,3 +321,26 @@ void APlayer_Hand::Attack_Effect_Dir()
 		Attack_Degree = (std::atan2(Attack_EffectDir.Y, Attack_EffectDir.X)) * UEngineMath::RToD;
 	}
 }
+
+
+
+void APlayer_Hand::ChangeSwordType(SwordHand_Type _Set)
+{
+	if (SwordType != _Set)
+	{
+		switch (_Set)
+		{
+		case SwordHand_Type::Lasli_Sword:
+			LasliSword_ChoiceStart();
+			break;
+		case SwordHand_Type::Fire_Sword:
+			FireSword_ChoiceStart();
+			break;
+
+		default:
+			break;
+		}
+	}
+	SwordType = _Set;
+}
+

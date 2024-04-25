@@ -1,6 +1,15 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
+enum class Sword_Type
+{
+	None,
+	Lasli_Sword,
+	Fire_Sword,
+	AttackEnd,
+};
+
+
 enum class AttackState
 {
 	None,
@@ -26,7 +35,7 @@ public:
 	{ 
 		Attack = true;	
 	}
-	float AttackDamage() { return Attack_Damage; }
+	float AttackDamage() { return Lasli_Sword_Damage; }
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -40,13 +49,25 @@ protected:
 	void ChangeState(AttackState _Set);
 	void StateUpdate(float _DeltaTime);
 
+
+	void SwordType_Choice();
+	void SwordType_Update();
+	void ChangeSwordType(Sword_Type _Set);
+	void FireSword_Choice();
+	void FireSword_ChoiceStart();
+	void LasliSword_Choice();
+	void LasliSword_ChoiceStart();
+	void CollisionCheck_Function();
+
 private:
 	USpriteRenderer* Renderer = nullptr;
 	UCollision* Collision = nullptr;
 	AttackState WapponState = AttackState::None;
+	static Sword_Type SwordType;
 	bool Attack = false;
 	float4 Color;
 
-	float Attack_Damage = 100.f;
+	float Lasli_Sword_Damage = 100.f;
+	float Fire_Sword_Damage = 100.f;
 };
 

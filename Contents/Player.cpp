@@ -90,11 +90,15 @@ void APlayer::Tick(float _DeltaTime)
 	FVector PlayerPos = GetActorLocation();
 	Right_Hand->SetActorLocation({ PlayerPos });	
 	PlayAfterImage(_DeltaTime, PlayerPos);	
+	CollisionCheckFunction();	
+}
 
 
+void APlayer::CollisionCheckFunction()
+{
 	Collision->CollisionEnter(EColOrder::Boss_IceBullet, [=](std::shared_ptr<UCollision> _Collison)
-		{		
-			AActor* Actors =_Collison->GetActor();
+		{
+			AActor* Actors = _Collison->GetActor();
 			AIceBullet* IceBullet = dynamic_cast<AIceBullet*>(Actors);
 			if (IceBullet != nullptr)
 			{
@@ -129,5 +133,3 @@ void APlayer::Tick(float _DeltaTime)
 		}
 	);
 }
-
-

@@ -131,5 +131,6 @@ private:
 
 	void Town_ColorSet();
 	void TileMap_ColorSet();
+	void CollisionCheckFunction();
 };
 
