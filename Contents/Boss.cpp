@@ -64,7 +64,7 @@ void ABoss::BeginPlay()
 	Effect_Renderer->SetOrder(ERenderOrder::Effect_Front);
 	Effect_Renderer->SetActive(false);
 	Effect_Renderer->SetAutoSize(1.5f, true);
-	Effect_Renderer->AddPosition({ 0.f,50.f});
+	Effect_Renderer->AddPosition({ 0.f,85.f});
 	Effect_Renderer->CreateAnimation("Stun", "Stun.png", 0.1f, true);
 
 
@@ -83,47 +83,13 @@ void ABoss::Tick(float _DeltaTime)
 	FVector BossPos = GetActorLocation();
 	for (int Num = 0; Num < 4; Num++)
 	{
-		//IcePillar[0]->SetActorLocation({ BossPos });
 		IcePillar[Num]->SetActorLocation({BossPos});
 	}
 	StateUpdate(_DeltaTime);
-	if (Death == false)
-	{
-		Direction();
-		IcePallarCheck();
-	}
-	{
-		//std::string Msg = std::format("BossCollisionPos : {}\n", Collision->GetWorldPosition().ToString());
-		//UEngineDebugMsgWindow::PushMsg(Msg);
-	}
 
-	Collision->CollisionEnter(EColOrder::Wapon, [=](std::shared_ptr<UCollision> _Collison)
-		{
-			AActor* Actors = _Collison->GetActor();
-			APlayer_Attack_Effect* Wapon = dynamic_cast<APlayer_Attack_Effect*>(Actors);
-			if (Wapon != nullptr)
-			{
-				if (DamageOn == true)
-				{
-					float Damage = Wapon->AttackDamage();
-					Hp -= Damage;
-					float Damageratio = Hp / Max_Hp;
-					Damageratio = 1 - Damageratio;
-					if (Hp <= 0.f)
-					{
-						Effect_Renderer->SetActive(false);
-						StateChange(BossState::Death);
-						Damageratio = 0;
-						Boss_HpBAR->AttackDamege(1);
-						Death = true;
-						return;
-					}
-					Boss_HpBAR->AttackDamege(Damageratio);
-				}		
-				return;
-			}
-		}
-	);
+	DeathCheckFunction();
+	DebugFunction();
+	CollisionCheckFunction();	
 }
 
 void ABoss::StateChange(BossState _State)
@@ -204,7 +170,6 @@ void ABoss::StateUpdate(float _DeltaTime)
 	case BossState::Patton5:
 		Boss_Patton5(_DeltaTime);
 		break;
-
 	case BossState::Ready:
 		Boss_Ready(_DeltaTime);
 		break;
@@ -249,7 +214,6 @@ void ABoss::Boss_IntroStart()
 		IcePillar[a]->StateChange(IcePillarState::Intro);
 	}
 }
-
 void ABoss::Boss_Intro(float _DeltaTime)
 {
 	for (int Num = 0; Num < 4; Num++)
@@ -282,7 +246,6 @@ void ABoss::Boss_IdleStart()
 		IcePillar[Num]->SetActorRotation({ PlRotation[Num] });
 	}
 }
-
 void ABoss::Boss_Idle(float _DeltaTime)
 {
 	Boss_Time += _DeltaTime;
@@ -311,10 +274,8 @@ void ABoss::Boss_Idle(float _DeltaTime)
 			}
 			Regenerate = false;
 		}
-		else
+		else if (TestAttack ==true)
 		{
-			//UEngineInput::IsDown('1')
-
 			if (UEngineInput::IsDown('3'))
 			{
 				StateChange(BossState::Patton1);
@@ -346,16 +307,40 @@ void ABoss::Boss_Idle(float _DeltaTime)
 				IceSpear_Aattack();
 				Boss_Time = 0.f;
 			}
-
-
-			//Boss_Time += _DeltaTime;
-			//if (Boss_Time > 3.f)
-			//{
-			//	//StateChange(BossState::Patton1);
-			//	//StateChange(BossState::Patton2);
-			//	//StateChange(BossState::Patton3);
-			//	Boss_Time = 0.f;
-			//}
+		}
+		else
+		{
+			AttackChoice = UContentsHelper::Random(1, 5);
+			if (AttackChoice == 1)
+			{
+				StateChange(BossState::Patton1);
+				AttackChoice = 0;
+				Boss_Time = 0.f;
+			}
+			else if (AttackChoice == 2)
+			{
+				StateChange(BossState::Patton2);
+				AttackChoice = 0;
+				Boss_Time = 0.f;
+			}
+			else if (AttackChoice == 3)
+			{
+				StateChange(BossState::Patton3);
+				AttackChoice = 0;
+				Boss_Time = 0.f;
+			}
+			else if (AttackChoice == 4)
+			{
+				StateChange(BossState::Patton4);
+				AttackChoice = 0;
+				Boss_Time = 0.f;
+			}
+			else if (AttackChoice == 5)
+			{
+				StateChange(BossState::Patton5);
+				AttackChoice = 0;
+				Boss_Time = 0.f;
+			}
 		}
 	}
 }
@@ -627,13 +612,43 @@ void ABoss::Boss_Patton5Start()
 	for (int Num = 0; Num < 4; Num++)
 	{
 		Bullet[Num] = GetWorld()->SpawnActor<AIcicle_Bullet>("IcicleBullet");
-		float offset = (Num - 1.5) * 100.f; 
-		Bullet[Num]->SetActorLocation({ Setpos.X + offset, Setpos.Y+200, Setpos.Z+1 });
+		float offset = (Num - 1.5) * 150.f; 
+		Bullet[Num]->SetActorLocation({ Setpos.X + offset, Setpos.Y+350, Setpos.Z+1 });
 		FVector asd =Bullet[Num]->GetActorLocation();
 		Bullet[Num]->AttackOn();
 	}
 	IcicleCreat = false;
 }
+void ABoss::Boss_Patton5(float _DeltaTime)
+{
+	if (IcicleCreat == false)
+	{
+		FVector Setpos = Player->GetActorLocation();
+		std::shared_ptr<AIcicle_Bullet> Bullet[4];
+
+		for (int Num = 0; Num < 4; Num++)
+		{
+			Bullet[Num] = GetWorld()->SpawnActor<AIcicle_Bullet>("IcicleBullet");
+			int offset = (Num - 1.5) * 150.f;
+			Bullet[Num]->SetActorLocation({ Setpos.X + offset-75.f, Setpos.Y + 350.f,Setpos.Z + 1 });
+			Bullet[Num]->AttackOn();
+		}
+		IcicleCreat = true;
+	}
+	else
+	{
+		StateChange(BossState::Idle);
+		return;
+	}
+
+	if (UEngineInput::IsDown('1'))
+	{
+		StateChange(BossState::Idle);
+		Boss_Time = 0.f;
+	}
+}
+
+
 void ABoss::IcePallarCheck()
 {
 	for (int Num = 0; Num < 4; Num++)
@@ -645,7 +660,6 @@ void ABoss::IcePallarCheck()
 	}
 	StateChange(BossState::Fainting);
 }
-
 void ABoss::Boss_FaintingStart()
 {
 	Effect_Renderer->SetActive(true);
@@ -745,29 +759,7 @@ void ABoss::Boss_Fainting(float _DeltaTime)
 }
 
 
-void ABoss::Boss_Patton5(float _DeltaTime)
-{
-	if (IcicleCreat == false)
-	{
-		FVector Setpos = Player->GetActorLocation();
-		std::shared_ptr<AIcicle_Bullet> Bullet[4];
 
-		for (int Num = 0; Num < 4; Num++)
-		{
-			Bullet[Num] = GetWorld()->SpawnActor<AIcicle_Bullet>("IcicleBullet");
-			int offset = (Num - 1.5) * 150;
-			Bullet[Num]->SetActorLocation({ Setpos.X + offset, Setpos.Y + 200.f,Setpos.Z + 1 });
-			Bullet[Num]->AttackOn();
-		}
-		IcicleCreat = true;
-	}
-
-	if (UEngineInput::IsDown('1'))
-	{
-		StateChange(BossState::Idle);
-		Boss_Time = 0.f;
-	}
-}
 
 void ABoss::IceSpear_Aattack()
 {
@@ -775,8 +767,8 @@ void ABoss::IceSpear_Aattack()
 	{
 		IceSpear = GetWorld()->SpawnActor<AIceSpear>("IcePillar");
 		FVector Setpos = Player->GetActorLocation();
-		Setpos.Y -= 35;
-
+		//Setpos.Y -= 35;
+		Setpos.Y += 35;
 		IceSpear->SetActorLocation({ Setpos});
 		IceSpear->SetPlayer(Player);
 		IceSpear->AttackOn();
@@ -843,6 +835,7 @@ void ABoss::Boss_DeathStart()
 {
 	Renderer->ChangeAnimation("Boss_Die");
 }
+
 void ABoss::Boss_Death(float _DeltaTime)
 {
 }
@@ -963,4 +956,64 @@ void ABoss::Direction()
 			Renderer->SetDir(EEngineDir::Left);
 		}
 	}
+}
+
+
+
+void ABoss::DeathCheckFunction()
+{
+	if (Death == false)
+	{
+		Direction();
+		IcePallarCheck();
+	}
+}
+
+
+void ABoss::DebugFunction()
+{
+	if (UEngineInput::IsDown('I'))
+	{
+		TestAttack = true;
+	}
+	if (UEngineInput::IsDown('U'))
+	{
+		TestAttack = true;
+	}
+	{
+		//std::string Msg = std::format("BossCollisionPos : {}\n", Collision->GetWorldPosition().ToString());
+		//UEngineDebugMsgWindow::PushMsg(Msg);
+	}
+}
+
+
+void ABoss::CollisionCheckFunction()
+{
+	Collision->CollisionEnter(EColOrder::Wapon, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			AActor* Actors = _Collison->GetActor();
+			APlayer_Attack_Effect* Wapon = dynamic_cast<APlayer_Attack_Effect*>(Actors);
+			if (Wapon != nullptr)
+			{
+				if (DamageOn == true)
+				{
+					float Damage = Wapon->AttackDamage();
+					Hp -= Damage;
+					float Damageratio = Hp / Max_Hp;
+					Damageratio = 1 - Damageratio;
+					if (Hp <= 0.f)
+					{
+						Effect_Renderer->SetActive(false);
+						StateChange(BossState::Death);
+						Damageratio = 0;
+						Boss_HpBAR->AttackDamege(1);
+						Death = true;
+						return;
+					}
+					Boss_HpBAR->AttackDamege(Damageratio);
+				}
+				return;
+			}
+		}
+	);
 }

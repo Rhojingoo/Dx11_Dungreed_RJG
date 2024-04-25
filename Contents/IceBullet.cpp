@@ -33,6 +33,7 @@ AIceBullet::~AIceBullet()
 
 void AIceBullet::AttackStart()
 {
+	DestroyTime = 0.f;
 }
 
 
@@ -45,8 +46,9 @@ void AIceBullet::BeginPlay()
 	Renderer->ChangeAnimation("IceBullet");
 	Renderer->SetOrder(ERenderOrder::Boss_IceBullet);
 
-	EffectRenderer->CreateAnimation("IceBulletEfferct", "IceBulletEfferct", 0.1f, false);
+	EffectRenderer->CreateAnimation("IceBulletEfferct", "IceBulletEfferct", 0.5f, false);
 	EffectRenderer->SetOrder(ERenderOrder::Boss_IceBullet_Effect);
+	EffectRenderer->SetAutoSize(4.f, true);
 	
 	//GetWorld()->InstancingOn<USpriteInstancingRender>(ERenderOrder::Boss_IceBullet);
 	//Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2, 10.f });

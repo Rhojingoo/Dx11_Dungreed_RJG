@@ -5,10 +5,11 @@ enum class Iciclestate
 {
 	Effect,
 	Icicle,
+	Collision,
 	Attack,
 };
 
-
+class UCollision;
 class APlayer;
 class UDefaultSceneComponent;
 class USpriteRenderer;
@@ -27,6 +28,8 @@ public:
 	void SetPlayer(std::shared_ptr<APlayer> _Set) { Player = _Set; };
 	void AttackOn();
 
+	void BombBullet() { ChangeState(Iciclestate::Collision); }
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -40,6 +43,10 @@ protected:
 	void Attack(float _DeltaTime);
 	void AttackStart();
 
+	void ColEnterStart();
+	void ColEnter(float _DeltaTime);
+
+
 	void ChangeState(Iciclestate _Set);
 	void StateUpdate(float _DeltaTime);
 
@@ -48,6 +55,7 @@ private:
 	USpriteRenderer* Renderer = nullptr;
 	USpriteRenderer* EffectRenderer = nullptr;
 	std::shared_ptr<APlayer> Player = nullptr;
+	UCollision* Collision = nullptr;
 	Iciclestate Icicle_state = Iciclestate::Effect;
 
 

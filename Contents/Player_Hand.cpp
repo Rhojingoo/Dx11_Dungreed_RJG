@@ -49,8 +49,6 @@ void APlayer_Hand::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Swing_EF = GetWorld()->SpawnActor<APlayer_Attack_Effect>("R_Hand");
-
 	Renderer->CreateAnimation("Player_Hand", "Player_Hand", 0.1f);
 	Renderer->ChangeAnimation("Player_Hand");
 	Renderer->SetOrder(ERenderOrder::Wapon);

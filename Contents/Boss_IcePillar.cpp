@@ -44,21 +44,50 @@ void ABoss_IcePillar::BeginPlay()
 	Renderer->CreateAnimation("IcePillar", "IcePillar", 0.1f, false);
 	Renderer->CreateAnimation("IcePillarDestroy", "IcePillarDestroy", 0.1f, false);
 	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
+
+
 }
 
-void ABoss_IcePillar::Tick(float _DeltaTime)
-{
-	Super::Tick(_DeltaTime);
-	Pos = GetActorLocation();
-	RenderPos = Renderer->GetWorldPosition();
 
-	StateUpdate(_DeltaTime);
-	Hp_Bar->SetActorLocation(RenderPos);
-	if (Player != nullptr)
-	{
-		PlayerPos = Player->GetActorLocation();
-	}
-	DeathCheck();
+void ABoss_IcePillar::CollisionCheck_Function()
+{
+	Collision->CollisionEnter(EColOrder::Wapon, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			AActor* Actors = _Collison->GetActor();
+			APlayer_Attack_Effect* Wapon = dynamic_cast<APlayer_Attack_Effect*>(Actors);
+			if (Wapon != nullptr)
+			{
+				float Damage = Wapon->AttackDamage();
+				Hp -= Damage;
+				float Damageratio = Hp / MaxHp;
+				if (Hp <= 0.f)
+				{
+					AttackEnd = true;
+					StateChange(IcePillarState::Death);
+					Damageratio = 0;
+					Hp_Bar->AttackDamege(0);
+					return;
+				}
+				Hp_Bar->AttackDamege(Damageratio);
+			}
+		}
+	);
+
+	Collision->CollisionExit(EColOrder::Wapon, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			AActor* Actors = _Collison->GetActor();
+			APlayer_Attack_Effect* Wapon = dynamic_cast<APlayer_Attack_Effect*>(Actors);
+
+			if (Wapon != nullptr)
+			{
+				int a = 0;
+			}
+		}
+	);
+}
+
+void ABoss_IcePillar::DebugCheck_Function()
+{
 	{
 		std::string Msg = std::format("IcePalliarCollisionPos : {}\n", Collision->GetWorldPosition().ToString());
 		UEngineDebugMsgWindow::PushMsg(Msg);
@@ -74,42 +103,24 @@ void ABoss_IcePillar::Tick(float _DeltaTime)
 		StateChange(IcePillarState::Death);
 		Hp_Bar->AttackDamege(1);
 	}
+}
 
 
-	Collision->CollisionEnter(EColOrder::Wapon, [=](std::shared_ptr<UCollision> _Collison)
-		{
-			AActor* Actors = _Collison->GetActor();
-			APlayer_Attack_Effect* Wapon = dynamic_cast<APlayer_Attack_Effect*>(Actors);
-			if (Wapon != nullptr)
-			{
-				float Damage = Wapon->AttackDamage();
-				Hp -= Damage;
-				float Damageratio = Hp / MaxHp;
-				if (Hp <= 0.f)
-				{
-					StateChange(IcePillarState::Death);
-					Damageratio = 0;
-					Hp_Bar->AttackDamege(1);
-					return;
-				}
-				Hp_Bar->AttackDamege(Damageratio);
-			}
-		}
-	);
+void ABoss_IcePillar::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+	Pos = GetActorLocation();
+	RenderPos = Renderer->GetWorldPosition();
 
-	Collision->CollisionExit(EColOrder::Wapon, [=](std::shared_ptr<UCollision> _Collison)
-		{
-			AActor* Actors = _Collison->GetActor();
-			APlayer_Attack_Effect* Wapon = dynamic_cast<APlayer_Attack_Effect*>(Actors);
-			
-			if (Wapon != nullptr)
-			{
-				int a= 0;
-			}
-		}
-	);
-
-
+	StateUpdate(_DeltaTime);
+	Hp_Bar->SetActorLocation(RenderPos);
+	if (Player != nullptr)
+	{
+		PlayerPos = Player->GetActorLocation();
+	}
+	DeathCheck();
+	CollisionCheck_Function();	
+	DebugCheck_Function();
 }
 
 
@@ -225,14 +236,12 @@ void ABoss_IcePillar::StateUpdate(float _DeltaTime)
 void ABoss_IcePillar::IcePillar_IntroStart()
 {
 	Renderer->ChangeAnimation("IcePillar");
-
 	LocalRottation = Renderer->GetLocalRotation();
 	WorldRottation = Renderer->GetWorldRotation();
 }
 
 void ABoss_IcePillar::IcePillar_Intro(float _DeltaTime)
 {
-	//AddActorRotation(float4{ 0.0f, 0.0f, 1.0f } *180.0f * _DeltaTime);
 	Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
 	IntroCheck = Renderer->IsCurAnimationEnd();
 }
@@ -601,9 +610,9 @@ void ABoss_IcePillar::IcePillar_AttackStart_2()
 
 void ABoss_IcePillar::IcePillar_Attack_2(float _DeltaTime)
 {
-	if (Death == false)
+	if (SetBullet == true)
 	{
-		if (SetBullet == true)
+		if (Death == false)
 		{
 			FVector RootRENDERPos = Root->GetWorldRotation();
 			GetActorTransform().GetRotation();
@@ -750,17 +759,17 @@ void ABoss_IcePillar::IcePillar_Attack_2(float _DeltaTime)
 				Create_Bullets = false;
 				AttackEnd = true;
 			}
-
 		}
-		if (AttackEnd == true)
+		else
 		{
-			AttackCount = 0;
+			Create_Bullets = false;
+			AttackEnd = true;
+			SetBullet = false;
 		}
 	}
-	else
+	if (AttackEnd == true)
 	{
-		AttackEnd = true;
-		SetBullet = false;
+		AttackCount = 0;
 	}
 	Renderer->AddRotationDeg(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
 	AddActorRotation(float4{ 0.0f, 0.0f, 1.0f } *500.0f * _DeltaTime);
@@ -828,7 +837,6 @@ void ABoss_IcePillar::CreatBullet(FVector _Dir, FVector _Pos)
 	std::shared_ptr<AIceBullet> Bullet = GetWorld()->SpawnActor<AIceBullet>("IceBullet");
 
 	Bullet->SetActorLocation(_Pos);
-	//_Dir.Normalize2D();
 	_Dir.Z = 0;
 	_Dir.X *= UEngineMath::DToR;
 	_Dir.Y *= UEngineMath::DToR;

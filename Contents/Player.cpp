@@ -10,6 +10,7 @@
 #include "Player_AfterImage.h"
 #include "IceBullet.h"
 #include "Icicle_Bullet.h"
+#include "IceSpear.h"
 #include "Player_HpBar.h"
 
 
@@ -25,6 +26,7 @@ APlayer::APlayer()
 	Collision->SetupAttachment(Root);
 	Collision->SetCollisionGroup(EColOrder::Player);
 	Collision->SetCollisionType(ECollisionType::RotRect);
+	Collision->AddPosition({ 0.f,25.f });
 
 	SetRoot(Root);
 }
@@ -74,7 +76,7 @@ void APlayer::BeginPlay()
 	
 	Renderer->SetOrder(ERenderOrder::Player);	
 	Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2,1.f});
-	Collision->AddPosition({0.f, 0.25f });
+	Collision->AddPosition({0.f, 0.30f });
 	
 	Renderer->ChangeAnimation("Player_Idle");
 	StateInit();
@@ -99,21 +101,33 @@ void APlayer::Tick(float _DeltaTime)
 				IceBullet->BombBullet();
 				return;
 			}
-			int a = 0;
 		}
 	);
 
-	//Collision->CollisionExit(EColOrder::Boss_IceBullet, [=](std::shared_ptr<UCollision> _Collison)
-	//	{
-	//		int a = 0;
-	//	}
-	//);
+	Collision->CollisionEnter(EColOrder::Boss_Icicle_Bullet, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			AActor* Actors = _Collison->GetActor();
+			AIcicle_Bullet* IceBullet = dynamic_cast<AIcicle_Bullet*>(Actors);
+			if (IceBullet != nullptr)
+			{
+				IceBullet->BombBullet();
+				return;
+			}
+		}
+	);
 
-	//Collision->CollisionStay(EColOrder::Boss_IceBullet, [=](std::shared_ptr<UCollision> _Collison)
-	//	{
-	//		int a = 0;
-	//	}
-	//);
+	Collision->CollisionEnter(EColOrder::Boss_IceSpear, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			AActor* Actors = _Collison->GetActor();
+			AIceSpear* IceSpear = dynamic_cast<AIceSpear*>(Actors);
+			if (IceSpear != nullptr)
+			{
+				//IceSpear->BombBullet();
+				int a = 0;
+				return;
+			}
+		}
+	);
 }
 
 

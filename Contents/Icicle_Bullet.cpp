@@ -13,7 +13,13 @@ AIcicle_Bullet::AIcicle_Bullet()
 
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Renderer->SetupAttachment(Root);
-	Renderer->SetPivot(EPivot::BOT);
+	//Renderer->SetPivot(EPivot::BOT);
+
+	Collision = CreateDefaultSubObject<UCollision>("Collision");
+	Collision->SetupAttachment(Renderer);
+	Collision->SetCollisionGroup(EColOrder::Boss_Icicle_Bullet);
+	Collision->SetCollisionType(ECollisionType::RotRect);
+
 
 	EffectRenderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	EffectRenderer->SetupAttachment(Root);
@@ -36,6 +42,7 @@ void AIcicle_Bullet::BeginPlay()
 	Super::BeginPlay();
 	Renderer->SetAutoSize(3.f, true);
 	Renderer->CreateAnimation("Icicle_Bullet", "Icicle_Bullet", 0.1f, false);
+	Renderer->CreateAnimation("IcicleDestroy", "IcicleDestroy", 0.1f, false);
 	//Renderer->ChangeAnimation("IceSpear");
 	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
 	Renderer->AddPosition({ 0.f, 0.f, 0.f });
@@ -107,6 +114,18 @@ void AIcicle_Bullet::Attack(float _DeltaTime)
 
 
 
+void AIcicle_Bullet::ColEnterStart()
+{
+	Renderer->ChangeAnimation("IcicleDestroy");
+}
+
+void AIcicle_Bullet::ColEnter(float _DeltaTime)
+{
+	if (Renderer->IsCurAnimationEnd())
+	{
+		Destroy();
+	}
+}
 
 
 void AIcicle_Bullet::ChangeState(Iciclestate _Set)
@@ -123,6 +142,9 @@ void AIcicle_Bullet::ChangeState(Iciclestate _Set)
 			break;
 		case Iciclestate::Attack:
 			AttackStart();
+			break;
+		case Iciclestate::Collision:
+			ColEnterStart();
 			break;
 		default:
 			break;
@@ -144,6 +166,9 @@ void AIcicle_Bullet::StateUpdate(float _DeltaTime)
 		break;
 	case Iciclestate::Attack:
 		Attack(_DeltaTime);
+		break;
+	case Iciclestate::Collision:
+		ColEnter(_DeltaTime);
 		break;
 	default:
 		break;

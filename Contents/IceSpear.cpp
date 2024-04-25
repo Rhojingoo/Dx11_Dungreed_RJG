@@ -12,11 +12,17 @@ AIceSpear::AIceSpear()
 
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Renderer->SetupAttachment(Root);
-	Renderer->SetPivot(EPivot::BOT);
+	//Renderer->SetPivot(EPivot::BOT);
+
+	Collision = CreateDefaultSubObject<UCollision>("Collision");
+	Collision->SetupAttachment(Renderer);
+	Collision->SetCollisionGroup(EColOrder::Boss_IceSpear);
+	Collision->SetCollisionType(ECollisionType::RotRect);
+
 
 	EffectRenderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	EffectRenderer->SetupAttachment(Root);
-	EffectRenderer->SetPivot(EPivot::BOT);
+	//EffectRenderer->SetPivot(EPivot::BOT);
 	SetRoot(Root);
 }
 
@@ -33,7 +39,7 @@ void AIceSpear::AttackOn()
 void AIceSpear::BeginPlay()
 {
 	Super::BeginPlay();
-	Renderer->SetAutoSize(3.f, true);
+	Renderer->SetAutoSize(2.f, true);
 	Renderer->CreateAnimation("IceSpear", "IceSpear", 0.1f, false);
 	//Renderer->ChangeAnimation("IceSpear");
 	Renderer->SetOrder(ERenderOrder::Boss_Bullet);
@@ -95,8 +101,7 @@ void AIceSpear::AttackStart()
 void AIceSpear::Attack(float _DeltaTime)
 {
 	if (RightAttack == true)
-	{
-		
+	{		
 		AttPos += FVector::Right * Speed * _DeltaTime;
 		AddActorLocation(AttPos);
 	}

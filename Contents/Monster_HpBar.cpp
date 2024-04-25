@@ -11,7 +11,7 @@ AMonster_HpBar::AMonster_HpBar()
 	LifeBack->SetupAttachment(Root);
 	LifeBack->SetPivot(EPivot::BOT);
 	LifeBack->SetScale(FVector(74.0f, 16.0f, 100.0f));
-	LifeBack->AddPosition({ 0.0f, 0.0f, 0.0f });
+	LifeBack->AddPosition({ 0.0f, -50.0f, 0.0f });
 
 	LifeBar = CreateDefaultSubObject<USpriteRenderer>("LifeBar");
 	LifeBar->SetupAttachment(LifeBack);
@@ -55,12 +55,13 @@ void AMonster_HpBar::BeginPlay()
 	LifeBack->SetActive(false);
 	LifeBar->SetActive(false);
 	MaxLife = LifeBar->GetLocalScale().X;
+	Life = MaxLife;
 }
 
 void AMonster_HpBar::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	Life = LifeBar->GetLocalScale().X;
+	//Life = LifeBar->GetLocalScale().X;
 
 	if (Attack == true)
 	{
@@ -75,10 +76,10 @@ void AMonster_HpBar::Tick(float _DeltaTime)
 		}
 		else
 		{
+			float ratioLife = MaxLife * Attackratio;
 			LifeBack->SetActive(true);
 			LifeBar->SetActive(true);
-
-			Life = Life - Life * Attackratio;
+			Life = MaxLife- (MaxLife - ratioLife);
 			LifeBar->SetScale({ Life, 1.f });
 		}
 

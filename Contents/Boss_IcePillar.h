@@ -72,7 +72,8 @@ protected:
 	void CreatBullet(FVector _Dir, FVector _Pos);
 	void DeathCheck();
 
-
+	void CollisionCheck_Function();
+	void DebugCheck_Function();
 
 private:
 	FVector BulletDir = {};

@@ -86,6 +86,11 @@ protected:
 
 	void Boss_Death(float _DeltaTime);
 	void Boss_DeathStart();
+
+
+	void CollisionCheckFunction();
+	void DebugFunction();
+	void DeathCheckFunction();
 		
 	
 private:
@@ -132,5 +137,7 @@ private:
 	const float MinY_Map_Pos = 450.f;
 
 	bool Death = false;
+	int AttackChoice = 0;
+	bool TestAttack = false;
 };
 

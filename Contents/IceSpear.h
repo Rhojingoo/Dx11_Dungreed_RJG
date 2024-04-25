@@ -9,6 +9,7 @@ enum class Spearstate
 	Attack,
 };
 
+class UCollision;
 class APlayer;
 class UDefaultSceneComponent;
 class USpriteRenderer;
@@ -32,13 +33,17 @@ public:
 		RightAttack = true; 
 		EffectRenderer->SetDir(EEngineDir::Right);
 		Renderer->SetDir(EEngineDir::Right);
+		Renderer->AddPosition({ -500.f,0.f });
 	}
 	void Attack_Left()
 	{
 		LeftAttack = true;
 		EffectRenderer ->SetDir(EEngineDir::Left);
 		Renderer->SetDir(EEngineDir::Left);
+		Renderer->AddPosition({ 500.f,0.f });
 	}
+
+	
 
 protected:
 	void BeginPlay() override;
@@ -61,11 +66,12 @@ private:
 	USpriteRenderer* Renderer = nullptr;
 	USpriteRenderer* EffectRenderer = nullptr;
 	std::shared_ptr<APlayer> Player = nullptr;
+	UCollision* Collision = nullptr;
 	Spearstate Spear_state = Spearstate::Effect;
 
 	bool Attack_Start = false;
 	bool EffectEnd = false;
-	float Speed = 250.f;
+	float Speed = 50.f;
 	FVector AttPos = {};
 	bool RightAttack = false;
 	bool LeftAttack = false;
