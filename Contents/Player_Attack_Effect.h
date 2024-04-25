@@ -35,7 +35,10 @@ public:
 	{ 
 		Attack = true;	
 	}
-	float AttackDamage() { return Lasli_Sword_Damage; }
+	float AttackDamage() { return Sword_Damage; }
+	static void SwordEffectType_Choice(Sword_Type _Set);
+
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -48,15 +51,6 @@ protected:
 
 	void ChangeState(AttackState _Set);
 	void StateUpdate(float _DeltaTime);
-
-
-	void SwordType_Choice();
-	void SwordType_Update();
-	void ChangeSwordType(Sword_Type _Set);
-	void FireSword_Choice();
-	void FireSword_ChoiceStart();
-	void LasliSword_Choice();
-	void LasliSword_ChoiceStart();
 	void CollisionCheck_Function();
 
 private:
@@ -67,7 +61,13 @@ private:
 	bool Attack = false;
 	float4 Color;
 
-	float Lasli_Sword_Damage = 100.f;
-	float Fire_Sword_Damage = 100.f;
+	const float Lasli_Sword_MaxDamage = 140.f;
+	const float Lasli_Sword_MinDamage = 125.f;
+
+	const float Fire_Sword_MaxDamage = 150.f;
+	const float Fire_Sword_MinDamage = 120.f;
+
+	float Sword_Damage = 50.f;
+
 };
 

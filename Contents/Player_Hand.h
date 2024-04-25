@@ -50,15 +50,13 @@ public:
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-
+	void HandStateUpdate();
+	
 
 	void SwordType_Choice();
-	void SwordType_Update();
 	void ChangeSwordType(SwordHand_Type _Set);
 	void FireSword_Choice();
-	void FireSword_ChoiceStart();
 	void LasliSword_Choice();
-	void LasliSword_ChoiceStart();
 
 private:
 	static SwordHand_Type SwordType;

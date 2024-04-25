@@ -57,6 +57,15 @@ void APlayer_Hand::BeginPlay()
 	Sword_Renderer->SetOrder(ERenderOrder::Wapon);
 	Hand_Renderer->SetOrder(ERenderOrder::Wapon);
 	InputOn();
+
+	if (SwordType == SwordHand_Type::Lasli_Sword)
+	{
+		Sword_Renderer->ChangeAnimation("Demon_Sword");
+	}
+	else if (SwordType == SwordHand_Type::Fire_Sword)
+	{
+		Sword_Renderer->ChangeAnimation("Fire_Sword");
+	}
 }
 
 void APlayer_Hand::Tick(float _DeltaTime)
@@ -67,50 +76,29 @@ void APlayer_Hand::Tick(float _DeltaTime)
 	CursorPos = Cursor->GetPos();
 
 	Hand_Dir();
+	HandStateUpdate();
 	 
+	SwordType_Choice();
 	Attack_Effect_Dir();		
+	
+	SetActorRotation(SwordRotation);
+}
 
+void APlayer_Hand::HandStateUpdate()
+{
 	switch (Hand_RL)
 	{
 	case Hand_LeftRight::Right:
 		Right();
-	 break;
+		break;
 	case Hand_LeftRight::Left:
 		Left();
 	case Hand_LeftRight::End:
-	 break;
+		break;
 	default:
-	 break;
+		break;
 	}
-	SetActorRotation(SwordRotation);
 }
-
-void APlayer_Hand::SwordType_Choice()
-{
-}
-
-void APlayer_Hand::SwordType_Update()
-{
-}
-
-
-void APlayer_Hand::FireSword_Choice()
-{
-}
-
-void APlayer_Hand::FireSword_ChoiceStart()
-{
-}
-
-void APlayer_Hand::LasliSword_Choice()
-{
-}
-
-void APlayer_Hand::LasliSword_ChoiceStart()
-{
-}
-
-
 
 void APlayer_Hand::Right()
 {
@@ -147,7 +135,7 @@ void APlayer_Hand::Right()
 
 
 			Attack_EffectDir = Attack_EffectDir * UEngineMath::DToR;
-			Swing_EF = GetWorld()->SpawnActor<APlayer_Attack_Effect>("R_Hand");
+			Swing_EF = GetWorld()->SpawnActor<APlayer_Attack_Effect>("R_Hand");	
 			Swing_EF->SetActorLocation({ GetActorLocation().X - (15.0f* Attack_EffectDir.X), GetActorLocation().Y - (15.0f * Attack_EffectDir.Y),190.f});
 			Swing_EF->SetActorRotation({0.f,0.f,Attack_Degree + 90.f });
 			Swing_EF->AttackOn();
@@ -170,8 +158,6 @@ void APlayer_Hand::Right()
 		return;
 	}
 }
-
-
 void APlayer_Hand::Left()
 {
 
@@ -228,10 +214,6 @@ void APlayer_Hand::Left()
 		return;
 	}
 }
-
-
-
-
 void APlayer_Hand::Hand_Dir()
 {
 	float Dir1 = CursorPos.X - PlayerPos.X;
@@ -281,7 +263,6 @@ void APlayer_Hand::Hand_Dir()
 		}
 	}
 }
-
 void APlayer_Hand::Attack_Effect_Dir()
 {
 	//팔, 소드 회전시 사용되는 Dir
@@ -323,7 +304,20 @@ void APlayer_Hand::Attack_Effect_Dir()
 }
 
 
+void APlayer_Hand::SwordType_Choice()
+{
+	if (UEngineInput::IsPress('1'))
+	{
+		ChangeSwordType(SwordHand_Type::Lasli_Sword);
+		Swing_EF->SwordEffectType_Choice(Sword_Type::Lasli_Sword);
+	}
+	if (UEngineInput::IsPress('2'))
+	{
+		ChangeSwordType(SwordHand_Type::Fire_Sword);
+		Swing_EF->SwordEffectType_Choice(Sword_Type::Fire_Sword);
+	}
 
+}
 void APlayer_Hand::ChangeSwordType(SwordHand_Type _Set)
 {
 	if (SwordType != _Set)
@@ -331,10 +325,10 @@ void APlayer_Hand::ChangeSwordType(SwordHand_Type _Set)
 		switch (_Set)
 		{
 		case SwordHand_Type::Lasli_Sword:
-			LasliSword_ChoiceStart();
+			LasliSword_Choice();
 			break;
 		case SwordHand_Type::Fire_Sword:
-			FireSword_ChoiceStart();
+			FireSword_Choice();
 			break;
 
 		default:
@@ -343,4 +337,11 @@ void APlayer_Hand::ChangeSwordType(SwordHand_Type _Set)
 	}
 	SwordType = _Set;
 }
-
+void APlayer_Hand::FireSword_Choice()
+{
+	Sword_Renderer->ChangeAnimation("Fire_Sword"); 
+}
+void APlayer_Hand::LasliSword_Choice()
+{
+	Sword_Renderer->ChangeAnimation("Demon_Sword"); 
+}
