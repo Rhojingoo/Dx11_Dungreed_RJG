@@ -139,6 +139,9 @@
     <ClInclude Include="Town_DungeonDoor.h">
       <Filter>Level &amp; OBJ\Town_Stage\Town_Object</Filter>
     </ClInclude>
+    <ClInclude Include="Title_UI.h">
+      <Filter>Level &amp; OBJ\Title_Screen\Title_Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -278,6 +281,9 @@
     </ClCompile>
     <ClCompile Include="Town_DungeonDoor.cpp">
       <Filter>Level &amp; OBJ\Town_Stage\Town_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Title_UI.cpp">
+      <Filter>Level &amp; OBJ\Title_Screen\Title_Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
