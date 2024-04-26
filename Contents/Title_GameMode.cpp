@@ -7,6 +7,7 @@
 #include <EngineCore/Camera.h>
 #include "Title_UI.h"
 #include "TitleCusor.h"
+#include "Title_Bird.h"
 
 
 ATitle_GameMode::ATitle_GameMode()
@@ -34,19 +35,25 @@ void ATitle_GameMode::BeginPlay()
 	std::shared_ptr<TitleCusor> TitleCursorUI = GetWorld()->SpawnActor<TitleCusor>("ATitle_CursorUI", EOBJ_Order::Cursor);
 	TitleCursorUI->SetActorLocation({ 0.0f, 0.0f, 200.0f });
 	
+	std::shared_ptr<ATitle_Bird> TitleBird1 = GetWorld()->SpawnActor<ATitle_Bird>("ATitle_CursorUI", EOBJ_Order::Bullet);
+	TitleBird1->SetActorLocation({ -850.0f, 250.0f, 201.0f });
 
+	std::shared_ptr<ATitle_Bird> TitleBird2 = GetWorld()->SpawnActor<ATitle_Bird>("ATitle_CursorUI", EOBJ_Order::Bullet);
+	TitleBird2->SetActorLocation({ -1050.0f, -50.0f, 201.0f });
 
-	//GetWorld()->SpawnActor<APlayer>("Player");
+	std::shared_ptr<ATitle_Bird> TitleBird3 = GetWorld()->SpawnActor<ATitle_Bird>("ATitle_CursorUI", EOBJ_Order::Bullet);
+	TitleBird3->SetActorLocation({ -650.0f, -150.0f, 201.0f });
+
+	std::shared_ptr<ATitle_Bird> TitleBird4 = GetWorld()->SpawnActor<ATitle_Bird>("ATitle_CursorUI", EOBJ_Order::Bullet);
+	TitleBird4->SetActorLocation({ -1550.0f, -50.0f, 201.0f });
+
+	std::shared_ptr<ATitle_Bird> TitleBird5 = GetWorld()->SpawnActor<ATitle_Bird>("ATitle_CursorUI", EOBJ_Order::Bullet);
+	TitleBird5->SetActorLocation({ -1850.0f, -150.0f, 201.0f });
+
 }
 
 void ATitle_GameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	if (true == UEngineInput::IsDown('P'))
-	{
-		GEngine->ChangeLevel("TownLevel");
-		//TestLevel
-		//TownLevel
-	}
 }

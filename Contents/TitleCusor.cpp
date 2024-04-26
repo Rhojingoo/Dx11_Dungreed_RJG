@@ -35,6 +35,12 @@ void TitleCusor::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	{
+		std::string Msg = std::format("TitleCursorPos : {}\n", Renderer->GetWorldPosition().ToString());
+		UEngineDebugMsgWindow::PushMsg(Msg);
+	}
+
+
 
 	Collision->CollisionStay(EColOrder::GameStart_UI, [=](std::shared_ptr<UCollision> _Collison)
 		{
@@ -43,6 +49,11 @@ void TitleCusor::Tick(float _DeltaTime)
 			if (UI_OBJ != nullptr)
 			{
 				UI_OBJ->StartUIOn();
+
+				if (true == UEngineInput::IsDown(VK_LBUTTON))
+				{
+					GEngine->ChangeLevel("TownLevel");
+				}
 				return;
 			}
 		}
@@ -55,6 +66,11 @@ void TitleCusor::Tick(float _DeltaTime)
 			if (UI_OBJ != nullptr)
 			{
 				UI_OBJ->EndUIOn();
+				if (true == UEngineInput::IsDown(VK_LBUTTON))
+				{
+					//GEngine->ChangeLevel("TownLevel");
+				}
+
 				return;
 			}
 		}

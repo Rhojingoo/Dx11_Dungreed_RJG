@@ -23,7 +23,11 @@ protected:
 private:
 	USpriteRenderer* FrontCloud_Renderer = nullptr;
 	USpriteRenderer* BackCloud_Renderer = nullptr;
-	FVector Vertexplus = {};
+	USpriteRenderer* Clouds_Renderer = nullptr;
+
+	FVector FrontVertexplus = {};
+	FVector BackVertexplus = {};
+	FVector MidVertexplus = {};
 
 };
 
