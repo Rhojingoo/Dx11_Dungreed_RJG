@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "BackGround.h"
 #include <EngineCore/Renderer.h>
+#include <EngineCore/SpriteRenderer.h>
 
 ABackGround::ABackGround()
 {

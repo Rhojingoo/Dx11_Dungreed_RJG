@@ -7,11 +7,9 @@
 #include "Target.h"
 #include "Player_Smoke_Effect.h"
 #include "Player_AfterImage.h"
+#include "FadeIn_OUT.h"
 
-//void Function(URenderer* Renderer)
-//{
-//	Renderer->ChangeAnimation("Idle");
-//}
+
 
 void APlayer::StateInit()
 {
@@ -116,8 +114,22 @@ void APlayer::DieStart()
 	PlayerDie = true;
 }
 
-void APlayer::Die(float _Update)
+void APlayer::Die(float _DeltaTime)
 {
+	Time += _DeltaTime * 30;
+	if (Time >= 5.f)
+	{
+		if (DieFadeOn == false)
+		{
+			GetWorld()->GetLastTarget()->AddEffect<AFadeIn_OUT>();
+			
+			if (Time > 6.f)
+			{
+				GEngine->ChangeLevel("GameEnd");
+				Time = 0.f;
+			}
+		}
+	}
 
 }
 
@@ -557,7 +569,6 @@ void APlayer::CalGravityVector(float _DeltaTime)
 					SkyGround = false;
 			}	
 		}
-
 	}		
 	if (Color == Color8Bit::Black|| HillColor == Color8Bit::Red)
 	{

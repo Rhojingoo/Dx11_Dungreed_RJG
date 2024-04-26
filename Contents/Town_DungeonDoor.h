@@ -28,7 +28,7 @@ private:
 	UDefaultSceneComponent* Root = nullptr;
 	USpriteRenderer* Renderer = nullptr;
 	UCollision* Collision = nullptr;
-
+	float Time = 0.f;
 
 
 	bool ColCheck = false;

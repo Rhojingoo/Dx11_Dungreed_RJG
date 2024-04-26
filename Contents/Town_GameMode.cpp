@@ -35,6 +35,8 @@ void ATown_GameMode::LevelStart(ULevel* _PrevLevel)
 
 	Town_Door = GetWorld()->SpawnActor<ATown_DungeonDoor>("Door", EOBJ_Order::Door);
 	Town_Door->SetActorLocation({ 5050.0f, -1450.0f, 200.0f });
+
+
 }
 
 void ATown_GameMode::LevelEnd(ULevel* _NextLevel)

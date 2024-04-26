@@ -45,10 +45,13 @@ private:
 	std::shared_ptr<APlayer_AfterImage> After_Image[10] = {};
 	std::shared_ptr<APlayer_HpBar>Player_HpBAR = nullptr;
 
-		
+	float Time = 0.f;
+
+
 	const float MaxHp = 200.f;
 	float Hp = MaxHp;
 	bool PlayerDie = false;
+	bool DieFadeOn = false;
 
 	FVector PlayerPos = {};
 	FVector CursorPos = {};

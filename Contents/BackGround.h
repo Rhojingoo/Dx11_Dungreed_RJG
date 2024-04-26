@@ -1,9 +1,9 @@
 #pragma once
 #include <EngineCore/Actor.h>
-#include <EngineCore/SpriteRenderer.h>
+
 
 // Ό³Έν :
-
+class USpriteRenderer;
 class ABackGround : public AActor
 {
 	GENERATED_BODY(AActor)

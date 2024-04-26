@@ -107,7 +107,6 @@ void USpriteRenderer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-
 	if (nullptr != CurAnimation)
 	{
 		CurAnimation->Update(_DeltaTime);

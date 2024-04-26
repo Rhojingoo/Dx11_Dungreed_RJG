@@ -8,7 +8,7 @@
 #include "Title_UI.h"
 #include "TitleCusor.h"
 #include "Title_Bird.h"
-
+#include "EndLevel_UI.h"
 
 ATitle_GameMode::ATitle_GameMode()
 {

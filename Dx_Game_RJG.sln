@@ -40,6 +40,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level04", "Level04", "{AC84
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineShader", "EngineShader\EngineShader.vcxproj", "{ED093C64-874F-4022-B431-9C9870B9D745}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ContentsShader", "ContentsShader\ContentsShader.vcxproj", "{13DB4AF0-068F-4E71-AB15-42257E6D67E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -96,6 +98,14 @@ Global
 		{ED093C64-874F-4022-B431-9C9870B9D745}.Release|x64.Build.0 = Release|x64
 		{ED093C64-874F-4022-B431-9C9870B9D745}.Release|x86.ActiveCfg = Release|Win32
 		{ED093C64-874F-4022-B431-9C9870B9D745}.Release|x86.Build.0 = Release|Win32
+		{13DB4AF0-068F-4E71-AB15-42257E6D67E5}.Debug|x64.ActiveCfg = Debug|x64
+		{13DB4AF0-068F-4E71-AB15-42257E6D67E5}.Debug|x64.Build.0 = Debug|x64
+		{13DB4AF0-068F-4E71-AB15-42257E6D67E5}.Debug|x86.ActiveCfg = Debug|Win32
+		{13DB4AF0-068F-4E71-AB15-42257E6D67E5}.Debug|x86.Build.0 = Debug|Win32
+		{13DB4AF0-068F-4E71-AB15-42257E6D67E5}.Release|x64.ActiveCfg = Release|x64
+		{13DB4AF0-068F-4E71-AB15-42257E6D67E5}.Release|x64.Build.0 = Release|x64
+		{13DB4AF0-068F-4E71-AB15-42257E6D67E5}.Release|x86.ActiveCfg = Release|Win32
+		{13DB4AF0-068F-4E71-AB15-42257E6D67E5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

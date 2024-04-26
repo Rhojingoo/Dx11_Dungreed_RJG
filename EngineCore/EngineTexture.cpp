@@ -237,7 +237,7 @@ Color8Bit UEngineTexture::GetColor(unsigned int _X, unsigned int _Y, Color8Bit _
 	// [][][][] [][][][]
 	// [][][][] [][][][]
 
-	// DXGI_FORMAT_B8G8R8A8_UNORM 색상1픽셀이 4바이트
+	// DXGI_FORMAT_B8G8R8A8_UNORM 색상1픽셀이 4바이트ddd
 
 	switch (Fmt)
 	{

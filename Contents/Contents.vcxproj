@@ -167,6 +167,22 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EndLevel_UI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="FadeIn_OUT.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameEnd_BackGround.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameEND_Mode.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="PlayerDamage_Screen.h">
       <SubType>
       </SubType>
@@ -208,10 +224,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ContentsHelper.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Contents_SpriteRender.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -363,6 +375,22 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EndLevel_UI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FadeIn_OUT.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameEnd_BackGround.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameEND_Mode.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="PlayerDamage_Screen.cpp">
       <SubType>
       </SubType>
@@ -404,10 +432,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ContentsHelper.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Contents_SpriteRender.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -7,9 +7,8 @@
 #include "Monster03_GameMode.h"
 #include "Boss_GameMode.h"
 #include "TileSet_Mode.h"
-
+#include "GameEND_Mode.h"
 #include <EngineCore/EngineSprite.h>
-
 #include <EngineCore/EngineEditorGUI.h>
 #include "ContentsGUI.h"
 #include "MapEditorGUI.h"
@@ -98,13 +97,26 @@ void UGameCore::Initialize()
 		// UEngineSound::SoundPlay("anipang_ingame_wav.wav");
 	}
 
+	{
+		UEngineDirectory Dir;
+		Dir.MoveToSearchChild("ContentsShader");
+		UEngineShader::AutoCompile(Dir);
+	}
+
+	{
+		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("FadeINOUT");
+		Mat->SetPixelShader("FadeShader.fx");
+		Mat->SetVertexShader("FadeShader.fx");
+	}
+
+
 	GEngine->CreateLevel<ATitle_GameMode>("TitleLevel");
 	GEngine->CreateLevel<ATown_GameMode>("TownLevel");
 	GEngine->CreateLevel<AMonster01_GameMode>("Mon01_Level");
 	GEngine->CreateLevel<AMonster02_GameMode>("Mon02_Level");
 	GEngine->CreateLevel<AMonster03_GameMode>("Mon03_Level");
 	GEngine->CreateLevel<ABoss_GameMode>("BossLevel");
-
+	GEngine->CreateLevel<AGameEND_Mode>("GameEnd");
 	GEngine->ChangeLevel("TitleLevel");
 
 }

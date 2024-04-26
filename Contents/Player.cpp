@@ -82,6 +82,14 @@ void APlayer::BeginPlay()
 void APlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	if (UEngineInput::IsPress('Z'))
+	{
+		Hp = 0.f;
+		float ratio = Hp / MaxHp;
+		Player_HpBAR->SetRatio(ratio);
+	}
+
 	if (Hp <= 0.f)
 	{
 		if (PlayerDie == false)
@@ -91,6 +99,8 @@ void APlayer::Tick(float _DeltaTime)
 			return;
 		}
 	}
+
+
 	State.Update(_DeltaTime);
 	DebugFunction(_DeltaTime);
 	FVector PlayerPos = GetActorLocation();
@@ -103,12 +113,6 @@ void APlayer::Tick(float _DeltaTime)
 	{
 		std::shared_ptr<APlayerDamage_Screen> DamageScreen = GetWorld()->SpawnActor<APlayerDamage_Screen>("Damage_Screen");	
 	}
-	
-
-
-
-
-
 }
 
 
@@ -179,7 +183,7 @@ void APlayer::CollisionCheckFunction()
 			AActor* Actors = _Collison->GetActor();
 			ATown_DungeonDoor* Town = dynamic_cast<ATown_DungeonDoor*>(Actors);
 			if (Town != nullptr)
-			{
+			{				
 				Town->Dungeon_Enter();
 				int a = 0;
 				return;

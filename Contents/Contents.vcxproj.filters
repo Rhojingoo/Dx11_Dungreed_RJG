@@ -37,9 +37,6 @@
     <ClInclude Include="Town_BGPIXEL.h">
       <Filter>Level &amp; OBJ\Town_Stage\Town_Object</Filter>
     </ClInclude>
-    <ClInclude Include="Contents_SpriteRender.h">
-      <Filter>Shader</Filter>
-    </ClInclude>
     <ClInclude Include="Player_Attack_Effect.h">
       <Filter>Level &amp; OBJ\Public\OBJ\Player\Effect</Filter>
     </ClInclude>
@@ -151,6 +148,18 @@
     <ClInclude Include="PlayerDamage_Screen.h">
       <Filter>Level &amp; OBJ\Public\OBJ\Player\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="FadeIn_OUT.h">
+      <Filter>Level &amp; OBJ\Public\OBJ\FadeIn_Out</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEND_Mode.h">
+      <Filter>Level &amp; OBJ\GameEnd_Stage\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEnd_BackGround.h">
+      <Filter>Level &amp; OBJ\GameEnd_Stage\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="EndLevel_UI.h">
+      <Filter>Level &amp; OBJ\GameEnd_Stage\OBJ</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -188,9 +197,6 @@
     </ClCompile>
     <ClCompile Include="Town_BGPIXEL.cpp">
       <Filter>Level &amp; OBJ\Town_Stage\Town_Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Contents_SpriteRender.cpp">
-      <Filter>Shader</Filter>
     </ClCompile>
     <ClCompile Include="Player_Attack_Effect.cpp">
       <Filter>Level &amp; OBJ\Public\OBJ\Player\Effect</Filter>
@@ -303,6 +309,18 @@
     <ClCompile Include="PlayerDamage_Screen.cpp">
       <Filter>Level &amp; OBJ\Public\OBJ\Player\Effect</Filter>
     </ClCompile>
+    <ClCompile Include="FadeIn_OUT.cpp">
+      <Filter>Level &amp; OBJ\Public\OBJ\FadeIn_Out</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEND_Mode.cpp">
+      <Filter>Level &amp; OBJ\GameEnd_Stage\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEnd_BackGround.cpp">
+      <Filter>Level &amp; OBJ\GameEnd_Stage\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="EndLevel_UI.cpp">
+      <Filter>Level &amp; OBJ\GameEnd_Stage\OBJ</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -412,6 +430,18 @@
     </Filter>
     <Filter Include="Level &amp; OBJ\Public\OBJ\Hp">
       <UniqueIdentifier>{13ddd34e-169e-4ea3-b3b3-c019eeac6b7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Public\OBJ\FadeIn_Out">
+      <UniqueIdentifier>{a63364ec-cb2a-42c2-981f-0e1c6a947a54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\GameEnd_Stage">
+      <UniqueIdentifier>{facde8c7-e80e-4bcc-8d50-c7400b043cc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\GameEnd_Stage\Level">
+      <UniqueIdentifier>{c88b29b8-f399-4936-a270-1ec0fe8f3f45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\GameEnd_Stage\OBJ">
+      <UniqueIdentifier>{3186cde7-7f74-4ca1-b169-11724d4affea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
