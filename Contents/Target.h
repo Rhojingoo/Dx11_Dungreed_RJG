@@ -1,11 +1,11 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include <EngineCore/SpriteRenderer.h>
+#include "Cursor.h"
 
-
-class ATarget : public AActor
+class ATarget : public ACursor
 {
-	GENERATED_BODY(AActor)
+	GENERATED_BODY(ACursor)
 public:
 	ATarget();
 	~ATarget();
@@ -26,8 +26,7 @@ protected:
 	//void RendererOn();
 
 private:
-	USpriteRenderer* Renderer = nullptr;
-	FVector TargetPos = {};
+
 
 };
 

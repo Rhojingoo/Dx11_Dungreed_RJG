@@ -15,10 +15,16 @@ public:
 	ATitle_UI& operator =(const 	ATitle_UI& _Other)		= delete;
 	ATitle_UI& operator =(ATitle_UI& _Other)noexcept		= delete;
 
+	void StartUIOn();
+	void StartUIOff();
+	void EndUIOn();
+	void EndUIOff();
+
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
+
 
 private:
 	USpriteRenderer* GameStart_Renderer = nullptr;

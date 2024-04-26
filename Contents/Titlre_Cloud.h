@@ -21,7 +21,9 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	USpriteRenderer* Renderer = nullptr;
+	USpriteRenderer* FrontCloud_Renderer = nullptr;
+	USpriteRenderer* BackCloud_Renderer = nullptr;
+	FVector Vertexplus = {};
 
 };
 

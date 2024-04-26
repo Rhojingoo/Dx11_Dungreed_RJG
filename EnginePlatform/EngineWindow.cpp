@@ -275,5 +275,5 @@ void UEngineWindow::CursorOff()
 void UEngineWindow::CursorOn()
 {
 	ShowCursor(TRUE);
-	IsCursorValue = false;
+	IsCursorValue = true;
 }

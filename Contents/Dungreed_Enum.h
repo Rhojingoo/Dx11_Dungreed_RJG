@@ -7,6 +7,7 @@ enum class EOBJ_Order
 	Bullet,
 	Monster,
 	Door,
+	Cursor,
 	BackGround,
 	PixelGround,
 };
@@ -42,6 +43,8 @@ enum class ERenderOrder
 enum class EColOrder
 {
 	Door,
+	GameStart_UI,
+	GameEnd_UI,
 	Monster_Col,
 	Monster,
 	Boss_Col,

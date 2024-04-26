@@ -2,6 +2,7 @@
 #include <EngineCore/GameMode.h>
 
 // Ό³Έν :
+class Title_UI;
 class ATitle_GameMode : public AGameMode
 {
 	GENERATED_BODY(AGameMode)

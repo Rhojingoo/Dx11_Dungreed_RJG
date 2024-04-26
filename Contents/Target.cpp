@@ -27,17 +27,17 @@ void ATarget::BeginPlay()
 void ATarget::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	//float4 Pos = GEngine->EngineWindow.GetScreenMousePos();
+	////float4 Pos = GEngine->EngineWindow.GetScreenMousePos();
 
-	FVector MousePos = GEngine->EngineWindow.GetScreenMousePos();
-	FVector CameraPos = GetWorld()->GetMainCamera()->GetActorLocation();
-	FVector PlayerPos = GetActorLocation();
+	//FVector MousePos = GEngine->EngineWindow.GetScreenMousePos();
+	//FVector CameraPos = GetWorld()->GetMainCamera()->GetActorLocation();
+	//FVector PlayerPos = GetActorLocation();
 
-	FVector WindowScale = GEngine->EngineWindow.GetWindowScale();
-	TargetPos =
-		FVector(CameraPos.X, CameraPos.Y, 0.f) +
-		FVector(MousePos.X - WindowScale.hX(), -(MousePos.Y - WindowScale.hY()), 199.f);
+	//FVector WindowScale = GEngine->EngineWindow.GetWindowScale();
+	//TargetPos =
+	//	FVector(CameraPos.X, CameraPos.Y, 0.f) +
+	//	FVector(MousePos.X - WindowScale.hX(), -(MousePos.Y - WindowScale.hY()), 199.f);
 
-	SetActorLocation({ TargetPos });
+	//SetActorLocation({ TargetPos });
 }
 

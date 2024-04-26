@@ -16,7 +16,7 @@ void UTickObject::BeginPlay()
 
 void UTickObject::Tick(float _DeltaTime)
 {
-	if (true == IsActive())
+	if (false == IsActive())
 	{
 		return;
 	}

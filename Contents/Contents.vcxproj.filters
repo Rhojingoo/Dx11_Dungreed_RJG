@@ -142,6 +142,12 @@
     <ClInclude Include="Title_UI.h">
       <Filter>Level &amp; OBJ\Title_Screen\Title_Object</Filter>
     </ClInclude>
+    <ClInclude Include="Cursor.h">
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleCusor.h">
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -284,6 +290,12 @@
     </ClCompile>
     <ClCompile Include="Title_UI.cpp">
       <Filter>Level &amp; OBJ\Title_Screen\Title_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Cursor.cpp">
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleCusor.cpp">
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
