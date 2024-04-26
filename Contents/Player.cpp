@@ -115,6 +115,13 @@ void APlayer::Tick(float _DeltaTime)
 	}
 }
 
+void APlayer::End()
+{
+	Cursor->Destroy();
+	Smoke_Effect->Destroy();
+	Right_Hand -> Destroy();
+}
+
 
 void APlayer::CollisionCheckFunction()
 {

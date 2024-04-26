@@ -35,8 +35,6 @@ void ATown_GameMode::LevelStart(ULevel* _PrevLevel)
 
 	Town_Door = GetWorld()->SpawnActor<ATown_DungeonDoor>("Door", EOBJ_Order::Door);
 	Town_Door->SetActorLocation({ 5050.0f, -1450.0f, 200.0f });
-
-
 }
 
 void ATown_GameMode::LevelEnd(ULevel* _NextLevel)
@@ -53,11 +51,6 @@ void ATown_GameMode::BeginPlay()
 
 	UContentsHelper::MapTex = UEngineTexture::FindRes("TownModelPX.png");//원래 통짜맵 사용할때
 	UContentsHelper::MapTexScale = UContentsHelper::MapTex->GetScale();
-
-	//Boss = GetWorld()->SpawnActor<ABoss>("Boss", EOBJ_Order::Monster);
-	//Boss->SetActorLocation({ 1040.0f, -750.0f, 200.0f });
-	//Boss->SetPlayer(Player);
-	//Boss->SetTOWN();
 
 	std::shared_ptr<ATown_BackGround> BackGr = GetWorld()->SpawnActor<ATown_BackGround>("TOWNBack", EOBJ_Order::BackGround);
 	float TileSize = UContentsHelper::TileSize;

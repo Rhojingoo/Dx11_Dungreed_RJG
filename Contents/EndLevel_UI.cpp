@@ -31,6 +31,16 @@ AEndLevel_UI::~AEndLevel_UI()
 }
 
 
+void AEndLevel_UI::Fail()
+{
+	LogoRenderer->SetSprite("ExplorationFailure.png");
+}
+
+void AEndLevel_UI::Success()
+{
+	LogoRenderer->SetSprite("ExplorationSuccess.png");
+}
+
 void AEndLevel_UI::BeginPlay()
 {
 	Super::BeginPlay();
@@ -53,20 +63,6 @@ void AEndLevel_UI::Tick(float _DeltaTime)
 
 
 
-void AEndLevel_UI::StartUIOn()
-{
 
-}
 
-void AEndLevel_UI::StartUIOff()
-{
-}
-
-void AEndLevel_UI::EndUIOn()
-{
-}
-
-void AEndLevel_UI::EndUIOff()
-{
-}
 

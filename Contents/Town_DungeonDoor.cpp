@@ -13,9 +13,7 @@ ATown_DungeonDoor::ATown_DungeonDoor()
 {
 	Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	//Renderer->SetPivot(EPivot::BOT);
 	Renderer->SetupAttachment(Root);
-
 
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
 	Collision->SetupAttachment(Root);
@@ -29,7 +27,6 @@ ATown_DungeonDoor::~ATown_DungeonDoor()
 {
 }
 
-
 void ATown_DungeonDoor::BeginPlay()
 {
 	Super::BeginPlay();
@@ -38,10 +35,7 @@ void ATown_DungeonDoor::BeginPlay()
 	Renderer->CreateAnimation("DungeonIngurgitate50", "DungeonIngurgitate50.png", 0.1f, false);
 	Renderer->CreateAnimation("DungeonIngurgitate18", "DungeonIngurgitate18.png", 0.1f, false);
 	Renderer->ChangeAnimation("DungeonIngurgitate");
-	Renderer->SetOrder(ERenderOrder::Door);
-	
-	
-	
+	Renderer->SetOrder(ERenderOrder::Door);	
 }
 
 void ATown_DungeonDoor::Tick(float _DeltaTime)

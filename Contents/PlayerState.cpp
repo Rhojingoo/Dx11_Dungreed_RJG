@@ -8,7 +8,7 @@
 #include "Player_Smoke_Effect.h"
 #include "Player_AfterImage.h"
 #include "FadeIn_OUT.h"
-
+#include "GameEND_Mode.h"
 
 
 void APlayer::StateInit()
@@ -121,10 +121,12 @@ void APlayer::Die(float _DeltaTime)
 	{
 		if (DieFadeOn == false)
 		{
-			GetWorld()->GetLastTarget()->AddEffect<AFadeIn_OUT>();
+			std::shared_ptr<AFadeIn_OUT> Fade = GetWorld()->GetLastTarget()->AddEffect<AFadeIn_OUT>();
 			
-			if (Time > 6.f)
+			if (Time > 8.f)
 			{
+				AGameEND_Mode::EndLevelEnter();
+				AGameEND_Mode::PlayerDie();
 				GEngine->ChangeLevel("GameEnd");
 				Time = 0.f;
 			}

@@ -34,7 +34,7 @@ ImagePSOutPut FadeInOut_PS(ImageVSOutPut _Input)
     if (Out.COLOR.r >= float(0.65f))
     {
         Out.COLOR.rgba = float4(0.f, 0.f, 0.f, 1.f);
-    }
-    
+    }    
+
     return Out;
 }

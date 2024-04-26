@@ -16,10 +16,9 @@ public:
 	AEndLevel_UI& operator=(const AEndLevel_UI& _Other) = delete;
 	AEndLevel_UI& operator=(AEndLevel_UI&& _Other) noexcept = delete;
 
-	void StartUIOn();
-	void StartUIOff();
-	void EndUIOn();
-	void EndUIOff();
+	void Fail();
+	void Success();
+
 
 protected:
 	void BeginPlay() override;
