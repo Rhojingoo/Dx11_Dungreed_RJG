@@ -295,7 +295,6 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 			ImGui::SameLine();
 		}
 	}
-
 	ImGui::EndChild();
 
 }

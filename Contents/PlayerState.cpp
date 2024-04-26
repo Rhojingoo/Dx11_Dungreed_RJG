@@ -55,6 +55,11 @@ void APlayer::StateInit()
 
 	State.SetStartFunction("Player_SecondDash", std::bind(&APlayer::SecondDashStart, this));
 
+	State.SetUpdateFunction("Player_Die", std::bind(&APlayer::Die, this, std::placeholders::_1));
+
+	State.SetStartFunction("Player_Die", std::bind(&APlayer::DieStart, this));
+
+
 
 	State.SetUpdateFunction("Player_Debug", [=](float _Delta)
 		{
@@ -101,9 +106,15 @@ void APlayer::StateInit()
 	
 	// Ã¼ÀÎÁöPlayer_Idle
 	//State.ChangeState("Player_Debug");
-	State.ChangeState("Player_Idle");
+	State.ChangeState("Player_Idle");	
 }
 
+
+void APlayer::DieStart()
+{
+	Renderer->ChangeAnimation("Player_Die");
+	PlayerDie = true;
+}
 
 void APlayer::Die(float _Update)
 {

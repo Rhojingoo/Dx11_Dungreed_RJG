@@ -29,6 +29,7 @@ public:
 	void AttackOn();
 
 	void BombBullet() { ChangeState(Iciclestate::Collision); }
+	float Getdamage();
 
 protected:
 	void BeginPlay() override;
@@ -64,5 +65,9 @@ private:
 	float Speed = 5.f;
 	FVector AttPos = {};
 	float Destroy_Time = 0.f;
+
+	float Damage = 0.f;
+	const float MaxDamage = 15.f;
+	const float MinDamage = 10.f;
 };
 

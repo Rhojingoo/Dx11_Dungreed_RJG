@@ -37,6 +37,12 @@ void AIcicle_Bullet::AttackOn()
 	EffectRenderer->ChangeAnimation("Icicle_Effect");
 }
 
+float AIcicle_Bullet::Getdamage()
+{
+	Damage = UContentsHelper::Random(MinDamage, MaxDamage);
+	return Damage;
+}
+
 void AIcicle_Bullet::BeginPlay()
 {
 	Super::BeginPlay();

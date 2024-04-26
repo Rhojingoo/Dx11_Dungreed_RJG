@@ -37,6 +37,13 @@ void AIceBullet::AttackStart()
 }
 
 
+
+float AIceBullet::Getdamage()
+{
+	Damage = UContentsHelper::Random(MinDamage, MaxDamage);
+	return Damage;
+}
+
 void AIceBullet::BeginPlay()
 {
 	Super::BeginPlay();

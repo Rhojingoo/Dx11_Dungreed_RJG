@@ -12,7 +12,7 @@ AIceSpear::AIceSpear()
 
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Renderer->SetupAttachment(Root);
-	//Renderer->SetPivot(EPivot::BOT);
+	Renderer->SetPivot(EPivot::BOT);
 
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
 	Collision->SetupAttachment(Renderer);
@@ -34,6 +34,12 @@ void AIceSpear::AttackOn()
 {
 	Attack_Start = true;
 	EffectRenderer->ChangeAnimation("SpearCreat_Effect");	
+}
+
+float AIceSpear::Getdamage()
+{
+	Damage = UContentsHelper::Random(MinDamage, MaxDamage);
+	return Damage;
 }
 
 void AIceSpear::BeginPlay()

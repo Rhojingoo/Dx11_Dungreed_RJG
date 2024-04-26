@@ -35,7 +35,7 @@ public:
 	void FireSecondBullet() { OtherBulletFire = true, TargetSwitch = true; }
 	
 	void BombBullet() { ChangeState(IceBulletState::Collision); }
-
+	float Getdamage();
 
 protected:
 	void BeginPlay() override;
@@ -64,5 +64,9 @@ private:
 	bool Fire = false;
 	bool OtherBulletFire = false;	
 	float DestroyTime = 0.f;
+
+	float Damage = 0.f;
+	const float MaxDamage = 10.f;
+	const float MinDamage = 5.f;
 };
 

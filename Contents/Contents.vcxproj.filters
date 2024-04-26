@@ -148,6 +148,9 @@
     <ClInclude Include="TitleCusor.h">
       <Filter>Level &amp; OBJ\Public\OBJ\Player\Base</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerDamage_Screen.h">
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -296,6 +299,9 @@
     </ClCompile>
     <ClCompile Include="TitleCusor.cpp">
       <Filter>Level &amp; OBJ\Public\OBJ\Player\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDamage_Screen.cpp">
+      <Filter>Level &amp; OBJ\Public\OBJ\Player\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

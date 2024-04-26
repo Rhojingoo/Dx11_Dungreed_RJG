@@ -45,6 +45,7 @@ void APlayer_HpBar::BeginPlay()
 		LifeBarWave->SetScale({ 0.15f,1.f });
 		LifeBarWave->AddPosition({ 0.55f,0.f });
 		LifeBarWave->SetOrder(2);
+		LifeBarWave->SetActive(false);
 
 		PlayerPicture = CreateWidget<UImage>(GetWorld(), "PlayerUI");
 		PlayerPicture->AddToViewPort(4);
@@ -59,16 +60,38 @@ void APlayer_HpBar::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	if (EnergyDown == true)
+	{
+		WaveHp = true;
+		if (Life <= 0.f)
+		{
+			return;
+		}
+		Life -= MaxLife - (MaxLife * ratio);
+		float Setratio = (Life / MaxLife);  // 체력 비율을 계산
+		float fullWidth = LifeBar->GetWorldScale().X;  // 이미지 전체 길이
+		float basePos = -410;  // 기본 위치
+		LifePos = basePos - ((MaxLife / 2) * (1 - Setratio));  // 깎인 만큼 왼쪽으로 이동
+		if (WaveHp == true)
+		{
+			LifeBarWave->SetActive(true);
+			LifeBarWave->ChangeAnimation("Player_LifeWave");
+		}
+		EnergyDown = false;
+	}
+
+
 	if (UEngineInput::IsDown('M'))
 	{
-		EnergyDown = true;
+		WaveHp = true;
 		Life -= 10;
 		float Setratio = (Life / MaxLife);  // 체력 비율을 계산
 		float fullWidth = LifeBar->GetWorldScale().X;  // 이미지 전체 길이
 		float basePos = -410;  // 기본 위치
 		LifePos = basePos - ((MaxLife / 2) * (1 - Setratio));  // 깎인 만큼 왼쪽으로 이동
-		if (EnergyDown == true)
+		if (WaveHp == true)
 		{
+			LifeBarWave->SetActive(true);
 			LifeBarWave->ChangeAnimation("Player_LifeWave");
 		}
 	}

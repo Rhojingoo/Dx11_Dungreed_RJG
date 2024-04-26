@@ -16,6 +16,8 @@ public:
 	APlayer_HpBar& operator=(const APlayer_HpBar& _Other) = delete;
 	APlayer_HpBar& operator=(APlayer_HpBar&& _Other) noexcept = delete;
 
+	void SetRatio(float _Set) { EnergyDown = true, ratio = _Set; }
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -26,12 +28,14 @@ private:
 	UImage* LifeBar = nullptr;
 	UImage* LifeBarWave = nullptr;
 
+	bool EnergyDown = false;
+	bool WaveHp = false;
+	float ratio = 0.f;
 	const float MaxLife = 200.f;
 	float Life = MaxLife;
-
 	const float Life_POSX = -410.f;
 	float LifePos = Life_POSX;
 
-	bool EnergyDown = false;
+
 };
 

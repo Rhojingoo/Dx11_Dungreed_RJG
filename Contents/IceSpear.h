@@ -43,7 +43,7 @@ public:
 		Renderer->AddPosition({ 500.f,0.f });
 	}
 
-	
+	float Getdamage();
 
 protected:
 	void BeginPlay() override;
@@ -77,5 +77,8 @@ private:
 	bool LeftAttack = false;
 	float Destroy_Time = 0.f;
 
+	float Damage = 0.f;
+	const float MaxDamage = 30.f;
+	const float MinDamage = 20.f;
 };
 

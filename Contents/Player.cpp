@@ -13,6 +13,7 @@
 #include "IceSpear.h"
 #include "Player_HpBar.h"
 #include "Town_DungeonDoor.h"
+#include "PlayerDamage_Screen.h"
 
 
 APlayer::APlayer()
@@ -57,7 +58,7 @@ void APlayer::BeginPlay()
 	{
 		After_Image[a] = GetWorld()->SpawnActor<APlayer_AfterImage>("AfterImage");
 	}
-	
+		
 	Renderer->CreateAnimation("Player_Idle", "Player_Idle",0.1f);
 	Renderer->CreateAnimation("Player_Jump", "Player_Jump", 0.1f);
 	Renderer->CreateAnimation("Player_Run", "Player_Run", 0.1f);
@@ -73,7 +74,6 @@ void APlayer::BeginPlay()
 	
 	Renderer->SetOrder(ERenderOrder::Player);	
 	Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2,1.f});
-	Collision->AddPosition({0.f, 0.30f });
 	
 	Renderer->ChangeAnimation("Player_Idle");
 	StateInit();
@@ -82,12 +82,33 @@ void APlayer::BeginPlay()
 void APlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+	if (Hp <= 0.f)
+	{
+		if (PlayerDie == false)
+		{
+			State.ChangeState("Player_Die");
+			Right_Hand->Destroy();
+			return;
+		}
+	}
 	State.Update(_DeltaTime);
 	DebugFunction(_DeltaTime);
 	FVector PlayerPos = GetActorLocation();
 	Right_Hand->SetActorLocation({ PlayerPos });	
 	PlayAfterImage(_DeltaTime, PlayerPos);	
 	CollisionCheckFunction();	
+
+
+	if (UEngineInput::IsPress('Z'))
+	{
+		std::shared_ptr<APlayerDamage_Screen> DamageScreen = GetWorld()->SpawnActor<APlayerDamage_Screen>("Damage_Screen");	
+	}
+	
+
+
+
+
+
 }
 
 
@@ -99,7 +120,15 @@ void APlayer::CollisionCheckFunction()
 			AIceBullet* IceBullet = dynamic_cast<AIceBullet*>(Actors);
 			if (IceBullet != nullptr)
 			{
-				IceBullet->BombBullet();
+				if (PlayerDie == false)
+				{
+					std::shared_ptr<APlayerDamage_Screen> DamageScreen = GetWorld()->SpawnActor<APlayerDamage_Screen>("Damage_Screen");
+					IceBullet->BombBullet();
+					float Damage = IceBullet->Getdamage();
+					Hp -= Damage;
+					float ratio = Hp / MaxHp;
+					Player_HpBAR->SetRatio(ratio);
+				}
 				return;
 			}
 		}
@@ -111,7 +140,15 @@ void APlayer::CollisionCheckFunction()
 			AIcicle_Bullet* IceBullet = dynamic_cast<AIcicle_Bullet*>(Actors);
 			if (IceBullet != nullptr)
 			{
-				IceBullet->BombBullet();
+				if (PlayerDie == false)
+				{
+					std::shared_ptr<APlayerDamage_Screen> DamageScreen = GetWorld()->SpawnActor<APlayerDamage_Screen>("Damage_Screen");
+					IceBullet->BombBullet();
+					float Damage = IceBullet->Getdamage();
+					Hp -= Damage;
+					float ratio = Hp / MaxHp;
+					Player_HpBAR->SetRatio(ratio);
+				}				
 				return;
 			}
 		}
@@ -123,8 +160,14 @@ void APlayer::CollisionCheckFunction()
 			AIceSpear* IceSpear = dynamic_cast<AIceSpear*>(Actors);
 			if (IceSpear != nullptr)
 			{
-				//IceSpear->BombBullet();
-				int a = 0;
+				if (PlayerDie == false)
+				{
+					std::shared_ptr<APlayerDamage_Screen> DamageScreen = GetWorld()->SpawnActor<APlayerDamage_Screen>("Damage_Screen");
+					float Damage = IceSpear->Getdamage();
+					Hp -= Damage;
+					float ratio = Hp / MaxHp;
+					Player_HpBAR->SetRatio(ratio);
+				}
 				return;
 			}
 		}

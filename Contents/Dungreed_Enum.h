@@ -2,6 +2,7 @@
 
 enum class EOBJ_Order
 {
+	Damage_Screen,
 	Player,
 	Wapon,
 	Bullet,
@@ -38,6 +39,7 @@ enum class ERenderOrder
 	Player,
 	Cursor,
 	Collision,
+	Damage_Screen,
 };
 
 enum class EColOrder
