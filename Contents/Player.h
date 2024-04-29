@@ -3,6 +3,7 @@
 #include <EngineCore/StateManager.h>
 
 // Ό³Έν :
+class AFadeIn_OUT_Black;
 class APlayer_HpBar;
 class ATarget;
 class APlayer_Hand;
@@ -145,5 +146,8 @@ private:
 	void Town_ColorSet();
 	void TileMap_ColorSet();
 	void CollisionCheckFunction();
+
+	std::shared_ptr<AFadeIn_OUT_Black> Fade = nullptr;
+	AFadeIn_OUT_Black* Fadeprt = nullptr;
 };
 

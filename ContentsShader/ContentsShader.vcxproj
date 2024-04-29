@@ -127,7 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <FxCompile Include="FadeShader.fx" />
+    <FxCompile Include="FadeShader_Black.fx" />
+    <FxCompile Include="FadeShader_White.fx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ContentShaderBase.hlsli" />

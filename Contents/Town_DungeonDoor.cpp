@@ -6,7 +6,7 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/DefaultSceneComponent.h>
 #include <EngineCore/SpriteInstancingRender.h>
-#include "FadeIn_OUT.h"
+#include "FadeIn_OUT_Black.h"
 
 
 ATown_DungeonDoor::ATown_DungeonDoor()
@@ -63,9 +63,15 @@ void ATown_DungeonDoor::Tick(float _DeltaTime)
 		if (Renderer->IsCurAnimationEnd() == true)
 		{
 			Time += _DeltaTime*30;
-			GetWorld()->GetLastTarget()->AddEffect<AFadeIn_OUT>();
+			if (FadeStart == false)
+			{
+				Fade = GetWorld()->GetLastTarget()->AddEffect<AFadeIn_OUT_Black>();
+				Fadeprt = Fade.get();
+				FadeStart = true;
+			}
 			if (Time > 1.0)
 			{
+				Fadeprt->Active(false);
 				Time = 0.f;
 				GEngine->ChangeLevel("Mon01_Level");
 			}

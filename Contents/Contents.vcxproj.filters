@@ -148,7 +148,7 @@
     <ClInclude Include="PlayerDamage_Screen.h">
       <Filter>Level &amp; OBJ\Public\OBJ\Player\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="FadeIn_OUT.h">
+    <ClInclude Include="FadeIn_OUT_Black.h">
       <Filter>Level &amp; OBJ\Public\OBJ\FadeIn_Out</Filter>
     </ClInclude>
     <ClInclude Include="GameEND_Mode.h">
@@ -159,6 +159,9 @@
     </ClInclude>
     <ClInclude Include="EndLevel_UI.h">
       <Filter>Level &amp; OBJ\GameEnd_Stage\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="FadeIn_OUT_White.h">
+      <Filter>Level &amp; OBJ\Public\OBJ\FadeIn_Out</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -309,7 +312,7 @@
     <ClCompile Include="PlayerDamage_Screen.cpp">
       <Filter>Level &amp; OBJ\Public\OBJ\Player\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="FadeIn_OUT.cpp">
+    <ClCompile Include="FadeIn_OUT_Black.cpp">
       <Filter>Level &amp; OBJ\Public\OBJ\FadeIn_Out</Filter>
     </ClCompile>
     <ClCompile Include="GameEND_Mode.cpp">
@@ -320,6 +323,9 @@
     </ClCompile>
     <ClCompile Include="EndLevel_UI.cpp">
       <Filter>Level &amp; OBJ\GameEnd_Stage\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeIn_OUT_White.cpp">
+      <Filter>Level &amp; OBJ\Public\OBJ\FadeIn_Out</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

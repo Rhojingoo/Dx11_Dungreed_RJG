@@ -6,7 +6,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="FadeShader.fx">
+    <FxCompile Include="FadeShader_Black.fx">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="FadeShader_White.fx">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

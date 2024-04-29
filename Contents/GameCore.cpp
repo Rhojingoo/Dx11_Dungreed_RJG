@@ -104,9 +104,14 @@ void UGameCore::Initialize()
 	}
 
 	{
-		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("FadeINOUT");
-		Mat->SetPixelShader("FadeShader.fx");
-		Mat->SetVertexShader("FadeShader.fx");
+		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("FadeINOUT_Black");
+		Mat->SetPixelShader("FadeShader_Black.fx");
+		Mat->SetVertexShader("FadeShader_Black.fx");
+	}
+	{
+		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("FadeINOUT_White");
+		Mat->SetPixelShader("FadeShader_White.fx");
+		Mat->SetVertexShader("FadeShader_White.fx");
 	}
 
 

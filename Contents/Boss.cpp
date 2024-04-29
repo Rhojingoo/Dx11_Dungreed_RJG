@@ -8,6 +8,8 @@
 #include <EngineCore/DefaultSceneComponent.h>
 #include "Boss_HpBar.h"
 #include "Player_Attack_Effect.h"
+#include "FadeIn_OUT_White.h"
+#include "GameEND_Mode.h"
 
 float ABoss::IcePillarPos = 0.f;
 
@@ -81,13 +83,15 @@ void ABoss::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 	FVector BossPos = GetActorLocation();
+	
+	
 	for (int Num = 0; Num < 4; Num++)
 	{
 		IcePillar[Num]->SetActorLocation({BossPos});
 	}
 	StateUpdate(_DeltaTime);
 
-	DeathCheckFunction();
+	DeathCheckFunction(_DeltaTime);
 	DebugFunction();
 	CollisionCheckFunction();	
 }
@@ -960,12 +964,36 @@ void ABoss::Direction()
 
 
 
-void ABoss::DeathCheckFunction()
+void ABoss::DeathCheckFunction(float _DeltaTime)
 {
 	if (Death == false)
 	{
 		Direction();
 		IcePallarCheck();
+	}
+	else
+	{
+		Time += _DeltaTime /**5*/;
+		if (Time >= 7.5f)
+		{
+			if (DieFadeOn == false)
+			{
+				DieFadeOn = true;
+				Fade = GetWorld()->GetLastTarget()->AddEffect<AFadeIn_OUT_White>();
+				Fadeprt = Fade.get();
+			}
+			else
+			{
+				if (Time > 9.5f)
+				{
+					AGameEND_Mode::EndLevelEnter();
+					AGameEND_Mode::BossClear();
+					GEngine->ChangeLevel("GameEnd");
+					Time = 0.f;
+					Fadeprt->Active(false);
+				}
+			}
+		}
 	}
 }
 

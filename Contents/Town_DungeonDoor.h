@@ -2,6 +2,7 @@
 #include <EngineCore/Actor.h>
 
 
+class AFadeIn_OUT_Black;
 class UCollision;
 class UDefaultSceneComponent;
 class USpriteRenderer;
@@ -30,7 +31,11 @@ private:
 	UCollision* Collision = nullptr;
 	float Time = 0.f;
 
+	std::shared_ptr<AFadeIn_OUT_Black> Fade = nullptr;
+	AFadeIn_OUT_Black* Fadeprt = nullptr;
+
 
 	bool ColCheck = false;
+	bool FadeStart = false;
 };
 

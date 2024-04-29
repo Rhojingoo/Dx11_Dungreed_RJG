@@ -20,6 +20,8 @@ enum class BossState
 	Death,
 };
 
+
+class AFadeIn_OUT_White;
 class UCollision;
 class ABoss_HpBar;
 class AIceSpear;
@@ -90,7 +92,7 @@ protected:
 
 	void CollisionCheckFunction();
 	void DebugFunction();
-	void DeathCheckFunction();
+	void DeathCheckFunction(float _DeltaTime);
 		
 	
 private:
@@ -139,5 +141,10 @@ private:
 	bool Death = false;
 	int AttackChoice = 0;
 	bool TestAttack = false;
+
+	std::shared_ptr<AFadeIn_OUT_White> Fade = nullptr;
+	AFadeIn_OUT_White* Fadeprt = nullptr;
+	float Time = 0.f;
+	bool DieFadeOn = false;
 };
 
