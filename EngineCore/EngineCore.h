@@ -17,6 +17,7 @@ class UserCore
 {
 public:
 	virtual void Initialize() = 0;
+
 };
 
 // Ό³Έν :
@@ -121,15 +122,17 @@ public:
 		TimeScales[_Order] = _Value;
 	}
 
+	
 protected:
-
 private:
 	FEngineOption EngineOption;
 
 	UEngineTime MainTimer;
 
+	std::string WindowIconPath;
 
 	UEngineGraphicDevice EngineDevice;
+
 
 	UserCore* UserCorePtr = nullptr;
 

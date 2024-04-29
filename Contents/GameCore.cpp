@@ -28,6 +28,9 @@ void UGameCore::Initialize()
 		UEngineEditorGUI::CreateEditorWindow<MapEditorGUI>("MapEditor");
 	}
 
+
+
+
 	{
 		// 파일의 헤더
 		UEngineDirectory Dir;
@@ -125,3 +128,4 @@ void UGameCore::Initialize()
 	GEngine->ChangeLevel("TitleLevel");
 
 }
+

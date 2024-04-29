@@ -39,7 +39,7 @@ void UEngineCore::EngineStart(HINSTANCE _Inst)
 
 	EngineOptionInit();
 
-	EngineWindow.Open(EngineOption.WindowTitle);
+	EngineWindow.Open(EngineOption.WindowTitle, WindowIconPath);
 	// 디바이스 초기화전에 크기가 다정해지면 해상도가 이미 결정 된거에요.
 	// EngineOption.WindowScale 해상도
 	// 해상도는 윈도우 크기와 관련이 없습니다.
@@ -86,6 +86,14 @@ void UEngineCore::EngineOptionInit()
 		File.Open(EIOOpenMode::Read, EIODataType::Text);
 		File.Load(Ser);
 		EngineOption.DeSerialize(Ser);
+	}
+
+	{
+		UEngineDirectory NewDir;
+		NewDir.MoveToSearchChild("ContentsResources");
+		NewDir.Move("Image");
+		WindowIconPath = NewDir.AppendPath("Dungreed.ico");
+		//open = IconPath;
 	}
 
 }
