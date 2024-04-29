@@ -107,6 +107,7 @@ void USpriteRenderer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+
 	if (nullptr != CurAnimation)
 	{
 		CurAnimation->Update(_DeltaTime);
@@ -214,6 +215,22 @@ void USpriteRenderer::SetSpriteInfo(const FSpriteInfo& _Info)
 			if (0 > Scale.X)
 			{
 				Scale.X = -Scale.X;
+			}
+			break;
+		}
+		case EEngineDir::Up:
+		{
+			if (0 > Scale.Y)
+			{
+				Scale.Y = -Scale.Y;
+			}
+			break;
+		}
+		case EEngineDir::Down:
+		{
+			if (0 < Scale.Y)
+			{
+				Scale.Y = -Scale.Y;
 			}
 			break;
 		}

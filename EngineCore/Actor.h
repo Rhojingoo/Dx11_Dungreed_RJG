@@ -47,11 +47,11 @@ public:
 	FTransform& GetActorTransform();
 	void SetActorTransform(const FTransform& _Transform);
 
-	FVector GetActorLocation();
 	FVector GetActorForwardVector();
 	FVector GetActorRightVector();
 	FVector GetActorUpVector();
 
+	FVector GetActorLocation();
 	FVector GetActorScale3D();
 
 	void SetActorScale3D(FVector _Value);
@@ -141,6 +141,10 @@ private:
 
 	void PushComponent(std::shared_ptr<UActorComponent> _Component, std::string_view _Name);
 	/////////////////////// ¿Œ«≤
+
+
+
+
 
 public:
 	void InputOff();

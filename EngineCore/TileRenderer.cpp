@@ -19,7 +19,6 @@ void UTileRenderer::BeginPlay()
 	Super::BeginPlay();
 	Resources->SettingConstantBuffer("ResultColorValue", ColorData);
 	Resources->SettingConstantBuffer("FCuttingData", CuttingDataValue);
-	Resources->SettingConstantBuffer("FVertexUV", VertexUVValue);
 }
 
 void UTileRenderer::CreateTileMap(std::string_view _TileSet, float4 _TileSize, int _X, int _Y, int _DefaultIndex)

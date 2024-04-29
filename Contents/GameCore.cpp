@@ -12,6 +12,7 @@
 #include <EngineCore/EngineEditorGUI.h>
 #include "ContentsGUI.h"
 #include "MapEditorGUI.h"
+#include <EngineCore/EngineFont.h>
 
 UGameCore::UGameCore()
 {
@@ -23,13 +24,12 @@ UGameCore::~UGameCore()
 
 void UGameCore::Initialize()
 {
+	UEngineFont::Load("궁서");
+
 	{
 		UEngineEditorGUI::CreateEditorWindow<ContentsGUI>("Contents");
 		UEngineEditorGUI::CreateEditorWindow<MapEditorGUI>("MapEditor");
 	}
-
-
-
 
 	{
 		// 파일의 헤더
@@ -69,7 +69,6 @@ void UGameCore::Initialize()
 		UEngineSprite::CreateCutting("Map4X(64).png", 12, 4);
 		UEngineSprite::CreateCutting("Map4X(64)_Cut.png", 13, 4);
 		UEngineSprite::CreateCutting("Stun.png", 6, 1);
-		
 	}
 	//UEngineDirectory Dir;
 	//Dir.MoveToSearchChild("ContentsResources");

@@ -1,7 +1,8 @@
 #include "PreCompile.h"
 #include "Player_HpBar.h"
 #include <EngineCore/Image.h>
-
+#include <EngineCore/TextWidget.h>
+#include <EngineCore/Image.h>
 
 APlayer_HpBar::APlayer_HpBar()
 {
@@ -18,11 +19,11 @@ void APlayer_HpBar::BeginPlay()
 		
 	{
 		PlayerLifeBase = CreateWidget<UImage>(GetWorld(), "PlayerLifeBase");
-		PlayerLifeBase->AddToViewPort(3);
+		PlayerLifeBase->AddToViewPort(1);
 		PlayerLifeBase->SetSprite("PlayerLifeBase.png");
 		PlayerLifeBase->SetAutoSize(4.f, true);
 		PlayerLifeBase->SetPosition({ -450, 300 });
-		PlayerLifeBase->SetOrder(3);
+		PlayerLifeBase->SetOrder(1);
 
 		PlayerLifeBack = CreateWidget<UImage>(GetWorld(), "PlayerLifeBack");
 		PlayerLifeBack->AddToViewPort(0);
@@ -32,11 +33,11 @@ void APlayer_HpBar::BeginPlay()
 		PlayerLifeBack->SetOrder(0);
 
 		LifeBar = CreateWidget<UImage>(GetWorld(), "LifeBar");
-		LifeBar->AddToViewPort(1);
+		LifeBar->AddToViewPort(3);
 		LifeBar->SetSprite("LifeBar.png");
-		LifeBar->SetParent({ PlayerLifeBase });
+		//LifeBar->SetParent({ PlayerLifeBase });
 		LifeBar->SetScale({ 200.f,50.f });
-		LifeBar->SetOrder(1);
+		LifeBar->SetOrder(3);
 
 		LifeBarWave = CreateWidget<UImage>(GetWorld(), "Player_LifeWave");
 		LifeBarWave->AddToViewPort(2);
@@ -53,6 +54,17 @@ void APlayer_HpBar::BeginPlay()
 		PlayerPicture->SetAutoSize(4.f, true);
 		PlayerPicture->SetPosition({ -550, 300 });
 		PlayerPicture->SetOrder(4);		
+	}
+
+	{
+		UTextWidget* Image = CreateWidget<UTextWidget>(GetWorld(), "Test");
+		//Image->SetupAttachment(this);
+		Image->SetFont("叡辞");
+		Image->AddToViewPort(5);
+		Image->SetScale(100.0f);
+		Image->SetColor(Color8Bit::Blue);
+		Image->SetPosition({ 400, 300 });
+		Image->SetText("馬馬馬た買たびけしい君たびいけし君たびけいし");
 	}
 }
 

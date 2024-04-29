@@ -49,13 +49,13 @@ public:
 	{
 		UEnginePath NewPath = UEnginePath(std::filesystem::path(_Path));
 		std::string FileName = NewPath.GetFileName();
-		return Load(_Path, FileName);
+		return ThreadSafeLoad(_Path, FileName);
 	}
 
 	static std::shared_ptr<UEngineSprite> ThreadSafeLoad(std::string_view _Path, std::string_view _Name)
 	{
 		std::shared_ptr<UEngineSprite> NewRes = ThreadSafeCreateResName(_Path, _Name);
-		NewRes->ResLoad();
+		NewRes->ThreadSafeResLoad();
 		return NewRes;
 	}
 
@@ -65,7 +65,7 @@ public:
 		std::string FileName = NewPath.GetFileName();
 
 		std::shared_ptr<UEngineSprite> NewRes = ThreadSafeCreateResName(_Path, FileName);
-		NewRes->ResLoadFolder();
+		NewRes->ThreadSafeResLoadFolder();
 		return NewRes;
 	}
 

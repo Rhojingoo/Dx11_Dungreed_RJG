@@ -211,6 +211,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineThread.h" />
     <ClInclude Include="EngineTime.h">
       <SubType>
       </SubType>
@@ -221,6 +222,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="PreCompile.h" />
+    <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="Transform.h">
       <SubType>
       </SubType>
@@ -263,6 +265,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EngineThread.cpp" />
     <ClCompile Include="EngineTime.cpp">
       <SubType>
       </SubType>
@@ -278,6 +281,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ThreadPool.cpp" />
     <ClCompile Include="Transform.cpp">
       <SubType>
       </SubType>

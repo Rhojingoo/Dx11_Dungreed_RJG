@@ -6,6 +6,7 @@
 
 #include <EnginePlatform/EngineWindow.h>
 #include <EngineBase/EngineTime.h>
+#include <EngineBase/ThreadPool.h>
 
 #include "EngineGraphicDevice.h"
 #include "EngineOption.h"
@@ -17,7 +18,6 @@ class UserCore
 {
 public:
 	virtual void Initialize() = 0;
-
 };
 
 // Ό³Έν :
@@ -122,17 +122,17 @@ public:
 		TimeScales[_Order] = _Value;
 	}
 
-	
+	UThreadPool JobWorker;
+
 protected:
+
 private:
 	FEngineOption EngineOption;
 
 	UEngineTime MainTimer;
 
-	std::string WindowIconPath;
 
 	UEngineGraphicDevice EngineDevice;
-
 
 	UserCore* UserCorePtr = nullptr;
 

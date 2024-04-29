@@ -199,12 +199,23 @@ void UEngineTexture::Reset(EShaderType _Type, UINT _Slot)
 
 Color8Bit UEngineTexture::GetColor(unsigned int _X, unsigned int _Y, Color8Bit _DefaultColor)
 {
-	if (_X > GetScale().uiX())
+	if (_X < 0)
 	{
 		return _DefaultColor;
 	}
 
-	if (_Y > GetScale().uiY())
+	if (_Y < 0)
+	{
+		return _DefaultColor;
+	}
+
+
+	if (_X >= GetScale().uiX())
+	{
+		return _DefaultColor;
+	}
+
+	if (_Y >= GetScale().uiY())
 	{
 		return _DefaultColor;
 	}
@@ -237,7 +248,7 @@ Color8Bit UEngineTexture::GetColor(unsigned int _X, unsigned int _Y, Color8Bit _
 	// [][][][] [][][][]
 	// [][][][] [][][][]
 
-	// DXGI_FORMAT_B8G8R8A8_UNORM 색상1픽셀이 4바이트ddd
+	// DXGI_FORMAT_B8G8R8A8_UNORM 색상1픽셀이 4바이트
 
 	switch (Fmt)
 	{
