@@ -11,12 +11,23 @@
 #include "FadeIn_OUT_White.h"
 #include "FadeIn_OUT_Boss.h"
 #include "GameEND_Mode.h"
+#include <EngineCore/TextWidget.h>
+#include <EngineCore/EngineEditorGUI.h>
+#include "Boss_TestSkill_GUI.h"
+
 
 float ABoss::IcePillarPos = 0.f;
+bool ABoss::TestAttack = false;
+bool ABoss::TestAttack_First = false;
+bool ABoss::TestAttack_Second = false;
+bool ABoss::TestAttack_Third = false;
+bool ABoss::TestAttack_Fourth = false;
+bool ABoss::TestAttack_Fifth = false;
+bool ABoss::TestAttack_Sixth = false;
 
 
 ABoss::ABoss()
-{
+{	
 	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
 
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
@@ -31,6 +42,8 @@ ABoss::ABoss()
 	Collision->SetupAttachment(Renderer);
 	Collision->SetCollisionGroup(EColOrder::Boss);
 	Collision->SetCollisionType(ECollisionType::RotRect);
+
+	
 
 	SetRoot(Root);
 }
@@ -52,8 +65,8 @@ void ABoss::BeginPlay()
 {
 	Super::BeginPlay();
 	//SetActorScale3D(FVector(320.0f, 320.0f, 100.0f));
-
 	CreateIcePillar();
+	UEngineEditorGUI::CreateEditorWindow<UBoss_TestSkill_GUI>("Boss_TestSkill");
 
 	Renderer->CreateAnimation("Boss_Attack", "Boss_Attack", 0.1f);
 	Renderer->CreateAnimation("Boss_Die", "Boss_Die", 0.1f, false);
@@ -205,6 +218,18 @@ void ABoss::Boss_IntroStart()
 
 	IntroFade = GetWorld()->GetLastTarget()->AddEffect<AFadeIn_OUT_Boss>();
 
+	{
+		TextImage = CreateWidget<UTextWidget>(GetWorld(), "Test");
+		TextImage->SetFont("HY견고딕");
+		TextImage->AddToViewPort(5);
+		TextImage->SetScale(45.0f);
+		TextImage->SetColor(Color8Bit::White);
+		TextImage->SetPosition({ -535, -185 });
+		TextImage->SetText("니플헤임");
+	}
+
+
+
 	IcePillar[0]->AddPos({ -Bullet,Bullet });
 	IcePillar[1]->AddPos({ Bullet,Bullet });
 	IcePillar[2]->AddPos({ -Bullet,-Bullet });
@@ -237,6 +262,7 @@ void ABoss::Boss_Intro(float _DeltaTime)
 	StateChange(BossState::Idle);
 	IntroEnd = true;
 	IntroFade->Active(false);
+	TextImage->SetActive(false);
 }
 
 
@@ -285,36 +311,42 @@ void ABoss::Boss_Idle(float _DeltaTime)
 		}
 		else if (TestAttack ==true)
 		{
-			if (UEngineInput::IsDown('3'))
+			if (UEngineInput::IsDown('3') || TestAttack_First == true)
 			{
 				StateChange(BossState::Patton1);
 				Boss_Time = 0.f;
+				TestAttack_First = false;
 			}
-			if (UEngineInput::IsDown('4'))
+			if (UEngineInput::IsDown('4') || TestAttack_Second == true)
 			{
 				StateChange(BossState::Patton2);
 				Boss_Time = 0.f;
+				TestAttack_Second = false;
 			}
-			if (UEngineInput::IsDown('5'))
+			if (UEngineInput::IsDown('5') || TestAttack_Third == true)
 			{
 				StateChange(BossState::Patton3);
 				Boss_Time = 0.f;
+				TestAttack_Third = false;
 			}
-			if (UEngineInput::IsDown('6'))
+			if (UEngineInput::IsDown('6') || TestAttack_Fourth == true)
 			{
 				StateChange(BossState::Patton4);
 				Boss_Time = 0.f;
+				TestAttack_Fourth = false;
 			}
-			if (UEngineInput::IsDown('7'))
+			if (UEngineInput::IsDown('7') || TestAttack_Fifth == true)
 			{
 				StateChange(BossState::Patton5);
 				Boss_Time = 0.f;
+				TestAttack_Fifth = false;
 			}
-			if (UEngineInput::IsDown('8'))
+			if (UEngineInput::IsDown('8') || TestAttack_Sixth == true)
 			{
 				SpearCreat = false;
 				IceSpear_Aattack();
 				Boss_Time = 0.f;
+				TestAttack_Sixth = false;
 			}
 		}
 		else
@@ -1050,3 +1082,4 @@ void ABoss::CollisionCheckFunction()
 		}
 	);
 }
+

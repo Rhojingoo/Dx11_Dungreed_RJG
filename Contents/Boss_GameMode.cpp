@@ -7,9 +7,11 @@
 #include "Boss_BackGround.h"
 #include "Boss_BGPIXEL.h"
 #include <EngineCore/Camera.h>
+#include <EngineCore/EngineEditorGUI.h>
 
 ABoss_GameMode::ABoss_GameMode()
 {
+
 }
 
 ABoss_GameMode::~ABoss_GameMode()
@@ -33,12 +35,18 @@ void ABoss_GameMode::LevelStart(ULevel* _PrevLevel)
 	Cursor = GetWorld()->SpawnActor<ATarget>("Player2");
 	Cursor->SetActorLocation({ 640.0f, -360.0f, 200.0f });
 
+	
 	Boss = GetWorld()->SpawnActor<ABoss>("Boss", EOBJ_Order::Monster);
 	Boss->SetActorLocation({ 1200.0f, 750.0f, 200.0f });
 	Boss->SetPlayer(Player);
+	
 
 	UContentsHelper::MapTex = UEngineTexture::FindRes("NIflheimRoom_Pixel.png");
 	UContentsHelper::MapTexScale = UContentsHelper::MapTex->GetScale();
+
+
+
+
 }
 
 void ABoss_GameMode::LevelEnd(ULevel* _NextLevel)

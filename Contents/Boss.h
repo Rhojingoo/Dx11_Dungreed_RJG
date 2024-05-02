@@ -1,6 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
-//#include <EngineCore/SpriteRenderer.h>
+#include <EngineCore/EngineEditorWindow.h>
 
 enum class BossState
 {
@@ -20,7 +20,8 @@ enum class BossState
 	Death,
 };
 
-
+class UBoss_TestSkill_GUI;
+class UTextWidget; 
 class AFadeIn_OUT_Boss;
 class AFadeIn_OUT_White;
 class UCollision;
@@ -32,6 +33,7 @@ class USpriteRenderer;
 class ABoss : public AActor
 {
 	GENERATED_BODY(AActor)
+	friend UBoss_TestSkill_GUI;
 
 public:
 	ABoss();
@@ -99,6 +101,7 @@ protected:
 		
 	
 private:
+	UTextWidget* TextImage = nullptr;
 	USpriteRenderer* Renderer = nullptr;
 	USpriteRenderer* Effect_Renderer = nullptr;
 	std::shared_ptr<APlayer> Player = nullptr;
@@ -144,7 +147,7 @@ private:
 
 	bool Death = false;
 	int AttackChoice = 0;
-	bool TestAttack = false;
+	static bool TestAttack;
 
 
 
@@ -154,5 +157,15 @@ private:
 	AFadeIn_OUT_White* Fadeprt = nullptr;
 	float Time = 0.f;
 	bool DieFadeOn = false;
+
+
+	static bool TestAttack_First;
+	static bool TestAttack_Second;
+	static bool TestAttack_Third;
+	static bool TestAttack_Fourth;
+	static bool TestAttack_Fifth;
+	static bool TestAttack_Sixth;
+
+	
 };
 

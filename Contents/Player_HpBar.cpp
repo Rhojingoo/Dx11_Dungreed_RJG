@@ -56,16 +56,7 @@ void APlayer_HpBar::BeginPlay()
 		PlayerPicture->SetOrder(4);		
 	}
 
-	{
-		//UTextWidget* Image = CreateWidget<UTextWidget>(GetWorld(), "Test");
-		////Image->SetupAttachment(this);
-		//Image->SetFont("叡辞");
-		//Image->AddToViewPort(5);
-		//Image->SetScale(100.0f);
-		//Image->SetColor(Color8Bit::Blue);
-		//Image->SetPosition({ 400, 300 });
-		//Image->SetText("馬馬馬た買たびけしい君たびいけし君たびけいし");
-	}
+
 }
 
 void APlayer_HpBar::Tick(float _DeltaTime)

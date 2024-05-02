@@ -24,11 +24,12 @@ UGameCore::~UGameCore()
 
 void UGameCore::Initialize()
 {
-	UEngineFont::Load("±Ã¼­");
+	UEngineFont::Load("HY°ß°íµñ");
 
 	{
 		UEngineEditorGUI::CreateEditorWindow<ContentsGUI>("Contents");
 		UEngineEditorGUI::CreateEditorWindow<MapEditorGUI>("MapEditor");
+
 	}
 
 	{

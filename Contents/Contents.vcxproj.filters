@@ -166,6 +166,9 @@
     <ClInclude Include="FadeIn_OUT_Boss.h">
       <Filter>Level &amp; OBJ\Public\OBJ\FadeIn_Out</Filter>
     </ClInclude>
+    <ClInclude Include="Boss_TestSkill_GUI.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -332,6 +335,9 @@
     </ClCompile>
     <ClCompile Include="FadeIn_OUT_Boss.cpp">
       <Filter>Level &amp; OBJ\Public\OBJ\FadeIn_Out</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss_TestSkill_GUI.cpp">
+      <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
