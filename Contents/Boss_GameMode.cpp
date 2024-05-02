@@ -8,6 +8,7 @@
 #include "Boss_BGPIXEL.h"
 #include <EngineCore/Camera.h>
 #include <EngineCore/EngineEditorGUI.h>
+#include "Boss_TestSkill_GUI.h"
 
 ABoss_GameMode::ABoss_GameMode()
 {
@@ -64,7 +65,7 @@ void ABoss_GameMode::BeginPlay()
 	IndexCount[0] = 40, IndexCount[1] = 20;
 
 	Super::BeginPlay();
-
+	UEngineEditorGUI::CreateEditorWindow<UBoss_TestSkill_GUI>("Boss_TestSkill");
 	UContentsHelper::MapTex = UEngineTexture::FindRes("NIflheimRoom_Pixel.png");
 	UContentsHelper::MapTexScale = UContentsHelper::MapTex->GetScale();
 	

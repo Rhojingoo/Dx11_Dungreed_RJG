@@ -16,6 +16,7 @@
 #include "Boss_TestSkill_GUI.h"
 
 
+
 float ABoss::IcePillarPos = 0.f;
 bool ABoss::TestAttack = false;
 bool ABoss::TestAttack_First = false;
@@ -66,7 +67,7 @@ void ABoss::BeginPlay()
 	Super::BeginPlay();
 	//SetActorScale3D(FVector(320.0f, 320.0f, 100.0f));
 	CreateIcePillar();
-	UEngineEditorGUI::CreateEditorWindow<UBoss_TestSkill_GUI>("Boss_TestSkill");
+
 
 	Renderer->CreateAnimation("Boss_Attack", "Boss_Attack", 0.1f);
 	Renderer->CreateAnimation("Boss_Die", "Boss_Die", 0.1f, false);
