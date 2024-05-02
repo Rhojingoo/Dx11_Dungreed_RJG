@@ -21,6 +21,7 @@ enum class BossState
 };
 
 
+class AFadeIn_OUT_Boss;
 class AFadeIn_OUT_White;
 class UCollision;
 class ABoss_HpBar;
@@ -43,6 +44,8 @@ public:
 
 	void SetPlayer(std::shared_ptr<APlayer> _Set); 
 	void SetTOWN() { Foot_Collision_Check_At_Town = true; }
+	bool EndIntro() {return IntroEnd;}
+
 
 protected:
 	void BeginPlay() override;
@@ -113,6 +116,7 @@ private:
 	const float Bullet = 150.f;
 	float Boss_Time = 0.f;
 	bool IntroOn = false;
+	bool IntroEnd = false;
 	bool Attack_Check = false;
 	bool Attack_End = false;
 
@@ -141,6 +145,10 @@ private:
 	bool Death = false;
 	int AttackChoice = 0;
 	bool TestAttack = false;
+
+
+
+	std::shared_ptr<AFadeIn_OUT_Boss> IntroFade = nullptr;
 
 	std::shared_ptr<AFadeIn_OUT_White> Fade = nullptr;
 	AFadeIn_OUT_White* Fadeprt = nullptr;

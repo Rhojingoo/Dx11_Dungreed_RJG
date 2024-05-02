@@ -163,6 +163,9 @@
     <ClInclude Include="FadeIn_OUT_White.h">
       <Filter>Level &amp; OBJ\Public\OBJ\FadeIn_Out</Filter>
     </ClInclude>
+    <ClInclude Include="FadeIn_OUT_Boss.h">
+      <Filter>Level &amp; OBJ\Public\OBJ\FadeIn_Out</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -325,6 +328,9 @@
       <Filter>Level &amp; OBJ\GameEnd_Stage\OBJ</Filter>
     </ClCompile>
     <ClCompile Include="FadeIn_OUT_White.cpp">
+      <Filter>Level &amp; OBJ\Public\OBJ\FadeIn_Out</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeIn_OUT_Boss.cpp">
       <Filter>Level &amp; OBJ\Public\OBJ\FadeIn_Out</Filter>
     </ClCompile>
   </ItemGroup>

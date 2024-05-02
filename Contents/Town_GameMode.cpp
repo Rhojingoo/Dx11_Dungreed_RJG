@@ -73,6 +73,20 @@ void ATown_GameMode::Tick(float _DeltaTime)
 	}
 	if (Camera != nullptr)
 	{
-		Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y });
+		FVector Playerpos = Player->GetActorTransform().LocalPosition;
+
+		if (Playerpos.X > 650 && Playerpos.X < 8400 && Playerpos.Y < -610 && Playerpos.Y > -1330)
+		{
+			Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y });
+		}
+		else if ((Playerpos.X <= 650 || Playerpos.X >= 8400) && Playerpos.Y < -610 && Playerpos.Y > -1330)
+		{
+			Camera->SetActorLocation({ Camera->GetActorLocation().X, Player->GetActorLocation().Y });
+		}
+		else if (Playerpos.X > 650 && Playerpos.X < 8400 && (Playerpos.Y >= -610 || Playerpos.Y <= -1330))
+		{
+			Camera->SetActorLocation({ Player->GetActorLocation().X, Camera->GetActorLocation().Y });
+		}
+
 	}
 }

@@ -115,6 +115,11 @@ void UGameCore::Initialize()
 		Mat->SetPixelShader("FadeShader_White.fx");
 		Mat->SetVertexShader("FadeShader_White.fx");
 	}
+	{
+		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("FadeINOUT_Boss");
+		Mat->SetPixelShader("FadeShader_Boss.fx");
+		Mat->SetVertexShader("FadeShader_Boss.fx");
+	}
 
 
 	GEngine->CreateLevel<ATitle_GameMode>("TitleLevel");

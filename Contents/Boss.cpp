@@ -9,6 +9,7 @@
 #include "Boss_HpBar.h"
 #include "Player_Attack_Effect.h"
 #include "FadeIn_OUT_White.h"
+#include "FadeIn_OUT_Boss.h"
 #include "GameEND_Mode.h"
 
 float ABoss::IcePillarPos = 0.f;
@@ -202,6 +203,8 @@ void ABoss::Boss_IntroStart()
 {
 	Renderer->ChangeAnimation("Boss_Enter");
 
+	IntroFade = GetWorld()->GetLastTarget()->AddEffect<AFadeIn_OUT_Boss>();
+
 	IcePillar[0]->AddPos({ -Bullet,Bullet });
 	IcePillar[1]->AddPos({ Bullet,Bullet });
 	IcePillar[2]->AddPos({ -Bullet,-Bullet });
@@ -232,6 +235,8 @@ void ABoss::Boss_Intro(float _DeltaTime)
 		IcePillar[Num]->StateChange(IcePillarState::Idle);
 	}
 	StateChange(BossState::Idle);
+	IntroEnd = true;
+	IntroFade->Active(false);
 }
 
 

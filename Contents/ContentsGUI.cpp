@@ -20,8 +20,27 @@ void ContentsGUI::OnGui(ULevel* _Level, float _Delta)
 		GEngine->ChangeLevel("TitleLevel");
 	}
 
-	if (true == ImGui::Button("TestLevel"))
+	if (true == ImGui::Button("TownLevel"))
 	{
-		GEngine->ChangeLevel("TestLevel");
+		GEngine->ChangeLevel("TownLevel");
 	}
+
+	if (true == ImGui::Button("Mon01_Level"))
+	{
+		GEngine->ChangeLevel("Mon01_Level");
+	}
+	if (true == ImGui::Button("Mon02_Level"))
+	{
+		GEngine->ChangeLevel("Mon02_Level");
+	}
+	if (true == ImGui::Button("Mon03_Level"))
+	{
+		GEngine->ChangeLevel("Mon03_Level");
+	}
+
+	if (true == ImGui::Button("BossLevel"))
+	{
+		GEngine->ChangeLevel("BossLevel");
+	}
+
 }

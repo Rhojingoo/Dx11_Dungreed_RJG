@@ -36,6 +36,10 @@ private:
 	std::shared_ptr<ABoss> Boss = nullptr;
 	std::shared_ptr<ATarget> Cursor = nullptr;
 
+	bool BossIntro = false;
+	bool BossIntroEnd = false;
+	float Time = 0.f;
+
 	const float MaxX_Map_Pos = 2080.f;
 	const float MaxX_Min_Pos = 400.f;
 	const float MaxY_Map_Pos = 750.f;

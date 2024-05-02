@@ -23,7 +23,9 @@ void ABoss_GameMode::SetMapEdit()
 void ABoss_GameMode::LevelStart(ULevel* _PrevLevel)
 {
 	Camera = GetWorld()->GetMainCamera();
-	Camera->SetActorLocation(FVector(640.0f, 360.0f, -200.0f));
+	//Camera->SetActorLocation(FVector(640.0f, 360.0f, -200.0f));
+	Camera->SetActorLocation(FVector(840.0f, 460.0f, -200.0f));
+
 
 	Player = GetWorld()->SpawnActor<APlayer>("Player", EOBJ_Order::Player);
 	Player->SetActorLocation({ 640.0f, 360.0f, 200.0f });
@@ -81,6 +83,46 @@ void ABoss_GameMode::Tick(float _DeltaTime)
 	}
 	if (Camera != nullptr)
 	{
-		Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y });
+		FVector Playerpos = Player->GetActorTransform().LocalPosition;
+		FVector Bosspos = Boss->GetActorTransform().LocalPosition;
+
+
+		if (BossIntro == false)
+		{
+			Time += _DeltaTime;
+			if (Time<2.f)
+			{
+				if (Playerpos.X > 650 && Playerpos.X < 1900 && Playerpos.Y < 826 && Playerpos.Y > 382)
+				{
+					Camera->SetActorLocation({ Player->GetActorLocation().X+200, Player->GetActorLocation().Y+200 });
+				}
+			}
+			else
+			{
+				Camera->SetActorLocation({ Boss->GetActorLocation().X, Boss->GetActorLocation().Y });
+				BossIntro = Boss->EndIntro();
+				if (BossIntro == true)
+				{
+					Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y+200 });
+		
+					return;
+				}
+			}
+		}
+		else
+		{
+			if (Playerpos.X > 650 && Playerpos.X < 1900 && Playerpos.Y < 826 && Playerpos.Y > 382)
+			{
+				Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y });
+			}
+			else if ((Playerpos.X <= 650 || Playerpos.X >= 1900) && Playerpos.Y < 826 && Playerpos.Y > 382)
+			{
+				Camera->SetActorLocation({ Camera->GetActorLocation().X, Player->GetActorLocation().Y });
+			}
+			else if (Playerpos.X > 650 && Playerpos.X < 1900 && (Playerpos.Y >= 826 || Playerpos.Y <= 382))
+			{
+				Camera->SetActorLocation({ Player->GetActorLocation().X, Camera->GetActorLocation().Y });
+			}
+		}		
 	}
 }

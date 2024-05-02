@@ -41,6 +41,7 @@ protected:
 	std::vector<std::vector<int>> Tiles;
 	FResultColorValue ColorData;
 	FCuttingData CuttingDataValue;
+	FVertexUV VertexUVValue;
 	std::shared_ptr<UEngineSprite> TileSprite;
 	float4 TileSize = {64, 64};
 };

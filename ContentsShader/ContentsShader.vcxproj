@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <FxCompile Include="FadeShader_Black.fx" />
+    <FxCompile Include="FadeShader_Boss.fx" />
     <FxCompile Include="FadeShader_White.fx" />
   </ItemGroup>
   <ItemGroup>

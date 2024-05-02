@@ -12,6 +12,9 @@
     <FxCompile Include="FadeShader_White.fx">
       <Filter>Shader</Filter>
     </FxCompile>
+    <FxCompile Include="FadeShader_Boss.fx">
+      <Filter>Shader</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ContentShaderBase.hlsli">
