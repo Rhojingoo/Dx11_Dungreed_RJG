@@ -226,6 +226,7 @@ void AMonster01_GameMode::MonsterGroup3_Enter()
 		{
 			MonsterGroup_Thirth.clear();
 			DoorCreate = true;
+			BossDoor->BossOpne();
 		}
 	}
 }

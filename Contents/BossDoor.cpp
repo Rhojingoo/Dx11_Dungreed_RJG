@@ -40,9 +40,10 @@ void ABossDoor::BeginPlay()
 
 void ABossDoor::Tick(float _DeltaTime)
 {
+	Collision->SetScale({ Renderer->GetWorldScale().X , Renderer->GetWorldScale().Y });
 	Super::Tick(_DeltaTime);
 
-	Collision->SetScale({ Renderer->GetLocalScale() });
+	//Collision->SetScale({ Renderer->GetLocalScale() });
 
 	if (BossRoomOPENStart == true)
 	{

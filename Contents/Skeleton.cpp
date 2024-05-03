@@ -198,6 +198,7 @@ void ASkeleton::DeathStart()
 {
 	EffectRenderer->ChangeAnimation("Die_Effect");
 	Renderer->SetActive(false);
+	MonsterDie = true;
 }
 
 

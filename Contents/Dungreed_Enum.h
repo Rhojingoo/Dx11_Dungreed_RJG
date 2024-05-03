@@ -7,8 +7,8 @@ enum class EOBJ_Order
 	Wapon,
 	Bullet,
 	Monster,
-	Door,
 	Cursor,
+	Door,
 	BackGround,
 	PixelGround,
 };
@@ -20,7 +20,6 @@ enum class ERenderOrder
 	ForeGround,
 	PixelMap,
 	TileMap,
-
 	Effect_Back,
 	Effect_Mid,
 	Effect_Front,
