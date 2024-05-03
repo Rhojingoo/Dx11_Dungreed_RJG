@@ -181,6 +181,9 @@
     <ClInclude Include="RedGinatBat.h">
       <Filter>Level &amp; OBJ\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Level &amp; OBJ\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -361,6 +364,9 @@
       <Filter>Level &amp; OBJ\Monster</Filter>
     </ClCompile>
     <ClCompile Include="RedGinatBat.cpp">
+      <Filter>Level &amp; OBJ\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
       <Filter>Level &amp; OBJ\Monster</Filter>
     </ClCompile>
   </ItemGroup>

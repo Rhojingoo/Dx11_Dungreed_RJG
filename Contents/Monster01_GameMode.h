@@ -41,7 +41,6 @@ private:
 	std::vector<std::shared_ptr<AMonster>> MonsterGroup_First;
 	std::vector<std::shared_ptr<AMonster>> MonsterGroup_Second;
 	std::vector<std::shared_ptr<AMonster>> MonsterGroup_Thirth;
-	std::vector<std::shared_ptr<AMonster>> MonsterGroup_Fourth;
 
 
 	bool MonTerCreate_First = false;
@@ -53,6 +52,9 @@ private:
 	bool MonTerEnd_Thirth = false;
 
 	bool MonTerEnter_Second = false;
-	bool MonTerEnter_Thirth = false;
+
+
+	bool DoorCreate = false;
+	bool DoorOpen = false;
 };
 

@@ -23,7 +23,7 @@ AMiniBat::AMiniBat()
 	Collision->SetCollisionGroup(EColOrder::Monter_Bullet);
 
 	EffectRenderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	EffectRenderer->SetupAttachment(Root);
+	EffectRenderer->SetupAttachment(Renderer);
 
 
 	SetRoot(Root);

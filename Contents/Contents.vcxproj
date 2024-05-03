@@ -336,6 +336,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Skeleton.h" />
     <ClInclude Include="Target.h">
       <SubType>
       </SubType>
@@ -572,6 +573,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="Target.cpp">
       <SubType>
       </SubType>

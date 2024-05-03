@@ -8,6 +8,7 @@
 #include <EngineCore/Camera.h>
 #include "MiniBat.h"
 #include "RedGinatBat.h"
+#include "Skeleton.h"
 #include "Monster.h"
 
 
@@ -36,10 +37,15 @@ void AMonster01_GameMode::LevelStart(ULevel* _PrevLevel)
 	Cursor->SetActorLocation({ 640.0f, 360.0f, 200.0f });
 
 	CreateMonster();
-
-	//std::shared_ptr<AMiniBat> IceBat1 = GetWorld()->SpawnActor<AMiniBat>("Ice_Bat", EOBJ_Order::Monster);
-	//IceBat1->SetActorLocation({ 640.0f, 360.0f, 200.0f });
+	
+	//std::shared_ptr<ASkeleton> IceBat1 = GetWorld()->SpawnActor<ASkeleton>("Ice_Bat", EOBJ_Order::Monster);
+	//IceBat1->SetActorLocation({ 640.f, 190.0f, 200.0f });
 	//IceBat1->SetPlayer(Player);
+
+
+	//std::shared_ptr<Aminibat> icebat1 = getworld()->spawnactor<Aminibat>("ice_bat", eobj_order::monster);
+	//icebat1->setactorlocation({ 640.0f, 360.0f, 200.0f });
+	//icebat1->setplayer(player);
 
 	//std::shared_ptr<ARedGinatBat> IceBat = GetWorld()->SpawnActor<ARedGinatBat>("Ice_Bat", EOBJ_Order::Monster);
 	//IceBat->SetActorLocation({ 640.0f, -760.0f, 200.0f });
@@ -51,6 +57,16 @@ void AMonster01_GameMode::LevelEnd(ULevel* _NextLevel)
 	Player->Destroy();
 	Camera->Destroy();
 	Cursor->Destroy();
+	DoorCreate = false;
+	DoorOpen = false;
+
+	MonTerCreate_First = false;
+	MonTerCreate_Second = false;
+	MonTerCreate_Thirth = false;	
+	MonTerEnd_First = false;
+	MonTerEnd_Second = false;
+	MonTerEnd_Thirth = false;	
+	MonTerEnter_Second = false;
 }
 
 void AMonster01_GameMode::BeginPlay()
@@ -76,6 +92,8 @@ void AMonster01_GameMode::BeginPlay()
 	std::shared_ptr<AMonster01_BGPIXEL> Back = GetWorld()->SpawnActor<AMonster01_BGPIXEL>("Monster_01PX", EOBJ_Order::PixelGround);
 	Back->SetActorScale3D(ImageScale);
 	Back->SetActorLocation({ ImageScale.hX(), ImageScale.hY(), 500.0f});
+
+
 }
 
 void AMonster01_GameMode::Tick(float _DeltaTime)
@@ -91,6 +109,14 @@ void AMonster01_GameMode::Tick(float _DeltaTime)
 		Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y });
 	}
 
+	if (DoorCreate == true)
+	{
+		if (DoorOpen == false)
+		{
+			DoorOpen = true;
+		}
+	}
+
 	MonsterGroup1_Enter();
 }
 
@@ -103,22 +129,6 @@ void AMonster01_GameMode::CreateMonster()
 		Mon->SetActive(false);
 		MonsterGroup_First.push_back(Mon);
 	}
-	
-	for (int Num = 0; Num < 2; Num++)
-	{
-		std::shared_ptr<AMonster> Mon = GetWorld()->SpawnActor<ARedGinatBat>("Giant_Bat", EOBJ_Order::Monster);
-		Mon->SetActorLocation({ 0.f, 0.0f, 200.0f });
-		Mon->SetActive(false);
-		MonsterGroup_Second.push_back(Mon);
-	}
-
-	//for (int Num = 0; Num < 3; Num++)
-	//{
-	//	std::shared_ptr<AMonster> Mon = GetWorld()->SpawnActor<AMiniBat>("Giant_Bat", EOBJ_Order::Monster);
-	//	Mon->SetActorLocation({ 640.0f, 360.0f + 150.f * Num - 150.f, 200.0f });
-	//	MonsterGroup_Second.push_back(Mon);
-	//}
-
 }
 
 void AMonster01_GameMode::IS_Die_Monter(std::vector<std::shared_ptr<AMonster>> _MonsterGroup, bool& _CheckGroup)
@@ -162,26 +172,50 @@ void AMonster01_GameMode::MonsterGroup2_Enter()
 {
 	if (MonTerCreate_Second == false)
 	{
-		int Num = 0;
-		for (std::shared_ptr<AMonster> Mon : MonsterGroup_Second)
-		{			
-			if (Num == 1)
-			{
-				Num = 2;
-			}
+		for (int Num = 0; Num < 2; Num++)
+		{
+			std::shared_ptr<AMonster> Mon = GetWorld()->SpawnActor<ARedGinatBat>("Giant_Bat", EOBJ_Order::Monster);
 			Mon->SetActorLocation({ 700.0f + (300.f * Num) - 300.f, 560.0f, 200.0f });
 			Mon->SetActive(true);
-			Mon->SetPlayer(Player);
-			Num++;
-		}
+			MonsterGroup_Second.push_back(Mon);
+		}		
 		MonTerCreate_Second = true;
 	}
 	else
 	{
 		IS_Die_Monter(MonsterGroup_Second, MonTerEnd_Second);
 		if (MonTerEnd_Second == true)
+		{		
+			if (MonTerEnd_First == true)
+			{
+				MonsterGroup_Second.clear();
+				MonsterGroup_First.clear();
+				MonsterGroup3_Enter();
+			}
+		}
+	}
+}
+
+void AMonster01_GameMode::MonsterGroup3_Enter()
+{
+	if (MonTerCreate_Thirth == false)
+	{
+		for (int Num = 0; Num < 2; Num++)
 		{
-			MonsterGroup_Second.clear();
+			std::shared_ptr<AMonster> Mon = GetWorld()->SpawnActor<ASkeleton>("Skelleton", EOBJ_Order::Monster);
+			Mon->SetActorLocation({ 700.0f + (300.f * Num) - 300.f, 190.0f, 200.0f });
+			Mon->SetActive(true);
+			MonsterGroup_Thirth.push_back(Mon);
+		}
+		MonTerCreate_Thirth = true;
+	}
+	else
+	{
+		IS_Die_Monter(MonsterGroup_Thirth, MonTerEnd_Thirth);
+		if (MonTerEnd_Thirth == true)
+		{
+			MonsterGroup_Thirth.clear();
+			DoorCreate = true;
 		}
 	}
 }
