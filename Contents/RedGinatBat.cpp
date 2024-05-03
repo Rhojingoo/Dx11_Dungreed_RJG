@@ -79,6 +79,7 @@ void ARedGinatBat::Idle(float _DeltaTime)
 	{
 		ChangeState(MonsterState::Attack);
 		Time = 0.f;
+		AttackDirSet = false;
 	}
 }
 
@@ -103,6 +104,7 @@ void ARedGinatBat::Attack(float _DeltaTime)
 	if (Renderer->IsCurAnimationEnd() == true)
 	{
 		ChangeState(MonsterState::Idle);
+		AttackDirSet = false;
 	}
 }
 

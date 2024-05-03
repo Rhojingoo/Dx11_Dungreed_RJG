@@ -35,13 +35,15 @@ void AMonster01_GameMode::LevelStart(ULevel* _PrevLevel)
 	Cursor = GetWorld()->SpawnActor<ATarget>("Player2");
 	Cursor->SetActorLocation({ 640.0f, 360.0f, 200.0f });
 
-	std::shared_ptr<AMiniBat> IceBat1 = GetWorld()->SpawnActor<AMiniBat>("Ice_Bat", EOBJ_Order::Monster);
-	IceBat1->SetActorLocation({ 640.0f, -760.0f, 200.0f });
-	IceBat1->SetPlayer(Player);
+	CreateMonster();
 
-	std::shared_ptr<ARedGinatBat> IceBat = GetWorld()->SpawnActor<ARedGinatBat>("Ice_Bat", EOBJ_Order::Monster);
-	IceBat->SetActorLocation({ 640.0f, -760.0f, 200.0f });
-	IceBat->SetPlayer(Player);
+	//std::shared_ptr<AMiniBat> IceBat1 = GetWorld()->SpawnActor<AMiniBat>("Ice_Bat", EOBJ_Order::Monster);
+	//IceBat1->SetActorLocation({ 640.0f, 360.0f, 200.0f });
+	//IceBat1->SetPlayer(Player);
+
+	//std::shared_ptr<ARedGinatBat> IceBat = GetWorld()->SpawnActor<ARedGinatBat>("Ice_Bat", EOBJ_Order::Monster);
+	//IceBat->SetActorLocation({ 640.0f, -760.0f, 200.0f });
+	//IceBat->SetPlayer(Player);
 }
 
 void AMonster01_GameMode::LevelEnd(ULevel* _NextLevel)
@@ -88,16 +90,98 @@ void AMonster01_GameMode::Tick(float _DeltaTime)
 	{
 		Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y });
 	}
+
+	MonsterGroup1_Enter();
 }
 
 void AMonster01_GameMode::CreateMonster()
 {
-	std::shared_ptr<AMonster> Mon = GetWorld()->SpawnActor<AMiniBat>("Ice_Bat", EOBJ_Order::Monster);
+	for (int Num = 0; Num < 3; Num++)
+	{
+		std::shared_ptr<AMonster> Mon = GetWorld()->SpawnActor<AMiniBat>("Ice_Bat", EOBJ_Order::Monster);
+		Mon->SetActorLocation({ 0.f, 0.0f, 200.0f });
+		Mon->SetActive(false);
+		MonsterGroup_First.push_back(Mon);
+	}
+	
+	for (int Num = 0; Num < 2; Num++)
+	{
+		std::shared_ptr<AMonster> Mon = GetWorld()->SpawnActor<ARedGinatBat>("Giant_Bat", EOBJ_Order::Monster);
+		Mon->SetActorLocation({ 0.f, 0.0f, 200.0f });
+		Mon->SetActive(false);
+		MonsterGroup_Second.push_back(Mon);
+	}
 
-
+	//for (int Num = 0; Num < 3; Num++)
+	//{
+	//	std::shared_ptr<AMonster> Mon = GetWorld()->SpawnActor<AMiniBat>("Giant_Bat", EOBJ_Order::Monster);
+	//	Mon->SetActorLocation({ 640.0f, 360.0f + 150.f * Num - 150.f, 200.0f });
+	//	MonsterGroup_Second.push_back(Mon);
+	//}
 
 }
 
-void AMonster01_GameMode::IS_Die_Monter()
+void AMonster01_GameMode::IS_Die_Monter(std::vector<std::shared_ptr<AMonster>> _MonsterGroup, bool& _CheckGroup)
 {
+	for (std::shared_ptr<AMonster> Mon : _MonsterGroup)
+	{
+		if (Mon->IsDieMonster() == false)
+		{
+			return;
+		}		
+	}	
+	_CheckGroup = true;
+}
+
+void AMonster01_GameMode::MonsterGroup1_Enter()
+{
+	if (MonTerCreate_First == false)
+	{
+		int Num = 0;
+		for (std::shared_ptr<AMonster> Mon : MonsterGroup_First)
+		{			
+			Num++;
+			Mon->SetActorLocation({ 640.0f + 200.f * Num - 200.f, 360.0f, 200.0f });
+			Mon->SetPlayer(Player);
+			Mon->SetActive(true);			
+		}
+		MonTerCreate_First = true;
+	}
+	else
+	{
+		IS_Die_Monter(MonsterGroup_First, MonTerEnd_First);
+		if (MonTerEnd_First == true)
+		{
+			MonsterGroup_First.clear();
+			MonsterGroup2_Enter();
+		}
+	}
+}
+
+void AMonster01_GameMode::MonsterGroup2_Enter()
+{
+	if (MonTerCreate_Second == false)
+	{
+		int Num = 0;
+		for (std::shared_ptr<AMonster> Mon : MonsterGroup_Second)
+		{			
+			if (Num == 1)
+			{
+				Num = 2;
+			}
+			Mon->SetActorLocation({ 700.0f + (300.f * Num) - 300.f, 560.0f, 200.0f });
+			Mon->SetActive(true);
+			Mon->SetPlayer(Player);
+			Num++;
+		}
+		MonTerCreate_Second = true;
+	}
+	else
+	{
+		IS_Die_Monter(MonsterGroup_Second, MonTerEnd_Second);
+		if (MonTerEnd_Second == true)
+		{
+			MonsterGroup_Second.clear();
+		}
+	}
 }

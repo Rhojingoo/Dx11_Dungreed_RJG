@@ -27,17 +27,32 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	void CreateMonster();
-	void IS_Die_Monter();
+	void IS_Die_Monter(std::vector<std::shared_ptr<AMonster>> _MonsterGroup, bool& _CheckGroup);
+	void MonsterGroup1_Enter();
+	void MonsterGroup2_Enter();
+	void MonsterGroup3_Enter();
+
 
 private:
 	std::shared_ptr<UCamera> Camera = nullptr;
 	std::shared_ptr<APlayer> Player = nullptr;
 	std::shared_ptr<ATarget> Cursor = nullptr;
 
-	std::vector<AMonster> MonsterGroup_First;
-	std::vector<AMonster> MonsterGroup_Second;
-	std::vector<AMonster> MonsterGroup_Thirth;
-	std::vector<AMonster> MonsterGroup_Fourth;
+	std::vector<std::shared_ptr<AMonster>> MonsterGroup_First;
+	std::vector<std::shared_ptr<AMonster>> MonsterGroup_Second;
+	std::vector<std::shared_ptr<AMonster>> MonsterGroup_Thirth;
+	std::vector<std::shared_ptr<AMonster>> MonsterGroup_Fourth;
 
+
+	bool MonTerCreate_First = false;
+	bool MonTerCreate_Second = false;
+	bool MonTerCreate_Thirth = false;
+
+	bool MonTerEnd_First = false;
+	bool MonTerEnd_Second = false;
+	bool MonTerEnd_Thirth = false;
+
+	bool MonTerEnter_Second = false;
+	bool MonTerEnter_Thirth = false;
 };
 

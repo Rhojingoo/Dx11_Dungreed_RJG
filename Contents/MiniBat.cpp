@@ -91,23 +91,29 @@ void AMiniBat::Idle(float _DeltaTime)
 	{
 		ChangeState(MonsterState::Attack);
 		Time = 0.f;
+		AttackDirSet = false;
 	}
 }
-
 
 void AMiniBat::AttackStart()
 {
 	Renderer->ChangeAnimation("IceBat_Attack");
-
 	if (AttackDirSet == false)
 	{
 		BulletDir = RenderPos - PlayerPos;
 		AttackDirSet = true;
 	}
-
 	CreatBullet(BulletDir, Renderer->GetWorldPosition());
 }
 
+void AMiniBat::Attack(float _DeltaTime)
+{
+	if (Renderer->IsCurAnimationEnd() == true)
+	{
+		ChangeState(MonsterState::Idle);
+		AttackDirSet = false;
+	}
+}
 
 void AMiniBat::DeathStart()
 {
@@ -122,18 +128,6 @@ void AMiniBat::Death(float _DeltaTime)
 		Destroy();
 	}
 }
-
-
-
-
-void AMiniBat::Attack(float _DeltaTime)
-{
-	if (Renderer->IsCurAnimationEnd() == true)
-	{
-		ChangeState(MonsterState::Idle);
-	}
-}
-
 
 void AMiniBat::ChangeState(MonsterState _Set)
 {
