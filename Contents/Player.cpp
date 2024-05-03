@@ -14,6 +14,7 @@
 #include "Player_HpBar.h"
 #include "Town_DungeonDoor.h"
 #include "PlayerDamage_Screen.h"
+#include "MonsterBullet.h"
 
 
 APlayer::APlayer()
@@ -125,6 +126,26 @@ void APlayer::End()
 
 void APlayer::CollisionCheckFunction()
 {
+	Collision->CollisionEnter(EColOrder::Monter_Bullet, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			AActor* Actors = _Collison->GetActor();
+			AMonsterBullet* Bullet = dynamic_cast<AMonsterBullet*>(Actors);
+			if (Bullet != nullptr)
+			{
+				if (PlayerDie == false)
+				{
+					std::shared_ptr<APlayerDamage_Screen> DamageScreen = GetWorld()->SpawnActor<APlayerDamage_Screen>("Damage_Screen");
+					Bullet->BombBullet();
+					float Damage = Bullet->Getdamage();
+					Hp -= Damage;
+					float ratio = Hp / MaxHp;
+					Player_HpBAR->SetRatio(ratio);
+				}
+				return;
+			}
+		}
+	);
+
 	Collision->CollisionEnter(EColOrder::Boss_IceBullet, [=](std::shared_ptr<UCollision> _Collison)
 		{
 			AActor* Actors = _Collison->GetActor();

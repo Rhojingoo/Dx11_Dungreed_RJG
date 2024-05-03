@@ -6,6 +6,10 @@
 #include "Monster01_BackGround.h"
 #include "Monster01_BGPIXEL.h"
 #include <EngineCore/Camera.h>
+#include "MiniBat.h"
+#include "RedGinatBat.h"
+#include "Monster.h"
+
 
 AMonster01_GameMode::AMonster01_GameMode()
 {
@@ -30,6 +34,14 @@ void AMonster01_GameMode::LevelStart(ULevel* _PrevLevel)
 
 	Cursor = GetWorld()->SpawnActor<ATarget>("Player2");
 	Cursor->SetActorLocation({ 640.0f, 360.0f, 200.0f });
+
+	std::shared_ptr<AMiniBat> IceBat1 = GetWorld()->SpawnActor<AMiniBat>("Ice_Bat", EOBJ_Order::Monster);
+	IceBat1->SetActorLocation({ 640.0f, -760.0f, 200.0f });
+	IceBat1->SetPlayer(Player);
+
+	std::shared_ptr<ARedGinatBat> IceBat = GetWorld()->SpawnActor<ARedGinatBat>("Ice_Bat", EOBJ_Order::Monster);
+	IceBat->SetActorLocation({ 640.0f, -760.0f, 200.0f });
+	IceBat->SetPlayer(Player);
 }
 
 void AMonster01_GameMode::LevelEnd(ULevel* _NextLevel)
@@ -76,4 +88,16 @@ void AMonster01_GameMode::Tick(float _DeltaTime)
 	{
 		Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y });
 	}
+}
+
+void AMonster01_GameMode::CreateMonster()
+{
+	std::shared_ptr<AMonster> Mon = GetWorld()->SpawnActor<AMiniBat>("Ice_Bat", EOBJ_Order::Monster);
+
+
+
+}
+
+void AMonster01_GameMode::IS_Die_Monter()
+{
 }

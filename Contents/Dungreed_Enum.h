@@ -47,6 +47,7 @@ enum class EColOrder
 	Door,
 	GameStart_UI,
 	GameEnd_UI,
+	Monter_Bullet,
 	Monster_Col,
 	Monster,
 	Boss_Col,

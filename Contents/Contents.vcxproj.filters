@@ -169,6 +169,18 @@
     <ClInclude Include="Boss_TestSkill_GUI.h">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Level &amp; OBJ\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniBat.h">
+      <Filter>Level &amp; OBJ\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterBullet.h">
+      <Filter>Level &amp; OBJ\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="RedGinatBat.h">
+      <Filter>Level &amp; OBJ\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -339,6 +351,18 @@
     <ClCompile Include="Boss_TestSkill_GUI.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Level &amp; OBJ\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniBat.cpp">
+      <Filter>Level &amp; OBJ\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterBullet.cpp">
+      <Filter>Level &amp; OBJ\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="RedGinatBat.cpp">
+      <Filter>Level &amp; OBJ\Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -460,6 +484,9 @@
     </Filter>
     <Filter Include="Level &amp; OBJ\GameEnd_Stage\OBJ">
       <UniqueIdentifier>{3186cde7-7f74-4ca1-b169-11724d4affea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Monster">
+      <UniqueIdentifier>{2c846e07-4f9d-441f-b172-4a56f581b0f4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -9,7 +9,8 @@
 #include "Target.h"
 #include <EngineCore/Image.h>
 #include "Town_DungeonDoor.h"
-
+#include "MiniBat.h"
+#include "RedGinatBat.h"
 
 ATown_GameMode::ATown_GameMode()
 {

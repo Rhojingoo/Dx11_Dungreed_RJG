@@ -31,10 +31,6 @@ AIceBullet::~AIceBullet()
 {
 }
 
-void AIceBullet::AttackStart()
-{
-	DestroyTime = 0.f;
-}
 
 
 
@@ -74,6 +70,10 @@ void AIceBullet::Tick(float _DeltaTime)
 	}
 
 	StateUpdate(_DeltaTime);
+}
+void AIceBullet::AttackStart()
+{
+	DestroyTime = 0.f;
 }
 
 

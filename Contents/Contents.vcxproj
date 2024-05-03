@@ -195,6 +195,18 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="MiniBat.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MonsterBullet.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="PlayerDamage_Screen.h">
       <SubType>
       </SubType>
@@ -320,6 +332,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="RedGinatBat.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Target.h">
       <SubType>
       </SubType>
@@ -412,6 +428,18 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEND_Mode.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MiniBat.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MonsterBullet.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -537,6 +565,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Player_Smoke_Effect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="RedGinatBat.cpp">
       <SubType>
       </SubType>
     </ClCompile>
