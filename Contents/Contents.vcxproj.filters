@@ -133,9 +133,6 @@
     <ClInclude Include="Player_HpBar.h">
       <Filter>Level &amp; OBJ\Public\OBJ\Hp</Filter>
     </ClInclude>
-    <ClInclude Include="Town_DungeonDoor.h">
-      <Filter>Level &amp; OBJ\Town_Stage\Town_Object</Filter>
-    </ClInclude>
     <ClInclude Include="Title_UI.h">
       <Filter>Level &amp; OBJ\Title_Screen\Title_Object</Filter>
     </ClInclude>
@@ -183,6 +180,15 @@
     </ClInclude>
     <ClInclude Include="Skeleton.h">
       <Filter>Level &amp; OBJ\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Town_DungeonDoor.h">
+      <Filter>Level &amp; OBJ\Public\OBJ\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="BossDoor.h">
+      <Filter>Level &amp; OBJ\Public\OBJ\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonDoor.h">
+      <Filter>Level &amp; OBJ\Public\OBJ\Door</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -318,9 +324,6 @@
     <ClCompile Include="Player_HpBar.cpp">
       <Filter>Level &amp; OBJ\Public\OBJ\Hp</Filter>
     </ClCompile>
-    <ClCompile Include="Town_DungeonDoor.cpp">
-      <Filter>Level &amp; OBJ\Town_Stage\Town_Object</Filter>
-    </ClCompile>
     <ClCompile Include="Title_UI.cpp">
       <Filter>Level &amp; OBJ\Title_Screen\Title_Object</Filter>
     </ClCompile>
@@ -368,6 +371,15 @@
     </ClCompile>
     <ClCompile Include="Skeleton.cpp">
       <Filter>Level &amp; OBJ\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Town_DungeonDoor.cpp">
+      <Filter>Level &amp; OBJ\Public\OBJ\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="BossDoor.cpp">
+      <Filter>Level &amp; OBJ\Public\OBJ\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonDoor.cpp">
+      <Filter>Level &amp; OBJ\Public\OBJ\Door</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -493,6 +505,9 @@
     </Filter>
     <Filter Include="Level &amp; OBJ\Monster">
       <UniqueIdentifier>{2c846e07-4f9d-441f-b172-4a56f581b0f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Public\OBJ\Door">
+      <UniqueIdentifier>{8755213c-a60b-4d2a-b35e-f8723f79fde8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

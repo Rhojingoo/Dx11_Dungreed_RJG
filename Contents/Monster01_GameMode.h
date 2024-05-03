@@ -3,6 +3,8 @@
 #include "Monster.h"
 
 
+class ABossDoor;
+class ADungeonDoor;
 class Monster;
 class ATarget;
 class APlayer;
@@ -37,6 +39,9 @@ private:
 	std::shared_ptr<UCamera> Camera = nullptr;
 	std::shared_ptr<APlayer> Player = nullptr;
 	std::shared_ptr<ATarget> Cursor = nullptr;
+	std::shared_ptr<ADungeonDoor> Door = nullptr;
+	std::shared_ptr<ABossDoor> BossDoor = nullptr;
+	
 
 	std::vector<std::shared_ptr<AMonster>> MonsterGroup_First;
 	std::vector<std::shared_ptr<AMonster>> MonsterGroup_Second;

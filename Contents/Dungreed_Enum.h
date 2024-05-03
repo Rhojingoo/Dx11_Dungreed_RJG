@@ -44,7 +44,9 @@ enum class ERenderOrder
 
 enum class EColOrder
 {
-	Door,
+	BossDoor,
+	DungeonDoor,
+	TonwDoor,
 	GameStart_UI,
 	GameEnd_UI,
 	Monter_Bullet,

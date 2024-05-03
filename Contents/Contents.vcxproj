@@ -163,11 +163,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BossDoor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Boss_TestSkill_GUI.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="Cursor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="DungeonDoor.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -400,11 +408,19 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BossDoor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Boss_TestSkill_GUI.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="Cursor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="DungeonDoor.cpp">
       <SubType>
       </SubType>
     </ClCompile>

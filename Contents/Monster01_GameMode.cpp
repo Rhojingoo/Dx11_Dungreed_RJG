@@ -10,6 +10,9 @@
 #include "RedGinatBat.h"
 #include "Skeleton.h"
 #include "Monster.h"
+#include "DungeonDoor.h"
+#include "BossDoor.h"
+
 
 
 AMonster01_GameMode::AMonster01_GameMode()
@@ -33,15 +36,20 @@ void AMonster01_GameMode::LevelStart(ULevel* _PrevLevel)
 	Player = GetWorld()->SpawnActor<APlayer>("Player", EOBJ_Order::Player);
 	Player->SetActorLocation({ 640.0f, 360.0f, 200.0f });
 
-	Cursor = GetWorld()->SpawnActor<ATarget>("Player2");
+	Cursor = GetWorld()->SpawnActor<ATarget>("Target");
 	Cursor->SetActorLocation({ 640.0f, 360.0f, 200.0f });
+
+	Door = GetWorld()->SpawnActor<ADungeonDoor>("Door");
+	Door->SetActorLocation({ 1565.0f, 770.0f, 200.0f });
+	
+	BossDoor = GetWorld()->SpawnActor<ABossDoor>("BossDoor");
+	BossDoor->SetActorLocation({ 640.0f, 320.0f, 200.0f });
 
 	CreateMonster();
 	
 	//std::shared_ptr<ASkeleton> IceBat1 = GetWorld()->SpawnActor<ASkeleton>("Ice_Bat", EOBJ_Order::Monster);
 	//IceBat1->SetActorLocation({ 640.f, 190.0f, 200.0f });
 	//IceBat1->SetPlayer(Player);
-
 
 	//std::shared_ptr<Aminibat> icebat1 = getworld()->spawnactor<Aminibat>("ice_bat", eobj_order::monster);
 	//icebat1->setactorlocation({ 640.0f, 360.0f, 200.0f });
@@ -57,6 +65,8 @@ void AMonster01_GameMode::LevelEnd(ULevel* _NextLevel)
 	Player->Destroy();
 	Camera->Destroy();
 	Cursor->Destroy();
+	Door->Destroy();
+	BossDoor->Destroy();
 	DoorCreate = false;
 	DoorOpen = false;
 

@@ -17,7 +17,7 @@ ATown_DungeonDoor::ATown_DungeonDoor()
 
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
 	Collision->SetupAttachment(Root);
-	Collision->SetCollisionGroup(EColOrder::Door);
+	Collision->SetCollisionGroup(EColOrder::TonwDoor);
 	Collision->SetCollisionType(ECollisionType::Rect);
 
 	SetRoot(Root);

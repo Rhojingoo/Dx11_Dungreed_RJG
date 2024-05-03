@@ -15,7 +15,8 @@
 #include "Town_DungeonDoor.h"
 #include "PlayerDamage_Screen.h"
 #include "MonsterBullet.h"
-
+#include "BossDoor.h"
+#include "DungeonDoor.h"
 
 APlayer::APlayer()
 {
@@ -126,6 +127,22 @@ void APlayer::End()
 
 void APlayer::CollisionCheckFunction()
 {
+	Collision->CollisionStay(EColOrder::DungeonDoor, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			AActor* Actors = _Collison->GetActor();
+			ADungeonDoor* Door = dynamic_cast<ADungeonDoor*>(Actors);
+			if (Door != nullptr)
+			{
+				MoveVector = FVector::Zero;				
+				return;
+			}
+		}
+	);
+
+
+
+
+
 	Collision->CollisionEnter(EColOrder::Monter_Bullet, [=](std::shared_ptr<UCollision> _Collison)
 		{
 			AActor* Actors = _Collison->GetActor();
@@ -206,7 +223,7 @@ void APlayer::CollisionCheckFunction()
 	);
 
 
-	Collision->CollisionEnter(EColOrder::Door, [=](std::shared_ptr<UCollision> _Collison)
+	Collision->CollisionEnter(EColOrder::TonwDoor, [=](std::shared_ptr<UCollision> _Collison)
 		{
 			AActor* Actors = _Collison->GetActor();
 			ATown_DungeonDoor* Town = dynamic_cast<ATown_DungeonDoor*>(Actors);
