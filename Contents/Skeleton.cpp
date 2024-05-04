@@ -4,6 +4,7 @@
 #include <EngineCore/DefaultSceneComponent.h>
 #include "Monster_HpBar.h"
 #include "Player_Attack_Effect.h"
+#include "Skeleton_ATKCOL.h"
 
 
 ASkeleton::ASkeleton()
@@ -16,13 +17,13 @@ ASkeleton::ASkeleton()
 
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
 	Collision->SetupAttachment(Root);
-	Collision->SetCollisionGroup(EColOrder::Monster_AttackCol);
+	Collision->SetCollisionGroup(EColOrder::Monster);
 	Collision->SetCollisionType(ECollisionType::RotRect);
 	Collision->SetScale(FVector(66.0f, 60.0f));
 
 	PlayerCheckCollision = CreateDefaultSubObject<UCollision>("Collision");
 	PlayerCheckCollision->SetupAttachment(Root);
-	PlayerCheckCollision->SetCollisionGroup(EColOrder::Monster);
+	PlayerCheckCollision->SetCollisionGroup(EColOrder::Monster_SearchCol);
 	PlayerCheckCollision->SetCollisionType(ECollisionType::RotRect);
 	PlayerCheckCollision->SetScale(FVector(66.0f, 60.0f) * 4.0f); // 탐지 범위 설정.
 
@@ -168,10 +169,18 @@ void ASkeleton::AttackStart()
 		if (Dir > 0.f)
 		{
 			Renderer->SetDir(EEngineDir::Right);
+
+			MonAt_COL = GetWorld()->SpawnActor<ASkeleton_ATKCOL>("AMoonster_ATKCOL");
+			MonAt_COL->SetActorLocation({ GetActorLocation().X+80,	GetActorLocation().Y, 201.f });
+			//MonAt_COL->SetActorLocation({ Renderer->GetLocalPosition().X,Renderer->GetLocalPosition().Y, 201.f });
 		}
 		else
 		{
 			Renderer->SetDir(EEngineDir::Left);
+
+			MonAt_COL = GetWorld()->SpawnActor<ASkeleton_ATKCOL>("AMoonster_ATKCOL");
+			MonAt_COL->SetActorLocation({ GetActorLocation().X-80, GetActorLocation().Y, 201.f });
+			//MonAt_COL->SetActorLocation({ Renderer->GetLocalPosition().X,Renderer->GetLocalPosition().Y, 201.f});
 		}
 	}
 
@@ -181,6 +190,7 @@ void ASkeleton::Attack(float _DeltaTime)
 	if (true == Renderer->IsCurAnimationEnd())
 	{
 		ChangeState(MonsterState::Idle);
+		MonAt_COL->Destroy();
 		return;
 	}
 }
@@ -201,6 +211,11 @@ void ASkeleton::DeathStart()
 	Renderer->SetActive(false);
 	MonsterDie = true;
 	UEngineSound::SoundPlay("MonsterDie.wav");
+
+	if (MonAt_COL != nullptr)
+	{
+		MonAt_COL->Destroy();
+	}
 }
 
 

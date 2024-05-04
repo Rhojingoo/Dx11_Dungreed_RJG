@@ -90,7 +90,7 @@ void UGameCore::Initialize()
 		UEngineDirectory Dir;
 		Dir.MoveToSearchChild("ContentsResources");
 		Dir.Move("Sound");
-		std::vector<UEngineFile> Files = Dir.GetAllFile({ ".wav" });
+		std::vector<UEngineFile> Files = Dir.GetAllFile({ ".wav",".ogg" });
 		for (UEngineFile& File : Files)
 		{
 			//File.Open(EIOOpenMode::Read, EIODataType::Binary);

@@ -190,6 +190,9 @@
     <ClInclude Include="DungeonDoor.h">
       <Filter>Level &amp; OBJ\Public\OBJ\Door</Filter>
     </ClInclude>
+    <ClInclude Include="Skeleton_ATKCOL.h">
+      <Filter>Level &amp; OBJ\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -380,6 +383,9 @@
     </ClCompile>
     <ClCompile Include="DungeonDoor.cpp">
       <Filter>Level &amp; OBJ\Public\OBJ\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton_ATKCOL.cpp">
+      <Filter>Level &amp; OBJ\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

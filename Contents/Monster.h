@@ -66,7 +66,6 @@ protected:
 	USpriteRenderer* Renderer = nullptr;
 	USpriteRenderer* EffectRenderer = nullptr;
 	UCollision* Collision = nullptr;
-	UCollision* SerchCollision = nullptr;
 	std::shared_ptr<APlayer> Player = nullptr;
 	bool MonsterDie = false;
 

@@ -50,6 +50,7 @@ enum class EColOrder
 	GameEnd_UI,
 	Monter_Bullet,
 	Monster_AttackCol,
+	Monster_SearchCol,
 	Monster,
 	Boss_Col,
 	Boss_IceSpear,

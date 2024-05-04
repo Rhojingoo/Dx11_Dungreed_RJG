@@ -214,7 +214,8 @@ void AMonster01_GameMode::MonsterGroup2_Enter()
 		{
 			std::shared_ptr<AMonster> Mon = GetWorld()->SpawnActor<ARedGinatBat>("Giant_Bat", EOBJ_Order::Monster);
 			Mon->SetActorLocation({ 700.0f + (300.f * Num) - 300.f, 560.0f, 200.0f });
-			Mon->SetActive(true);
+			Mon->SetActive(true); 
+			Mon->SetPlayer(Player);
 			MonsterGroup_Second.push_back(Mon);
 		}		
 		UEngineSound::SoundPlay("SpawnMonster.wav");
@@ -243,7 +244,8 @@ void AMonster01_GameMode::MonsterGroup3_Enter()
 		{
 			std::shared_ptr<AMonster> Mon = GetWorld()->SpawnActor<ASkeleton>("Skelleton", EOBJ_Order::Monster);
 			Mon->SetActorLocation({ 700.0f + (300.f * Num) - 300.f, 190.0f, 200.0f });
-			Mon->SetActive(true);
+			Mon->SetActive(true); 
+			Mon->SetPlayer(Player);
 			MonsterGroup_Thirth.push_back(Mon);
 		}
 		UEngineSound::SoundPlay("SpawnMonster.wav");

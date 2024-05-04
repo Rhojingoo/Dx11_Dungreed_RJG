@@ -17,6 +17,9 @@
 #include "MonsterBullet.h"
 #include "BossDoor.h"
 #include "DungeonDoor.h"
+#include "Skeleton_ATKCOL.h"
+
+float APlayer::Hp = 200.f;
 
 APlayer::APlayer()
 {
@@ -140,9 +143,25 @@ void APlayer::CollisionCheckFunction()
 		}
 	);
 
-
-
-
+	Collision->CollisionEnter(EColOrder::Monster_AttackCol, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			AActor* Actors = _Collison->GetActor();
+			ASkeleton_ATKCOL* Swing = dynamic_cast<ASkeleton_ATKCOL*>(Actors);
+			if (Swing != nullptr)
+			{
+				if (PlayerDie == false)
+				{
+					std::shared_ptr<APlayerDamage_Screen> DamageScreen = GetWorld()->SpawnActor<APlayerDamage_Screen>("Damage_Screen");
+					float Damage = Swing->Getdamage();
+					Hp -= Damage;
+					float ratio = Hp / MaxHp;
+					Player_HpBAR->SetRatio(ratio);
+					UEngineSound::SoundPlay("Hit_Player.wav");
+				}
+				return;
+			}
+		}
+	);
 
 	Collision->CollisionEnter(EColOrder::Monter_Bullet, [=](std::shared_ptr<UCollision> _Collison)
 		{
@@ -158,6 +177,7 @@ void APlayer::CollisionCheckFunction()
 					Hp -= Damage;
 					float ratio = Hp / MaxHp;
 					Player_HpBAR->SetRatio(ratio);
+					UEngineSound::SoundPlay("Hit_Player.wav");
 				}
 				return;
 			}
@@ -178,6 +198,7 @@ void APlayer::CollisionCheckFunction()
 					Hp -= Damage;
 					float ratio = Hp / MaxHp;
 					Player_HpBAR->SetRatio(ratio);
+					UEngineSound::SoundPlay("Hit_Player.wav");
 				}
 				return;
 			}
@@ -198,6 +219,7 @@ void APlayer::CollisionCheckFunction()
 					Hp -= Damage;
 					float ratio = Hp / MaxHp;
 					Player_HpBAR->SetRatio(ratio);
+					UEngineSound::SoundPlay("Hit_Player.wav");
 				}				
 				return;
 			}
@@ -217,6 +239,7 @@ void APlayer::CollisionCheckFunction()
 					Hp -= Damage;
 					float ratio = Hp / MaxHp;
 					Player_HpBAR->SetRatio(ratio);
+					UEngineSound::SoundPlay("Hit_Player.wav");
 				}
 				return;
 			}

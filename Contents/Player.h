@@ -55,7 +55,7 @@ private:
 
 
 	const float MaxHp = 200.f;
-	float Hp = MaxHp;
+	static float Hp;
 	bool PlayerDie = false;
 	bool DieFadeOn = false;
 

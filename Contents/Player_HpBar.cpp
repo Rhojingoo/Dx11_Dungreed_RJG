@@ -4,6 +4,11 @@
 #include <EngineCore/TextWidget.h>
 #include <EngineCore/Image.h>
 
+float APlayer_HpBar::Life = 200.f;
+float APlayer_HpBar::LifePos = -410.f;
+bool APlayer_HpBar::WaveHp = false;
+
+
 APlayer_HpBar::APlayer_HpBar()
 {
 
@@ -56,7 +61,11 @@ void APlayer_HpBar::BeginPlay()
 		PlayerPicture->SetOrder(4);		
 	}
 
-
+	if (WaveHp == true)
+	{
+		LifeBarWave->SetActive(true);
+		LifeBarWave->ChangeAnimation("Player_LifeWave");
+	}
 }
 
 void APlayer_HpBar::Tick(float _DeltaTime)

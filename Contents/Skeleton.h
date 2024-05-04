@@ -2,6 +2,8 @@
 #include <EngineCore/Actor.h>
 #include "Monster.h"
 
+class ASkeleton_ATKCOL;
+class UCollision;
 class AMonster_HpBar;
 class ASkeleton : public AMonster
 {
@@ -43,6 +45,9 @@ protected:
 	void SideWallCheck();
 private :
 	std::shared_ptr<AMonster_HpBar> Hp_Bar = nullptr;
+	std::shared_ptr<ASkeleton_ATKCOL> MonAt_COL = nullptr;
+	
+
 	UCollision* PlayerCheckCollision = nullptr;
 
 	FVector Pos = {};

@@ -29,12 +29,12 @@ private:
 	UImage* LifeBarWave = nullptr;
 
 	bool EnergyDown = false;
-	bool WaveHp = false;
+	static bool WaveHp;
 	float ratio = 0.f;
 	const float MaxLife = 200.f;
-	float Life = MaxLife;
+	static float Life;
 	const float Life_POSX = -410.f;
-	float LifePos = Life_POSX;
+	static float LifePos;
 
 
 };
