@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EnginePlatform\EngineSound.h>
 
 enum class Sword_Type
 {

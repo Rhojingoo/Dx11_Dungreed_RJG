@@ -161,6 +161,7 @@ void ASkeleton::Move(float _DeltaTime)
 void ASkeleton::AttackStart()
 {
 	Renderer->ChangeAnimation("Skeleton_Attack");
+	UEngineSound::SoundPlay("weapon-sound8.wav");
 	if (Player != nullptr)
 	{
 		float Dir = Player->GetActorLocation().X - GetActorLocation().X;

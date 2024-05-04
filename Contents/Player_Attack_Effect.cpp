@@ -70,12 +70,13 @@ void APlayer_Attack_Effect::Effect_AttackStart()
 	if (SwordType == Sword_Type::Demon_Sword)
 	{
 		Renderer->ChangeAnimation("FireSword_Swing_Legend");
-
+		UEngineSound::SoundPlay("WujuSword.wav");
 		Sword_Damage = UContentsHelper::Random(DemonSword_MinDamage, DemonSword_MaxDamage);
 	}
 	else if (SwordType == Sword_Type::Demon_Blade)
 	{
 		Renderer->ChangeAnimation("Demon_Blade_Swing_Legend");
+		UEngineSound::SoundPlay("DemonSword_Weapon.wav");
 		Sword_Damage = UContentsHelper::Random(DemonBlade_MinDamage, DemonBlade_MaxDamage);
 	}
 	Renderer->SetActive(true);

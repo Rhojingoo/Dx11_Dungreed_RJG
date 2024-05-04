@@ -282,6 +282,7 @@ void APlayer::DebugCeck(float _DeltaTime)
 
 void APlayer::DashStart()
 {
+	UEngineSound::SoundPlay("tunakDash.wav");
 	Renderer->ChangeAnimation("Player_Jump");
 	PlayerPos = GetActorLocation();
 	CursorPos = Cursor->GetPos();
@@ -363,6 +364,7 @@ void APlayer::Dash_Effect_Call()
 
 void APlayer::SecondDashStart()
 {
+	UEngineSound::SoundPlay("tunakDash.wav");
 	Renderer->ChangeAnimation("Player_Jump");
 	DashVector = FVector::Zero;
 	GravityVector = FVector::Zero;
