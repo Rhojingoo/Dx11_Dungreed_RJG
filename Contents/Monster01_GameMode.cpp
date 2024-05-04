@@ -116,7 +116,22 @@ void AMonster01_GameMode::Tick(float _DeltaTime)
 
 	if (Camera != nullptr)
 	{
-		Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y });
+		FVector Playerpos = Player->GetActorTransform().LocalPosition;
+
+		//Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y });
+
+		if (Playerpos.X > 650 && Playerpos.X < 950 && Playerpos.Y < 1100 && Playerpos.Y > 330)
+		{
+			Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y });
+		}
+		else if ((Playerpos.X <= 650 || Playerpos.X >= 950) && Playerpos.Y < 1100 && Playerpos.Y > 330)
+		{
+			Camera->SetActorLocation({ Camera->GetActorLocation().X, Player->GetActorLocation().Y });
+		}
+		else if (Playerpos.X > 650 && Playerpos.X < 950 && (Playerpos.Y >= 1100 || Playerpos.Y <= 330))
+		{
+			Camera->SetActorLocation({ Player->GetActorLocation().X, Camera->GetActorLocation().Y });
+		}
 	}
 
 	if (DoorCreate == true)
