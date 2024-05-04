@@ -116,8 +116,7 @@ void AMonster01_GameMode::Tick(float _DeltaTime)
 
 	if (Camera != nullptr)
 	{
-		//FVector Playerpos = Player->GetActorTransform().LocalPosition;
-
+		FVector Playerpos = Player->GetActorTransform().LocalPosition;
 
 		if (Playerpos.X > 650 && Playerpos.X < 950 && Playerpos.Y < 1100 && Playerpos.Y > 330)
 		{
