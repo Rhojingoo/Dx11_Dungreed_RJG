@@ -5,6 +5,7 @@
 #include "ContentsHelper.h"
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/DefaultSceneComponent.h>
+#include <EnginePlatform\EngineSound.h>
 
 
 AIcicle_Bullet::AIcicle_Bullet()
@@ -58,6 +59,8 @@ void AIcicle_Bullet::BeginPlay()
 	EffectRenderer->SetOrder(ERenderOrder::Effect_Front);
 	EffectRenderer->SetAutoSize(4.f, true);
 	EffectRenderer->AddPosition({ 0.f, 0.f, 0.f });
+
+	UEngineSound::SoundPlay("ice.ogg");
 }
 
 void AIcicle_Bullet::Tick(float _DeltaTime)

@@ -62,6 +62,11 @@ void ABoss::SetPlayer(std::shared_ptr<APlayer> _Set)
 	}
 }
 
+void ABoss::SoundOFF()
+{
+	BGM.Off();
+}
+
 void ABoss::BeginPlay()
 {
 	Super::BeginPlay();

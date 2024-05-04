@@ -58,6 +58,7 @@ void ABoss_GameMode::LevelEnd(ULevel* _NextLevel)
 	Camera->Destroy();
 	Player->Destroy();
 	Cursor->Destroy();
+	Boss->SoundOFF();
 	Boss->Destroy();
 }
 

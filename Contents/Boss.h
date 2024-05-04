@@ -49,7 +49,7 @@ public:
 	void SetPlayer(std::shared_ptr<APlayer> _Set); 
 	void SetTOWN() { Foot_Collision_Check_At_Town = true; }
 	bool EndIntro() {return IntroEnd;}
-
+	void SoundOFF();
 
 protected:
 	void BeginPlay() override;

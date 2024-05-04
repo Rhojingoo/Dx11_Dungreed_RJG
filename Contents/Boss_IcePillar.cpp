@@ -8,6 +8,7 @@
 #include <EngineCore/DefaultSceneComponent.h>
 #include "Monster_HpBar.h"
 #include "Player_Attack_Effect.h"
+#include <EnginePlatform\EngineSound.h>
 
 ABoss_IcePillar::ABoss_IcePillar()
 {
@@ -69,6 +70,7 @@ void ABoss_IcePillar::CollisionCheck_Function()
 					return;
 				}
 				Hp_Bar->AttackDamege(Damageratio);
+				UEngineSound::SoundPlay("Hit_Monster.wav");
 			}
 		}
 	);
@@ -272,6 +274,7 @@ void ABoss_IcePillar::IcePillar_Stop(float _DeltaTime)
 void ABoss_IcePillar::IcePillar_DeathStart()
 {
 	Renderer->ChangeAnimation("IcePillarDestroy");
+	UEngineSound::SoundPlay("MonsterDie.wav");
 	Death = true;
 }
 

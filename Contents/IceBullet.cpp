@@ -5,6 +5,7 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/DefaultSceneComponent.h>
 #include <EngineCore/SpriteInstancingRender.h>
+#include <EnginePlatform\EngineSound.h>
 
 AIceBullet::AIceBullet()
 {
@@ -53,6 +54,7 @@ void AIceBullet::BeginPlay()
 	EffectRenderer->SetOrder(ERenderOrder::Boss_IceBullet_Effect);
 	EffectRenderer->SetAutoSize(4.f, true);
 	
+	UEngineSound::SoundPlay("Niflheimfire.wav");
 	//GetWorld()->InstancingOn<USpriteInstancingRender>(ERenderOrder::Boss_IceBullet);
 	//Collision->SetScale({ Renderer->GetWorldScale().X / 2, Renderer->GetWorldScale().Y / 2, 10.f });
 	//aaaaaCollision->AddPosition({ 0.85f, 0.0f });
