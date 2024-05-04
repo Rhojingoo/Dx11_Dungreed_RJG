@@ -1,6 +1,8 @@
 #pragma once
 //#include <EngineCore/GameMode.h>
 #include "TileSet_Mode.h"
+#include <EnginePlatform\EngineSound.h>
+
 
 class ATarget;
 class ABoss;
@@ -31,6 +33,8 @@ protected:
 
 
 private:
+	UEngineSoundPlayer Ambience;
+
 	std::shared_ptr<UCamera> Camera = nullptr;
 	std::shared_ptr<APlayer> Player = nullptr;
 	std::shared_ptr<ABoss> Boss = nullptr;

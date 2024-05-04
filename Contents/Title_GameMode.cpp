@@ -16,11 +16,16 @@ ATitle_GameMode::ATitle_GameMode()
 
 ATitle_GameMode::~ATitle_GameMode()
 {
+	
 }
 
 void ATitle_GameMode::BeginPlay()
 {
 	Super::BeginPlay();
+
+	BGM = UEngineSound::SoundPlay("title.wav");
+	BGM.Off();
+
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation(FVector(0.0f, 0.0f, -100.0f));
 
@@ -56,4 +61,14 @@ void ATitle_GameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+}
+
+void ATitle_GameMode::LevelStart(ULevel* _PrevLevel)
+{
+	BGM.On();
+}
+
+void ATitle_GameMode::LevelEnd(ULevel* _NextLevel)
+{
+	BGM.Off();
 }

@@ -27,6 +27,9 @@ AMonster01_GameMode::~AMonster01_GameMode()
 
 void AMonster01_GameMode::LevelStart(ULevel* _PrevLevel)
 {
+	BGM.On();
+	Ambience.On();
+
 	Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation(FVector(640.0f, 360.0f, -200.0f));
 
@@ -62,6 +65,9 @@ void AMonster01_GameMode::LevelStart(ULevel* _PrevLevel)
 
 void AMonster01_GameMode::LevelEnd(ULevel* _NextLevel)
 {
+	BGM.Off();
+	Ambience.Off();
+
 	Player->Destroy();
 	Camera->Destroy();
 	Cursor->Destroy();
@@ -81,6 +87,14 @@ void AMonster01_GameMode::LevelEnd(ULevel* _NextLevel)
 
 void AMonster01_GameMode::BeginPlay()
 {
+	Ambience = UEngineSound::SoundPlay("ambience_ice.wav");
+	Ambience.Loop();
+	Ambience.Off();
+
+	BGM = UEngineSound::SoundPlay("2.IceField.wav");
+	BGM.Loop();
+	BGM.Off();
+
 	Tile_MapName = "Monster_01_Tile";
 	FixelSize[0] = 64, FixelSize[1] = 64;
 	IndexCount[0] = 25, IndexCount[1] = 24;
@@ -178,6 +192,7 @@ void AMonster01_GameMode::MonsterGroup1_Enter()
 			Mon->SetPlayer(Player);
 			Mon->SetActive(true);			
 		}
+		UEngineSound::SoundPlay("SpawnMonster.wav");
 		MonTerCreate_First = true;
 	}
 	else
@@ -202,6 +217,7 @@ void AMonster01_GameMode::MonsterGroup2_Enter()
 			Mon->SetActive(true);
 			MonsterGroup_Second.push_back(Mon);
 		}		
+		UEngineSound::SoundPlay("SpawnMonster.wav");
 		MonTerCreate_Second = true;
 	}
 	else
@@ -230,6 +246,7 @@ void AMonster01_GameMode::MonsterGroup3_Enter()
 			Mon->SetActive(true);
 			MonsterGroup_Thirth.push_back(Mon);
 		}
+		UEngineSound::SoundPlay("SpawnMonster.wav");
 		MonTerCreate_Thirth = true;
 	}
 	else

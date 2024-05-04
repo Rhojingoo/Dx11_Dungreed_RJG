@@ -100,7 +100,7 @@ void UGameCore::Initialize()
 
 			UEngineSound::Load(File.GetFullPath());
 		}
-		 UEngineSound::SoundPlay("anipang_ingame_wav.wav");
+		 //UEngineSound::SoundPlay("anipang_ingame_wav.wav");
 	}
 
 	{

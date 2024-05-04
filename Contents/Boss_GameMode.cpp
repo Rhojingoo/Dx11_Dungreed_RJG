@@ -25,6 +25,8 @@ void ABoss_GameMode::SetMapEdit()
 
 void ABoss_GameMode::LevelStart(ULevel* _PrevLevel)
 {
+	Ambience.On();
+
 	Camera = GetWorld()->GetMainCamera();
 	//Camera->SetActorLocation(FVector(640.0f, 360.0f, -200.0f));
 	Camera->SetActorLocation(FVector(840.0f, 460.0f, -200.0f));
@@ -52,6 +54,7 @@ void ABoss_GameMode::LevelStart(ULevel* _PrevLevel)
 
 void ABoss_GameMode::LevelEnd(ULevel* _NextLevel)
 {
+	Ambience.Off();
 	Camera->Destroy();
 	Player->Destroy();
 	Cursor->Destroy();
@@ -63,6 +66,11 @@ void ABoss_GameMode::BeginPlay()
 	Tile_MapName = "NIflheimRoom_Tile";
 	FixelSize[0] = 64, FixelSize[1] = 64;
 	IndexCount[0] = 40, IndexCount[1] = 20;
+
+	Ambience = UEngineSound::SoundPlay("ambience_ice.wav");
+	Ambience.Loop();
+	Ambience.Off();
+
 
 	Super::BeginPlay();
 	UEngineEditorGUI::CreateEditorWindow<UBoss_TestSkill_GUI>("Boss_TestSkill");

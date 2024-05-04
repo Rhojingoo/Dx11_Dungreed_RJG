@@ -97,6 +97,7 @@ void APlayer::Tick(float _DeltaTime)
 		if (PlayerDie == false)
 		{
 			State.ChangeState("Player_Die");
+			UEngineSound::SoundPlay("dead.wav");
 			Right_Hand->Destroy();
 			return;
 		}

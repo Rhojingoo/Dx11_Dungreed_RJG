@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/GameMode.h>
+#include <EnginePlatform\EngineSound.h>
 
 class ATown_DungeonDoor;
 class ATarget;
@@ -32,6 +33,8 @@ private:
 	std::shared_ptr<ABoss> Boss = nullptr;
 	std::shared_ptr<ATarget> Cursor = nullptr;
 	std::shared_ptr<ATown_DungeonDoor> Town_Door = nullptr;
+	UEngineSoundPlayer BGM;
+
 
 };
 

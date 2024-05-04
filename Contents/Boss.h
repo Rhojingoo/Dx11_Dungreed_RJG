@@ -1,6 +1,8 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include <EngineCore/EngineEditorWindow.h>
+#include <EnginePlatform\EngineSound.h>
+
 
 enum class BossState
 {
@@ -166,6 +168,6 @@ private:
 	static bool TestAttack_Fifth;
 	static bool TestAttack_Sixth;
 
-	
+	UEngineSoundPlayer BGM;
 };
 

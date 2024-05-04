@@ -1,6 +1,8 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include <EngineCore/StateManager.h>
+#include <EnginePlatform\EngineSound.h>
+
 
 // Ό³Έν :
 class AFadeIn_OUT_Black;

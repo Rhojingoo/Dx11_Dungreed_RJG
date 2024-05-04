@@ -23,7 +23,7 @@ AMiniBat::AMiniBat()
 	Collision->SetCollisionGroup(EColOrder::Monter_Bullet);
 
 	EffectRenderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	EffectRenderer->SetupAttachment(Renderer);
+	EffectRenderer->SetupAttachment(Root);
 
 
 	SetRoot(Root);
@@ -120,6 +120,7 @@ void AMiniBat::DeathStart()
 	EffectRenderer->ChangeAnimation("Die_Effect");
 	Renderer->SetActive(false);
 	MonsterDie = true;
+	UEngineSound::SoundPlay("MonsterDie.wav");
 }
 void AMiniBat::Death(float _DeltaTime)
 {
@@ -188,6 +189,7 @@ void AMiniBat::CollisionCheck_Function()
 					return;
 				}
 				Hp_Bar->AttackDamege(Damageratio);
+				UEngineSound::SoundPlay("Hit_Monster.wav");
 			}
 		}
 	);

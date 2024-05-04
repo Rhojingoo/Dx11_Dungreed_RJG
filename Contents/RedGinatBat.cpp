@@ -114,6 +114,7 @@ void ARedGinatBat::DeathStart()
 	EffectRenderer->ChangeAnimation("Die_Effect");
 	Renderer->SetActive(false);
 	MonsterDie = true;
+	UEngineSound::SoundPlay("MonsterDie.wav");
 }
 void ARedGinatBat::Death(float _DeltaTime)
 {
@@ -182,6 +183,7 @@ void ARedGinatBat::CollisionCheck_Function()
 					return;
 				}
 				Hp_Bar->AttackDamege(Damageratio);
+				UEngineSound::SoundPlay("Hit_Monster.wav");
 			}
 		}
 	);

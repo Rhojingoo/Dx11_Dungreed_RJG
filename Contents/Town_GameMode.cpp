@@ -24,6 +24,8 @@ ATown_GameMode::~ATown_GameMode()
 
 void ATown_GameMode::LevelStart(ULevel* _PrevLevel)
 {
+	BGM.On();
+
 	Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation(FVector(640.0f, -360.0f, -200.0f));
 
@@ -42,6 +44,7 @@ void ATown_GameMode::LevelStart(ULevel* _PrevLevel)
 
 void ATown_GameMode::LevelEnd(ULevel* _NextLevel)
 {
+	BGM.Off();
 	Player->Destroy();
 	Camera->Destroy();
 	Cursor->Destroy();
@@ -51,6 +54,9 @@ void ATown_GameMode::LevelEnd(ULevel* _NextLevel)
 void ATown_GameMode::BeginPlay()
 {
 	Super::BeginPlay();
+
+	BGM = UEngineSound::SoundPlay("0.Town.wav");
+	BGM.Off();
 
 	UContentsHelper::MapTex = UEngineTexture::FindRes("TownModelPX.png");//원래 통짜맵 사용할때
 	UContentsHelper::MapTexScale = UContentsHelper::MapTex->GetScale();

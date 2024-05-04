@@ -65,6 +65,11 @@ void ABoss::SetPlayer(std::shared_ptr<APlayer> _Set)
 void ABoss::BeginPlay()
 {
 	Super::BeginPlay();
+
+	BGM = UEngineSound::SoundPlay("2.IceBoss.wav");
+	BGM.Loop();
+	BGM.Off();
+
 	//SetActorScale3D(FVector(320.0f, 320.0f, 100.0f));
 	CreateIcePillar();
 
@@ -216,6 +221,7 @@ void ABoss::StateUpdate(float _DeltaTime)
 void ABoss::Boss_IntroStart()
 {
 	Renderer->ChangeAnimation("Boss_Enter");
+	UEngineSound::SoundPlay("niflheim_start.wav");
 
 	IntroFade = GetWorld()->GetLastTarget()->AddEffect<AFadeIn_OUT_Boss>();
 
@@ -264,6 +270,7 @@ void ABoss::Boss_Intro(float _DeltaTime)
 	IntroEnd = true;
 	IntroFade->Active(false);
 	TextImage->SetActive(false);
+	BGM.On();
 }
 
 
@@ -876,6 +883,7 @@ void ABoss::Boss_TeleportOutStart()
 void ABoss::Boss_DeathStart()
 {
 	Renderer->ChangeAnimation("Boss_Die");
+	BGM.Off();
 }
 
 void ABoss::Boss_Death(float _DeltaTime)
@@ -1019,6 +1027,7 @@ void ABoss::DeathCheckFunction(float _DeltaTime)
 				DieFadeOn = true;
 				Fade = GetWorld()->GetLastTarget()->AddEffect<AFadeIn_OUT_White>();
 				Fadeprt = Fade.get();
+				UEngineSound::SoundPlay("bossDefeat.wav");
 			}
 			else
 			{

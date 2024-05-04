@@ -199,6 +199,7 @@ void ASkeleton::DeathStart()
 	EffectRenderer->ChangeAnimation("Die_Effect");
 	Renderer->SetActive(false);
 	MonsterDie = true;
+	UEngineSound::SoundPlay("MonsterDie.wav");
 }
 
 
@@ -223,6 +224,7 @@ void ASkeleton::CollisionCheck_Function(float _DeltaTime)
 					return;
 				}
 				Hp_Bar->AttackDamege(Damageratio);
+				UEngineSound::SoundPlay("Hit_Monster.wav");
 			}
 		}
 	);

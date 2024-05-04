@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/GameMode.h>
+#include <EnginePlatform\EngineSound.h>
 
 // Ό³Έν :
 class Title_UI;
@@ -22,7 +23,11 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	void LevelStart(ULevel* _PrevLevel) override;
+	void LevelEnd(ULevel* _NextLevel) override;
+
 private:
+	UEngineSoundPlayer BGM;
 
 };
 

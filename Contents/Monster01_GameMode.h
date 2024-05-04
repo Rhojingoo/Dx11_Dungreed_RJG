@@ -1,7 +1,7 @@
 #pragma once
 #include "TileSet_Mode.h"
 #include "Monster.h"
-
+#include <EnginePlatform\EngineSound.h>
 
 class ABossDoor;
 class ADungeonDoor;
@@ -36,6 +36,9 @@ protected:
 
 
 private:
+	UEngineSoundPlayer BGM;
+	UEngineSoundPlayer Ambience;
+
 	std::shared_ptr<UCamera> Camera = nullptr;
 	std::shared_ptr<APlayer> Player = nullptr;
 	std::shared_ptr<ATarget> Cursor = nullptr;
