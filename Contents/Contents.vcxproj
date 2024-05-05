@@ -179,6 +179,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Ending_BackGROUND.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Ending_GameMode.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EndLevel_UI.h">
       <SubType>
       </SubType>
@@ -425,6 +433,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="DungeonDoor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Ending_BackGROUND.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Ending_GameMode.cpp">
       <SubType>
       </SubType>
     </ClCompile>

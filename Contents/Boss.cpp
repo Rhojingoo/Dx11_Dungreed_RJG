@@ -230,6 +230,8 @@ void ABoss::Boss_IntroStart()
 
 	IntroFade = GetWorld()->GetLastTarget()->AddEffect<AFadeIn_OUT_Boss>();
 
+
+
 	{
 		TextImage = CreateWidget<UTextWidget>(GetWorld(), "Test");
 		TextImage->SetFont("HY°ß°íµñ");

@@ -193,6 +193,12 @@
     <ClInclude Include="Skeleton_ATKCOL.h">
       <Filter>Level &amp; OBJ\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="Ending_GameMode.h">
+      <Filter>Level &amp; OBJ\Ending_Stage\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Ending_BackGROUND.h">
+      <Filter>Level &amp; OBJ\Ending_Stage\OBJ</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -387,6 +393,12 @@
     <ClCompile Include="Skeleton_ATKCOL.cpp">
       <Filter>Level &amp; OBJ\Monster</Filter>
     </ClCompile>
+    <ClCompile Include="Ending_GameMode.cpp">
+      <Filter>Level &amp; OBJ\Ending_Stage\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Ending_BackGROUND.cpp">
+      <Filter>Level &amp; OBJ\Ending_Stage\OBJ</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -514,6 +526,15 @@
     </Filter>
     <Filter Include="Level &amp; OBJ\Public\OBJ\Door">
       <UniqueIdentifier>{8755213c-a60b-4d2a-b35e-f8723f79fde8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Ending_Stage">
+      <UniqueIdentifier>{d0d940b1-eda2-4498-b680-84364647edd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Ending_Stage\Level">
+      <UniqueIdentifier>{6fc72b08-c784-4795-a6a1-f8c05ad7389c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level &amp; OBJ\Ending_Stage\OBJ">
+      <UniqueIdentifier>{3a0ead45-42c8-4173-b81d-ef358042e6a0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

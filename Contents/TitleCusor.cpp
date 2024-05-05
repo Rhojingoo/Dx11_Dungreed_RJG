@@ -1,4 +1,5 @@
 #include "PreCompile.h"
+#include <EnginePlatform/EngineWindow.h>
 #include "TitleCusor.h"
 #include "Target.h"
 #include "Title_UI.h"
@@ -68,7 +69,7 @@ void TitleCusor::Tick(float _DeltaTime)
 				UI_OBJ->EndUIOn();
 				if (true == UEngineInput::IsDown(VK_LBUTTON))
 				{
-					//GEngine->ChangeLevel("TownLevel");
+					GEngine->ChangeLevel("GameExit");
 				}
 
 				return;

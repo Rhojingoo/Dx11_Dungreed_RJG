@@ -34,6 +34,7 @@ public:
 	UEngineCore();
 	~UEngineCore();
 
+
 	// delete Function
 	UEngineCore(const UEngineCore& _Other) = delete;
 	UEngineCore(UEngineCore&& _Other) noexcept = delete;

@@ -74,6 +74,7 @@ void ATown_DungeonDoor::Tick(float _DeltaTime)
 				Fadeprt->Active(false);
 				Time = 0.f;
 				GEngine->ChangeLevel("Mon01_Level");
+				UEngineSound::SoundPlay("upward2s_end.ogg");			
 			}
 		}
 	}
@@ -84,4 +85,5 @@ void ATown_DungeonDoor::Dungeon_Enter()
 	ColCheck = true;
 	Renderer->AnimationReset();
 	Renderer->ChangeAnimation("DungeonIngurgitate");
+	UEngineSound::SoundPlay("upward2s_dun.ogg");
 }

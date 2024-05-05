@@ -1,6 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
-
+#include <EnginePlatform\EngineSound.h>
 
 class AFadeIn_OUT_Black;
 class UCollision;

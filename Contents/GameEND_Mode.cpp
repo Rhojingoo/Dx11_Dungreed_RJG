@@ -65,5 +65,8 @@ void AGameEND_Mode::LevelEnd(ULevel* _NextLevel)
 	Camera->Destroy();
 	BackGR->Destroy();
 	EndUI->Destroy();
+	Player_Die = false;
+	Boss_Clear = false;
+	EndLevel = false;
 }
 
