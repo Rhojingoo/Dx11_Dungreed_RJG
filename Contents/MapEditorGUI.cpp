@@ -232,9 +232,9 @@ void MapEditorGUI::OnGui(ULevel* Level, float _Delta)
 			}
 
 			TileRenderer->CreateTileMap(spriteFilename, { 64, 64 }, TileCount[0], TileCount[1], 0);
-			for (size_t y = 0; y < TileCount[1]; y++)
+			for (int y = 0; y < TileCount[1]; y++)
 			{
-				for (size_t x = 0; x < TileCount[0]; x++)
+				for (int x = 0; x < TileCount[0]; x++)
 				{
 					TileRenderer->SetTile(x, y, Result[y][x]);
 				}
