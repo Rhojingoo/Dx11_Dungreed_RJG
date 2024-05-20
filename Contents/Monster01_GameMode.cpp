@@ -123,10 +123,10 @@ void AMonster01_GameMode::BeginPlay()
 void AMonster01_GameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	if (true == UEngineInput::IsDown('P'))
-	{
-		GEngine->ChangeLevel("Mon02_Level");
-	}
+	//if (true == UEngineInput::IsDown('P'))
+	//{
+	//	//GEngine->ChangeLevel("Mon02_Level");
+	//}
 
 	if (Camera != nullptr)
 	{

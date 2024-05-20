@@ -64,10 +64,7 @@ void AMonster03_GameMode::BeginPlay()
 void AMonster03_GameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	if (true == UEngineInput::IsDown('P'))
-	{
-		GEngine->ChangeLevel("BossLevel");
-	}
+
 
 	if (Camera != nullptr)
 	{

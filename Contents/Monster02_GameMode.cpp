@@ -64,11 +64,7 @@ void AMonster02_GameMode::BeginPlay()
 void AMonster02_GameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	if (true == UEngineInput::IsDown('P'))
-	{
-		GEngine->ChangeLevel("Mon03_Level");
-		//BossLevel
-	}
+
 	if (Camera != nullptr)
 	{
 		Camera->SetActorLocation({ Player->GetActorLocation().X, Player->GetActorLocation().Y });

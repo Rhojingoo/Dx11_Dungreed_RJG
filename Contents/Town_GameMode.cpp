@@ -76,10 +76,10 @@ void ATown_GameMode::BeginPlay()
 void ATown_GameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	if (true == UEngineInput::IsDown('P'))
-	{
-		GEngine->ChangeLevel("Mon01_Level");
-	}
+	//if (true == UEngineInput::IsDown('P'))
+	//{
+	//	GEngine->ChangeLevel("Mon01_Level");
+	//}
 	if (Camera != nullptr)
 	{
 		FVector Playerpos = Player->GetActorTransform().LocalPosition;

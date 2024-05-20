@@ -19,5 +19,13 @@ void AMonster02_BGPIXEL::BeginPlay()
 
 void AMonster02_BGPIXEL::Tick(float _DeltaTime)
 {
+	if (true == UEngineInput::IsDown('P'))
+	{
+		Renderer->SetActive(false);
+	}
+	if (true == UEngineInput::IsDown('O'))
+	{
+		Renderer->SetActive(true);
+	}
 	Super::Tick(_DeltaTime);
 }
